@@ -1,0 +1,11 @@
+{
+  "name": "bol-com/retailer-api",
+  "type": "library",
+  "description": "API Package to talk to the BolCom API",
+  "license": "Apache",
+  "autoload": {
+    "psr-4": {
+      "BolCom\\RetailerApi\\": "src/"
+    }
+  }
+}
