@@ -1,0 +1,31 @@
+namespace BolCom\RetailerApi\Model\Commission {
+    data Commission = Commission {
+        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Condition $condition,
+        \BolCom\RetailerApi\Model\CurrencyAmount $price,
+        \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound,
+        float $percentage,
+        \BolCom\RetailerApi\Model\CurrencyAmount $totalCost,
+        \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction,
+        CommissionResultReduction[] $reduction
+    };
+
+    data CommissionReduction = CommissionReduction {
+        \BolCom\RetailerApi\Model\CurrencyAmount $maximumPrice,
+        \BolCom\RetailerApi\Model\CurrencyAmount $costReduction,
+        \BolCom\RetailerApi\Model\Date $startDate,
+        \BolCom\RetailerApi\Model\Date $endDate
+    };
+}
+
+namespace BolCom\RetailerApi\Model\Commission\Query {
+    data GetCommission = GetCommission {
+        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Condition $condition,
+        \BolCom\RetailerApi\Model\CurrencyAmount $price
+    };
+
+    data GetCommissionList = GetCommissionList {
+        GetCommission[] $commissionQueries
+    };
+}
