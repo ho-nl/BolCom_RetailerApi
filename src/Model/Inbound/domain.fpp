@@ -98,7 +98,8 @@ namespace BolCom\RetailerApi\Model\Inbound\Query {
     };
 
     data GetProductLabelsByEan = GetProductLabelsByEan {
-        ProductLabelFormat $format
+        ProductLabelFormat $format,
+        ProductLabel[] $productLabels
     };
 
     data GetPackingList = GetPackingList {
