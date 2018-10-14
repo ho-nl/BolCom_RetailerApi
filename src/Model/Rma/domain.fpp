@@ -10,31 +10,13 @@ namespace BolCom\RetailerApi\Model\Rma {
         \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
         string $returnReason, //Enum?
         string $returnReasonComments,
-        CustomerDetails $customerDetails,
+        \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
         \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
-        string $trackAndTrace,
+        \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace,
         HandlingResult $handlingResult,
         ProcessingResult $processingResult,
         \BolCom\RetailerApi\Model\DateTime $processingDateTime
-    } deriving (FromArray);
-
-    data CustomerDetails = CustomerDetails {
-        string $salutationCode,
-        string $firstName,
-        string $surName,
-        string $streetName,
-        string $houseNumber,
-        string $houseNumberExtended,
-        string $addressSupplement,
-        string $extraAddressInformation,
-        string $zipCode,
-        string $city,
-        string $countryCode,
-        string $email,
-        string $company,
-        string $vatNumber,
-        string $deliveryPhoneNumber
     } deriving (FromArray);
 
     data HandlingResult = ReturnReceived | ExchangeProduct | ProductDoesNotMeetConditions | RepairProduct | CustomerKeepsProductPaid | StillApproved deriving(Enum) with (

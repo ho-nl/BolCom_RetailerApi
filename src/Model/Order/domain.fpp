@@ -33,18 +33,21 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data OrderItemId = String deriving (FromString, ToString);
 
+    data Quantity = Int deriving(FromScalar, ToScalar);
+
     data OrderItem = OrderItem {
         OrderItemId $orderItemId,
         string $orderReference,
         \BolCom\RetailerApi\Model\Ean $ean,
         string $title,
-        int $quantity,
-        float $offerPrice,
+        Quantity $quantity,
+        \BolCom\RetailerApi\Model\Offer\Price $offerPrice,
         float $transactionFee,
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
-        \BolCom\RetailerApi\Model\Condition $offerCondition,
+        \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
         string $cancelRequest,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod
+        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod,
+        SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 
     data SelectedDeliveryWindow = SelectedDeliveryWindow {
@@ -67,11 +70,6 @@ namespace BolCom\RetailerApi\Model\Order {
         UnfinableItem: "UNFINDABLE_ITEM",
         Other: "OTHER"
     );
-
-    data TransportInstruction = TransportInstruction {
-        string $transporterCode,
-        string $trackAndTrace
-    };
 }
 
 namespace BolCom\RetailerApi\Model\Order\Query {
@@ -96,6 +94,7 @@ namespace BolCom\RetailerApi\Model\Order\Command {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
         string $shipmentReference,
         string $shippingLabelCode,
-        \BolCom\RetailerApi\Model\Order\TransportInstruction $transportInstruction
+        \BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction
     };
 }
+

@@ -1,8 +1,6 @@
 namespace BolCom\RetailerApi\Model {
     data Ean = String deriving(FromString, ToString);
 
-    //We choose IsNew, because New is a protected key word
-    data Condition = IsNew | AsNew | Good | Reasonable | Moderate deriving(Enum) with (IsNew:'NEW', AsNew:'AS_NEW', Good:'GOOD', Reasonable:'REASONABLE', Moderate:'MODERATE');
 
     data CurrencyAmount = Float deriving(FromScalar, ToScalar);
     data Date = String deriving(FromString, ToString) where
