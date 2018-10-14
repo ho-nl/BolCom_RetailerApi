@@ -13,7 +13,7 @@ final class GetShipmentList
     private $fulfilmentMethod;
     private $orderid;
 
-    public function __construct(int $page, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\OrderId $orderid)
+    public function __construct(int $page, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\OrderId $orderid)
     {
         $this->page = $page;
         $this->fulfilmentMethod = $fulfilmentMethod;
@@ -25,7 +25,7 @@ final class GetShipmentList
         return $this->page;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -40,7 +40,7 @@ final class GetShipmentList
         return new self($page, $this->fulfilmentMethod, $this->orderid);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): GetShipmentList
+    public function withFulfilmentMethod(FulfilmentMethod $fulfilmentMethod): GetShipmentList
     {
         return new self($this->page, $fulfilmentMethod, $this->orderid);
     }

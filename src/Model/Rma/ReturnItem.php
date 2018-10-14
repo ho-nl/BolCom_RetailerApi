@@ -24,7 +24,7 @@ final class ReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Ean $ean, string $title, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace, HandlingResult $handlingResult, ProcessingResult $processingResult, \BolCom\RetailerApi\Model\DateTime $processingDateTime)
+    public function __construct(ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace, HandlingResult $handlingResult, ProcessingResult $processingResult, \BolCom\RetailerApi\Model\DateTime $processingDateTime)
     {
         $this->returnNumber = $returnNumber;
         $this->orderId = $orderId;
@@ -52,7 +52,7 @@ final class ReturnItem
         return $this->orderId;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -82,7 +82,7 @@ final class ReturnItem
         return $this->customerDetails;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -122,7 +122,7 @@ final class ReturnItem
         return new self($this->returnNumber, $orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): ReturnItem
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ReturnItem
     {
         return new self($this->returnNumber, $this->orderId, $ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -152,7 +152,7 @@ final class ReturnItem
         return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): ReturnItem
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): ReturnItem
     {
         return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -200,7 +200,7 @@ final class ReturnItem
             throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
-        $ean = \BolCom\RetailerApi\Model\Ean::fromString($data['ean']);
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
         if (! isset($data['title']) || ! \is_string($data['title'])) {
             throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
@@ -236,7 +236,7 @@ final class ReturnItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
 
         if (! isset($data['handled']) || ! \is_bool($data['handled'])) {
             throw new \InvalidArgumentException("Key 'handled' is missing in data array or is not a bool");

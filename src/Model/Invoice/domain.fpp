@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Invoice {
     data Period = String deriving(FromString, ToString) where
-        _: | !\BolCom\RetailerApi\Model\Invoice\Assert\AssertPeriod::execute($value) => 'Could not create period';
+        _: | !\BolCom\RetailerApi\Model\Assert\AssertDateRange::execute($value) => 'Could not create period';
 
     data InvoiceId = Int deriving(FromScalar, ToScalar);
 }

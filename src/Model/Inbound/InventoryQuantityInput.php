@@ -13,7 +13,7 @@ final class InventoryQuantityInput
 
     public function __construct(string $value)
     {
-        if (!\Assert\Assertion::betweenLength($value, 0, 500)) {
+        if (!\BolCom\RetailerApi\Model\Assert\AssertIntRange::execute($value)) {
             throw new \InvalidArgumentException('');
         }
 

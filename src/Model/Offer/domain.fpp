@@ -1,4 +1,6 @@
 namespace BolCom\RetailerApi\Model\Offer {
+    data Ean = String deriving(FromString, ToString);
+
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 999) => '';
 
@@ -31,37 +33,61 @@ namespace BolCom\RetailerApi\Model\Offer {
     //We choose IsNew, because New is a protected key word
     data Condition = IsNew | AsNew | Good | Reasonable | Moderate deriving(Enum) with (IsNew:'NEW', AsNew:'AS_NEW', Good:'GOOD', Reasonable:'REASONABLE', Moderate:'MODERATE');
 
+    data DeliveryCode = DC24uurs23 | DC24uurs22 | DC24uurs21 | DC24uurs20 | DC24uurs19 | DC24uurs18 | DC24uurs17 |
+        DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC34d | DC35d | DC48d | DC18d |
+        DCMijnLeverbelofte deriving (Enum) with(
+            DC24uurs23: "24uurs-23",
+            DC24uurs22: "24uurs-22",
+            DC24uurs21: "24uurs-21",
+            DC24uurs20: "24uurs-20",
+            DC24uurs19: "24uurs-19",
+            DC24uurs18: "24uurs-18",
+            DC24uurs17: "24uurs-17",
+            DC24uurs16: "24uurs-16",
+            DC24uurs15: "24uurs-15",
+            DC24uurs14: "24uurs-14",
+            DC24uurs13: "24uurs-13",
+            DC24uurs12: "24uurs-12",
+            DC12d: "1-2d",
+            DC23d: "2-3d",
+            DC34d: "3-4d",
+            DC35d: "3-5d",
+            DC48d: "4-8d",
+            DC18d: "1-8d",
+            DCMijnLeverbelofte: "MijnLeverbelofte"
+        );
+
     data RetailerOfferIdentifier = RetailerOfferIdentifier {
-        \BolCom\RetailerApi\Model\Ean $ean,
+        Ean $ean,
         Condition $condition,
     } deriving (ToArray);
 
     data RetailerOffer = RetailerOffer {
-        \BolCom\RetailerApi\Model\Ean $ean,
+        Ean $ean,
         Condition $condition,
         Price $price,
-        \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode,
+        DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
         UnreservedStock $unreservedStock,
         bool $publish,
         ReferenceCode $referenceCode,
         Description $description,
         Title $title,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
         RetailerOfferStatus $status
     } deriving (FromArray);
 
     data RetailerOfferUpsert = RetailerOfferUpsert {
-        \BolCom\RetailerApi\Model\Ean $ean,
+        Ean $ean,
         Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price,
-        \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode,
+        Price $price,
+        DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
         bool $publish,
         ReferenceCode $referenceCode,
         Description $description,
         Title $title,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
     } deriving (ToArray);
 }
 

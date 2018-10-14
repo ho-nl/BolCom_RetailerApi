@@ -38,7 +38,7 @@ namespace BolCom\RetailerApi\Model\Order {
     data OrderItem = OrderItem {
         OrderItemId $orderItemId,
         string $orderReference,
-        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
         Quantity $quantity,
         \BolCom\RetailerApi\Model\Offer\Price $offerPrice,
@@ -46,7 +46,7 @@ namespace BolCom\RetailerApi\Model\Order {
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
         string $cancelRequest,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
         SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 
@@ -79,7 +79,7 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 
     data GetAllOpenOrders = GetAllOpenOrders {
         int $page,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod
     };
 }
 

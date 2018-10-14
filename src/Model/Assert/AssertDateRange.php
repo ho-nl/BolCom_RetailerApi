@@ -3,9 +3,12 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-namespace BolCom\RetailerApi\Model\Invoice\Assert;
 
-class AssertPeriod
+declare(strict_types=1);
+
+namespace BolCom\RetailerApi\Model\Assert;
+
+class AssertDateRange
 {
     public static function execute($period): bool
     {

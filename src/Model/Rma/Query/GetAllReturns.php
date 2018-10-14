@@ -13,7 +13,7 @@ final class GetAllReturns
     private $handled;
     private $shipmentsMethod;
 
-    public function __construct(int $page, bool $handled, \BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod)
+    public function __construct(int $page, bool $handled, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod)
     {
         $this->page = $page;
         $this->handled = $handled;
@@ -30,7 +30,7 @@ final class GetAllReturns
         return $this->handled;
     }
 
-    public function shipmentsMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function shipmentsMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->shipmentsMethod;
     }
@@ -45,7 +45,7 @@ final class GetAllReturns
         return new self($this->page, $handled, $this->shipmentsMethod);
     }
 
-    public function withShipmentsMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod): GetAllReturns
+    public function withShipmentsMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllReturns
     {
         return new self($this->page, $this->handled, $shipmentsMethod);
     }

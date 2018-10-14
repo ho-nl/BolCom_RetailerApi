@@ -22,7 +22,7 @@ final class OrderItem
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(OrderItemId $orderItemId, string $orderReference, \BolCom\RetailerApi\Model\Ean $ean, string $title, Quantity $quantity, \BolCom\RetailerApi\Model\Offer\Price $offerPrice, float $transactionFee, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, string $cancelRequest, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod, SelectedDeliveryWindow $selectedDeliveryWindow)
+    public function __construct(OrderItemId $orderItemId, string $orderReference, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title, Quantity $quantity, \BolCom\RetailerApi\Model\Offer\Price $offerPrice, float $transactionFee, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, string $cancelRequest, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, SelectedDeliveryWindow $selectedDeliveryWindow)
     {
         $this->orderItemId = $orderItemId;
         $this->orderReference = $orderReference;
@@ -48,7 +48,7 @@ final class OrderItem
         return $this->orderReference;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -88,7 +88,7 @@ final class OrderItem
         return $this->cancelRequest;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -108,7 +108,7 @@ final class OrderItem
         return new self($this->orderItemId, $orderReference, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $this->cancelRequest, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): OrderItem
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): OrderItem
     {
         return new self($this->orderItemId, $this->orderReference, $ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $this->cancelRequest, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -148,7 +148,7 @@ final class OrderItem
         return new self($this->orderItemId, $this->orderReference, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $cancelRequest, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): OrderItem
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): OrderItem
     {
         return new self($this->orderItemId, $this->orderReference, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $this->cancelRequest, $fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -176,7 +176,7 @@ final class OrderItem
             throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
-        $ean = \BolCom\RetailerApi\Model\Ean::fromString($data['ean']);
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
         if (! isset($data['title']) || ! \is_string($data['title'])) {
             throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
@@ -224,7 +224,7 @@ final class OrderItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
 
         if (! isset($data['selectedDeliveryWindow']) || ! \is_array($data['selectedDeliveryWindow'])) {
             throw new \InvalidArgumentException("Key 'selectedDeliveryWindow' is missing in data array or is not an array");

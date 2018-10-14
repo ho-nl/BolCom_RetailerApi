@@ -26,7 +26,7 @@ namespace BolCom\RetailerApi\Model\Inbound {
     };
 
     data Product = Product {
-        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
         BSku $bsku,
         int $announcedQuantity,
         int $receivedQuantity,
@@ -64,12 +64,12 @@ namespace BolCom\RetailerApi\Model\Inbound {
         ZebraZPerform1000T: "ZEBRA_Z_PERFORM_1000T"
     );
     data ProductLabel = ProductLabel {
-        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
         int $quantity
     };
 
     data InventoryQuantityInput = String deriving(FromString, ToString) where
-        _: | !\Assert\Assertion::betweenLength($value, 0, 500) => '';
+        _: | !\BolCom\RetailerApi\Model\Assert\AssertIntRange::execute($value) => '';
 
     data InventoryStock = sufficient | insufficient deriving(Enum);
     data InventoryState = salable | unsalable deriving(Enum);

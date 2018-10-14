@@ -22,7 +22,7 @@ final class RetailerOffer
     private $fulfilmentMethod;
     private $status;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, Condition $condition, Price $price, \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, UnreservedStock $unreservedStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod, RetailerOfferStatus $status)
+    public function __construct(Ean $ean, Condition $condition, Price $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, UnreservedStock $unreservedStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, RetailerOfferStatus $status)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -38,7 +38,7 @@ final class RetailerOffer
         $this->status = $status;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): Ean
     {
         return $this->ean;
     }
@@ -53,7 +53,7 @@ final class RetailerOffer
         return $this->price;
     }
 
-    public function deliveryCode(): \BolCom\RetailerApi\Model\DeliveryCode
+    public function deliveryCode(): DeliveryCode
     {
         return $this->deliveryCode;
     }
@@ -88,7 +88,7 @@ final class RetailerOffer
         return $this->title;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -98,7 +98,7 @@ final class RetailerOffer
         return $this->status;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): RetailerOffer
+    public function withEan(Ean $ean): RetailerOffer
     {
         return new self($ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod, $this->status);
     }
@@ -113,7 +113,7 @@ final class RetailerOffer
         return new self($this->ean, $this->condition, $price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod, $this->status);
     }
 
-    public function withDeliveryCode(\BolCom\RetailerApi\Model\DeliveryCode $deliveryCode): RetailerOffer
+    public function withDeliveryCode(DeliveryCode $deliveryCode): RetailerOffer
     {
         return new self($this->ean, $this->condition, $this->price, $deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod, $this->status);
     }
@@ -148,7 +148,7 @@ final class RetailerOffer
         return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $title, $this->fulfilmentMethod, $this->status);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): RetailerOffer
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): RetailerOffer
     {
         return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $fulfilmentMethod, $this->status);
     }
@@ -164,7 +164,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
-        $ean = \BolCom\RetailerApi\Model\Ean::fromString($data['ean']);
+        $ean = Ean::fromString($data['ean']);
 
         if (! isset($data['condition']) || ! \is_string($data['condition'])) {
             throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
@@ -182,7 +182,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
         }
 
-        $deliveryCode = \BolCom\RetailerApi\Model\DeliveryCode::fromName($data['deliveryCode']);
+        $deliveryCode = DeliveryCode::fromName($data['deliveryCode']);
 
         if (! isset($data['quantityInStock']) || ! \is_int($data['quantityInStock'])) {
             throw new \InvalidArgumentException("Key 'quantityInStock' is missing in data array or is not a int");
@@ -224,7 +224,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
 
         if (! isset($data['status']) || ! \is_array($data['status'])) {
             throw new \InvalidArgumentException("Key 'status' is missing in data array or is not an array");

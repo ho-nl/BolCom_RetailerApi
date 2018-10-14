@@ -12,13 +12,13 @@ final class RetailerOfferIdentifier
     private $ean;
     private $condition;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, Condition $condition)
+    public function __construct(Ean $ean, Condition $condition)
     {
         $this->ean = $ean;
         $this->condition = $condition;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): Ean
     {
         return $this->ean;
     }
@@ -28,7 +28,7 @@ final class RetailerOfferIdentifier
         return $this->condition;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): RetailerOfferIdentifier
+    public function withEan(Ean $ean): RetailerOfferIdentifier
     {
         return new self($ean, $this->condition);
     }

@@ -15,7 +15,7 @@ final class Product
     private $receivedQuantity;
     private $state;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, BSku $bsku, int $announcedQuantity, int $receivedQuantity, State $state)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, BSku $bsku, int $announcedQuantity, int $receivedQuantity, State $state)
     {
         $this->ean = $ean;
         $this->bsku = $bsku;
@@ -24,7 +24,7 @@ final class Product
         $this->state = $state;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -49,7 +49,7 @@ final class Product
         return $this->state;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): Product
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): Product
     {
         return new self($ean, $this->bsku, $this->announcedQuantity, $this->receivedQuantity, $this->state);
     }

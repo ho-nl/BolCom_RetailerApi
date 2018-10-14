@@ -22,7 +22,7 @@ final class ShipmentOrderItem
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\Offer\Price $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\Offer\Price $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow)
     {
         $this->orderItemId = $orderItemId;
         $this->orderId = $orderId;
@@ -58,7 +58,7 @@ final class ShipmentOrderItem
         return $this->latestDeliveryDate;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -88,7 +88,7 @@ final class ShipmentOrderItem
         return $this->offerReference;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -118,7 +118,7 @@ final class ShipmentOrderItem
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): ShipmentOrderItem
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ShipmentOrderItem
     {
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -148,7 +148,7 @@ final class ShipmentOrderItem
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): ShipmentOrderItem
+    public function withFulfilmentMethod(FulfilmentMethod $fulfilmentMethod): ShipmentOrderItem
     {
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -188,7 +188,7 @@ final class ShipmentOrderItem
             throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
-        $ean = \BolCom\RetailerApi\Model\Ean::fromString($data['ean']);
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
         if (! isset($data['title']) || ! \is_string($data['title'])) {
             throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
@@ -224,7 +224,7 @@ final class ShipmentOrderItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = FulfilmentMethod::fromName($data['fulfilmentMethod']);
 
         if (! isset($data['selectedDeliveryWindow']) || ! \is_array($data['selectedDeliveryWindow'])) {
             throw new \InvalidArgumentException("Key 'selectedDeliveryWindow' is missing in data array or is not an array");

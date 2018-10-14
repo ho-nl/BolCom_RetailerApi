@@ -12,7 +12,7 @@ final class GetAllOpenOrders
     private $page;
     private $shipmentsMethod;
 
-    public function __construct(int $page, \BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod)
+    public function __construct(int $page, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod)
     {
         $this->page = $page;
         $this->shipmentsMethod = $shipmentsMethod;
@@ -23,7 +23,7 @@ final class GetAllOpenOrders
         return $this->page;
     }
 
-    public function shipmentsMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function shipmentsMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->shipmentsMethod;
     }
@@ -33,7 +33,7 @@ final class GetAllOpenOrders
         return new self($page, $this->shipmentsMethod);
     }
 
-    public function withShipmentsMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod): GetAllOpenOrders
+    public function withShipmentsMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllOpenOrders
     {
         return new self($this->page, $shipmentsMethod);
     }

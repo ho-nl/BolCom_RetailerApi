@@ -18,7 +18,7 @@ final class Commission
     private $totalCostWithoutReduction;
     private $reduction;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound, float $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, array $reduction)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound, float $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, array $reduction)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -35,7 +35,7 @@ final class Commission
         }
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -75,7 +75,7 @@ final class Commission
         return $this->reduction;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): Commission
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): Commission
     {
         return new self($ean, $this->condition, $this->price, $this->fixedAmound, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }

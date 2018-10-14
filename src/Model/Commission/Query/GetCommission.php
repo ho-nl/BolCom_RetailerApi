@@ -13,14 +13,14 @@ final class GetCommission
     private $condition;
     private $price;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price)
     {
         $this->ean = $ean;
         $this->condition = $condition;
         $this->price = $price;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -35,7 +35,7 @@ final class GetCommission
         return $this->price;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): GetCommission
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): GetCommission
     {
         return new self($ean, $this->condition, $this->price);
     }

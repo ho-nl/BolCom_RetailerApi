@@ -12,13 +12,13 @@ final class ProductLabel
     private $ean;
     private $quantity;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, int $quantity)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity)
     {
         $this->ean = $ean;
         $this->quantity = $quantity;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
         return $this->ean;
     }
@@ -28,7 +28,7 @@ final class ProductLabel
         return $this->quantity;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): ProductLabel
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ProductLabel
     {
         return new self($ean, $this->quantity);
     }

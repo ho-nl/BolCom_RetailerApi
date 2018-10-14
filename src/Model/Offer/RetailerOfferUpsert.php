@@ -20,7 +20,7 @@ final class RetailerOfferUpsert
     private $title;
     private $fulfilmentMethod;
 
-    public function __construct(\BolCom\RetailerApi\Model\Ean $ean, Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod)
+    public function __construct(Ean $ean, Condition $condition, Price $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -34,7 +34,7 @@ final class RetailerOfferUpsert
         $this->fulfilmentMethod = $fulfilmentMethod;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Ean
+    public function ean(): Ean
     {
         return $this->ean;
     }
@@ -44,12 +44,12 @@ final class RetailerOfferUpsert
         return $this->condition;
     }
 
-    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function price(): Price
     {
         return $this->price;
     }
 
-    public function deliveryCode(): \BolCom\RetailerApi\Model\DeliveryCode
+    public function deliveryCode(): DeliveryCode
     {
         return $this->deliveryCode;
     }
@@ -79,12 +79,12 @@ final class RetailerOfferUpsert
         return $this->title;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Ean $ean): RetailerOfferUpsert
+    public function withEan(Ean $ean): RetailerOfferUpsert
     {
         return new self($ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
@@ -94,12 +94,12 @@ final class RetailerOfferUpsert
         return new self($this->ean, $condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
 
-    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): RetailerOfferUpsert
+    public function withPrice(Price $price): RetailerOfferUpsert
     {
         return new self($this->ean, $this->condition, $price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
 
-    public function withDeliveryCode(\BolCom\RetailerApi\Model\DeliveryCode $deliveryCode): RetailerOfferUpsert
+    public function withDeliveryCode(DeliveryCode $deliveryCode): RetailerOfferUpsert
     {
         return new self($this->ean, $this->condition, $this->price, $deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
@@ -129,7 +129,7 @@ final class RetailerOfferUpsert
         return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $title, $this->fulfilmentMethod);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod): RetailerOfferUpsert
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): RetailerOfferUpsert
     {
         return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $fulfilmentMethod);
     }

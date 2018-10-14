@@ -5,13 +5,13 @@ namespace BolCom\RetailerApi\Model\Rma {
     data ReturnItem = ReturnItem {
         ReturnNumber $returnNumber,
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
-        \BolCom\RetailerApi\Model\Ean $ean,
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
         \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
         string $returnReason, //Enum?
         string $returnReasonComments,
         \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
         \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace,
         HandlingResult $handlingResult,
@@ -42,7 +42,7 @@ namespace BolCom\RetailerApi\Model\Rma\Query {
     data GetAllReturns = GetAllReturns {
         int $page,
         bool $handled,
-        \BolCom\RetailerApi\Model\FulfilmentMethod $shipmentsMethod
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod
     };
 }
 
