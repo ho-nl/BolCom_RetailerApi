@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetFppShippingLabel extends GetFbbShippingLabel
+final class GetFbbShippingLabel
 {
     private $inboundId;
 

@@ -11,17 +11,17 @@ final class GetOffer
 {
     private $retailerOfferIdentifier;
 
-    public function __construct(\BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier $retailerOfferIdentifier)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier)
     {
         $this->retailerOfferIdentifier = $retailerOfferIdentifier;
     }
 
-    public function retailerOfferIdentifier(): \BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier
+    public function retailerOfferIdentifier(): \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier
     {
         return $this->retailerOfferIdentifier;
     }
 
-    public function withRetailerOfferIdentifier(\BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier $retailerOfferIdentifier): GetOffer
+    public function withRetailerOfferIdentifier(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier): GetOffer
     {
         return new self($retailerOfferIdentifier);
     }

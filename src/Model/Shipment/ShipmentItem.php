@@ -25,4 +25,15 @@ final class ShipmentItem
     {
         return new self($shipmentOrderItem);
     }
+
+    public static function fromArray(array $data): ShipmentItem
+    {
+        if (! isset($data['shipmentOrderItem']) || ! \is_array($data['shipmentOrderItem'])) {
+            throw new \InvalidArgumentException("Key 'shipmentOrderItem' is missing in data array or is not an array");
+        }
+
+        $shipmentOrderItem = ShipmentOrderItem::fromArray($data['shipmentOrderItem']);
+
+        return new self($shipmentOrderItem);
+    }
 }

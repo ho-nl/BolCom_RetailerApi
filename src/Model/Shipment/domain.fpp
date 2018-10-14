@@ -1,6 +1,11 @@
 namespace BolCom\RetailerApi\Model\Shipment {
     data ShipmentId = Int deriving(FromScalar, ToScalar);
 
+    data FulfilmentMethod = ByRetailer | ByBolCom deriving(Enum) with (
+        ByRetailer: "FBR",
+        ByBolCom: "FFB"
+    );
+
     data Shipment = Shipment {
         ShipmentId $shipmentId,
         \BolCom\RetailerApi\Model\DateTime $shipmentDate,
@@ -8,16 +13,14 @@ namespace BolCom\RetailerApi\Model\Shipment {
         ShipmentItem[] $shipmentItems,
         \BolCom\RetailerApi\Model\Transport\Transport $transport,
         \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails
-    };
+    } deriving (FromArray);
+    data ShipmentList = ShipmentList {
+        Shipment[] $shipments
+    } deriving (FromArray);
 
     data ShipmentItem = ShipmentItem {
         ShipmentOrderItem $shipmentOrderItem
-    };
-
-    data FulfilmentMethod = ByRetailer | ByBolCom deriving(Enum) with (
-        ByRetailer: "FBR",
-        ByBolCom: "FFB"
-    );
+    } deriving (FromArray);
 
     data ShipmentOrderItem = ShipmentOrderItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,

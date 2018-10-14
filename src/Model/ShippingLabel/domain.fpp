@@ -10,7 +10,16 @@ namespace BolCom\RetailerApi\Model\ShippingLabel {
         float $purchasePrice,
         float $discount,
         float $shippingLabelCode
-    };
+    } deriving (FromArray);
+
+    data ShippingLabelList = ShippingLabelList {
+        ShippingLabel[] $purchasableShippingLabels
+    } deriving (FromArray);
+
+    data ShippingLabelPdf = String deriving (FromString, ToString);
+    data ShippingLabelPdfList = ShippingLabelPdfList {
+        ShippingLabelPdf[] $pdfs
+    } deriving (FromArray);
 }
 
 namespace BolCom\RetailerApi\Model\ShippingLabel\Query {

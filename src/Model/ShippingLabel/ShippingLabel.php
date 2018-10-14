@@ -109,4 +109,66 @@ final class ShippingLabel
     {
         return new self($this->transporterCode, $this->labelType, $this->maxWeight, $this->maxDimensions, $this->retailerPrice, $this->purchasePrice, $this->discount, $shippingLabelCode);
     }
+
+    public static function fromArray(array $data): ShippingLabel
+    {
+        if (! isset($data['transporterCode']) || ! \is_string($data['transporterCode'])) {
+            throw new \InvalidArgumentException("Key 'transporterCode' is missing in data array or is not a string");
+        }
+
+        $transporterCode = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromName($data['transporterCode']);
+
+        if (! isset($data['labelType']) || ! \is_string($data['labelType'])) {
+            throw new \InvalidArgumentException("Key 'labelType' is missing in data array or is not a string");
+        }
+
+        $labelType = $data['labelType'];
+
+        if (! isset($data['maxWeight']) || ! \is_string($data['maxWeight'])) {
+            throw new \InvalidArgumentException("Key 'maxWeight' is missing in data array or is not a string");
+        }
+
+        $maxWeight = $data['maxWeight'];
+
+        if (! isset($data['maxDimensions']) || ! \is_string($data['maxDimensions'])) {
+            throw new \InvalidArgumentException("Key 'maxDimensions' is missing in data array or is not a string");
+        }
+
+        $maxDimensions = $data['maxDimensions'];
+
+        if (! isset($data['retailerPrice']) || (! \is_float($data['retailerPrice']) && ! \is_int($data['retailerPrice']))) {
+            throw new \InvalidArgumentException("Key 'retailerPrice' is missing in data array or is not a float");
+        }
+
+        $retailerPrice = $data['retailerPrice'];
+
+        if (! isset($data['purchasePrice']) || (! \is_float($data['purchasePrice']) && ! \is_int($data['purchasePrice']))) {
+            throw new \InvalidArgumentException("Key 'purchasePrice' is missing in data array or is not a float");
+        }
+
+        $purchasePrice = $data['purchasePrice'];
+
+        if (! isset($data['discount']) || (! \is_float($data['discount']) && ! \is_int($data['discount']))) {
+            throw new \InvalidArgumentException("Key 'discount' is missing in data array or is not a float");
+        }
+
+        $discount = $data['discount'];
+
+        if (! isset($data['shippingLabelCode']) || (! \is_float($data['shippingLabelCode']) && ! \is_int($data['shippingLabelCode']))) {
+            throw new \InvalidArgumentException("Key 'shippingLabelCode' is missing in data array or is not a float");
+        }
+
+        $shippingLabelCode = $data['shippingLabelCode'];
+
+        return new self(
+            $transporterCode,
+            $labelType,
+            $maxWeight,
+            $maxDimensions,
+            $retailerPrice,
+            $purchasePrice,
+            $discount,
+            $shippingLabelCode
+        );
+    }
 }

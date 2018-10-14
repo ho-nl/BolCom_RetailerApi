@@ -97,7 +97,7 @@ namespace BolCom\RetailerApi\Model\Offer\Query {
     };
 
     data GetOffer = GetOffer {
-        \BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier $retailerOfferIdentifier
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier
     };
 }
 
@@ -107,8 +107,9 @@ namespace BolCom\RetailerApi\Model\Offer\Command {
     };
 
     data DeleteOffersInBulk = DeleteOffersInBulk {
-        \BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier[] $retailerOfferIdentifier
-    };
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier[] $retailerOfferIdentifier
+    } where
+        _: | count($retailerOfferIdentifier) === 0 => 'You should at least provide a single Offer to delete';
 
     data GenerateOfferCvs = GenerateOfferCvs {
         ?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter

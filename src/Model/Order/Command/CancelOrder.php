@@ -13,7 +13,7 @@ final class CancelOrder
     private $dateTime;
     private $reasonCode;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\DateTime $dateTime, \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?\BolCom\RetailerApi\Model\DateTime $dateTime, ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode)
     {
         $this->orderItemId = $orderItemId;
         $this->dateTime = $dateTime;
@@ -25,12 +25,12 @@ final class CancelOrder
         return $this->orderItemId;
     }
 
-    public function dateTime(): \BolCom\RetailerApi\Model\DateTime
+    public function dateTime(): ?\BolCom\RetailerApi\Model\DateTime
     {
         return $this->dateTime;
     }
 
-    public function reasonCode(): \BolCom\RetailerApi\Model\Order\CancellationReason
+    public function reasonCode(): ?\BolCom\RetailerApi\Model\Order\CancellationReason
     {
         return $this->reasonCode;
     }
@@ -40,12 +40,12 @@ final class CancelOrder
         return new self($orderItemId, $this->dateTime, $this->reasonCode);
     }
 
-    public function withDateTime(\BolCom\RetailerApi\Model\DateTime $dateTime): CancelOrder
+    public function withDateTime(?\BolCom\RetailerApi\Model\DateTime $dateTime): CancelOrder
     {
         return new self($this->orderItemId, $dateTime, $this->reasonCode);
     }
 
-    public function withReasonCode(\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode): CancelOrder
+    public function withReasonCode(?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode): CancelOrder
     {
         return new self($this->orderItemId, $this->dateTime, $reasonCode);
     }

@@ -11,8 +11,12 @@ final class DeleteOffersInBulk
 {
     private $retailerOfferIdentifier;
 
-    public function __construct(\BolCom\RetailerApi\Model\OfferRetailerOfferIdentifier ...$retailerOfferIdentifier)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier ...$retailerOfferIdentifier)
     {
+        if (count($retailerOfferIdentifier) === 0) {
+            throw new \InvalidArgumentException('You should at least provide a single Offer to delete');
+        }
+
         $this->retailerOfferIdentifier = $retailerOfferIdentifier;
     }
 

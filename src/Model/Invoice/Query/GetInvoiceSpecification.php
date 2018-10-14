@@ -12,7 +12,7 @@ final class GetInvoiceSpecification
     private $invoiceId;
     private $page;
 
-    public function __construct(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, int $page)
+    public function __construct(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, ?int $page)
     {
         $this->invoiceId = $invoiceId;
         $this->page = $page;
@@ -23,7 +23,7 @@ final class GetInvoiceSpecification
         return $this->invoiceId;
     }
 
-    public function page(): int
+    public function page(): ?int
     {
         return $this->page;
     }
@@ -33,7 +33,7 @@ final class GetInvoiceSpecification
         return new self($invoiceId, $this->page);
     }
 
-    public function withPage(int $page): GetInvoiceSpecification
+    public function withPage(?int $page): GetInvoiceSpecification
     {
         return new self($this->invoiceId, $page);
     }

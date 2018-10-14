@@ -181,4 +181,121 @@ final class Inbound
     {
         return new self($this->id, $this->reference, $this->creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $this->timeslot, $this->products, $this->stateTransitions, $fbbTransporter);
     }
+
+    public static function fromArray(array $data): Inbound
+    {
+        if (! isset($data['id']) || ! \is_int($data['id'])) {
+            throw new \InvalidArgumentException("Key 'id' is missing in data array or is not a int");
+        }
+
+        $id = InboundId::fromScalar($data['id']);
+
+        if (! isset($data['reference']) || ! \is_string($data['reference'])) {
+            throw new \InvalidArgumentException("Key 'reference' is missing in data array or is not a string");
+        }
+
+        $reference = Reference::fromString($data['reference']);
+
+        if (isset($data['creationDate'])) {
+            if (! \is_string($data['creationDate'])) {
+                throw new \InvalidArgumentException("Value for 'creationDate' is not a string in data array");
+            }
+
+            $creationDate = \BolCom\RetailerApi\Model\DateTime::fromString($data['creationDate']);
+        } else {
+            $creationDate = null;
+        }
+
+        if (! isset($data['state']) || ! \is_string($data['state'])) {
+            throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
+        }
+
+        $state = State::fromName($data['state']);
+
+        if (! isset($data['labellingService']) || ! \is_bool($data['labellingService'])) {
+            throw new \InvalidArgumentException("Key 'labellingService' is missing in data array or is not a bool");
+        }
+
+        $labellingService = $data['labellingService'];
+
+        if (! isset($data['announcedBSKUs']) || ! \is_int($data['announcedBSKUs'])) {
+            throw new \InvalidArgumentException("Key 'announcedBSKUs' is missing in data array or is not a int");
+        }
+
+        $announcedBSKUs = $data['announcedBSKUs'];
+
+        if (! isset($data['announcedQuantity']) || ! \is_int($data['announcedQuantity'])) {
+            throw new \InvalidArgumentException("Key 'announcedQuantity' is missing in data array or is not a int");
+        }
+
+        $announcedQuantity = $data['announcedQuantity'];
+
+        if (! isset($data['receivedBSKUs']) || ! \is_int($data['receivedBSKUs'])) {
+            throw new \InvalidArgumentException("Key 'receivedBSKUs' is missing in data array or is not a int");
+        }
+
+        $receivedBSKUs = $data['receivedBSKUs'];
+
+        if (! isset($data['receivedQuantity']) || ! \is_int($data['receivedQuantity'])) {
+            throw new \InvalidArgumentException("Key 'receivedQuantity' is missing in data array or is not a int");
+        }
+
+        $receivedQuantity = $data['receivedQuantity'];
+
+        if (! isset($data['timeslot']) || ! \is_BolCom\RetailerApi\Model\DateTime($data['timeslot'])) {
+            throw new \InvalidArgumentException("Key 'timeslot' is missing in data array or is not a BolCom\RetailerApi\Model\DateTime");
+        }
+
+        $timeslot = new Timeslot($data['timeslot']);
+
+        if (! isset($data['products']) || ! \is_array($data['products'])) {
+            throw new \InvalidArgumentException("Key 'products' is missing in data array or is not an array");
+        }
+        
+        $products = [];
+
+        foreach ($data['products'] as $__value) {
+            if (! \is_BolCom\RetailerApi\Model\Inbound\Product($__value)) {
+                throw new \InvalidArgumentException("Key 'products' in data array or is not an array of BolCom\RetailerApi\Model\Inbound\Product");
+            }
+
+            $products[] = $__value;
+        }
+
+        if (! isset($data['stateTransitions']) || ! \is_array($data['stateTransitions'])) {
+            throw new \InvalidArgumentException("Key 'stateTransitions' is missing in data array or is not an array");
+        }
+        
+        $stateTransitions = [];
+
+        foreach ($data['stateTransitions'] as $__value) {
+            if (! \is_BolCom\RetailerApi\Model\Inbound\StateTransition($__value)) {
+                throw new \InvalidArgumentException("Key 'stateTransitions' in data array or is not an array of BolCom\RetailerApi\Model\Inbound\StateTransition");
+            }
+
+            $stateTransitions[] = $__value;
+        }
+
+        if (! isset($data['fbbTransporter']) || ! \is_BolCom\RetailerApi\Model\Transport\TransporterName($data['fbbTransporter'])) {
+            throw new \InvalidArgumentException("Key 'fbbTransporter' is missing in data array or is not a BolCom\RetailerApi\Model\Transport\TransporterName");
+        }
+
+        $fbbTransporter = new Transporter($data['fbbTransporter']);
+
+        return new self(
+            $id,
+            $reference,
+            $creationDate,
+            $state,
+            $labellingService,
+            $announcedBSKUs,
+            $announcedQuantity,
+            $receivedBSKUs,
+            $receivedQuantity,
+            $timeslot,
+            $products,
+            $stateTransitions,
+            $fbbTransporter
+        );
+    }
 }

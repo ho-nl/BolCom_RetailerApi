@@ -8,6 +8,10 @@ namespace BolCom\RetailerApi\Model\Order {
         OrderItem[] $orderItems,
     } deriving (FromArray);
 
+    data OrderList = OrderList {
+        Order[] $orders
+    } deriving (FromArray);
+
     data OrderCustomerDetails = OrderCustomerDetails {
         AddressDetails $shipmentDetails,
         AddressDetails $billingDetails,
@@ -86,15 +90,14 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 namespace BolCom\RetailerApi\Model\Order\Command {
     data CancelOrder = CancelOrder {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        \BolCom\RetailerApi\Model\DateTime $dateTime,
-        \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
+        ?\BolCom\RetailerApi\Model\DateTime $dateTime,
+        ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
     };
 
     data ShipOrderItem = ShipOrderItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        string $shipmentReference,
-        string $shippingLabelCode,
-        \BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction
+        ?string $shipmentReference,
+        ?string $shippingLabelCode,
+        ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction
     };
 }
-

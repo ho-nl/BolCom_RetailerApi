@@ -3,10 +3,11 @@ namespace BolCom\RetailerApi\Model\Inbound {
     data State = Draft | PreAnnounced | ArrivedAtWH | Cancelled deriving(Enum);
     data BSku = String deriving(FromString, ToString);
 
-    data ShipmentList = GetShipmentListResponse {
+    data InboundList = InboundList {
         int $totalCount,
-        int $totalPageCount
-    };
+        int $totalPageCount,
+        Inbound[] $inbounds
+    } deriving(FromArray);
 
     data InboundId = Int deriving(FromScalar, ToScalar);
     data Inbound = Inbound {
@@ -23,7 +24,7 @@ namespace BolCom\RetailerApi\Model\Inbound {
         Product[] $products,
         StateTransition[] $stateTransitions,
         Transporter $fbbTransporter
-    };
+    } deriving(FromArray);
 
     data Product = Product {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
@@ -36,6 +37,10 @@ namespace BolCom\RetailerApi\Model\Inbound {
     data Timeslot = Timeslot {
         \BolCom\RetailerApi\Model\DateTime $start,
         \BolCom\RetailerApi\Model\DateTime $end
+    };
+
+    data TimeslotList = TimeslotList {
+        Timeslot[] $timeslot
     };
 
     data StateTransition = StateTransition {
@@ -73,6 +78,28 @@ namespace BolCom\RetailerApi\Model\Inbound {
 
     data InventoryStock = sufficient | insufficient deriving(Enum);
     data InventoryState = salable | unsalable deriving(Enum);
+
+    data InventoryList = InventoryList {
+        int $totalCount,
+        int $totalPageCount,
+        InventoryOffer[] $offers
+    } deriving (FromArray);
+
+    data InventoryOffer = InventoryOffer {
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
+        BSku $bsku,
+        int $nckStock,
+        int $stock,
+        string $title
+    } deriving (FromArray);
+
+    data PackingList = PackingList {
+        array $packingList
+    } deriving (FromArray);
+
+    data FbbShippingLabelList = FbbShippingLabelList {
+        array $labels
+    } deriving (FromArray);
 }
 
 namespace BolCom\RetailerApi\Model\Inbound\Query {
@@ -106,11 +133,11 @@ namespace BolCom\RetailerApi\Model\Inbound\Query {
         \BolCom\RetailerApi\Model\Inbound\InboundId $inboundId
     };
 
-    data GetFbbShippingLabel = GetFppShippingLabel {
+    data GetFbbShippingLabel = GetFbbShippingLabel {
         \BolCom\RetailerApi\Model\Inbound\InboundId $inboundId
     };
 
-    data GetInventory = GetInventory {
+    data GetInventoryList = GetInventoryList {
         int $page,
         \BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity,
         \BolCom\RetailerApi\Model\Inbound\InventoryStock $stock,
@@ -120,7 +147,7 @@ namespace BolCom\RetailerApi\Model\Inbound\Query {
 }
 
 namespace BolCom\RetailerApi\Model\Inbound\Command {
-    data CreateShipment = CreateShipment {
+    data CreateInbound = CreateInbound {
         ?\BolCom\RetailerApi\Model\Inbound\Reference $reference,
         Timeslot $timeslot,
         Transporter $fbbTransporter,

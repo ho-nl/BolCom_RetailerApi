@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetInventory
+final class GetInventoryList
 {
     private $page;
     private $quantity;
@@ -49,27 +49,27 @@ final class GetInventory
         return $this->query;
     }
 
-    public function withPage(int $page): GetInventory
+    public function withPage(int $page): GetInventoryList
     {
         return new self($page, $this->quantity, $this->stock, $this->state, $this->query);
     }
 
-    public function withQuantity(\BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity): GetInventory
+    public function withQuantity(\BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity): GetInventoryList
     {
         return new self($this->page, $quantity, $this->stock, $this->state, $this->query);
     }
 
-    public function withStock(\BolCom\RetailerApi\Model\Inbound\InventoryStock $stock): GetInventory
+    public function withStock(\BolCom\RetailerApi\Model\Inbound\InventoryStock $stock): GetInventoryList
     {
         return new self($this->page, $this->quantity, $stock, $this->state, $this->query);
     }
 
-    public function withState(\BolCom\RetailerApi\Model\Inbound\InventoryState $state): GetInventory
+    public function withState(\BolCom\RetailerApi\Model\Inbound\InventoryState $state): GetInventoryList
     {
         return new self($this->page, $this->quantity, $this->stock, $state, $this->query);
     }
 
-    public function withQuery(string $query): GetInventory
+    public function withQuery(string $query): GetInventoryList
     {
         return new self($this->page, $this->quantity, $this->stock, $this->state, $query);
     }

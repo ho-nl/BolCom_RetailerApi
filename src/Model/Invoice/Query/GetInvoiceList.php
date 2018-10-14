@@ -11,17 +11,17 @@ final class GetInvoiceList
 {
     private $period;
 
-    public function __construct(\BolCom\RetailerApi\Model\Invoice\Period $period)
+    public function __construct(?\BolCom\RetailerApi\Model\Invoice\Period $period)
     {
         $this->period = $period;
     }
 
-    public function period(): \BolCom\RetailerApi\Model\Invoice\Period
+    public function period(): ?\BolCom\RetailerApi\Model\Invoice\Period
     {
         return $this->period;
     }
 
-    public function withPeriod(\BolCom\RetailerApi\Model\Invoice\Period $period): GetInvoiceList
+    public function withPeriod(?\BolCom\RetailerApi\Model\Invoice\Period $period): GetInvoiceList
     {
         return new self($period);
     }

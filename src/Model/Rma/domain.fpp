@@ -19,6 +19,10 @@ namespace BolCom\RetailerApi\Model\Rma {
         \BolCom\RetailerApi\Model\DateTime $processingDateTime
     } deriving (FromArray);
 
+    data ReturnItemList = ReturnItemList {
+        ReturnItem[] $returns
+    } deriving (FromArray);
+
     data HandlingResult = ReturnReceived | ExchangeProduct | ProductDoesNotMeetConditions | RepairProduct | CustomerKeepsProductPaid | StillApproved deriving(Enum) with (
         ReturnReceived: "RETURN_RECEIVED",
         ExchangeProduct: "EXCHANGE_PRODUCT",

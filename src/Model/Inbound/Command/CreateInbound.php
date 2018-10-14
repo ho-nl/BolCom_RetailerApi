@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Command;
 
-final class CreateShipment
+final class CreateInbound
 {
     private $reference;
     private $timeslot;
@@ -54,27 +54,27 @@ final class CreateShipment
         return $this->products;
     }
 
-    public function withReference(?\BolCom\RetailerApi\Model\Inbound\Reference $reference): CreateShipment
+    public function withReference(?\BolCom\RetailerApi\Model\Inbound\Reference $reference): CreateInbound
     {
         return new self($reference, $this->timeslot, $this->fbbTransporter, $this->labellingService, $this->products);
     }
 
-    public function withTimeslot(Timeslot $timeslot): CreateShipment
+    public function withTimeslot(Timeslot $timeslot): CreateInbound
     {
         return new self($this->reference, $timeslot, $this->fbbTransporter, $this->labellingService, $this->products);
     }
 
-    public function withFbbTransporter(Transporter $fbbTransporter): CreateShipment
+    public function withFbbTransporter(Transporter $fbbTransporter): CreateInbound
     {
         return new self($this->reference, $this->timeslot, $fbbTransporter, $this->labellingService, $this->products);
     }
 
-    public function withLabellingService(bool $labellingService): CreateShipment
+    public function withLabellingService(bool $labellingService): CreateInbound
     {
         return new self($this->reference, $this->timeslot, $this->fbbTransporter, $labellingService, $this->products);
     }
 
-    public function withProducts(array $products): CreateShipment
+    public function withProducts(array $products): CreateInbound
     {
         return new self($this->reference, $this->timeslot, $this->fbbTransporter, $this->labellingService, $products);
     }

@@ -14,7 +14,7 @@ final class ShipOrderItem
     private $shippingLabelCode;
     private $transportInstruction;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, string $shipmentReference, string $shippingLabelCode, \BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction)
     {
         $this->orderItemId = $orderItemId;
         $this->shipmentReference = $shipmentReference;
@@ -27,17 +27,17 @@ final class ShipOrderItem
         return $this->orderItemId;
     }
 
-    public function shipmentReference(): string
+    public function shipmentReference(): ?string
     {
         return $this->shipmentReference;
     }
 
-    public function shippingLabelCode(): string
+    public function shippingLabelCode(): ?string
     {
         return $this->shippingLabelCode;
     }
 
-    public function transportInstruction(): \BolCom\RetailerApi\Model\Transport\TransportInstruction
+    public function transportInstruction(): ?\BolCom\RetailerApi\Model\Transport\TransportInstruction
     {
         return $this->transportInstruction;
     }
@@ -47,17 +47,17 @@ final class ShipOrderItem
         return new self($orderItemId, $this->shipmentReference, $this->shippingLabelCode, $this->transportInstruction);
     }
 
-    public function withShipmentReference(string $shipmentReference): ShipOrderItem
+    public function withShipmentReference(?string $shipmentReference): ShipOrderItem
     {
         return new self($this->orderItemId, $shipmentReference, $this->shippingLabelCode, $this->transportInstruction);
     }
 
-    public function withShippingLabelCode(string $shippingLabelCode): ShipOrderItem
+    public function withShippingLabelCode(?string $shippingLabelCode): ShipOrderItem
     {
         return new self($this->orderItemId, $this->shipmentReference, $shippingLabelCode, $this->transportInstruction);
     }
 
-    public function withTransportInstruction(\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction): ShipOrderItem
+    public function withTransportInstruction(?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction): ShipOrderItem
     {
         return new self($this->orderItemId, $this->shipmentReference, $this->shippingLabelCode, $transportInstruction);
     }

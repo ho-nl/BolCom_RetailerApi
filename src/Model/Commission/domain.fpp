@@ -1,4 +1,8 @@
 namespace BolCom\RetailerApi\Model\Commission {
+    data CommissionList = CommissionList {
+        Commission[] $commissions
+    };
+
     data Commission = Commission {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         \BolCom\RetailerApi\Model\Offer\Condition $condition,
