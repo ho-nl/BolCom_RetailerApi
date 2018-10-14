@@ -103,7 +103,7 @@ namespace BolCom\RetailerApi\Model\Offer\Query {
 
 namespace BolCom\RetailerApi\Model\Offer\Command {
     data CreateOrUpdateOffer = CreateOrUpdateOffer {
-        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailOffer
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[] $retailOffer
     };
 
     data DeleteOffersInBulk = DeleteOffersInBulk {

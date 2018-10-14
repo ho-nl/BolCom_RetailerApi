@@ -3,6 +3,9 @@
   "type": "library",
   "description": "API Package to talk to the BolCom API",
   "license": "Apache",
+  "require": {
+    "guzzlehttp/guzzle:": "~6.0"
+  },
   "autoload": {
     "psr-4": {
       "BolCom\\RetailerApi\\": "src/"

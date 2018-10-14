@@ -11,18 +11,18 @@ final class CreateOrUpdateOffer
 {
     private $retailOffer;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailOffer)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailOffer)
     {
         $this->retailOffer = $retailOffer;
     }
 
-    public function retailOffer(): \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert
+    public function retailOffer(): array
     {
         return $this->retailOffer;
     }
 
-    public function withRetailOffer(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailOffer): CreateOrUpdateOffer
+    public function withRetailOffer(array $retailOffer): CreateOrUpdateOffer
     {
-        return new self($retailOffer);
+        return new self(...$retailOffer);
     }
 }
