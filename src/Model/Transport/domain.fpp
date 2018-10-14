@@ -1,6 +1,8 @@
 namespace BolCom\RetailerApi\Model\Transport {
     data TransportId = Int deriving(FromScalar, ToScalar);
 
+    data TransporterName = String deriving(FromScalar, ToScalar);
+
     data TransporterCode = Briefpost | Ups | Tnt | TntExtra | TntBrief | TntExpress | Dyl | DpdNl | DpdBe | BPostBe |
           BpostBrief | Dhlforyou | Gls | FedexNl | FedexBe | Other | Dhl | DhlDe | DhlGlobalMail | Tsn | Fiege |
           Transmission | ParcelNl | Logoix | Packs | Courier | Rjp deriving(Enum) with (

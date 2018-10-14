@@ -26,10 +26,20 @@ namespace BolCom\RetailerApi\Model\Offer {
         string $errorMessage
     } deriving (FromArray);
 
+    data Price = Float deriving(FromScalar, ToScalar);
+
+    //We choose IsNew, because New is a protected key word
+    data Condition = IsNew | AsNew | Good | Reasonable | Moderate deriving(Enum) with (IsNew:'NEW', AsNew:'AS_NEW', Good:'GOOD', Reasonable:'REASONABLE', Moderate:'MODERATE');
+
+    data RetailerOfferIdentifier = RetailerOfferIdentifier {
+        \BolCom\RetailerApi\Model\Ean $ean,
+        Condition $condition,
+    } deriving (ToArray);
+
     data RetailerOffer = RetailerOffer {
         \BolCom\RetailerApi\Model\Ean $ean,
-        \BolCom\RetailerApi\Model\Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price,
+        Condition $condition,
+        Price $price,
         \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
         UnreservedStock $unreservedStock,
@@ -41,15 +51,9 @@ namespace BolCom\RetailerApi\Model\Offer {
         RetailerOfferStatus $status
     } deriving (FromArray);
 
-
-    data RetailerOfferIdentifier = RetailerOfferIdentifier {
-        \BolCom\RetailerApi\Model\Ean $ean,
-        \BolCom\RetailerApi\Model\Condition $condition,
-    } deriving (ToArray);
-
     data RetailerOfferUpsert = RetailerOfferUpsert {
         \BolCom\RetailerApi\Model\Ean $ean,
-        \BolCom\RetailerApi\Model\Condition $condition,
+        Condition $condition,
         \BolCom\RetailerApi\Model\CurrencyAmount $price,
         \BolCom\RetailerApi\Model\DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
