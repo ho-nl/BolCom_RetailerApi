@@ -7,22 +7,38 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Commission\Query;
 
-final class GetCommissionList
+final class GetCommissionList extends \Prooph\Common\Messaging\Query
 {
-    private $commissionQueries;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(GetCommission ...$commissionQueries)
-    {
-        $this->commissionQueries = $commissionQueries;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Commission\Query\GetCommissionList';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function commissionQueries(): array
     {
-        return $this->commissionQueries;
+        $__returnValue = [];
+
+        foreach ($this->payload['commissionQueries'] as $__value) {
+            $__returnValue[] = \BolCom\RetailerApi\Model\Commission\CommissionQuery::fromArray($__value);
+        }
+
+        return $__returnValue;
     }
 
-    public function withCommissionQueries(array $commissionQueries): GetCommissionList
+    public static function with(\BolCom\RetailerApi\Model\Commission\CommissionQuery ...$commissionQueries): GetCommissionList
     {
-        return new self(...$commissionQueries);
+        return new self([
+            'commissionQueries' => $commissionQueries,
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['commissionQueries'])) {
+            throw new \InvalidArgumentException("Key 'commissionQueries' is missing in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

@@ -28,8 +28,8 @@ final class Commission
         $this->totalCost = $totalCost;
         $this->totalCostWithoutReduction = $totalCostWithoutReduction;
         foreach ($reduction as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Commission\CommissionResultReduction) {
-                throw new \InvalidArgumentException('reduction expected an array of BolCom\RetailerApi\Model\Commission\CommissionResultReduction');
+            if (! $__value instanceof \BolCom\RetailerApi\Model\Commission\CommissionReduction) {
+                throw new \InvalidArgumentException('reduction expected an array of BolCom\RetailerApi\Model\Commission\CommissionReduction');
             }
             $this->reduction[] = $__value;
         }
@@ -113,5 +113,75 @@ final class Commission
     public function withReduction(array $reduction): Commission
     {
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmound, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $reduction);
+    }
+
+    public static function fromArray(array $data): Commission
+    {
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
+        }
+
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
+
+        if (! isset($data['condition']) || ! \is_string($data['condition'])) {
+            throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
+        }
+
+        $condition = \BolCom\RetailerApi\Model\Offer\Condition::fromName($data['condition']);
+
+        if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
+            throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
+        }
+
+        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
+
+        if (! isset($data['fixedAmound']) || (! \is_float($data['fixedAmound']) && ! \is_int($data['fixedAmound']))) {
+            throw new \InvalidArgumentException("Key 'fixedAmound' is missing in data array or is not a float");
+        }
+
+        $fixedAmound = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['fixedAmound']);
+
+        if (! isset($data['percentage']) || (! \is_float($data['percentage']) && ! \is_int($data['percentage']))) {
+            throw new \InvalidArgumentException("Key 'percentage' is missing in data array or is not a float");
+        }
+
+        $percentage = $data['percentage'];
+
+        if (! isset($data['totalCost']) || (! \is_float($data['totalCost']) && ! \is_int($data['totalCost']))) {
+            throw new \InvalidArgumentException("Key 'totalCost' is missing in data array or is not a float");
+        }
+
+        $totalCost = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['totalCost']);
+
+        if (! isset($data['totalCostWithoutReduction']) || (! \is_float($data['totalCostWithoutReduction']) && ! \is_int($data['totalCostWithoutReduction']))) {
+            throw new \InvalidArgumentException("Key 'totalCostWithoutReduction' is missing in data array or is not a float");
+        }
+
+        $totalCostWithoutReduction = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['totalCostWithoutReduction']);
+
+        if (! isset($data['reduction']) || ! \is_array($data['reduction'])) {
+            throw new \InvalidArgumentException("Key 'reduction' is missing in data array or is not an array");
+        }
+
+        $reduction = [];
+
+        foreach ($data['reduction'] as $__value) {
+            if (! \is_array($data['reduction'])) {
+                throw new \InvalidArgumentException("Key 'reduction' in data array or is not an array of arrays");
+            }
+
+            $reduction[] = CommissionReduction::fromArray($__value);
+        }
+
+        return new self(
+            $ean,
+            $condition,
+            $price,
+            $fixedAmound,
+            $percentage,
+            $totalCost,
+            $totalCostWithoutReduction,
+            $reduction
+        );
     }
 }

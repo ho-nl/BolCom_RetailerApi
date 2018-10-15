@@ -7,46 +7,52 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Commission\Query;
 
-final class GetCommission
+final class GetCommission extends \Prooph\Common\Messaging\Query
 {
-    private $ean;
-    private $condition;
-    private $price;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price)
-    {
-        $this->ean = $ean;
-        $this->condition = $condition;
-        $this->price = $price;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Commission\Query\GetCommission';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
-        return $this->ean;
+        return \BolCom\RetailerApi\Model\Offer\Ean::fromString($this->payload['ean']);
     }
 
     public function condition(): \BolCom\RetailerApi\Model\Offer\Condition
     {
-        return $this->condition;
+        return \BolCom\RetailerApi\Model\Offer\Condition::fromName($this->payload['condition']);
     }
 
     public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
-        return $this->price;
+        return \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($this->payload['price']);
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): GetCommission
+    public static function with(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price): GetCommission
     {
-        return new self($ean, $this->condition, $this->price);
+        return new self([
+            'ean' => $ean->toString(),
+            'condition' => $condition->name(),
+            'price' => $price->toScalar(),
+        ]);
     }
 
-    public function withCondition(\BolCom\RetailerApi\Model\Offer\Condition $condition): GetCommission
+    protected function setPayload(array $payload): void
     {
-        return new self($this->ean, $condition, $this->price);
-    }
+        if (! isset($payload['ean']) || ! \is_string($payload['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in payload or is not a string");
+        }
 
-    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): GetCommission
-    {
-        return new self($this->ean, $this->condition, $price);
+        if (! isset($payload['condition']) || ! \is_string($payload['condition'])) {
+            throw new \InvalidArgumentException("Key 'condition' is missing in payload or is not a string");
+        }
+
+        if (! isset($payload['price']) || (! \is_float($payload['price']) && ! \is_int($payload['price']))) {
+            throw new \InvalidArgumentException("Key 'price' is missing in payload or is not a float");
+        }
+
+        $this->payload = $payload;
     }
 }

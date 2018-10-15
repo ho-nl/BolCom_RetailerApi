@@ -25,4 +25,23 @@ final class CommissionList
     {
         return new self(...$commissions);
     }
+
+    public static function fromArray(array $data): CommissionList
+    {
+        if (! isset($data['commissions']) || ! \is_array($data['commissions'])) {
+            throw new \InvalidArgumentException("Key 'commissions' is missing in data array or is not an array");
+        }
+
+        $commissions = [];
+
+        foreach ($data['commissions'] as $__value) {
+            if (! \is_array($data['commissions'])) {
+                throw new \InvalidArgumentException("Key 'commissions' in data array or is not an array of arrays");
+            }
+
+            $commissions[] = Commission::fromArray($__value);
+        }
+
+        return new self($commissions);
+    }
 }

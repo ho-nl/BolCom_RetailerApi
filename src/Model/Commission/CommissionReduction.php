@@ -61,4 +61,38 @@ final class CommissionReduction
     {
         return new self($this->maximumPrice, $this->costReduction, $this->startDate, $endDate);
     }
+
+    public static function fromArray(array $data): CommissionReduction
+    {
+        if (! isset($data['maximumPrice']) || (! \is_float($data['maximumPrice']) && ! \is_int($data['maximumPrice']))) {
+            throw new \InvalidArgumentException("Key 'maximumPrice' is missing in data array or is not a float");
+        }
+
+        $maximumPrice = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['maximumPrice']);
+
+        if (! isset($data['costReduction']) || (! \is_float($data['costReduction']) && ! \is_int($data['costReduction']))) {
+            throw new \InvalidArgumentException("Key 'costReduction' is missing in data array or is not a float");
+        }
+
+        $costReduction = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['costReduction']);
+
+        if (! isset($data['startDate']) || ! \is_string($data['startDate'])) {
+            throw new \InvalidArgumentException("Key 'startDate' is missing in data array or is not a string");
+        }
+
+        $startDate = \BolCom\RetailerApi\Model\Date::fromString($data['startDate']);
+
+        if (! isset($data['endDate']) || ! \is_string($data['endDate'])) {
+            throw new \InvalidArgumentException("Key 'endDate' is missing in data array or is not a string");
+        }
+
+        $endDate = \BolCom\RetailerApi\Model\Date::fromString($data['endDate']);
+
+        return new self(
+            $maximumPrice,
+            $costReduction,
+            $startDate,
+            $endDate
+        );
+    }
 }
