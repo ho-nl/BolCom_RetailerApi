@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Invoice\Query;
 
-final class GetInvoice
+final class GetInvoice extends \Prooph\Common\Messaging\Query
 {
-    private $invoiceId;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId)
-    {
-        $this->invoiceId = $invoiceId;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Invoice\Query\GetInvoice';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function invoiceId(): \BolCom\RetailerApi\Model\Invoice\InvoiceId
     {
-        return $this->invoiceId;
+        return \BolCom\RetailerApi\Model\Invoice\InvoiceId::fromScalar($this->payload['invoiceId']);
     }
 
-    public function withInvoiceId(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId): GetInvoice
+    public static function with(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId): GetInvoice
     {
-        return new self($invoiceId);
+        return new self([
+            'invoiceId' => $invoiceId->toScalar(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['invoiceId']) || ! \is_int($payload['invoiceId'])) {
+            throw new \InvalidArgumentException("Key 'invoiceId' is missing in payload or is not a int");
+        }
+
+        $this->payload = $payload;
     }
 }

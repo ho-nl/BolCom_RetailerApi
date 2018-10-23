@@ -25,4 +25,23 @@ final class InvoiceSpecificationPdfList
     {
         return new self(...$pdfs);
     }
+
+    public static function fromArray(array $data): InvoiceSpecificationPdfList
+    {
+        if (! isset($data['pdfs']) || ! \is_array($data['pdfs'])) {
+            throw new \InvalidArgumentException("Key 'pdfs' is missing in data array or is not an array");
+        }
+
+        $pdfs = [];
+
+        foreach ($data['pdfs'] as $__value) {
+            if (! \is_string($__value)) {
+                throw new \InvalidArgumentException("Value for 'pdfs' in data array is not an array of string");
+            }
+
+            $pdfs[] = InvoiceSpecificationPdf::fromString($__value);
+        }
+
+        return new self($pdfs);
+    }
 }

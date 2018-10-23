@@ -8,7 +8,7 @@ namespace BolCom\RetailerApi\Model\Commission {
         \BolCom\RetailerApi\Model\Offer\Condition $condition,
         \BolCom\RetailerApi\Model\CurrencyAmount $price,
         \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound,
-        float $percentage,
+        \BolCom\RetailerApi\Model\PercentageAmount $percentage,
         \BolCom\RetailerApi\Model\CurrencyAmount $totalCost,
         \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction,
         CommissionReduction[] $reduction

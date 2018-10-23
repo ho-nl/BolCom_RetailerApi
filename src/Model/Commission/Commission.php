@@ -18,7 +18,7 @@ final class Commission
     private $totalCostWithoutReduction;
     private $reduction;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound, float $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, array $reduction)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmound, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, array $reduction)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -55,7 +55,7 @@ final class Commission
         return $this->fixedAmound;
     }
 
-    public function percentage(): float
+    public function percentage(): \BolCom\RetailerApi\Model\PercentageAmount
     {
         return $this->percentage;
     }
@@ -95,7 +95,7 @@ final class Commission
         return new self($this->ean, $this->condition, $this->price, $fixedAmound, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
 
-    public function withPercentage(float $percentage): Commission
+    public function withPercentage(\BolCom\RetailerApi\Model\PercentageAmount $percentage): Commission
     {
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmound, $percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
@@ -145,7 +145,7 @@ final class Commission
             throw new \InvalidArgumentException("Key 'percentage' is missing in data array or is not a float");
         }
 
-        $percentage = $data['percentage'];
+        $percentage = \BolCom\RetailerApi\Model\PercentageAmount::fromScalar($data['percentage']);
 
         if (! isset($data['totalCost']) || (! \is_float($data['totalCost']) && ! \is_int($data['totalCost']))) {
             throw new \InvalidArgumentException("Key 'totalCost' is missing in data array or is not a float");

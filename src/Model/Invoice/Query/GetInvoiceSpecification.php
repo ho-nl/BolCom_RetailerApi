@@ -7,34 +7,42 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Invoice\Query;
 
-final class GetInvoiceSpecification
+final class GetInvoiceSpecification extends \Prooph\Common\Messaging\Query
 {
-    private $invoiceId;
-    private $page;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, ?int $page)
-    {
-        $this->invoiceId = $invoiceId;
-        $this->page = $page;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Invoice\Query\GetInvoiceSpecification';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function invoiceId(): \BolCom\RetailerApi\Model\Invoice\InvoiceId
     {
-        return $this->invoiceId;
+        return \BolCom\RetailerApi\Model\Invoice\InvoiceId::fromScalar($this->payload['invoiceId']);
     }
 
     public function page(): ?int
     {
-        return $this->page;
+        return $this->payload['page'] ?? null;
     }
 
-    public function withInvoiceId(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId): GetInvoiceSpecification
+    public static function with(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, ?int $page): GetInvoiceSpecification
     {
-        return new self($invoiceId, $this->page);
+        return new self([
+            'invoiceId' => $invoiceId->toScalar(),
+            'page' => $page,
+        ]);
     }
 
-    public function withPage(?int $page): GetInvoiceSpecification
+    protected function setPayload(array $payload): void
     {
-        return new self($this->invoiceId, $page);
+        if (! isset($payload['invoiceId']) || ! \is_int($payload['invoiceId'])) {
+            throw new \InvalidArgumentException("Key 'invoiceId' is missing in payload or is not a int");
+        }
+
+        if (isset($payload['page']) && ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Value for 'page' is not a int in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

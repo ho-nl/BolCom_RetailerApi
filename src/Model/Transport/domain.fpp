@@ -56,7 +56,9 @@ namespace BolCom\RetailerApi\Model\Transport\Command {
         TransporterCode $transporterCode,
         TrackAndTrace $trackAndTrace
     };
+}
 
+namespace BolCom\RetailerApi\Model\Transport\Query {
     data GetShippingLabel = GetShippingLabel {
         TransportId $transportId
     };
