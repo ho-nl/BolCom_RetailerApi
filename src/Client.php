@@ -11,6 +11,8 @@ use BolCom\RetailerApi\Client\JsonStream;
 use BolCom\RetailerApi\Client\ResponseInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use kamermans\OAuth2\GrantType\ClientCredentials;
+use kamermans\OAuth2\OAuth2Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Log\LoggerInterface;
@@ -27,16 +29,18 @@ class Client extends \GuzzleHttp\Client
 {
     public function __construct(
         LoggerInterface $logger = null,
-        string $apiKey,
-        string $apiSecret
+        string $apiKey = '4c25a73d-31a4-402d-ac4c-83f0f869bca1',
+        string $apiSecret = 'CqXYlOHp3t-8WSu_FWTZi1GU7ivy9opskEGKEvj4K5WrJh1Tkdj0K0FvRDrMnxV1oIIJ2T4mBeloaXxMuOp93Q'
     ) {
         $stack = HandlerStack::create();
+
+        $stack->push($this->oauthMiddleware($apiKey, $apiSecret));
 
         if ($logger) {
             $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter()));
         }
 
-        $stack->push(self::apiVersion());
+        $stack->push($this->apiVersion());
 
         $stack->push(Middleware::mapResponse(function(\Psr\Http\Message\ResponseInterface $response) {
             return $response->withBody(new JsonStream($response->getBody()));
@@ -58,7 +62,7 @@ class Client extends \GuzzleHttp\Client
      *
      * @return callable Returns a function that accepts the next handler.
      */
-    public static function apiVersion() : callable
+    private function apiVersion() : callable
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
@@ -80,5 +84,21 @@ class Client extends \GuzzleHttp\Client
                 return $handler($request, $options);
             };
         };
+    }
+
+    /**
+     * @param string $apiKey
+     * @param string $apiSecret
+     *
+     * @return OAuth2Middleware
+     */
+    private function oauthMiddleware(string $apiKey, string $apiSecret): OAuth2Middleware
+    {
+        $reauthClient = new \GuzzleHttp\Client(['base_uri' => 'https://login.bol.com/token']);
+        $oauthMiddleware = new OAuth2Middleware(new ClientCredentials($reauthClient, [
+            'client_id' => $apiKey,
+            'client_secret' => $apiSecret,
+        ]));
+        return $oauthMiddleware;
     }
 }

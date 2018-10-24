@@ -4,11 +4,14 @@
   "description": "API Package to talk to the BolCom API",
   "license": "Apache",
   "require": {
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "kamermans/guzzle-oauth2-subscriber": "^1.0",
+    "php": "^7.1",
+    "prooph/common" : "^4.2.1"
   },
   "autoload": {
     "psr-4": {
-      "BolCom\\RetailerApi\\": "src/"
+      "BolCom\\RetailerApi\\": "src"
     }
   }
 }
