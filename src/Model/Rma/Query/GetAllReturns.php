@@ -27,7 +27,7 @@ final class GetAllReturns extends \Prooph\Common\Messaging\Query
 
     public function shipmentsMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
-        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($this->payload['shipmentsMethod']);
+        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['shipmentsMethod']);
     }
 
     public static function with(int $page, bool $handled, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllReturns
@@ -35,7 +35,7 @@ final class GetAllReturns extends \Prooph\Common\Messaging\Query
         return new self([
             'page' => $page,
             'handled' => $handled,
-            'shipmentsMethod' => $shipmentsMethod->name(),
+            'shipmentsMethod' => $shipmentsMethod->value(),
         ]);
     }
 

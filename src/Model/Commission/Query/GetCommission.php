@@ -22,7 +22,7 @@ final class GetCommission extends \Prooph\Common\Messaging\Query
 
     public function condition(): \BolCom\RetailerApi\Model\Offer\Condition
     {
-        return \BolCom\RetailerApi\Model\Offer\Condition::fromName($this->payload['condition']);
+        return \BolCom\RetailerApi\Model\Offer\Condition::fromValue($this->payload['condition']);
     }
 
     public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
@@ -34,7 +34,7 @@ final class GetCommission extends \Prooph\Common\Messaging\Query
     {
         return new self([
             'ean' => $ean->toString(),
-            'condition' => $condition->name(),
+            'condition' => $condition->value(),
             'price' => $price->toScalar(),
         ]);
     }

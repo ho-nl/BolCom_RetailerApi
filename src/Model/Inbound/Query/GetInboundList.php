@@ -37,7 +37,7 @@ final class GetInboundList extends \Prooph\Common\Messaging\Query
 
     public function state(): ?\BolCom\RetailerApi\Model\Inbound\State
     {
-        return isset($this->payload['state']) ? \BolCom\RetailerApi\Model\Inbound\State::fromName($this->payload['state']) : null;
+        return isset($this->payload['state']) ? \BolCom\RetailerApi\Model\Inbound\State::fromValue($this->payload['state']) : null;
     }
 
     public function page(): ?int
@@ -52,7 +52,7 @@ final class GetInboundList extends \Prooph\Common\Messaging\Query
             'bsku' => null === $bsku ? null : $bsku->toString(),
             'creationStart' => null === $creationStart ? null : $creationStart->toString(),
             'creationEnd' => null === $creationEnd ? null : $creationEnd->toString(),
-            'state' => null === $state ? null : $state->name(),
+            'state' => null === $state ? null : $state->value(),
             'page' => $page,
         ]);
     }

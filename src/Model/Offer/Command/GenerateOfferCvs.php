@@ -17,13 +17,13 @@ final class GenerateOfferCvs extends \Prooph\Common\Messaging\Command
 
     public function filter(): ?\BolCom\RetailerApi\Model\Offer\PublishStatus
     {
-        return isset($this->payload['filter']) ? \BolCom\RetailerApi\Model\Offer\PublishStatus::fromName($this->payload['filter']) : null;
+        return isset($this->payload['filter']) ? \BolCom\RetailerApi\Model\Offer\PublishStatus::fromValue($this->payload['filter']) : null;
     }
 
     public static function with(?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter): GenerateOfferCvs
     {
         return new self([
-            'filter' => null === $filter ? null : $filter->name(),
+            'filter' => null === $filter ? null : $filter->value(),
         ]);
     }
 

@@ -22,7 +22,7 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
 
     public function handlingResult(): \BolCom\RetailerApi\Model\Rma\HandlingResult
     {
-        return \BolCom\RetailerApi\Model\Rma\HandlingResult::fromName($this->payload['handlingResult']);
+        return \BolCom\RetailerApi\Model\Rma\HandlingResult::fromValue($this->payload['handlingResult']);
     }
 
     public function quantityReturned(): \BolCom\RetailerApi\Model\Rma\QuantityReturned
@@ -34,7 +34,7 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
     {
         return new self([
             'returnNumber' => $returnNumber->toScalar(),
-            'handlingResult' => $handlingResult->name(),
+            'handlingResult' => $handlingResult->value(),
             'quantityReturned' => $quantityReturned->toScalar(),
         ]);
     }

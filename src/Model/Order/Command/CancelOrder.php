@@ -27,7 +27,7 @@ final class CancelOrder extends \Prooph\Common\Messaging\Query
 
     public function reasonCode(): ?\BolCom\RetailerApi\Model\Order\CancellationReason
     {
-        return isset($this->payload['reasonCode']) ? \BolCom\RetailerApi\Model\Order\CancellationReason::fromName($this->payload['reasonCode']) : null;
+        return isset($this->payload['reasonCode']) ? \BolCom\RetailerApi\Model\Order\CancellationReason::fromValue($this->payload['reasonCode']) : null;
     }
 
     public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?\BolCom\RetailerApi\Model\DateTime $dateTime, ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode): CancelOrder
@@ -35,7 +35,7 @@ final class CancelOrder extends \Prooph\Common\Messaging\Query
         return new self([
             'orderItemId' => $orderItemId->toString(),
             'dateTime' => null === $dateTime ? null : $dateTime->toString(),
-            'reasonCode' => null === $reasonCode ? null : $reasonCode->name(),
+            'reasonCode' => null === $reasonCode ? null : $reasonCode->value(),
         ]);
     }
 

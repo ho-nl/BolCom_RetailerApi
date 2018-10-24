@@ -27,12 +27,12 @@ final class GetInventoryList extends \Prooph\Common\Messaging\Query
 
     public function stock(): \BolCom\RetailerApi\Model\Inbound\InventoryStock
     {
-        return \BolCom\RetailerApi\Model\Inbound\InventoryStock::fromName($this->payload['stock']);
+        return \BolCom\RetailerApi\Model\Inbound\InventoryStock::fromValue($this->payload['stock']);
     }
 
     public function state(): \BolCom\RetailerApi\Model\Inbound\InventoryState
     {
-        return \BolCom\RetailerApi\Model\Inbound\InventoryState::fromName($this->payload['state']);
+        return \BolCom\RetailerApi\Model\Inbound\InventoryState::fromValue($this->payload['state']);
     }
 
     public function query(): string
@@ -45,8 +45,8 @@ final class GetInventoryList extends \Prooph\Common\Messaging\Query
         return new self([
             'page' => $page,
             'quantity' => $quantity->toString(),
-            'stock' => $stock->name(),
-            'state' => $state->name(),
+            'stock' => $stock->value(),
+            'state' => $state->value(),
             'query' => $query,
         ]);
     }

@@ -22,7 +22,7 @@ final class GetStatusByEntity extends \Prooph\Common\Messaging\Query
 
     public function eventType(): \BolCom\RetailerApi\Model\ProcessStatus\EventType
     {
-        return \BolCom\RetailerApi\Model\ProcessStatus\EventType::fromName($this->payload['eventType']);
+        return \BolCom\RetailerApi\Model\ProcessStatus\EventType::fromValue($this->payload['eventType']);
     }
 
     public function page(): int
@@ -34,7 +34,7 @@ final class GetStatusByEntity extends \Prooph\Common\Messaging\Query
     {
         return new self([
             'entityId' => $entityId->toString(),
-            'eventType' => $eventType->name(),
+            'eventType' => $eventType->value(),
             'page' => $page,
         ]);
     }

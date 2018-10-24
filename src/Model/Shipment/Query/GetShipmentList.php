@@ -22,7 +22,7 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
 
     public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
-        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($this->payload['fulfilmentMethod']);
+        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
     }
 
     public function orderid(): \BolCom\RetailerApi\Model\Order\OrderId
@@ -34,7 +34,7 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
     {
         return new self([
             'page' => $page,
-            'fulfilmentMethod' => $fulfilmentMethod->name(),
+            'fulfilmentMethod' => $fulfilmentMethod->value(),
             'orderid' => $orderid->toString(),
         ]);
     }
