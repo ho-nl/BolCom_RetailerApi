@@ -110,7 +110,7 @@ final class ProcessStatus
             throw new \InvalidArgumentException("Key 'status' is missing in data array or is not a string");
         }
 
-        $status = EventStatus::fromName($data['status']);
+        $status = EventStatus::fromValue($data['status']);
 
         if (! isset($data['errorMessage']) || ! \is_string($data['errorMessage'])) {
             throw new \InvalidArgumentException("Key 'errorMessage' is missing in data array or is not a string");

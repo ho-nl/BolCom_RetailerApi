@@ -26,12 +26,12 @@ final class FulfilmentMethod
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function fBR(): self
+    public static function FBR(): self
     {
         return new self('FBR');
     }
 
-    public static function fFB(): self
+    public static function FFB(): self
     {
         return new self('FFB');
     }

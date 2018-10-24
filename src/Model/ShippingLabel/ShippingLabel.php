@@ -116,7 +116,7 @@ final class ShippingLabel
             throw new \InvalidArgumentException("Key 'transporterCode' is missing in data array or is not a string");
         }
 
-        $transporterCode = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromName($data['transporterCode']);
+        $transporterCode = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromValue($data['transporterCode']);
 
         if (! isset($data['labelType']) || ! \is_string($data['labelType'])) {
             throw new \InvalidArgumentException("Key 'labelType' is missing in data array or is not a string");

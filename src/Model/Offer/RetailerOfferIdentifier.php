@@ -50,7 +50,7 @@ final class RetailerOfferIdentifier
             throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
         }
 
-        $condition = Condition::fromName($data['condition']);
+        $condition = Condition::fromValue($data['condition']);
 
         return new self($ean, $condition);
     }

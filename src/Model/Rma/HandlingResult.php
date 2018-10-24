@@ -34,32 +34,32 @@ final class HandlingResult
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function rETURN_RECEIVED(): self
+    public static function RETURN_RECEIVED(): self
     {
         return new self('RETURN_RECEIVED');
     }
 
-    public static function eXCHANGE_PRODUCT(): self
+    public static function EXCHANGE_PRODUCT(): self
     {
         return new self('EXCHANGE_PRODUCT');
     }
 
-    public static function rETURN_DOES_NOT_MEET_CONDITIONS(): self
+    public static function RETURN_DOES_NOT_MEET_CONDITIONS(): self
     {
         return new self('RETURN_DOES_NOT_MEET_CONDITIONS');
     }
 
-    public static function rEPAIR_PRODUCT(): self
+    public static function REPAIR_PRODUCT(): self
     {
         return new self('REPAIR_PRODUCT');
     }
 
-    public static function cUSTOMER_KEEPS_PRODUCT_PAID(): self
+    public static function CUSTOMER_KEEPS_PRODUCT_PAID(): self
     {
         return new self('CUSTOMER_KEEPS_PRODUCT_PAID');
     }
 
-    public static function sTILL_APPROVED(): self
+    public static function STILL_APPROVED(): self
     {
         return new self('STILL_APPROVED');
     }

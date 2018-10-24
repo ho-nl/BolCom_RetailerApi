@@ -30,22 +30,22 @@ final class EventStatus
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function pENDING(): self
+    public static function PENDING(): self
     {
         return new self('PENDING');
     }
 
-    public static function sUCCESS(): self
+    public static function SUCCESS(): self
     {
         return new self('SUCCESS');
     }
 
-    public static function fAILURE(): self
+    public static function FAILURE(): self
     {
         return new self('FAILURE');
     }
 
-    public static function tIMEOUT(): self
+    public static function TIMEOUT(): self
     {
         return new self('TIMEOUT');
     }

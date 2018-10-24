@@ -212,7 +212,7 @@ final class ShipmentOrderItem
             throw new \InvalidArgumentException("Key 'offerCondition' is missing in data array or is not a string");
         }
 
-        $offerCondition = \BolCom\RetailerApi\Model\Offer\Condition::fromName($data['offerCondition']);
+        $offerCondition = \BolCom\RetailerApi\Model\Offer\Condition::fromValue($data['offerCondition']);
 
         if (! isset($data['offerReference']) || ! \is_string($data['offerReference'])) {
             throw new \InvalidArgumentException("Key 'offerReference' is missing in data array or is not a string");
@@ -224,7 +224,7 @@ final class ShipmentOrderItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = FulfilmentMethod::fromValue($data['fulfilmentMethod']);
 
         if (! isset($data['selectedDeliveryWindow']) || ! \is_array($data['selectedDeliveryWindow'])) {
             throw new \InvalidArgumentException("Key 'selectedDeliveryWindow' is missing in data array or is not an array");

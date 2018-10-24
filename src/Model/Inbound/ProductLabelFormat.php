@@ -34,32 +34,32 @@ final class ProductLabelFormat
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function aVERY_J8159(): self
+    public static function AVERY_J8159(): self
     {
         return new self('AVERY_J8159');
     }
 
-    public static function aVERY_J8160(): self
+    public static function AVERY_J8160(): self
     {
         return new self('AVERY_J8160');
     }
 
-    public static function aVERY_3474(): self
+    public static function AVERY_3474(): self
     {
         return new self('AVERY_3474');
     }
 
-    public static function dYMO_99012(): self
+    public static function DYMO_99012(): self
     {
         return new self('DYMO_99012');
     }
 
-    public static function bROTHER_DK11208D(): self
+    public static function BROTHER_DK11208D(): self
     {
         return new self('BROTHER_DK11208D');
     }
 
-    public static function zEBRA_Z_PERFORM_1000T(): self
+    public static function ZEBRA_Z_PERFORM_1000T(): self
     {
         return new self('ZEBRA_Z_PERFORM_1000T');
     }

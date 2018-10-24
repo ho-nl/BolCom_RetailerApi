@@ -13,7 +13,7 @@ final class Period
 
     public function __construct(string $value)
     {
-        if (!\BolCom\RetailerApi\Model\Assert\AssertDateRange::execute($value)) {
+        if (!\BolCom\RetailerApi\Model\Assert\AssertDateRange::assert($value)) {
             throw new \InvalidArgumentException('Could not create period');
         }
 

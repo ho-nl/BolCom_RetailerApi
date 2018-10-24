@@ -13,6 +13,10 @@ final class Ean
 
     public function __construct(string $value)
     {
+        if (!\Assert\Assertion::length($value, 13)) {
+            throw new \InvalidArgumentException('');
+        }
+
         $this->value = $value;
     }
 

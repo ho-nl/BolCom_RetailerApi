@@ -44,7 +44,7 @@ final class StateTransition
             throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
         }
 
-        $state = State::fromName($data['state']);
+        $state = State::fromValue($data['state']);
 
         if (! isset($data['stateDate']) || ! \is_string($data['stateDate'])) {
             throw new \InvalidArgumentException("Key 'stateDate' is missing in data array or is not a string");

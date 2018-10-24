@@ -17,12 +17,12 @@ final class InventoryList
     {
         $this->totalCount = $totalCount;
         $this->totalPageCount = $totalPageCount;
-        foreach ($offers as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\InventoryOffer) {
-                throw new \InvalidArgumentException('offers expected an array of BolCom\RetailerApi\Model\Inbound\InventoryOffer');
+            foreach ($offers as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\InventoryOffer) {
+                    throw new \InvalidArgumentException('offers expected an array of BolCom\RetailerApi\Model\Inbound\InventoryOffer');
+                }
+                $this->offers[] = $__value;
             }
-            $this->offers[] = $__value;
-        }
     }
 
     public function totalCount(): int

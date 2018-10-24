@@ -17,12 +17,12 @@ final class InboundList
     {
         $this->totalCount = $totalCount;
         $this->totalPageCount = $totalPageCount;
-        foreach ($inbounds as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Inbound) {
-                throw new \InvalidArgumentException('inbounds expected an array of BolCom\RetailerApi\Model\Inbound\Inbound');
+            foreach ($inbounds as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Inbound) {
+                    throw new \InvalidArgumentException('inbounds expected an array of BolCom\RetailerApi\Model\Inbound\Inbound');
+                }
+                $this->inbounds[] = $__value;
             }
-            $this->inbounds[] = $__value;
-        }
     }
 
     public function totalCount(): int

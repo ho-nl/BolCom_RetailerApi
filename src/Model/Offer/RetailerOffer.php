@@ -170,7 +170,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
         }
 
-        $condition = Condition::fromName($data['condition']);
+        $condition = Condition::fromValue($data['condition']);
 
         if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
             throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
@@ -182,7 +182,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
         }
 
-        $deliveryCode = DeliveryCode::fromName($data['deliveryCode']);
+        $deliveryCode = DeliveryCode::fromValue($data['deliveryCode']);
 
         if (! isset($data['quantityInStock']) || ! \is_int($data['quantityInStock'])) {
             throw new \InvalidArgumentException("Key 'quantityInStock' is missing in data array or is not a int");
@@ -224,7 +224,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
 
         if (! isset($data['status']) || ! \is_array($data['status'])) {
             throw new \InvalidArgumentException("Key 'status' is missing in data array or is not an array");

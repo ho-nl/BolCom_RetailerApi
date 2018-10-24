@@ -32,27 +32,27 @@ final class EventType
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function cONFIRM_SHIPMENT(): self
+    public static function CONFIRM_SHIPMENT(): self
     {
         return new self('CONFIRM_SHIPMENT');
     }
 
-    public static function cANCEL_ORDER(): self
+    public static function CANCEL_ORDER(): self
     {
         return new self('CANCEL_ORDER');
     }
 
-    public static function cHANGE_TRANSPORT(): self
+    public static function CHANGE_TRANSPORT(): self
     {
         return new self('CHANGE_TRANSPORT');
     }
 
-    public static function hANDLE_RETURN_ITEM(): self
+    public static function HANDLE_RETURN_ITEM(): self
     {
         return new self('HANDLE_RETURN_ITEM');
     }
 
-    public static function cREATE_INBOUND(): self
+    public static function CREATE_INBOUND(): self
     {
         return new self('CREATE_INBOUND');
     }

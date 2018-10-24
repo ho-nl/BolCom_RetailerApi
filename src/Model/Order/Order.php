@@ -19,12 +19,12 @@ final class Order
         $this->orderId = $orderId;
         $this->dateTimeOrderPlaced = $dateTimeOrderPlaced;
         $this->customerDetails = $customerDetails;
-        foreach ($orderItems as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Order\OrderItem) {
-                throw new \InvalidArgumentException('orderItems expected an array of BolCom\RetailerApi\Model\Order\OrderItem');
+            foreach ($orderItems as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Order\OrderItem) {
+                    throw new \InvalidArgumentException('orderItems expected an array of BolCom\RetailerApi\Model\Order\OrderItem');
+                }
+                $this->orderItems[] = $__value;
             }
-            $this->orderItems[] = $__value;
-        }
     }
 
     public function orderId(): OrderId

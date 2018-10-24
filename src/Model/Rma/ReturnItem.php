@@ -236,7 +236,7 @@ final class ReturnItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
 
         if (! isset($data['handled']) || ! \is_bool($data['handled'])) {
             throw new \InvalidArgumentException("Key 'handled' is missing in data array or is not a bool");
@@ -254,13 +254,13 @@ final class ReturnItem
             throw new \InvalidArgumentException("Key 'handlingResult' is missing in data array or is not a string");
         }
 
-        $handlingResult = HandlingResult::fromName($data['handlingResult']);
+        $handlingResult = HandlingResult::fromValue($data['handlingResult']);
 
         if (! isset($data['processingResult']) || ! \is_string($data['processingResult'])) {
             throw new \InvalidArgumentException("Key 'processingResult' is missing in data array or is not a string");
         }
 
-        $processingResult = ProcessingResult::fromName($data['processingResult']);
+        $processingResult = ProcessingResult::fromValue($data['processingResult']);
 
         if (! isset($data['processingDateTime']) || ! \is_string($data['processingDateTime'])) {
             throw new \InvalidArgumentException("Key 'processingDateTime' is missing in data array or is not a string");

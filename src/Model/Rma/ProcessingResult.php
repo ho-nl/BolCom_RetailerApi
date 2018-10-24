@@ -28,17 +28,17 @@ final class ProcessingResult
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function pENDING(): self
+    public static function PENDING(): self
     {
         return new self('PENDING');
     }
 
-    public static function aCCEPTED(): self
+    public static function ACCEPTED(): self
     {
         return new self('ACCEPTED');
     }
 
-    public static function rEJECTED(): self
+    public static function REJECTED(): self
     {
         return new self('REJECTED');
     }

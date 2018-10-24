@@ -104,7 +104,7 @@ final class Product
             throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
         }
 
-        $state = State::fromName($data['state']);
+        $state = State::fromValue($data['state']);
 
         return new self(
             $ean,

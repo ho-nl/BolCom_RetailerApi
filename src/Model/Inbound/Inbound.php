@@ -35,19 +35,19 @@ final class Inbound
         $this->receivedBSKUs = $receivedBSKUs;
         $this->receivedQuantity = $receivedQuantity;
         $this->timeslot = $timeslot;
-        foreach ($products as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Product) {
-                throw new \InvalidArgumentException('products expected an array of BolCom\RetailerApi\Model\Inbound\Product');
+            foreach ($products as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Product) {
+                    throw new \InvalidArgumentException('products expected an array of BolCom\RetailerApi\Model\Inbound\Product');
+                }
+                $this->products[] = $__value;
             }
-            $this->products[] = $__value;
-        }
 
-        foreach ($stateTransitions as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\StateTransition) {
-                throw new \InvalidArgumentException('stateTransitions expected an array of BolCom\RetailerApi\Model\Inbound\StateTransition');
+            foreach ($stateTransitions as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\StateTransition) {
+                    throw new \InvalidArgumentException('stateTransitions expected an array of BolCom\RetailerApi\Model\Inbound\StateTransition');
+                }
+                $this->stateTransitions[] = $__value;
             }
-            $this->stateTransitions[] = $__value;
-        }
 
         $this->fbbTransporter = $fbbTransporter;
     }
@@ -216,7 +216,7 @@ final class Inbound
             throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
         }
 
-        $state = State::fromName($data['state']);
+        $state = State::fromValue($data['state']);
 
         if (! isset($data['labellingService']) || ! \is_bool($data['labellingService'])) {
             throw new \InvalidArgumentException("Key 'labellingService' is missing in data array or is not a bool");

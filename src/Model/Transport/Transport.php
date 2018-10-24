@@ -62,7 +62,7 @@ final class Transport
             throw new \InvalidArgumentException("Key 'transporterCode' is missing in data array or is not a string");
         }
 
-        $transporterCode = TransporterCode::fromName($data['transporterCode']);
+        $transporterCode = TransporterCode::fromValue($data['transporterCode']);
 
         if (! isset($data['trackAndTrace']) || ! \is_string($data['trackAndTrace'])) {
             throw new \InvalidArgumentException("Key 'trackAndTrace' is missing in data array or is not a string");

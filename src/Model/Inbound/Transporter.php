@@ -50,7 +50,7 @@ final class Transporter
             throw new \InvalidArgumentException("Key 'code' is missing in data array or is not a string");
         }
 
-        $code = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromName($data['code']);
+        $code = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromValue($data['code']);
 
         return new self($name, $code);
     }

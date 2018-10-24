@@ -76,137 +76,137 @@ final class TransporterCode
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function bRIEFPOST(): self
+    public static function BRIEFPOST(): self
     {
         return new self('BRIEFPOST');
     }
 
-    public static function uPS(): self
+    public static function UPS(): self
     {
         return new self('UPS');
     }
 
-    public static function tNT(): self
+    public static function TNT(): self
     {
         return new self('TNT');
     }
 
-    public static function tNT_EXTRA(): self
+    public static function TNT_EXTRA(): self
     {
         return new self('TNT_EXTRA');
     }
 
-    public static function tNT_BRIEF(): self
+    public static function TNT_BRIEF(): self
     {
         return new self('TNT_BRIEF');
     }
 
-    public static function tNT_EXPRESS(): self
+    public static function TNT_EXPRESS(): self
     {
         return new self('TNT_EXPRESS');
     }
 
-    public static function dYL(): self
+    public static function DYL(): self
     {
         return new self('DYL');
     }
 
-    public static function dPD_NL(): self
+    public static function DPD_NL(): self
     {
         return new self('DPD_NL');
     }
 
-    public static function dPD_BE(): self
+    public static function DPD_BE(): self
     {
         return new self('DPD_BE');
     }
 
-    public static function bPOST_BE(): self
+    public static function BPOST_BE(): self
     {
         return new self('BPOST_BE');
     }
 
-    public static function bPOST_BRIEF(): self
+    public static function BPOST_BRIEF(): self
     {
         return new self('BPOST_BRIEF');
     }
 
-    public static function dHLFORYOU(): self
+    public static function DHLFORYOU(): self
     {
         return new self('DHLFORYOU');
     }
 
-    public static function gLS(): self
+    public static function GLS(): self
     {
         return new self('GLS');
     }
 
-    public static function fEDEX_NL(): self
+    public static function FEDEX_NL(): self
     {
         return new self('FEDEX_NL');
     }
 
-    public static function fEDEX_BE(): self
+    public static function FEDEX_BE(): self
     {
         return new self('FEDEX_BE');
     }
 
-    public static function oTHER(): self
+    public static function OTHER(): self
     {
         return new self('OTHER');
     }
 
-    public static function dHL(): self
+    public static function DHL(): self
     {
         return new self('DHL');
     }
 
-    public static function dHL_DE(): self
+    public static function DHL_DE(): self
     {
         return new self('DHL_DE');
     }
 
-    public static function dHL_GLOBAL_MAIL(): self
+    public static function DHL_GLOBAL_MAIL(): self
     {
         return new self('DHL_GLOBAL_MAIL');
     }
 
-    public static function tSN(): self
+    public static function TSN(): self
     {
         return new self('TSN');
     }
 
-    public static function fIEGE(): self
+    public static function FIEGE(): self
     {
         return new self('FIEGE');
     }
 
-    public static function tRANSMISSION(): self
+    public static function TRANSMISSION(): self
     {
         return new self('TRANSMISSION');
     }
 
-    public static function pARCEL_NL(): self
+    public static function PARCEL_NL(): self
     {
         return new self('PARCEL_NL');
     }
 
-    public static function lOGOIX(): self
+    public static function LOGOIX(): self
     {
         return new self('LOGOIX');
     }
 
-    public static function pACKS(): self
+    public static function PACKS(): self
     {
         return new self('PACKS');
     }
 
-    public static function cOURIER(): self
+    public static function COURIER(): self
     {
         return new self('COURIER');
     }
 
-    public static function rJP(): self
+    public static function RJP(): self
     {
         return new self('RJP');
     }

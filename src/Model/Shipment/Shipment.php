@@ -21,12 +21,12 @@ final class Shipment
         $this->shipmentId = $shipmentId;
         $this->shipmentDate = $shipmentDate;
         $this->shipmentReference = $shipmentReference;
-        foreach ($shipmentItems as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Shipment\ShipmentItem) {
-                throw new \InvalidArgumentException('shipmentItems expected an array of BolCom\RetailerApi\Model\Shipment\ShipmentItem');
+            foreach ($shipmentItems as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Shipment\ShipmentItem) {
+                    throw new \InvalidArgumentException('shipmentItems expected an array of BolCom\RetailerApi\Model\Shipment\ShipmentItem');
+                }
+                $this->shipmentItems[] = $__value;
             }
-            $this->shipmentItems[] = $__value;
-        }
 
         $this->transport = $transport;
         $this->customerDetails = $customerDetails;
