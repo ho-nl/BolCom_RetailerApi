@@ -6,14 +6,19 @@
 
 declare(strict_types=1);
 
-namespace BolCom\RetailerApi\Model\Inbound\Assert;
+namespace BolCom\RetailerApi\Model\Assert;
 
 class AssertIntRange
 {
-    public static function execute($period): bool
+
+    /**
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function assert(string $period): bool
     {
         \Assert\Assertion::contains('-', $period);
         [$from, $to] = explode('-', $period);
         \Assert\Assertion::min($to, $from);
+        return true;
     }
 }

@@ -13,7 +13,7 @@ final class Date
 
     public function __construct(string $value)
     {
-        if (\Assert\Assertion::date($value, 'Y-m-d')) {
+        if (!\Assert\Assertion::date($value, 'Y-m-d')) {
             throw new \InvalidArgumentException('');
         }
 

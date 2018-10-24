@@ -68,7 +68,7 @@ namespace BolCom\RetailerApi\Model\Inbound {
     } deriving (FromArray);
 
     data InventoryQuantityInput = String deriving(FromString, ToString) where
-        _: | !\BolCom\RetailerApi\Model\Assert\AssertIntRange::execute($value) => '';
+        _: | !\BolCom\RetailerApi\Model\Assert\AssertIntRange::assert($value) => '';
 
     data InventoryStock = sufficient | insufficient deriving(Enum);
     data InventoryState = salable | unsalable deriving(Enum);

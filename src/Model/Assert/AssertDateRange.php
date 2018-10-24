@@ -10,7 +10,11 @@ namespace BolCom\RetailerApi\Model\Assert;
 
 class AssertDateRange
 {
-    public static function execute($period): bool
+
+    /**
+     * @throws \Assert\AssertionFailedException
+     */
+    public static function assert(string $period): bool
     {
         \Assert\Assertion::contains('/', $period);
         [$from, $to] = explode('/', $period);

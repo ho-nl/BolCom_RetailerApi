@@ -13,7 +13,7 @@ final class CurrencyAmount
 
     public function __construct(float $value)
     {
-        if (\BolCom\RetailerApi\Model\Assert\AssertCurrency::date($value)) {
+        if (!\BolCom\RetailerApi\Model\Assert\AssertCurrency::assert($value)) {
             throw new \InvalidArgumentException('');
         }
 

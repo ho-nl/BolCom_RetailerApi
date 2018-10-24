@@ -46,62 +46,62 @@ final class CancellationReason
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function oUT_OF_STOCK(): self
+    public static function OUT_OF_STOCK(): self
     {
         return new self('OUT_OF_STOCK');
     }
 
-    public static function rEQUESTED_BY_CUSTOMER(): self
+    public static function REQUESTED_BY_CUSTOMER(): self
     {
         return new self('REQUESTED_BY_CUSTOMER');
     }
 
-    public static function bAD_CONDITION(): self
+    public static function BAD_CONDITION(): self
     {
         return new self('BAD_CONDITION');
     }
 
-    public static function hIGHER_SHIPCOST(): self
+    public static function HIGHER_SHIPCOST(): self
     {
         return new self('HIGHER_SHIPCOST');
     }
 
-    public static function iNCORRECT_PRICE(): self
+    public static function INCORRECT_PRICE(): self
     {
         return new self('INCORRECT_PRICE');
     }
 
-    public static function nOT_AVAIL_IN_TIME(): self
+    public static function NOT_AVAIL_IN_TIME(): self
     {
         return new self('NOT_AVAIL_IN_TIME');
     }
 
-    public static function nO_BOL_GUARANTEE(): self
+    public static function NO_BOL_GUARANTEE(): self
     {
         return new self('NO_BOL_GUARANTEE');
     }
 
-    public static function oRDERED_TWICE(): self
+    public static function ORDERED_TWICE(): self
     {
         return new self('ORDERED_TWICE');
     }
 
-    public static function rETAIN_ITEM(): self
+    public static function RETAIN_ITEM(): self
     {
         return new self('RETAIN_ITEM');
     }
 
-    public static function tECH_ISSUE(): self
+    public static function TECH_ISSUE(): self
     {
         return new self('TECH_ISSUE');
     }
 
-    public static function uNFINDABLE_ITEM(): self
+    public static function UNFINDABLE_ITEM(): self
     {
         return new self('UNFINDABLE_ITEM');
     }
 
-    public static function oTHER(): self
+    public static function OTHER(): self
     {
         return new self('OTHER');
     }

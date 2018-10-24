@@ -13,7 +13,7 @@ final class DateTime
 
     public function __construct(string $value)
     {
-        if (\Assert\Assertion::date($value, 'c')) {
+        if (!\Assert\Assertion::date($value, 'c')) {
             throw new \InvalidArgumentException('');
         }
 

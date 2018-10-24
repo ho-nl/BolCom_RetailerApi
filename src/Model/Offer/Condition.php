@@ -32,27 +32,27 @@ final class Condition
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function iS_NEW(): self
+    public static function IS_NEW(): self
     {
         return new self('IS_NEW');
     }
 
-    public static function aS_NEW(): self
+    public static function AS_NEW(): self
     {
         return new self('AS_NEW');
     }
 
-    public static function gOOD(): self
+    public static function GOOD(): self
     {
         return new self('GOOD');
     }
 
-    public static function rEASONABLE(): self
+    public static function REASONABLE(): self
     {
         return new self('REASONABLE');
     }
 
-    public static function mODERATE(): self
+    public static function MODERATE(): self
     {
         return new self('MODERATE');
     }

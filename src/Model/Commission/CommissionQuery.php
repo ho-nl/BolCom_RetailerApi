@@ -62,7 +62,7 @@ final class CommissionQuery
             throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
         }
 
-        $condition = \BolCom\RetailerApi\Model\Offer\Condition::fromName($data['condition']);
+        $condition = \BolCom\RetailerApi\Model\Offer\Condition::fromValue($data['condition']);
 
         if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
             throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");

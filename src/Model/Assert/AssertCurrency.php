@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BolCom\RetailerApi\Model\Inbound\Assert;
+namespace BolCom\RetailerApi\Model\Assert;
 
 use Assert\Assertion;
 
@@ -16,8 +16,9 @@ class AssertCurrency
      * @param float $value
      * @throws \Assert\AssertionFailedException
      */
-    public function execute(float $value): void
+    public static function assert(float $value): bool
     {
         Assertion::eq(round($value, 2), $value);
+        return true;
     }
 }
