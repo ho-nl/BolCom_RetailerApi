@@ -7,39 +7,51 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetProductLabelsByEan
+final class GetProductLabelsByEan extends \Prooph\Common\Messaging\Query
 {
-    private $format;
-    private $productLabels;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(ProductLabelFormat $format, array $productLabels)
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetProductLabelsByEan';
+
+    protected $messageName = self::MESSAGE_NAME;
+
+    public function format(): \BolCom\RetailerApi\Model\Inbound\ProductLabelFormat
     {
-        $this->format = $format;
-        foreach ($productLabels as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Query\ProductLabel) {
-                throw new \InvalidArgumentException('productLabels expected an array of BolCom\RetailerApi\Model\Inbound\Query\ProductLabel');
-            }
-            $this->productLabels[] = $__value;
-        }
+        return \BolCom\RetailerApi\Model\Inbound\ProductLabelFormat::fromName($this->payload['format']);
     }
 
-    public function format(): ProductLabelFormat
-    {
-        return $this->format;
-    }
-
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\ProductLabel[]
+     */
     public function productLabels(): array
     {
-        return $this->productLabels;
+        $__returnValue = [];
+
+        foreach ($this->payload['productLabels'] as $__value) {
+            $__returnValue[] = \BolCom\RetailerApi\Model\Inbound\ProductLabel::fromArray($__value);
+        }
+
+        return $__returnValue;
     }
 
-    public function withFormat(ProductLabelFormat $format): GetProductLabelsByEan
+    public static function with(\BolCom\RetailerApi\Model\Inbound\ProductLabelFormat $format, array $productLabels): GetProductLabelsByEan
     {
-        return new self($format, $this->productLabels);
+        return new self([
+            'format' => $format->name(),
+            'productLabels' => $productLabels,
+        ]);
     }
 
-    public function withProductLabels(array $productLabels): GetProductLabelsByEan
+    protected function setPayload(array $payload): void
     {
-        return new self($this->format, $productLabels);
+        if (! isset($payload['format']) || ! \is_string($payload['format'])) {
+            throw new \InvalidArgumentException("Key 'format' is missing in payload or is not a string");
+        }
+
+        if (! isset($payload['productLabels'])) {
+            throw new \InvalidArgumentException("Key 'productLabels' is missing in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

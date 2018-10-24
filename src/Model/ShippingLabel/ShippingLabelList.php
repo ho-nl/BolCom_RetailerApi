@@ -16,6 +16,9 @@ final class ShippingLabelList
         $this->purchasableShippingLabels = $purchasableShippingLabels;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabel[]
+     */
     public function purchasableShippingLabels(): array
     {
         return $this->purchasableShippingLabels;

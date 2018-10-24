@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer\Query;
 
-final class GetOfferCsv
+final class GetOfferCsv extends \Prooph\Common\Messaging\Query
 {
-    private $filename;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(string $filename)
-    {
-        $this->filename = $filename;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOfferCsv';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function filename(): string
     {
-        return $this->filename;
+        return $this->payload['filename'];
     }
 
-    public function withFilename(string $filename): GetOfferCsv
+    public static function with(string $filename): GetOfferCsv
     {
-        return new self($filename);
+        return new self([
+            'filename' => $filename,
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['filename']) || ! \is_string($payload['filename'])) {
+            throw new \InvalidArgumentException("Key 'filename' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

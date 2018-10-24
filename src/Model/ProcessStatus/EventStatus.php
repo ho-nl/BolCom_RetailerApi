@@ -10,16 +10,16 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 final class EventStatus
 {
     public const OPTIONS = [
-        'Pending' => 'PENDING',
-        'Success' => 'SUCCESS',
-        'Failure' => 'FAILURE',
-        'Timeout' => 'TIMEOUT',
+        'PENDING' => 0,
+        'SUCCESS' => 1,
+        'FAILURE' => 2,
+        'TIMEOUT' => 3,
     ];
 
-    public const Pending = 'PENDING';
-    public const Success = 'SUCCESS';
-    public const Failure = 'FAILURE';
-    public const Timeout = 'TIMEOUT';
+    public const PENDING = 0;
+    public const SUCCESS = 1;
+    public const FAILURE = 2;
+    public const TIMEOUT = 3;
 
     private $name;
     private $value;
@@ -30,24 +30,24 @@ final class EventStatus
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function pending(): self
+    public static function pENDING(): self
     {
-        return new self('Pending');
+        return new self('PENDING');
     }
 
-    public static function success(): self
+    public static function sUCCESS(): self
     {
-        return new self('Success');
+        return new self('SUCCESS');
     }
 
-    public static function failure(): self
+    public static function fAILURE(): self
     {
-        return new self('Failure');
+        return new self('FAILURE');
     }
 
-    public static function timeout(): self
+    public static function tIMEOUT(): self
     {
-        return new self('Timeout');
+        return new self('TIMEOUT');
     }
 
     public static function fromName(string $value): self

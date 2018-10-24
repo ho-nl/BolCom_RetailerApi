@@ -16,6 +16,9 @@ final class CommissionList
         $this->commissions = $commissions;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Commission\Commission[]
+     */
     public function commissions(): array
     {
         return $this->commissions;

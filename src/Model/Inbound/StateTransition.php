@@ -37,4 +37,21 @@ final class StateTransition
     {
         return new self($this->state, $stateDate);
     }
+
+    public static function fromArray(array $data): StateTransition
+    {
+        if (! isset($data['state']) || ! \is_string($data['state'])) {
+            throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
+        }
+
+        $state = State::fromName($data['state']);
+
+        if (! isset($data['stateDate']) || ! \is_string($data['stateDate'])) {
+            throw new \InvalidArgumentException("Key 'stateDate' is missing in data array or is not a string");
+        }
+
+        $stateDate = \BolCom\RetailerApi\Model\DateTime::fromString($data['stateDate']);
+
+        return new self($state, $stateDate);
+    }
 }

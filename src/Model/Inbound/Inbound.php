@@ -102,11 +102,17 @@ final class Inbound
         return $this->timeslot;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\Product[]
+     */
     public function products(): array
     {
         return $this->products;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\StateTransition[]
+     */
     public function stateTransitions(): array
     {
         return $this->stateTransitions;
@@ -242,45 +248,45 @@ final class Inbound
 
         $receivedQuantity = $data['receivedQuantity'];
 
-        if (! isset($data['timeslot']) || ! \is_BolCom\RetailerApi\Model\DateTime($data['timeslot'])) {
-            throw new \InvalidArgumentException("Key 'timeslot' is missing in data array or is not a BolCom\RetailerApi\Model\DateTime");
+        if (! isset($data['timeslot']) || ! \is_array($data['timeslot'])) {
+            throw new \InvalidArgumentException("Key 'timeslot' is missing in data array or is not an array");
         }
 
-        $timeslot = new Timeslot($data['timeslot']);
+        $timeslot = Timeslot::fromArray($data['timeslot']);
 
         if (! isset($data['products']) || ! \is_array($data['products'])) {
             throw new \InvalidArgumentException("Key 'products' is missing in data array or is not an array");
         }
-        
+
         $products = [];
 
         foreach ($data['products'] as $__value) {
-            if (! \is_BolCom\RetailerApi\Model\Inbound\Product($__value)) {
-                throw new \InvalidArgumentException("Key 'products' in data array or is not an array of BolCom\RetailerApi\Model\Inbound\Product");
+            if (! \is_array($data['products'])) {
+                throw new \InvalidArgumentException("Key 'products' in data array or is not an array of arrays");
             }
 
-            $products[] = $__value;
+            $products[] = Product::fromArray($__value);
         }
 
         if (! isset($data['stateTransitions']) || ! \is_array($data['stateTransitions'])) {
             throw new \InvalidArgumentException("Key 'stateTransitions' is missing in data array or is not an array");
         }
-        
+
         $stateTransitions = [];
 
         foreach ($data['stateTransitions'] as $__value) {
-            if (! \is_BolCom\RetailerApi\Model\Inbound\StateTransition($__value)) {
-                throw new \InvalidArgumentException("Key 'stateTransitions' in data array or is not an array of BolCom\RetailerApi\Model\Inbound\StateTransition");
+            if (! \is_array($data['stateTransitions'])) {
+                throw new \InvalidArgumentException("Key 'stateTransitions' in data array or is not an array of arrays");
             }
 
-            $stateTransitions[] = $__value;
+            $stateTransitions[] = StateTransition::fromArray($__value);
         }
 
-        if (! isset($data['fbbTransporter']) || ! \is_BolCom\RetailerApi\Model\Transport\TransporterName($data['fbbTransporter'])) {
-            throw new \InvalidArgumentException("Key 'fbbTransporter' is missing in data array or is not a BolCom\RetailerApi\Model\Transport\TransporterName");
+        if (! isset($data['fbbTransporter']) || ! \is_array($data['fbbTransporter'])) {
+            throw new \InvalidArgumentException("Key 'fbbTransporter' is missing in data array or is not an array");
         }
 
-        $fbbTransporter = new Transporter($data['fbbTransporter']);
+        $fbbTransporter = Transporter::fromArray($data['fbbTransporter']);
 
         return new self(
             $id,

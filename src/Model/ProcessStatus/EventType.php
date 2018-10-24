@@ -10,18 +10,18 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 final class EventType
 {
     public const OPTIONS = [
-        'ConfirmShipment' => 'CONFIRM_SHIPMENT',
-        'CancelOrder' => 'CANCEL_ORDER',
-        'ChangeTransport' => 'CHANGE_TRANSPORT',
-        'HandleReturnItem' => 'HANDLE_RETURN_ITEM',
-        'CreateInbound' => 'CREATE_INBOUND',
+        'CONFIRM_SHIPMENT' => 0,
+        'CANCEL_ORDER' => 1,
+        'CHANGE_TRANSPORT' => 2,
+        'HANDLE_RETURN_ITEM' => 3,
+        'CREATE_INBOUND' => 4,
     ];
 
-    public const ConfirmShipment = 'CONFIRM_SHIPMENT';
-    public const CancelOrder = 'CANCEL_ORDER';
-    public const ChangeTransport = 'CHANGE_TRANSPORT';
-    public const HandleReturnItem = 'HANDLE_RETURN_ITEM';
-    public const CreateInbound = 'CREATE_INBOUND';
+    public const CONFIRM_SHIPMENT = 0;
+    public const CANCEL_ORDER = 1;
+    public const CHANGE_TRANSPORT = 2;
+    public const HANDLE_RETURN_ITEM = 3;
+    public const CREATE_INBOUND = 4;
 
     private $name;
     private $value;
@@ -32,29 +32,29 @@ final class EventType
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function confirmShipment(): self
+    public static function cONFIRM_SHIPMENT(): self
     {
-        return new self('ConfirmShipment');
+        return new self('CONFIRM_SHIPMENT');
     }
 
-    public static function cancelOrder(): self
+    public static function cANCEL_ORDER(): self
     {
-        return new self('CancelOrder');
+        return new self('CANCEL_ORDER');
     }
 
-    public static function changeTransport(): self
+    public static function cHANGE_TRANSPORT(): self
     {
-        return new self('ChangeTransport');
+        return new self('CHANGE_TRANSPORT');
     }
 
-    public static function handleReturnItem(): self
+    public static function hANDLE_RETURN_ITEM(): self
     {
-        return new self('HandleReturnItem');
+        return new self('HANDLE_RETURN_ITEM');
     }
 
-    public static function createInbound(): self
+    public static function cREATE_INBOUND(): self
     {
-        return new self('CreateInbound');
+        return new self('CREATE_INBOUND');
     }
 
     public static function fromName(string $value): self

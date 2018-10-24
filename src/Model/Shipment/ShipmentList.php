@@ -16,6 +16,9 @@ final class ShipmentList
         $this->shipments = $shipments;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Shipment\Shipment[]
+     */
     public function shipments(): array
     {
         return $this->shipments;

@@ -60,31 +60,18 @@ namespace BolCom\RetailerApi\Model\Order {
         \BolCom\RetailerApi\Model\DateTime $end
     } deriving (FromArray);
 
-    data CancellationReason = OutOfStock | RequestedByCustomer | BadCondition | HigherShipcost | IncorrectPrice | NotAvailInTime | NoBolGuarantee | OrderedTwice | RetainItem | TechIssue | UnfinableItem | Other deriving(Enum) with (
-        OutOfStock: "OUT_OF_STOCK",
-        RequestedByCustomer: "REQUESTED_BY_CUSTOMER",
-        BadCondition: "BAD_CONDITION",
-        HigherShipcost: "HIGHER_SHIPCOST",
-        IncorrectPrice: "INCORRECT_PRICE",
-        NotAvailInTime: "NOT_AVAIL_IN_TIME",
-        NoBolGuarantee: "NO_BOL_GUARANTEE",
-        OrderedTwice: "ORDERED_TWICE",
-        RetainItem: "RETAIN_ITEM",
-        TechIssue: "TECH_ISSUE",
-        UnfinableItem: "UNFINDABLE_ITEM",
-        Other: "OTHER"
-    );
+    data CancellationReason = OUT_OF_STOCK | REQUESTED_BY_CUSTOMER | BAD_CONDITION | HIGHER_SHIPCOST | INCORRECT_PRICE | NOT_AVAIL_IN_TIME | NO_BOL_GUARANTEE | ORDERED_TWICE | RETAIN_ITEM | TECH_ISSUE | UNFINDABLE_ITEM | OTHER deriving(Enum);
 }
 
 namespace BolCom\RetailerApi\Model\Order\Query {
     data GetOrder = GetOrder {
         \BolCom\RetailerApi\Model\Order\OrderId $orderId
-    };
+    } deriving (Query);
 
     data GetAllOpenOrders = GetAllOpenOrders {
         int $page,
         \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod
-    };
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Order\Command {
@@ -92,12 +79,12 @@ namespace BolCom\RetailerApi\Model\Order\Command {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
         ?\BolCom\RetailerApi\Model\DateTime $dateTime,
         ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
-    };
+    } deriving (Query);
 
     data ShipOrderItem = ShipOrderItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
         ?string $shipmentReference,
         ?string $shippingLabelCode,
         ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction
-    };
+    } deriving (Query);
 }

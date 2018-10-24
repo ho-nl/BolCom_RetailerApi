@@ -7,82 +7,82 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetInboundList
+final class GetInboundList extends \Prooph\Common\Messaging\Query
 {
-    private $reference;
-    private $bsku;
-    private $creationStart;
-    private $creationEnd;
-    private $state;
-    private $page;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, ?\BolCom\RetailerApi\Model\Inbound\BSku $bsku, ?\BolCom\RetailerApi\Model\Date $creationStart, ?\BolCom\RetailerApi\Model\Date $creationEnd, ?\BolCom\RetailerApi\Model\Inbound\State $state, ?int $page)
-    {
-        $this->reference = $reference;
-        $this->bsku = $bsku;
-        $this->creationStart = $creationStart;
-        $this->creationEnd = $creationEnd;
-        $this->state = $state;
-        $this->page = $page;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetInboundList';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function reference(): ?\BolCom\RetailerApi\Model\Inbound\Reference
     {
-        return $this->reference;
+        return isset($this->payload['reference']) ? \BolCom\RetailerApi\Model\Inbound\Reference::fromString($this->payload['reference']) : null;
     }
 
     public function bsku(): ?\BolCom\RetailerApi\Model\Inbound\BSku
     {
-        return $this->bsku;
+        return isset($this->payload['bsku']) ? \BolCom\RetailerApi\Model\Inbound\BSku::fromString($this->payload['bsku']) : null;
     }
 
     public function creationStart(): ?\BolCom\RetailerApi\Model\Date
     {
-        return $this->creationStart;
+        return isset($this->payload['creationStart']) ? \BolCom\RetailerApi\Model\Date::fromString($this->payload['creationStart']) : null;
     }
 
     public function creationEnd(): ?\BolCom\RetailerApi\Model\Date
     {
-        return $this->creationEnd;
+        return isset($this->payload['creationEnd']) ? \BolCom\RetailerApi\Model\Date::fromString($this->payload['creationEnd']) : null;
     }
 
     public function state(): ?\BolCom\RetailerApi\Model\Inbound\State
     {
-        return $this->state;
+        return isset($this->payload['state']) ? \BolCom\RetailerApi\Model\Inbound\State::fromName($this->payload['state']) : null;
     }
 
     public function page(): ?int
     {
-        return $this->page;
+        return $this->payload['page'] ?? null;
     }
 
-    public function withReference(?\BolCom\RetailerApi\Model\Inbound\Reference $reference): GetInboundList
+    public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, ?\BolCom\RetailerApi\Model\Inbound\BSku $bsku, ?\BolCom\RetailerApi\Model\Date $creationStart, ?\BolCom\RetailerApi\Model\Date $creationEnd, ?\BolCom\RetailerApi\Model\Inbound\State $state, ?int $page): GetInboundList
     {
-        return new self($reference, $this->bsku, $this->creationStart, $this->creationEnd, $this->state, $this->page);
+        return new self([
+            'reference' => null === $reference ? null : $reference->toString(),
+            'bsku' => null === $bsku ? null : $bsku->toString(),
+            'creationStart' => null === $creationStart ? null : $creationStart->toString(),
+            'creationEnd' => null === $creationEnd ? null : $creationEnd->toString(),
+            'state' => null === $state ? null : $state->name(),
+            'page' => $page,
+        ]);
     }
 
-    public function withBsku(?\BolCom\RetailerApi\Model\Inbound\BSku $bsku): GetInboundList
+    protected function setPayload(array $payload): void
     {
-        return new self($this->reference, $bsku, $this->creationStart, $this->creationEnd, $this->state, $this->page);
-    }
+        if (isset($payload['reference']) && ! \is_string($payload['reference'])) {
+            throw new \InvalidArgumentException("Value for 'reference' is not a string in payload");
+        }
 
-    public function withCreationStart(?\BolCom\RetailerApi\Model\Date $creationStart): GetInboundList
-    {
-        return new self($this->reference, $this->bsku, $creationStart, $this->creationEnd, $this->state, $this->page);
-    }
+        if (isset($payload['bsku']) && ! \is_string($payload['bsku'])) {
+            throw new \InvalidArgumentException("Value for 'bsku' is not a string in payload");
+        }
 
-    public function withCreationEnd(?\BolCom\RetailerApi\Model\Date $creationEnd): GetInboundList
-    {
-        return new self($this->reference, $this->bsku, $this->creationStart, $creationEnd, $this->state, $this->page);
-    }
+        if (isset($payload['creationStart']) && ! \is_string($payload['creationStart'])) {
+            throw new \InvalidArgumentException("Value for 'creationStart' is not a string in payload");
+        }
 
-    public function withState(?\BolCom\RetailerApi\Model\Inbound\State $state): GetInboundList
-    {
-        return new self($this->reference, $this->bsku, $this->creationStart, $this->creationEnd, $state, $this->page);
-    }
+        if (isset($payload['creationEnd']) && ! \is_string($payload['creationEnd'])) {
+            throw new \InvalidArgumentException("Value for 'creationEnd' is not a string in payload");
+        }
 
-    public function withPage(?int $page): GetInboundList
-    {
-        return new self($this->reference, $this->bsku, $this->creationStart, $this->creationEnd, $this->state, $page);
+        if (isset($payload['state']) && ! \is_string($payload['state'])) {
+            throw new \InvalidArgumentException("Value for 'state' is not a string in payload");
+        }
+
+        if (isset($payload['page']) && ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Value for 'page' is not a int in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

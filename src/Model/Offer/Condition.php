@@ -10,18 +10,18 @@ namespace BolCom\RetailerApi\Model\Offer;
 final class Condition
 {
     public const OPTIONS = [
-        'IsNew' => 'NEW',
-        'AsNew' => 'AS_NEW',
-        'Good' => 'GOOD',
-        'Reasonable' => 'REASONABLE',
-        'Moderate' => 'MODERATE',
+        'IS_NEW' => 'NEW',
+        'AS_NEW' => 'AS_NEW',
+        'GOOD' => 'GOOD',
+        'REASONABLE' => 'REASONABLE',
+        'MODERATE' => 'MODERATE',
     ];
 
-    public const IsNew = 'NEW';
-    public const AsNew = 'AS_NEW';
-    public const Good = 'GOOD';
-    public const Reasonable = 'REASONABLE';
-    public const Moderate = 'MODERATE';
+    public const IS_NEW = 'NEW';
+    public const AS_NEW = 'AS_NEW';
+    public const GOOD = 'GOOD';
+    public const REASONABLE = 'REASONABLE';
+    public const MODERATE = 'MODERATE';
 
     private $name;
     private $value;
@@ -32,29 +32,29 @@ final class Condition
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function isNew(): self
+    public static function iS_NEW(): self
     {
-        return new self('IsNew');
+        return new self('IS_NEW');
     }
 
-    public static function asNew(): self
+    public static function aS_NEW(): self
     {
-        return new self('AsNew');
+        return new self('AS_NEW');
     }
 
-    public static function good(): self
+    public static function gOOD(): self
     {
-        return new self('Good');
+        return new self('GOOD');
     }
 
-    public static function reasonable(): self
+    public static function rEASONABLE(): self
     {
-        return new self('Reasonable');
+        return new self('REASONABLE');
     }
 
-    public static function moderate(): self
+    public static function mODERATE(): self
     {
-        return new self('Moderate');
+        return new self('MODERATE');
     }
 
     public static function fromName(string $value): self

@@ -16,6 +16,9 @@ final class ShippingLabelPdfList
         $this->pdfs = $pdfs;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdf[]
+     */
     public function pdfs(): array
     {
         return $this->pdfs;

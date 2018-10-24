@@ -20,9 +20,9 @@ class GetCommissionHandlerTest extends TestCase
     /**
      * @test
      */
-    public function should_get_commission_back()
+    public function should_get_commission_back(): void
     {
-        $handler = new GetCommissionHandler(new Client(null, 'username', 'password'));
+        $handler = new GetCommissionHandler(new Client());
 
         $commission = $handler(GetCommission::with(
             Ean::fromString('1234455432'),

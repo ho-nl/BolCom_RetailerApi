@@ -70,6 +70,9 @@ final class Commission
         return $this->totalCostWithoutReduction;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Commission\CommissionReduction[]
+     */
     public function reduction(): array
     {
         return $this->reduction;

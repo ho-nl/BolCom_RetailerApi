@@ -23,20 +23,10 @@ namespace BolCom\RetailerApi\Model\Rma {
         ReturnItem[] $returns
     } deriving (FromArray);
 
-    data HandlingResult = ReturnReceived | ExchangeProduct | ProductDoesNotMeetConditions | RepairProduct | CustomerKeepsProductPaid | StillApproved deriving(Enum) with (
-        ReturnReceived: "RETURN_RECEIVED",
-        ExchangeProduct: "EXCHANGE_PRODUCT",
-        ProductDoesNotMeetConditions: "RETURN_DOES_NOT_MEET_CONDITIONS",
-        RepairProduct: "REPAIR_PRODUCT",
-        CustomerKeepsProductPaid: "CUSTOMER_KEEPS_PRODUCT_PAID",
-        StillApproved: "STILL_APPROVED"
-    );
+    data HandlingResult = RETURN_RECEIVED | EXCHANGE_PRODUCT | RETURN_DOES_NOT_MEET_CONDITIONS | REPAIR_PRODUCT
+        | CUSTOMER_KEEPS_PRODUCT_PAID | STILL_APPROVED deriving(Enum);
 
-    data ProcessingResult = Pending | Accepted | Rejected deriving(Enum) with (
-        Pending: "PENDING",
-        Accepted: "ACCEPTED",
-        Rejected: "REJECTED"
-    );
+    data ProcessingResult = PENDING | ACCEPTED | REJECTED deriving(Enum);
 
     data QuantityReturned = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 9999) => '';
@@ -47,13 +37,13 @@ namespace BolCom\RetailerApi\Model\Rma\Query {
         int $page,
         bool $handled,
         \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod
-    };
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Rma\Command {
     data HandleReturn = HandleReturn {
-        BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber,
-        BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult,
-        QuantityReturned $quantityReturned
-    }
+        \BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber,
+        \BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult,
+        \BolCom\RetailerApi\Model\Rma\QuantityReturned $quantityReturned
+    } deriving(Command);
 }

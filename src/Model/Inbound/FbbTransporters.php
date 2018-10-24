@@ -16,6 +16,9 @@ final class FbbTransporters
         $this->fbbTransporters = $fbbTransporters;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\Transporter[]
+     */
     public function fbbTransporters(): array
     {
         return $this->fbbTransporters;

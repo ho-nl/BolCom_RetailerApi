@@ -7,58 +7,62 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Order\Command;
 
-final class ShipOrderItem
+final class ShipOrderItem extends \Prooph\Common\Messaging\Query
 {
-    private $orderItemId;
-    private $shipmentReference;
-    private $shippingLabelCode;
-    private $transportInstruction;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction)
-    {
-        $this->orderItemId = $orderItemId;
-        $this->shipmentReference = $shipmentReference;
-        $this->shippingLabelCode = $shippingLabelCode;
-        $this->transportInstruction = $transportInstruction;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Command\ShipOrderItem';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
     {
-        return $this->orderItemId;
+        return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
     }
 
     public function shipmentReference(): ?string
     {
-        return $this->shipmentReference;
+        return $this->payload['shipmentReference'] ?? null;
     }
 
     public function shippingLabelCode(): ?string
     {
-        return $this->shippingLabelCode;
+        return $this->payload['shippingLabelCode'] ?? null;
     }
 
     public function transportInstruction(): ?\BolCom\RetailerApi\Model\Transport\TransportInstruction
     {
-        return $this->transportInstruction;
+        return isset($this->payload['transportInstruction']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transportInstruction']) : null;
     }
 
-    public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): ShipOrderItem
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction): ShipOrderItem
     {
-        return new self($orderItemId, $this->shipmentReference, $this->shippingLabelCode, $this->transportInstruction);
+        return new self([
+            'orderItemId' => $orderItemId->toString(),
+            'shipmentReference' => $shipmentReference,
+            'shippingLabelCode' => $shippingLabelCode,
+            'transportInstruction' => $transportInstruction,
+        ]);
     }
 
-    public function withShipmentReference(?string $shipmentReference): ShipOrderItem
+    protected function setPayload(array $payload): void
     {
-        return new self($this->orderItemId, $shipmentReference, $this->shippingLabelCode, $this->transportInstruction);
-    }
+        if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
+            throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
+        }
 
-    public function withShippingLabelCode(?string $shippingLabelCode): ShipOrderItem
-    {
-        return new self($this->orderItemId, $this->shipmentReference, $shippingLabelCode, $this->transportInstruction);
-    }
+        if (isset($payload['shipmentReference']) && ! \is_string($payload['shipmentReference'])) {
+            throw new \InvalidArgumentException("Value for 'shipmentReference' is not a string in payload");
+        }
 
-    public function withTransportInstruction(?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction): ShipOrderItem
-    {
-        return new self($this->orderItemId, $this->shipmentReference, $this->shippingLabelCode, $transportInstruction);
+        if (isset($payload['shippingLabelCode']) && ! \is_string($payload['shippingLabelCode'])) {
+            throw new \InvalidArgumentException("Value for 'shippingLabelCode' is not a string in payload");
+        }
+
+        if (! isset($payload['transportInstruction'])) {
+            throw new \InvalidArgumentException("Key 'transportInstruction' is missing in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

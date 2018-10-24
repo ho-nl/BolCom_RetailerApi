@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetPackingList
+final class GetPackingList extends \Prooph\Common\Messaging\Query
 {
-    private $inboundId;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Inbound\InboundId $inboundId)
-    {
-        $this->inboundId = $inboundId;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetPackingList';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function inboundId(): \BolCom\RetailerApi\Model\Inbound\InboundId
     {
-        return $this->inboundId;
+        return \BolCom\RetailerApi\Model\Inbound\InboundId::fromScalar($this->payload['inboundId']);
     }
 
-    public function withInboundId(\BolCom\RetailerApi\Model\Inbound\InboundId $inboundId): GetPackingList
+    public static function with(\BolCom\RetailerApi\Model\Inbound\InboundId $inboundId): GetPackingList
     {
-        return new self($inboundId);
+        return new self([
+            'inboundId' => $inboundId->toScalar(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['inboundId']) || ! \is_int($payload['inboundId'])) {
+            throw new \InvalidArgumentException("Key 'inboundId' is missing in payload or is not a int");
+        }
+
+        $this->payload = $payload;
     }
 }

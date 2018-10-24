@@ -10,12 +10,12 @@ namespace BolCom\RetailerApi\Model\Shipment;
 final class FulfilmentMethod
 {
     public const OPTIONS = [
-        'ByRetailer' => 'FBR',
-        'ByBolCom' => 'FFB',
+        'FBR' => 0,
+        'FFB' => 1,
     ];
 
-    public const ByRetailer = 'FBR';
-    public const ByBolCom = 'FFB';
+    public const FBR = 0;
+    public const FFB = 1;
 
     private $name;
     private $value;
@@ -26,14 +26,14 @@ final class FulfilmentMethod
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function byRetailer(): self
+    public static function fBR(): self
     {
-        return new self('ByRetailer');
+        return new self('FBR');
     }
 
-    public static function byBolCom(): self
+    public static function fFB(): self
     {
-        return new self('ByBolCom');
+        return new self('FFB');
     }
 
     public static function fromName(string $value): self

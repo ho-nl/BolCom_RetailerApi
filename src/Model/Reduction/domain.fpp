@@ -9,6 +9,6 @@ namespace BolCom\RetailerApi\Model\Reduction {
 }
 
 namespace BolCom\RetailerApi\Model\Reduction\Query {
-    data GetReductionList = GetReductionList {};
-    data GetLatestReductionsFilename = GetLatestReductionsFilename{};
+    data GetReductionList = GetReductionList {} deriving (Query);
+    data GetLatestReductionsFilename = GetLatestReductionsFilename{} deriving (Query);
 }

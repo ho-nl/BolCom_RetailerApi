@@ -10,32 +10,32 @@ namespace BolCom\RetailerApi\Model\Order;
 final class CancellationReason
 {
     public const OPTIONS = [
-        'OutOfStock' => 'OUT_OF_STOCK',
-        'RequestedByCustomer' => 'REQUESTED_BY_CUSTOMER',
-        'BadCondition' => 'BAD_CONDITION',
-        'HigherShipcost' => 'HIGHER_SHIPCOST',
-        'IncorrectPrice' => 'INCORRECT_PRICE',
-        'NotAvailInTime' => 'NOT_AVAIL_IN_TIME',
-        'NoBolGuarantee' => 'NO_BOL_GUARANTEE',
-        'OrderedTwice' => 'ORDERED_TWICE',
-        'RetainItem' => 'RETAIN_ITEM',
-        'TechIssue' => 'TECH_ISSUE',
-        'UnfinableItem' => 'UNFINDABLE_ITEM',
-        'Other' => 'OTHER',
+        'OUT_OF_STOCK' => 0,
+        'REQUESTED_BY_CUSTOMER' => 1,
+        'BAD_CONDITION' => 2,
+        'HIGHER_SHIPCOST' => 3,
+        'INCORRECT_PRICE' => 4,
+        'NOT_AVAIL_IN_TIME' => 5,
+        'NO_BOL_GUARANTEE' => 6,
+        'ORDERED_TWICE' => 7,
+        'RETAIN_ITEM' => 8,
+        'TECH_ISSUE' => 9,
+        'UNFINDABLE_ITEM' => 10,
+        'OTHER' => 11,
     ];
 
-    public const OutOfStock = 'OUT_OF_STOCK';
-    public const RequestedByCustomer = 'REQUESTED_BY_CUSTOMER';
-    public const BadCondition = 'BAD_CONDITION';
-    public const HigherShipcost = 'HIGHER_SHIPCOST';
-    public const IncorrectPrice = 'INCORRECT_PRICE';
-    public const NotAvailInTime = 'NOT_AVAIL_IN_TIME';
-    public const NoBolGuarantee = 'NO_BOL_GUARANTEE';
-    public const OrderedTwice = 'ORDERED_TWICE';
-    public const RetainItem = 'RETAIN_ITEM';
-    public const TechIssue = 'TECH_ISSUE';
-    public const UnfinableItem = 'UNFINDABLE_ITEM';
-    public const Other = 'OTHER';
+    public const OUT_OF_STOCK = 0;
+    public const REQUESTED_BY_CUSTOMER = 1;
+    public const BAD_CONDITION = 2;
+    public const HIGHER_SHIPCOST = 3;
+    public const INCORRECT_PRICE = 4;
+    public const NOT_AVAIL_IN_TIME = 5;
+    public const NO_BOL_GUARANTEE = 6;
+    public const ORDERED_TWICE = 7;
+    public const RETAIN_ITEM = 8;
+    public const TECH_ISSUE = 9;
+    public const UNFINDABLE_ITEM = 10;
+    public const OTHER = 11;
 
     private $name;
     private $value;
@@ -46,64 +46,64 @@ final class CancellationReason
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function outOfStock(): self
+    public static function oUT_OF_STOCK(): self
     {
-        return new self('OutOfStock');
+        return new self('OUT_OF_STOCK');
     }
 
-    public static function requestedByCustomer(): self
+    public static function rEQUESTED_BY_CUSTOMER(): self
     {
-        return new self('RequestedByCustomer');
+        return new self('REQUESTED_BY_CUSTOMER');
     }
 
-    public static function badCondition(): self
+    public static function bAD_CONDITION(): self
     {
-        return new self('BadCondition');
+        return new self('BAD_CONDITION');
     }
 
-    public static function higherShipcost(): self
+    public static function hIGHER_SHIPCOST(): self
     {
-        return new self('HigherShipcost');
+        return new self('HIGHER_SHIPCOST');
     }
 
-    public static function incorrectPrice(): self
+    public static function iNCORRECT_PRICE(): self
     {
-        return new self('IncorrectPrice');
+        return new self('INCORRECT_PRICE');
     }
 
-    public static function notAvailInTime(): self
+    public static function nOT_AVAIL_IN_TIME(): self
     {
-        return new self('NotAvailInTime');
+        return new self('NOT_AVAIL_IN_TIME');
     }
 
-    public static function noBolGuarantee(): self
+    public static function nO_BOL_GUARANTEE(): self
     {
-        return new self('NoBolGuarantee');
+        return new self('NO_BOL_GUARANTEE');
     }
 
-    public static function orderedTwice(): self
+    public static function oRDERED_TWICE(): self
     {
-        return new self('OrderedTwice');
+        return new self('ORDERED_TWICE');
     }
 
-    public static function retainItem(): self
+    public static function rETAIN_ITEM(): self
     {
-        return new self('RetainItem');
+        return new self('RETAIN_ITEM');
     }
 
-    public static function techIssue(): self
+    public static function tECH_ISSUE(): self
     {
-        return new self('TechIssue');
+        return new self('TECH_ISSUE');
     }
 
-    public static function unfinableItem(): self
+    public static function uNFINDABLE_ITEM(): self
     {
-        return new self('UnfinableItem');
+        return new self('UNFINDABLE_ITEM');
     }
 
-    public static function other(): self
+    public static function oTHER(): self
     {
-        return new self('Other');
+        return new self('OTHER');
     }
 
     public static function fromName(string $value): self

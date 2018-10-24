@@ -42,6 +42,9 @@ final class Order
         return $this->customerDetails;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Order\OrderItem[]
+     */
     public function orderItems(): array
     {
         return $this->orderItems;

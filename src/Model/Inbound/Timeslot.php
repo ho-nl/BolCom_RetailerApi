@@ -37,4 +37,21 @@ final class Timeslot
     {
         return new self($this->start, $end);
     }
+
+    public static function fromArray(array $data): Timeslot
+    {
+        if (! isset($data['start']) || ! \is_string($data['start'])) {
+            throw new \InvalidArgumentException("Key 'start' is missing in data array or is not a string");
+        }
+
+        $start = \BolCom\RetailerApi\Model\DateTime::fromString($data['start']);
+
+        if (! isset($data['end']) || ! \is_string($data['end'])) {
+            throw new \InvalidArgumentException("Key 'end' is missing in data array or is not a string");
+        }
+
+        $end = \BolCom\RetailerApi\Model\DateTime::fromString($data['end']);
+
+        return new self($start, $end);
+    }
 }

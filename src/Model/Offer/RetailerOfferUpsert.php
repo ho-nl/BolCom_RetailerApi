@@ -134,6 +134,82 @@ final class RetailerOfferUpsert
         return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $fulfilmentMethod);
     }
 
+    public static function fromArray(array $data): RetailerOfferUpsert
+    {
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
+        }
+
+        $ean = Ean::fromString($data['ean']);
+
+        if (! isset($data['condition']) || ! \is_string($data['condition'])) {
+            throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
+        }
+
+        $condition = Condition::fromName($data['condition']);
+
+        if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
+            throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
+        }
+
+        $price = Price::fromScalar($data['price']);
+
+        if (! isset($data['deliveryCode']) || ! \is_string($data['deliveryCode'])) {
+            throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
+        }
+
+        $deliveryCode = DeliveryCode::fromName($data['deliveryCode']);
+
+        if (! isset($data['quantityInStock']) || ! \is_int($data['quantityInStock'])) {
+            throw new \InvalidArgumentException("Key 'quantityInStock' is missing in data array or is not a int");
+        }
+
+        $quantityInStock = QuantityInStock::fromScalar($data['quantityInStock']);
+
+        if (! isset($data['publish']) || ! \is_bool($data['publish'])) {
+            throw new \InvalidArgumentException("Key 'publish' is missing in data array or is not a bool");
+        }
+
+        $publish = $data['publish'];
+
+        if (! isset($data['referenceCode']) || ! \is_string($data['referenceCode'])) {
+            throw new \InvalidArgumentException("Key 'referenceCode' is missing in data array or is not a string");
+        }
+
+        $referenceCode = ReferenceCode::fromString($data['referenceCode']);
+
+        if (! isset($data['description']) || ! \is_string($data['description'])) {
+            throw new \InvalidArgumentException("Key 'description' is missing in data array or is not a string");
+        }
+
+        $description = Description::fromString($data['description']);
+
+        if (! isset($data['title']) || ! \is_string($data['title'])) {
+            throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
+        }
+
+        $title = Title::fromString($data['title']);
+
+        if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
+            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
+        }
+
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($data['fulfilmentMethod']);
+
+        return new self(
+            $ean,
+            $condition,
+            $price,
+            $deliveryCode,
+            $quantityInStock,
+            $publish,
+            $referenceCode,
+            $description,
+            $title,
+            $fulfilmentMethod
+        );
+    }
+
     public function toArray(): array
     {
         return [

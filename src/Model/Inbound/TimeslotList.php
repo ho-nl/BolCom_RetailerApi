@@ -16,6 +16,9 @@ final class TimeslotList
         $this->timeslot = $timeslot;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\Timeslot[]
+     */
     public function timeslot(): array
     {
         return $this->timeslot;
@@ -24,5 +27,24 @@ final class TimeslotList
     public function withTimeslot(array $timeslot): TimeslotList
     {
         return new self(...$timeslot);
+    }
+
+    public static function fromArray(array $data): TimeslotList
+    {
+        if (! isset($data['timeslot']) || ! \is_array($data['timeslot'])) {
+            throw new \InvalidArgumentException("Key 'timeslot' is missing in data array or is not an array");
+        }
+
+        $timeslot = [];
+
+        foreach ($data['timeslot'] as $__value) {
+            if (! \is_array($data['timeslot'])) {
+                throw new \InvalidArgumentException("Key 'timeslot' in data array or is not an array of arrays");
+            }
+
+            $timeslot[] = Timeslot::fromArray($__value);
+        }
+
+        return new self($timeslot);
     }
 }

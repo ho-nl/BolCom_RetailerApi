@@ -7,70 +7,72 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Query;
 
-final class GetInventoryList
+final class GetInventoryList extends \Prooph\Common\Messaging\Query
 {
-    private $page;
-    private $quantity;
-    private $stock;
-    private $state;
-    private $query;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(int $page, \BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity, \BolCom\RetailerApi\Model\Inbound\InventoryStock $stock, \BolCom\RetailerApi\Model\Inbound\InventoryState $state, string $query)
-    {
-        $this->page = $page;
-        $this->quantity = $quantity;
-        $this->stock = $stock;
-        $this->state = $state;
-        $this->query = $query;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetInventoryList';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function page(): int
     {
-        return $this->page;
+        return $this->payload['page'];
     }
 
     public function quantity(): \BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput
     {
-        return $this->quantity;
+        return \BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput::fromString($this->payload['quantity']);
     }
 
     public function stock(): \BolCom\RetailerApi\Model\Inbound\InventoryStock
     {
-        return $this->stock;
+        return \BolCom\RetailerApi\Model\Inbound\InventoryStock::fromName($this->payload['stock']);
     }
 
     public function state(): \BolCom\RetailerApi\Model\Inbound\InventoryState
     {
-        return $this->state;
+        return \BolCom\RetailerApi\Model\Inbound\InventoryState::fromName($this->payload['state']);
     }
 
     public function query(): string
     {
-        return $this->query;
+        return $this->payload['query'];
     }
 
-    public function withPage(int $page): GetInventoryList
+    public static function with(int $page, \BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity, \BolCom\RetailerApi\Model\Inbound\InventoryStock $stock, \BolCom\RetailerApi\Model\Inbound\InventoryState $state, string $query): GetInventoryList
     {
-        return new self($page, $this->quantity, $this->stock, $this->state, $this->query);
+        return new self([
+            'page' => $page,
+            'quantity' => $quantity->toString(),
+            'stock' => $stock->name(),
+            'state' => $state->name(),
+            'query' => $query,
+        ]);
     }
 
-    public function withQuantity(\BolCom\RetailerApi\Model\Inbound\InventoryQuantityInput $quantity): GetInventoryList
+    protected function setPayload(array $payload): void
     {
-        return new self($this->page, $quantity, $this->stock, $this->state, $this->query);
-    }
+        if (! isset($payload['page']) || ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");
+        }
 
-    public function withStock(\BolCom\RetailerApi\Model\Inbound\InventoryStock $stock): GetInventoryList
-    {
-        return new self($this->page, $this->quantity, $stock, $this->state, $this->query);
-    }
+        if (! isset($payload['quantity']) || ! \is_string($payload['quantity'])) {
+            throw new \InvalidArgumentException("Key 'quantity' is missing in payload or is not a string");
+        }
 
-    public function withState(\BolCom\RetailerApi\Model\Inbound\InventoryState $state): GetInventoryList
-    {
-        return new self($this->page, $this->quantity, $this->stock, $state, $this->query);
-    }
+        if (! isset($payload['stock']) || ! \is_string($payload['stock'])) {
+            throw new \InvalidArgumentException("Key 'stock' is missing in payload or is not a string");
+        }
 
-    public function withQuery(string $query): GetInventoryList
-    {
-        return new self($this->page, $this->quantity, $this->stock, $this->state, $query);
+        if (! isset($payload['state']) || ! \is_string($payload['state'])) {
+            throw new \InvalidArgumentException("Key 'state' is missing in payload or is not a string");
+        }
+
+        if (! isset($payload['query']) || ! \is_string($payload['query'])) {
+            throw new \InvalidArgumentException("Key 'query' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

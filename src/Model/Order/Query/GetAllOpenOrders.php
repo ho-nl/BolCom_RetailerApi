@@ -7,34 +7,42 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Order\Query;
 
-final class GetAllOpenOrders
+final class GetAllOpenOrders extends \Prooph\Common\Messaging\Query
 {
-    private $page;
-    private $shipmentsMethod;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(int $page, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod)
-    {
-        $this->page = $page;
-        $this->shipmentsMethod = $shipmentsMethod;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function page(): int
     {
-        return $this->page;
+        return $this->payload['page'];
     }
 
     public function shipmentsMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
-        return $this->shipmentsMethod;
+        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($this->payload['shipmentsMethod']);
     }
 
-    public function withPage(int $page): GetAllOpenOrders
+    public static function with(int $page, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllOpenOrders
     {
-        return new self($page, $this->shipmentsMethod);
+        return new self([
+            'page' => $page,
+            'shipmentsMethod' => $shipmentsMethod->name(),
+        ]);
     }
 
-    public function withShipmentsMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllOpenOrders
+    protected function setPayload(array $payload): void
     {
-        return new self($this->page, $shipmentsMethod);
+        if (! isset($payload['page']) || ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");
+        }
+
+        if (! isset($payload['shipmentsMethod']) || ! \is_string($payload['shipmentsMethod'])) {
+            throw new \InvalidArgumentException("Key 'shipmentsMethod' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

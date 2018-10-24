@@ -16,6 +16,9 @@ final class InvoiceSpecificationPdfList
         $this->pdfs = $pdfs;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Invoice\InvoiceSpecificationPdf[]
+     */
     public function pdfs(): array
     {
         return $this->pdfs;

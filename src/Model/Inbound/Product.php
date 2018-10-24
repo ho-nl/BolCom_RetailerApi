@@ -73,4 +73,45 @@ final class Product
     {
         return new self($this->ean, $this->bsku, $this->announcedQuantity, $this->receivedQuantity, $state);
     }
+
+    public static function fromArray(array $data): Product
+    {
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
+        }
+
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
+
+        if (! isset($data['bsku']) || ! \is_string($data['bsku'])) {
+            throw new \InvalidArgumentException("Key 'bsku' is missing in data array or is not a string");
+        }
+
+        $bsku = BSku::fromString($data['bsku']);
+
+        if (! isset($data['announcedQuantity']) || ! \is_int($data['announcedQuantity'])) {
+            throw new \InvalidArgumentException("Key 'announcedQuantity' is missing in data array or is not a int");
+        }
+
+        $announcedQuantity = $data['announcedQuantity'];
+
+        if (! isset($data['receivedQuantity']) || ! \is_int($data['receivedQuantity'])) {
+            throw new \InvalidArgumentException("Key 'receivedQuantity' is missing in data array or is not a int");
+        }
+
+        $receivedQuantity = $data['receivedQuantity'];
+
+        if (! isset($data['state']) || ! \is_string($data['state'])) {
+            throw new \InvalidArgumentException("Key 'state' is missing in data array or is not a string");
+        }
+
+        $state = State::fromName($data['state']);
+
+        return new self(
+            $ean,
+            $bsku,
+            $announcedQuantity,
+            $receivedQuantity,
+            $state
+        );
+    }
 }

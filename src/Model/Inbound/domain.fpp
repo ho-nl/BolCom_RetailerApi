@@ -32,26 +32,26 @@ namespace BolCom\RetailerApi\Model\Inbound {
         int $announcedQuantity,
         int $receivedQuantity,
         State $state
-    };
+    } deriving (FromArray);
 
     data Timeslot = Timeslot {
         \BolCom\RetailerApi\Model\DateTime $start,
         \BolCom\RetailerApi\Model\DateTime $end
-    };
+    } deriving (FromArray);
 
     data TimeslotList = TimeslotList {
         Timeslot[] $timeslot
-    };
+    } deriving (FromArray);
 
     data StateTransition = StateTransition {
         State $state,
         \BolCom\RetailerApi\Model\DateTime $stateDate
-    };
+    } deriving (FromArray);
 
     data Transporter = Transporter {
         \BolCom\RetailerApi\Model\Transport\TransporterName $name,
         \BolCom\RetailerApi\Model\Transport\TransporterCode $code
-    };
+    } deriving (FromArray);
 
     data ItemsToSend = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::min($value, 1) => '';
@@ -60,18 +60,12 @@ namespace BolCom\RetailerApi\Model\Inbound {
         Transporter[] $fbbTransporters
     };
 
-    data ProductLabelFormat = AveryJ8159 | AveryJ8160 | Avery3474 | Dymo99012 | BrotherDK11208D | ZebraZPerform1000T deriving(Enum) with(
-        AveryJ8159: "AVERY_J8159",
-        AveryJ8160: "AVERY_J8160",
-        Avery3474: "AVERY_3474",
-        Dymo99012: "DYMO_99012",
-        BrotherDK11208D: "BROTHER_DK11208D",
-        ZebraZPerform1000T: "ZEBRA_Z_PERFORM_1000T"
-    );
+    data ProductLabelFormat = AVERY_J8159 | AVERY_J8160 | AVERY_3474 | DYMO_99012 | BROTHER_DK11208D | ZEBRA_Z_PERFORM_1000T deriving(Enum);
+
     data ProductLabel = ProductLabel {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         int $quantity
-    };
+    } deriving (FromArray);
 
     data InventoryQuantityInput = String deriving(FromString, ToString) where
         _: | !\BolCom\RetailerApi\Model\Assert\AssertIntRange::execute($value) => '';
@@ -105,7 +99,7 @@ namespace BolCom\RetailerApi\Model\Inbound {
 namespace BolCom\RetailerApi\Model\Inbound\Query {
     data GetInbound = GetInbound {
         \BolCom\RetailerApi\Model\Inbound\InboundId $inboundId
-    };
+    } deriving (Query);
 
     data GetInboundList = GetInboundList {
         ?\BolCom\RetailerApi\Model\Inbound\Reference $reference,
@@ -114,28 +108,28 @@ namespace BolCom\RetailerApi\Model\Inbound\Query {
         ?\BolCom\RetailerApi\Model\Date $creationEnd,
         ?\BolCom\RetailerApi\Model\Inbound\State $state,
         ?int $page
-    };
+    } deriving (Query);
 
     data GetDeliveryWindows = GetDeliveryWindow {
         ?\BolCom\RetailerApi\Model\DateTime $deliveryDate,
-        ?ItemsToSend $itemsToSend,
-    };
+        ?\BolCom\RetailerApi\Model\Inbound\ItemsToSend $itemsToSend,
+    } deriving (Query);
 
     data GetFbbTransporterList = GetFbbTransporterList {
-    };
+    } deriving (Query);
 
     data GetProductLabelsByEan = GetProductLabelsByEan {
-        ProductLabelFormat $format,
-        ProductLabel[] $productLabels
-    };
+        \BolCom\RetailerApi\Model\Inbound\ProductLabelFormat $format,
+        \BolCom\RetailerApi\Model\Inbound\ProductLabel[] $productLabels
+    } deriving (Query);
 
     data GetPackingList = GetPackingList {
         \BolCom\RetailerApi\Model\Inbound\InboundId $inboundId
-    };
+    } deriving (Query);
 
     data GetFbbShippingLabel = GetFbbShippingLabel {
         \BolCom\RetailerApi\Model\Inbound\InboundId $inboundId
-    };
+    } deriving (Query);
 
     data GetInventoryList = GetInventoryList {
         int $page,
@@ -143,15 +137,15 @@ namespace BolCom\RetailerApi\Model\Inbound\Query {
         \BolCom\RetailerApi\Model\Inbound\InventoryStock $stock,
         \BolCom\RetailerApi\Model\Inbound\InventoryState $state,
         string $query
-    };
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Inbound\Command {
     data CreateInbound = CreateInbound {
         ?\BolCom\RetailerApi\Model\Inbound\Reference $reference,
-        Timeslot $timeslot,
-        Transporter $fbbTransporter,
+        \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot,
+        \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter,
         bool $labellingService,
-        Product[] $products
-    };
+        \BolCom\RetailerApi\Model\Inbound\Product[] $products
+    } deriving (Command);
 }

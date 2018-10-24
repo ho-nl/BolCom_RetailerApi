@@ -37,4 +37,21 @@ final class TransportInstruction
     {
         return new self($this->transporterCode, $trackAndTrace);
     }
+
+    public static function fromArray(array $data): TransportInstruction
+    {
+        if (! isset($data['transporterCode']) || ! \is_string($data['transporterCode'])) {
+            throw new \InvalidArgumentException("Key 'transporterCode' is missing in data array or is not a string");
+        }
+
+        $transporterCode = TransporterCode::fromName($data['transporterCode']);
+
+        if (! isset($data['trackAndTrace']) || ! \is_string($data['trackAndTrace'])) {
+            throw new \InvalidArgumentException("Key 'trackAndTrace' is missing in data array or is not a string");
+        }
+
+        $trackAndTrace = TrackAndTrace::fromScalar($data['trackAndTrace']);
+
+        return new self($transporterCode, $trackAndTrace);
+    }
 }

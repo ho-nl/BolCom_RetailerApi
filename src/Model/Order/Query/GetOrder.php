@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Order\Query;
 
-final class GetOrder
+final class GetOrder extends \Prooph\Common\Messaging\Query
 {
-    private $orderId;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderId $orderId)
-    {
-        $this->orderId = $orderId;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Query\GetOrder';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
     {
-        return $this->orderId;
+        return \BolCom\RetailerApi\Model\Order\OrderId::fromString($this->payload['orderId']);
     }
 
-    public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): GetOrder
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderId $orderId): GetOrder
     {
-        return new self($orderId);
+        return new self([
+            'orderId' => $orderId->toString(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['orderId']) || ! \is_string($payload['orderId'])) {
+            throw new \InvalidArgumentException("Key 'orderId' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

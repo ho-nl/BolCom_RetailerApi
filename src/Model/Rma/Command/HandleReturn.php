@@ -7,46 +7,52 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Rma\Command;
 
-final class HandleReturn
+final class HandleReturn extends \Prooph\Common\Messaging\Command
 {
-    private $returnNumber;
-    private $handlingResult;
-    private $quantityReturned;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult, QuantityReturned $quantityReturned)
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Rma\Command\HandleReturn';
+
+    protected $messageName = self::MESSAGE_NAME;
+
+    public function returnNumber(): \BolCom\RetailerApi\Model\Rma\ReturnNumber
     {
-        $this->returnNumber = $returnNumber;
-        $this->handlingResult = $handlingResult;
-        $this->quantityReturned = $quantityReturned;
+        return \BolCom\RetailerApi\Model\Rma\ReturnNumber::fromScalar($this->payload['returnNumber']);
     }
 
-    public function returnNumber(): \BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\ReturnNumber
+    public function handlingResult(): \BolCom\RetailerApi\Model\Rma\HandlingResult
     {
-        return $this->returnNumber;
+        return \BolCom\RetailerApi\Model\Rma\HandlingResult::fromName($this->payload['handlingResult']);
     }
 
-    public function handlingResult(): \BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\HandlingResult
+    public function quantityReturned(): \BolCom\RetailerApi\Model\Rma\QuantityReturned
     {
-        return $this->handlingResult;
+        return \BolCom\RetailerApi\Model\Rma\QuantityReturned::fromScalar($this->payload['quantityReturned']);
     }
 
-    public function quantityReturned(): QuantityReturned
+    public static function with(\BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult, \BolCom\RetailerApi\Model\Rma\QuantityReturned $quantityReturned): HandleReturn
     {
-        return $this->quantityReturned;
+        return new self([
+            'returnNumber' => $returnNumber->toScalar(),
+            'handlingResult' => $handlingResult->name(),
+            'quantityReturned' => $quantityReturned->toScalar(),
+        ]);
     }
 
-    public function withReturnNumber(\BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber): HandleReturn
+    protected function setPayload(array $payload): void
     {
-        return new self($returnNumber, $this->handlingResult, $this->quantityReturned);
-    }
+        if (! isset($payload['returnNumber']) || ! \is_int($payload['returnNumber'])) {
+            throw new \InvalidArgumentException("Key 'returnNumber' is missing in payload or is not a int");
+        }
 
-    public function withHandlingResult(\BolCom\RetailerApi\Model\Rma\Command\BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult): HandleReturn
-    {
-        return new self($this->returnNumber, $handlingResult, $this->quantityReturned);
-    }
+        if (! isset($payload['handlingResult']) || ! \is_string($payload['handlingResult'])) {
+            throw new \InvalidArgumentException("Key 'handlingResult' is missing in payload or is not a string");
+        }
 
-    public function withQuantityReturned(QuantityReturned $quantityReturned): HandleReturn
-    {
-        return new self($this->returnNumber, $this->handlingResult, $quantityReturned);
+        if (! isset($payload['quantityReturned']) || ! \is_int($payload['quantityReturned'])) {
+            throw new \InvalidArgumentException("Key 'quantityReturned' is missing in payload or is not a int");
+        }
+
+        $this->payload = $payload;
     }
 }

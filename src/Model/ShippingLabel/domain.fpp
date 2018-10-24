@@ -25,5 +25,5 @@ namespace BolCom\RetailerApi\Model\ShippingLabel {
 namespace BolCom\RetailerApi\Model\ShippingLabel\Query {
     data GetShippingLabels = GetShippingLabels {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId
-    };
+    } deriving (Query);
 }

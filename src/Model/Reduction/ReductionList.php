@@ -16,6 +16,9 @@ final class ReductionList
         $this->reductions = $reductions;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Reduction\Reduction[]
+     */
     public function reductions(): array
     {
         return $this->reductions;

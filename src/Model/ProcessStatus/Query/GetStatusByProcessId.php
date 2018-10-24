@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\ProcessStatus\Query;
 
-final class GetStatusByProcessId
+final class GetStatusByProcessId extends \Prooph\Common\Messaging\Query
 {
-    private $id;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\ProcessStatus\Id $id)
-    {
-        $this->id = $id;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessId';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function id(): \BolCom\RetailerApi\Model\ProcessStatus\Id
     {
-        return $this->id;
+        return \BolCom\RetailerApi\Model\ProcessStatus\Id::fromString($this->payload['id']);
     }
 
-    public function withId(\BolCom\RetailerApi\Model\ProcessStatus\Id $id): GetStatusByProcessId
+    public static function with(\BolCom\RetailerApi\Model\ProcessStatus\Id $id): GetStatusByProcessId
     {
-        return new self($id);
+        return new self([
+            'id' => $id->toString(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['id']) || ! \is_string($payload['id'])) {
+            throw new \InvalidArgumentException("Key 'id' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

@@ -7,46 +7,52 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Order\Command;
 
-final class CancelOrder
+final class CancelOrder extends \Prooph\Common\Messaging\Query
 {
-    private $orderItemId;
-    private $dateTime;
-    private $reasonCode;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?\BolCom\RetailerApi\Model\DateTime $dateTime, ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode)
-    {
-        $this->orderItemId = $orderItemId;
-        $this->dateTime = $dateTime;
-        $this->reasonCode = $reasonCode;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Command\CancelOrder';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
     {
-        return $this->orderItemId;
+        return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
     }
 
     public function dateTime(): ?\BolCom\RetailerApi\Model\DateTime
     {
-        return $this->dateTime;
+        return isset($this->payload['dateTime']) ? \BolCom\RetailerApi\Model\DateTime::fromString($this->payload['dateTime']) : null;
     }
 
     public function reasonCode(): ?\BolCom\RetailerApi\Model\Order\CancellationReason
     {
-        return $this->reasonCode;
+        return isset($this->payload['reasonCode']) ? \BolCom\RetailerApi\Model\Order\CancellationReason::fromName($this->payload['reasonCode']) : null;
     }
 
-    public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): CancelOrder
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?\BolCom\RetailerApi\Model\DateTime $dateTime, ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode): CancelOrder
     {
-        return new self($orderItemId, $this->dateTime, $this->reasonCode);
+        return new self([
+            'orderItemId' => $orderItemId->toString(),
+            'dateTime' => null === $dateTime ? null : $dateTime->toString(),
+            'reasonCode' => null === $reasonCode ? null : $reasonCode->name(),
+        ]);
     }
 
-    public function withDateTime(?\BolCom\RetailerApi\Model\DateTime $dateTime): CancelOrder
+    protected function setPayload(array $payload): void
     {
-        return new self($this->orderItemId, $dateTime, $this->reasonCode);
-    }
+        if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
+            throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
+        }
 
-    public function withReasonCode(?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode): CancelOrder
-    {
-        return new self($this->orderItemId, $this->dateTime, $reasonCode);
+        if (isset($payload['dateTime']) && ! \is_string($payload['dateTime'])) {
+            throw new \InvalidArgumentException("Value for 'dateTime' is not a string in payload");
+        }
+
+        if (isset($payload['reasonCode']) && ! \is_string($payload['reasonCode'])) {
+            throw new \InvalidArgumentException("Value for 'reasonCode' is not a string in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

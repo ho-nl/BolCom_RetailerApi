@@ -47,6 +47,9 @@ final class Shipment
         return $this->shipmentReference;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Shipment\ShipmentItem[]
+     */
     public function shipmentItems(): array
     {
         return $this->shipmentItems;

@@ -37,4 +37,21 @@ final class Transporter
     {
         return new self($this->name, $code);
     }
+
+    public static function fromArray(array $data): Transporter
+    {
+        if (! isset($data['name']) || ! \is_string($data['name'])) {
+            throw new \InvalidArgumentException("Key 'name' is missing in data array or is not a string");
+        }
+
+        $name = \BolCom\RetailerApi\Model\Transport\TransporterName::fromScalar($data['name']);
+
+        if (! isset($data['code']) || ! \is_string($data['code'])) {
+            throw new \InvalidArgumentException("Key 'code' is missing in data array or is not a string");
+        }
+
+        $code = \BolCom\RetailerApi\Model\Transport\TransporterCode::fromName($data['code']);
+
+        return new self($name, $code);
+    }
 }

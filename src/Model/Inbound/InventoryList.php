@@ -35,6 +35,9 @@ final class InventoryList
         return $this->totalPageCount;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\InventoryOffer[]
+     */
     public function offers(): array
     {
         return $this->offers;

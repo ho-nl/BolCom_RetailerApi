@@ -7,75 +7,81 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Inbound\Command;
 
-final class CreateInbound
+final class CreateInbound extends \Prooph\Common\Messaging\Command
 {
-    private $reference;
-    private $timeslot;
-    private $fbbTransporter;
-    private $labellingService;
-    private $products;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, Timeslot $timeslot, Transporter $fbbTransporter, bool $labellingService, array $products)
-    {
-        $this->reference = $reference;
-        $this->timeslot = $timeslot;
-        $this->fbbTransporter = $fbbTransporter;
-        $this->labellingService = $labellingService;
-        foreach ($products as $__value) {
-            if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Command\Product) {
-                throw new \InvalidArgumentException('products expected an array of BolCom\RetailerApi\Model\Inbound\Command\Product');
-            }
-            $this->products[] = $__value;
-        }
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Command\CreateInbound';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function reference(): ?\BolCom\RetailerApi\Model\Inbound\Reference
     {
-        return $this->reference;
+        return isset($this->payload['reference']) ? \BolCom\RetailerApi\Model\Inbound\Reference::fromString($this->payload['reference']) : null;
     }
 
-    public function timeslot(): Timeslot
+    public function timeslot(): \BolCom\RetailerApi\Model\Inbound\Timeslot
     {
-        return $this->timeslot;
+        return \BolCom\RetailerApi\Model\Inbound\Timeslot::fromArray($this->payload['timeslot']);
     }
 
-    public function fbbTransporter(): Transporter
+    public function fbbTransporter(): \BolCom\RetailerApi\Model\Inbound\Transporter
     {
-        return $this->fbbTransporter;
+        return \BolCom\RetailerApi\Model\Inbound\Transporter::fromArray($this->payload['fbbTransporter']);
     }
 
     public function labellingService(): bool
     {
-        return $this->labellingService;
+        return $this->payload['labellingService'];
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\Product[]
+     */
     public function products(): array
     {
-        return $this->products;
+        $__returnValue = [];
+
+        foreach ($this->payload['products'] as $__value) {
+            $__returnValue[] = \BolCom\RetailerApi\Model\Inbound\Product::fromArray($__value);
+        }
+
+        return $__returnValue;
     }
 
-    public function withReference(?\BolCom\RetailerApi\Model\Inbound\Reference $reference): CreateInbound
+    public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot, \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter, bool $labellingService, array $products): CreateInbound
     {
-        return new self($reference, $this->timeslot, $this->fbbTransporter, $this->labellingService, $this->products);
+        return new self([
+            'reference' => null === $reference ? null : $reference->toString(),
+            'timeslot' => $timeslot,
+            'fbbTransporter' => $fbbTransporter,
+            'labellingService' => $labellingService,
+            'products' => $products,
+        ]);
     }
 
-    public function withTimeslot(Timeslot $timeslot): CreateInbound
+    protected function setPayload(array $payload): void
     {
-        return new self($this->reference, $timeslot, $this->fbbTransporter, $this->labellingService, $this->products);
-    }
+        if (isset($payload['reference']) && ! \is_string($payload['reference'])) {
+            throw new \InvalidArgumentException("Value for 'reference' is not a string in payload");
+        }
 
-    public function withFbbTransporter(Transporter $fbbTransporter): CreateInbound
-    {
-        return new self($this->reference, $this->timeslot, $fbbTransporter, $this->labellingService, $this->products);
-    }
+        if (! isset($payload['timeslot'])) {
+            throw new \InvalidArgumentException("Key 'timeslot' is missing in payload");
+        }
 
-    public function withLabellingService(bool $labellingService): CreateInbound
-    {
-        return new self($this->reference, $this->timeslot, $this->fbbTransporter, $labellingService, $this->products);
-    }
+        if (! isset($payload['fbbTransporter'])) {
+            throw new \InvalidArgumentException("Key 'fbbTransporter' is missing in payload");
+        }
 
-    public function withProducts(array $products): CreateInbound
-    {
-        return new self($this->reference, $this->timeslot, $this->fbbTransporter, $this->labellingService, $products);
+        if (! isset($payload['labellingService']) || ! \is_bool($payload['labellingService'])) {
+            throw new \InvalidArgumentException("Key 'labellingService' is missing in payload or is not a bool");
+        }
+
+        if (! isset($payload['products'])) {
+            throw new \InvalidArgumentException("Key 'products' is missing in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

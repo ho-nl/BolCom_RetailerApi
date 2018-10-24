@@ -10,20 +10,20 @@ namespace BolCom\RetailerApi\Model\Inbound;
 final class ProductLabelFormat
 {
     public const OPTIONS = [
-        'AveryJ8159' => 'AVERY_J8159',
-        'AveryJ8160' => 'AVERY_J8160',
-        'Avery3474' => 'AVERY_3474',
-        'Dymo99012' => 'DYMO_99012',
-        'BrotherDK11208D' => 'BROTHER_DK11208D',
-        'ZebraZPerform1000T' => 'ZEBRA_Z_PERFORM_1000T',
+        'AVERY_J8159' => 0,
+        'AVERY_J8160' => 1,
+        'AVERY_3474' => 2,
+        'DYMO_99012' => 3,
+        'BROTHER_DK11208D' => 4,
+        'ZEBRA_Z_PERFORM_1000T' => 5,
     ];
 
-    public const AveryJ8159 = 'AVERY_J8159';
-    public const AveryJ8160 = 'AVERY_J8160';
-    public const Avery3474 = 'AVERY_3474';
-    public const Dymo99012 = 'DYMO_99012';
-    public const BrotherDK11208D = 'BROTHER_DK11208D';
-    public const ZebraZPerform1000T = 'ZEBRA_Z_PERFORM_1000T';
+    public const AVERY_J8159 = 0;
+    public const AVERY_J8160 = 1;
+    public const AVERY_3474 = 2;
+    public const DYMO_99012 = 3;
+    public const BROTHER_DK11208D = 4;
+    public const ZEBRA_Z_PERFORM_1000T = 5;
 
     private $name;
     private $value;
@@ -34,34 +34,34 @@ final class ProductLabelFormat
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function averyJ8159(): self
+    public static function aVERY_J8159(): self
     {
-        return new self('AveryJ8159');
+        return new self('AVERY_J8159');
     }
 
-    public static function averyJ8160(): self
+    public static function aVERY_J8160(): self
     {
-        return new self('AveryJ8160');
+        return new self('AVERY_J8160');
     }
 
-    public static function avery3474(): self
+    public static function aVERY_3474(): self
     {
-        return new self('Avery3474');
+        return new self('AVERY_3474');
     }
 
-    public static function dymo99012(): self
+    public static function dYMO_99012(): self
     {
-        return new self('Dymo99012');
+        return new self('DYMO_99012');
     }
 
-    public static function brotherDK11208D(): self
+    public static function bROTHER_DK11208D(): self
     {
-        return new self('BrotherDK11208D');
+        return new self('BROTHER_DK11208D');
     }
 
-    public static function zebraZPerform1000T(): self
+    public static function zEBRA_Z_PERFORM_1000T(): self
     {
-        return new self('ZebraZPerform1000T');
+        return new self('ZEBRA_Z_PERFORM_1000T');
     }
 
     public static function fromName(string $value): self

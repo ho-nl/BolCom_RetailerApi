@@ -35,6 +35,9 @@ final class InboundList
         return $this->totalPageCount;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Inbound\Inbound[]
+     */
     public function inbounds(): array
     {
         return $this->inbounds;

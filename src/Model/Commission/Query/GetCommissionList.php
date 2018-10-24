@@ -15,6 +15,9 @@ final class GetCommissionList extends \Prooph\Common\Messaging\Query
 
     protected $messageName = self::MESSAGE_NAME;
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Commission\CommissionQuery[]
+     */
     public function commissionQueries(): array
     {
         $__returnValue = [];

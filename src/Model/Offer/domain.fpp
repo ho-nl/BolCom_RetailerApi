@@ -31,7 +31,13 @@ namespace BolCom\RetailerApi\Model\Offer {
     data Price = Float deriving(FromScalar, ToScalar);
 
     //We choose IsNew, because New is a protected key word
-    data Condition = IsNew | AsNew | Good | Reasonable | Moderate deriving(Enum) with (IsNew:'NEW', AsNew:'AS_NEW', Good:'GOOD', Reasonable:'REASONABLE', Moderate:'MODERATE');
+    data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum) with (
+        IS_NEW:'NEW',
+        AS_NEW:'AS_NEW',
+        GOOD:'GOOD',
+        REASONABLE:'REASONABLE',
+        MODERATE:'MODERATE'
+    );
 
     data DeliveryCode = DC24uurs23 | DC24uurs22 | DC24uurs21 | DC24uurs20 | DC24uurs19 | DC24uurs18 | DC24uurs17 |
         DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC34d | DC35d | DC48d | DC18d |
@@ -60,7 +66,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data RetailerOfferIdentifier = RetailerOfferIdentifier {
         Ean $ean,
         Condition $condition,
-    } deriving (ToArray);
+    } deriving (FromArray, ToArray);
 
     data RetailerOffer = RetailerOffer {
         Ean $ean,
@@ -88,30 +94,30 @@ namespace BolCom\RetailerApi\Model\Offer {
         Description $description,
         Title $title,
         \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
-    } deriving (ToArray);
+    } deriving (FromArray, ToArray);
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Query {
     data GetOfferCsv = GetOfferCsv {
         string $filename
-    };
+    } deriving (Query);
 
     data GetOffer = GetOffer {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier
-    };
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Command {
     data CreateOrUpdateOffer = CreateOrUpdateOffer {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[] $retailOffer
-    };
+    } deriving (Command);
 
     data DeleteOffersInBulk = DeleteOffersInBulk {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier[] $retailerOfferIdentifier
-    } where
+    } deriving (Command) where
         _: | count($retailerOfferIdentifier) === 0 => 'You should at least provide a single Offer to delete';
 
     data GenerateOfferCvs = GenerateOfferCvs {
         ?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter
-    };
+    } deriving (Command);
 }

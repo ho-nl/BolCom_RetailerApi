@@ -10,14 +10,14 @@ namespace BolCom\RetailerApi\Model\Rma;
 final class ProcessingResult
 {
     public const OPTIONS = [
-        'Pending' => 'PENDING',
-        'Accepted' => 'ACCEPTED',
-        'Rejected' => 'REJECTED',
+        'PENDING' => 0,
+        'ACCEPTED' => 1,
+        'REJECTED' => 2,
     ];
 
-    public const Pending = 'PENDING';
-    public const Accepted = 'ACCEPTED';
-    public const Rejected = 'REJECTED';
+    public const PENDING = 0;
+    public const ACCEPTED = 1;
+    public const REJECTED = 2;
 
     private $name;
     private $value;
@@ -28,19 +28,19 @@ final class ProcessingResult
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function pending(): self
+    public static function pENDING(): self
     {
-        return new self('Pending');
+        return new self('PENDING');
     }
 
-    public static function accepted(): self
+    public static function aCCEPTED(): self
     {
-        return new self('Accepted');
+        return new self('ACCEPTED');
     }
 
-    public static function rejected(): self
+    public static function rEJECTED(): self
     {
-        return new self('Rejected');
+        return new self('REJECTED');
     }
 
     public static function fromName(string $value): self

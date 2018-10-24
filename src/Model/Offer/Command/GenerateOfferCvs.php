@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer\Command;
 
-final class GenerateOfferCvs
+final class GenerateOfferCvs extends \Prooph\Common\Messaging\Command
 {
-    private $filter;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter)
-    {
-        $this->filter = $filter;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\GenerateOfferCvs';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function filter(): ?\BolCom\RetailerApi\Model\Offer\PublishStatus
     {
-        return $this->filter;
+        return isset($this->payload['filter']) ? \BolCom\RetailerApi\Model\Offer\PublishStatus::fromName($this->payload['filter']) : null;
     }
 
-    public function withFilter(?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter): GenerateOfferCvs
+    public static function with(?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter): GenerateOfferCvs
     {
-        return new self($filter);
+        return new self([
+            'filter' => null === $filter ? null : $filter->name(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (isset($payload['filter']) && ! \is_string($payload['filter'])) {
+            throw new \InvalidArgumentException("Value for 'filter' is not a string in payload");
+        }
+
+        $this->payload = $payload;
     }
 }

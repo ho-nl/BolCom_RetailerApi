@@ -1,10 +1,7 @@
 namespace BolCom\RetailerApi\Model\Shipment {
     data ShipmentId = Int deriving(FromScalar, ToScalar);
 
-    data FulfilmentMethod = ByRetailer | ByBolCom deriving(Enum) with (
-        ByRetailer: "FBR",
-        ByBolCom: "FFB"
-    );
+    data FulfilmentMethod = FBR | FFB deriving(Enum);
 
     data Shipment = Shipment {
         ShipmentId $shipmentId,
@@ -41,13 +38,13 @@ namespace BolCom\RetailerApi\Model\Shipment {
 namespace BolCom\RetailerApi\Model\Shipment\Query {
     data GetShipment = GetShipment {
         \BolCom\RetailerApi\Model\Shipment\ShipmentId $shipmentId
-    };
+    } deriving (Query);
 
     data GetShipmentList = GetShipmentList {
         int $page,
-        FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
         \BolCom\RetailerApi\Model\Order\OrderId $orderid
-    };
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Shipment\Command {

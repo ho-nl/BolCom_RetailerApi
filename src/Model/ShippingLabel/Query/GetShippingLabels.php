@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\ShippingLabel\Query;
 
-final class GetShippingLabels
+final class GetShippingLabels extends \Prooph\Common\Messaging\Query
 {
-    private $orderItemId;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId)
-    {
-        $this->orderItemId = $orderItemId;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
     {
-        return $this->orderItemId;
+        return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
     }
 
-    public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): GetShippingLabels
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): GetShippingLabels
     {
-        return new self($orderItemId);
+        return new self([
+            'orderItemId' => $orderItemId->toString(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
+            throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

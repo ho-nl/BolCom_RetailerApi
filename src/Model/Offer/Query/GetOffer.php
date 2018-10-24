@@ -7,22 +7,32 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer\Query;
 
-final class GetOffer
+final class GetOffer extends \Prooph\Common\Messaging\Query
 {
-    private $retailerOfferIdentifier;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier)
-    {
-        $this->retailerOfferIdentifier = $retailerOfferIdentifier;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOffer';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function retailerOfferIdentifier(): \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier
     {
-        return $this->retailerOfferIdentifier;
+        return \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier::fromArray($this->payload['retailerOfferIdentifier']);
     }
 
-    public function withRetailerOfferIdentifier(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier): GetOffer
+    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier): GetOffer
     {
-        return new self($retailerOfferIdentifier);
+        return new self([
+            'retailerOfferIdentifier' => $retailerOfferIdentifier->toArray(),
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['retailerOfferIdentifier']) || ! \is_array($payload['retailerOfferIdentifier'])) {
+            throw new \InvalidArgumentException("Key 'retailerOfferIdentifier' is missing in payload or is not an array");
+        }
+
+        $this->payload = $payload;
     }
 }

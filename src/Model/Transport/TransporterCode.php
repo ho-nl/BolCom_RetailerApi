@@ -10,62 +10,62 @@ namespace BolCom\RetailerApi\Model\Transport;
 final class TransporterCode
 {
     public const OPTIONS = [
-        'Briefpost' => 'BRIEFPOST',
-        'Ups' => 'UPS',
-        'Tnt' => 'TNT',
-        'TntExtra' => 'TNT-EXTRA',
-        'TntBrief' => 'TNT_BRIEF',
-        'TntExpress' => 'TNT-EXPRESS',
-        'Dyl' => 'DYL',
-        'DpdNl' => 'DPD-NL',
-        'DpdBe' => 'DPD-BE',
-        'BPostBe' => 'BPOST_BE',
-        'BpostBrief' => 'BPOST_BRIEF',
-        'Dhlforyou' => 'DHLFORYOU',
-        'Gls' => 'GLS',
-        'FedexNl' => 'FEDEX_NL',
-        'FedexBe' => 'FEDEX_BE',
-        'Other' => 'OTHER',
-        'Dhl' => 'DHL',
-        'DhlDe' => 'DHL_DE',
-        'DhlGlobalMail' => 'DHL-GLOBAL-MAIL',
-        'Tsn' => 'TSN',
-        'Fiege' => 'FIEGE',
-        'Transmission' => 'TRANSMISSION',
-        'ParcelNl' => 'PARCEL-NL',
-        'Logoix' => 'LOGOIX',
-        'Packs' => 'PACKS',
-        'Courier' => 'COURIER',
-        'Rjp' => 'RJP',
+        'BRIEFPOST' => 'BRIEFPOST',
+        'UPS' => 'UPS',
+        'TNT' => 'TNT',
+        'TNT_EXTRA' => 'TNT-EXTRA',
+        'TNT_BRIEF' => 'TNT_BRIEF',
+        'TNT_EXPRESS' => 'TNT-EXPRESS',
+        'DYL' => 'DYL',
+        'DPD_NL' => 'DPD-NL',
+        'DPD_BE' => 'DPD-BE',
+        'BPOST_BE' => 'BPOST_BE',
+        'BPOST_BRIEF' => 'BPOST_BRIEF',
+        'DHLFORYOU' => 'DHLFORYOU',
+        'GLS' => 'GLS',
+        'FEDEX_NL' => 'FEDEX_NL',
+        'FEDEX_BE' => 'FEDEX_BE',
+        'OTHER' => 'OTHER',
+        'DHL' => 'DHL',
+        'DHL_DE' => 'DHL_DE',
+        'DHL_GLOBAL_MAIL' => 'DHL-GLOBAL-MAIL',
+        'TSN' => 'TSN',
+        'FIEGE' => 'FIEGE',
+        'TRANSMISSION' => 'TRANSMISSION',
+        'PARCEL_NL' => 'PARCEL-NL',
+        'LOGOIX' => 'LOGOIX',
+        'PACKS' => 'PACKS',
+        'COURIER' => 'COURIER',
+        'RJP' => 'RJP',
     ];
 
-    public const Briefpost = 'BRIEFPOST';
-    public const Ups = 'UPS';
-    public const Tnt = 'TNT';
-    public const TntExtra = 'TNT-EXTRA';
-    public const TntBrief = 'TNT_BRIEF';
-    public const TntExpress = 'TNT-EXPRESS';
-    public const Dyl = 'DYL';
-    public const DpdNl = 'DPD-NL';
-    public const DpdBe = 'DPD-BE';
-    public const BPostBe = 'BPOST_BE';
-    public const BpostBrief = 'BPOST_BRIEF';
-    public const Dhlforyou = 'DHLFORYOU';
-    public const Gls = 'GLS';
-    public const FedexNl = 'FEDEX_NL';
-    public const FedexBe = 'FEDEX_BE';
-    public const Other = 'OTHER';
-    public const Dhl = 'DHL';
-    public const DhlDe = 'DHL_DE';
-    public const DhlGlobalMail = 'DHL-GLOBAL-MAIL';
-    public const Tsn = 'TSN';
-    public const Fiege = 'FIEGE';
-    public const Transmission = 'TRANSMISSION';
-    public const ParcelNl = 'PARCEL-NL';
-    public const Logoix = 'LOGOIX';
-    public const Packs = 'PACKS';
-    public const Courier = 'COURIER';
-    public const Rjp = 'RJP';
+    public const BRIEFPOST = 'BRIEFPOST';
+    public const UPS = 'UPS';
+    public const TNT = 'TNT';
+    public const TNT_EXTRA = 'TNT-EXTRA';
+    public const TNT_BRIEF = 'TNT_BRIEF';
+    public const TNT_EXPRESS = 'TNT-EXPRESS';
+    public const DYL = 'DYL';
+    public const DPD_NL = 'DPD-NL';
+    public const DPD_BE = 'DPD-BE';
+    public const BPOST_BE = 'BPOST_BE';
+    public const BPOST_BRIEF = 'BPOST_BRIEF';
+    public const DHLFORYOU = 'DHLFORYOU';
+    public const GLS = 'GLS';
+    public const FEDEX_NL = 'FEDEX_NL';
+    public const FEDEX_BE = 'FEDEX_BE';
+    public const OTHER = 'OTHER';
+    public const DHL = 'DHL';
+    public const DHL_DE = 'DHL_DE';
+    public const DHL_GLOBAL_MAIL = 'DHL-GLOBAL-MAIL';
+    public const TSN = 'TSN';
+    public const FIEGE = 'FIEGE';
+    public const TRANSMISSION = 'TRANSMISSION';
+    public const PARCEL_NL = 'PARCEL-NL';
+    public const LOGOIX = 'LOGOIX';
+    public const PACKS = 'PACKS';
+    public const COURIER = 'COURIER';
+    public const RJP = 'RJP';
 
     private $name;
     private $value;
@@ -76,139 +76,139 @@ final class TransporterCode
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function briefpost(): self
+    public static function bRIEFPOST(): self
     {
-        return new self('Briefpost');
+        return new self('BRIEFPOST');
     }
 
-    public static function ups(): self
+    public static function uPS(): self
     {
-        return new self('Ups');
+        return new self('UPS');
     }
 
-    public static function tnt(): self
+    public static function tNT(): self
     {
-        return new self('Tnt');
+        return new self('TNT');
     }
 
-    public static function tntExtra(): self
+    public static function tNT_EXTRA(): self
     {
-        return new self('TntExtra');
+        return new self('TNT_EXTRA');
     }
 
-    public static function tntBrief(): self
+    public static function tNT_BRIEF(): self
     {
-        return new self('TntBrief');
+        return new self('TNT_BRIEF');
     }
 
-    public static function tntExpress(): self
+    public static function tNT_EXPRESS(): self
     {
-        return new self('TntExpress');
+        return new self('TNT_EXPRESS');
     }
 
-    public static function dyl(): self
+    public static function dYL(): self
     {
-        return new self('Dyl');
+        return new self('DYL');
     }
 
-    public static function dpdNl(): self
+    public static function dPD_NL(): self
     {
-        return new self('DpdNl');
+        return new self('DPD_NL');
     }
 
-    public static function dpdBe(): self
+    public static function dPD_BE(): self
     {
-        return new self('DpdBe');
+        return new self('DPD_BE');
     }
 
-    public static function bPostBe(): self
+    public static function bPOST_BE(): self
     {
-        return new self('BPostBe');
+        return new self('BPOST_BE');
     }
 
-    public static function bpostBrief(): self
+    public static function bPOST_BRIEF(): self
     {
-        return new self('BpostBrief');
+        return new self('BPOST_BRIEF');
     }
 
-    public static function dhlforyou(): self
+    public static function dHLFORYOU(): self
     {
-        return new self('Dhlforyou');
+        return new self('DHLFORYOU');
     }
 
-    public static function gls(): self
+    public static function gLS(): self
     {
-        return new self('Gls');
+        return new self('GLS');
     }
 
-    public static function fedexNl(): self
+    public static function fEDEX_NL(): self
     {
-        return new self('FedexNl');
+        return new self('FEDEX_NL');
     }
 
-    public static function fedexBe(): self
+    public static function fEDEX_BE(): self
     {
-        return new self('FedexBe');
+        return new self('FEDEX_BE');
     }
 
-    public static function other(): self
+    public static function oTHER(): self
     {
-        return new self('Other');
+        return new self('OTHER');
     }
 
-    public static function dhl(): self
+    public static function dHL(): self
     {
-        return new self('Dhl');
+        return new self('DHL');
     }
 
-    public static function dhlDe(): self
+    public static function dHL_DE(): self
     {
-        return new self('DhlDe');
+        return new self('DHL_DE');
     }
 
-    public static function dhlGlobalMail(): self
+    public static function dHL_GLOBAL_MAIL(): self
     {
-        return new self('DhlGlobalMail');
+        return new self('DHL_GLOBAL_MAIL');
     }
 
-    public static function tsn(): self
+    public static function tSN(): self
     {
-        return new self('Tsn');
+        return new self('TSN');
     }
 
-    public static function fiege(): self
+    public static function fIEGE(): self
     {
-        return new self('Fiege');
+        return new self('FIEGE');
     }
 
-    public static function transmission(): self
+    public static function tRANSMISSION(): self
     {
-        return new self('Transmission');
+        return new self('TRANSMISSION');
     }
 
-    public static function parcelNl(): self
+    public static function pARCEL_NL(): self
     {
-        return new self('ParcelNl');
+        return new self('PARCEL_NL');
     }
 
-    public static function logoix(): self
+    public static function lOGOIX(): self
     {
-        return new self('Logoix');
+        return new self('LOGOIX');
     }
 
-    public static function packs(): self
+    public static function pACKS(): self
     {
-        return new self('Packs');
+        return new self('PACKS');
     }
 
-    public static function courier(): self
+    public static function cOURIER(): self
     {
-        return new self('Courier');
+        return new self('COURIER');
     }
 
-    public static function rjp(): self
+    public static function rJP(): self
     {
-        return new self('Rjp');
+        return new self('RJP');
     }
 
     public static function fromName(string $value): self

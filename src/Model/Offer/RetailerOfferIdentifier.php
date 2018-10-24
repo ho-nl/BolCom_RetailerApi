@@ -38,6 +38,23 @@ final class RetailerOfferIdentifier
         return new self($this->ean, $condition);
     }
 
+    public static function fromArray(array $data): RetailerOfferIdentifier
+    {
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
+        }
+
+        $ean = Ean::fromString($data['ean']);
+
+        if (! isset($data['condition']) || ! \is_string($data['condition'])) {
+            throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
+        }
+
+        $condition = Condition::fromName($data['condition']);
+
+        return new self($ean, $condition);
+    }
+
     public function toArray(): array
     {
         return [

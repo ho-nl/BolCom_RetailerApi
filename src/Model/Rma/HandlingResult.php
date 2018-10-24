@@ -10,20 +10,20 @@ namespace BolCom\RetailerApi\Model\Rma;
 final class HandlingResult
 {
     public const OPTIONS = [
-        'ReturnReceived' => 'RETURN_RECEIVED',
-        'ExchangeProduct' => 'EXCHANGE_PRODUCT',
-        'ProductDoesNotMeetConditions' => 'RETURN_DOES_NOT_MEET_CONDITIONS',
-        'RepairProduct' => 'REPAIR_PRODUCT',
-        'CustomerKeepsProductPaid' => 'CUSTOMER_KEEPS_PRODUCT_PAID',
-        'StillApproved' => 'STILL_APPROVED',
+        'RETURN_RECEIVED' => 0,
+        'EXCHANGE_PRODUCT' => 1,
+        'RETURN_DOES_NOT_MEET_CONDITIONS' => 2,
+        'REPAIR_PRODUCT' => 3,
+        'CUSTOMER_KEEPS_PRODUCT_PAID' => 4,
+        'STILL_APPROVED' => 5,
     ];
 
-    public const ReturnReceived = 'RETURN_RECEIVED';
-    public const ExchangeProduct = 'EXCHANGE_PRODUCT';
-    public const ProductDoesNotMeetConditions = 'RETURN_DOES_NOT_MEET_CONDITIONS';
-    public const RepairProduct = 'REPAIR_PRODUCT';
-    public const CustomerKeepsProductPaid = 'CUSTOMER_KEEPS_PRODUCT_PAID';
-    public const StillApproved = 'STILL_APPROVED';
+    public const RETURN_RECEIVED = 0;
+    public const EXCHANGE_PRODUCT = 1;
+    public const RETURN_DOES_NOT_MEET_CONDITIONS = 2;
+    public const REPAIR_PRODUCT = 3;
+    public const CUSTOMER_KEEPS_PRODUCT_PAID = 4;
+    public const STILL_APPROVED = 5;
 
     private $name;
     private $value;
@@ -34,34 +34,34 @@ final class HandlingResult
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function returnReceived(): self
+    public static function rETURN_RECEIVED(): self
     {
-        return new self('ReturnReceived');
+        return new self('RETURN_RECEIVED');
     }
 
-    public static function exchangeProduct(): self
+    public static function eXCHANGE_PRODUCT(): self
     {
-        return new self('ExchangeProduct');
+        return new self('EXCHANGE_PRODUCT');
     }
 
-    public static function productDoesNotMeetConditions(): self
+    public static function rETURN_DOES_NOT_MEET_CONDITIONS(): self
     {
-        return new self('ProductDoesNotMeetConditions');
+        return new self('RETURN_DOES_NOT_MEET_CONDITIONS');
     }
 
-    public static function repairProduct(): self
+    public static function rEPAIR_PRODUCT(): self
     {
-        return new self('RepairProduct');
+        return new self('REPAIR_PRODUCT');
     }
 
-    public static function customerKeepsProductPaid(): self
+    public static function cUSTOMER_KEEPS_PRODUCT_PAID(): self
     {
-        return new self('CustomerKeepsProductPaid');
+        return new self('CUSTOMER_KEEPS_PRODUCT_PAID');
     }
 
-    public static function stillApproved(): self
+    public static function sTILL_APPROVED(): self
     {
-        return new self('StillApproved');
+        return new self('STILL_APPROVED');
     }
 
     public static function fromName(string $value): self

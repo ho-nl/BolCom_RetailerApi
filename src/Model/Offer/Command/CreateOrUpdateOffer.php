@@ -7,22 +7,53 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer\Command;
 
-final class CreateOrUpdateOffer
+final class CreateOrUpdateOffer extends \Prooph\Common\Messaging\Command
 {
-    private $retailOffer;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailOffer)
-    {
-        $this->retailOffer = $retailOffer;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer';
 
+    protected $messageName = self::MESSAGE_NAME;
+
+    /**
+     * @return \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[]
+     */
     public function retailOffer(): array
     {
-        return $this->retailOffer;
+        $__returnValue = [];
+
+        foreach ($this->payload['retailOffer'] as $__value) {
+            $__returnValue[] = \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert::fromArray($__value);
+        }
+
+        return $__returnValue;
     }
 
-    public function withRetailOffer(array $retailOffer): CreateOrUpdateOffer
+    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailOffer): CreateOrUpdateOffer
     {
-        return new self(...$retailOffer);
+        $__array_retailOffer = [];
+
+        foreach ($retailOffer as $__value) {
+            $__array_retailOffer[] = $__value->toArray();
+        }
+
+        return new self([
+            'retailOffer' => $__array_retailOffer,
+        ]);
+    }
+
+    protected function setPayload(array $payload): void
+    {
+        if (! isset($payload['retailOffer']) || ! \is_array($payload['retailOffer'])) {
+            throw new \InvalidArgumentException("Key 'retailOffer' is missing in payload or is not an array");
+        }
+
+        foreach ($payload['retailOffer'] as $__value) {
+            if (! \is_array($__value)) {
+                throw new \InvalidArgumentException("Key 'retailOffer' is not an array of arrays in payload");
+            }
+        }
+
+        $this->payload = $payload;
     }
 }

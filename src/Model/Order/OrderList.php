@@ -16,6 +16,9 @@ final class OrderList
         $this->orders = $orders;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Order\Order[]
+     */
     public function orders(): array
     {
         return $this->orders;

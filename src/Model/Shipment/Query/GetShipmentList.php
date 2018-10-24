@@ -7,46 +7,52 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Shipment\Query;
 
-final class GetShipmentList
+final class GetShipmentList extends \Prooph\Common\Messaging\Query
 {
-    private $page;
-    private $fulfilmentMethod;
-    private $orderid;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(int $page, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\OrderId $orderid)
-    {
-        $this->page = $page;
-        $this->fulfilmentMethod = $fulfilmentMethod;
-        $this->orderid = $orderid;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function page(): int
     {
-        return $this->page;
+        return $this->payload['page'];
     }
 
-    public function fulfilmentMethod(): FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
-        return $this->fulfilmentMethod;
+        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromName($this->payload['fulfilmentMethod']);
     }
 
     public function orderid(): \BolCom\RetailerApi\Model\Order\OrderId
     {
-        return $this->orderid;
+        return \BolCom\RetailerApi\Model\Order\OrderId::fromString($this->payload['orderid']);
     }
 
-    public function withPage(int $page): GetShipmentList
+    public static function with(int $page, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\OrderId $orderid): GetShipmentList
     {
-        return new self($page, $this->fulfilmentMethod, $this->orderid);
+        return new self([
+            'page' => $page,
+            'fulfilmentMethod' => $fulfilmentMethod->name(),
+            'orderid' => $orderid->toString(),
+        ]);
     }
 
-    public function withFulfilmentMethod(FulfilmentMethod $fulfilmentMethod): GetShipmentList
+    protected function setPayload(array $payload): void
     {
-        return new self($this->page, $fulfilmentMethod, $this->orderid);
-    }
+        if (! isset($payload['page']) || ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");
+        }
 
-    public function withOrderid(\BolCom\RetailerApi\Model\Order\OrderId $orderid): GetShipmentList
-    {
-        return new self($this->page, $this->fulfilmentMethod, $orderid);
+        if (! isset($payload['fulfilmentMethod']) || ! \is_string($payload['fulfilmentMethod'])) {
+            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in payload or is not a string");
+        }
+
+        if (! isset($payload['orderid']) || ! \is_string($payload['orderid'])) {
+            throw new \InvalidArgumentException("Key 'orderid' is missing in payload or is not a string");
+        }
+
+        $this->payload = $payload;
     }
 }

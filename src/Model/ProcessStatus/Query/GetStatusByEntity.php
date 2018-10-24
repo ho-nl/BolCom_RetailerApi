@@ -7,46 +7,52 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\ProcessStatus\Query;
 
-final class GetStatusByEntity
+final class GetStatusByEntity extends \Prooph\Common\Messaging\Query
 {
-    private $entityId;
-    private $eventType;
-    private $page;
+    use \Prooph\Common\Messaging\PayloadTrait;
 
-    public function __construct(\BolCom\RetailerApi\Model\ProcessStatus\EntityId $entityId, \BolCom\RetailerApi\Model\ProcessStatus\EventType $eventType, int $page)
-    {
-        $this->entityId = $entityId;
-        $this->eventType = $eventType;
-        $this->page = $page;
-    }
+    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function entityId(): \BolCom\RetailerApi\Model\ProcessStatus\EntityId
     {
-        return $this->entityId;
+        return \BolCom\RetailerApi\Model\ProcessStatus\EntityId::fromString($this->payload['entityId']);
     }
 
     public function eventType(): \BolCom\RetailerApi\Model\ProcessStatus\EventType
     {
-        return $this->eventType;
+        return \BolCom\RetailerApi\Model\ProcessStatus\EventType::fromName($this->payload['eventType']);
     }
 
     public function page(): int
     {
-        return $this->page;
+        return $this->payload['page'];
     }
 
-    public function withEntityId(\BolCom\RetailerApi\Model\ProcessStatus\EntityId $entityId): GetStatusByEntity
+    public static function with(\BolCom\RetailerApi\Model\ProcessStatus\EntityId $entityId, \BolCom\RetailerApi\Model\ProcessStatus\EventType $eventType, int $page): GetStatusByEntity
     {
-        return new self($entityId, $this->eventType, $this->page);
+        return new self([
+            'entityId' => $entityId->toString(),
+            'eventType' => $eventType->name(),
+            'page' => $page,
+        ]);
     }
 
-    public function withEventType(\BolCom\RetailerApi\Model\ProcessStatus\EventType $eventType): GetStatusByEntity
+    protected function setPayload(array $payload): void
     {
-        return new self($this->entityId, $eventType, $this->page);
-    }
+        if (! isset($payload['entityId']) || ! \is_string($payload['entityId'])) {
+            throw new \InvalidArgumentException("Key 'entityId' is missing in payload or is not a string");
+        }
 
-    public function withPage(int $page): GetStatusByEntity
-    {
-        return new self($this->entityId, $this->eventType, $page);
+        if (! isset($payload['eventType']) || ! \is_string($payload['eventType'])) {
+            throw new \InvalidArgumentException("Key 'eventType' is missing in payload or is not a string");
+        }
+
+        if (! isset($payload['page']) || ! \is_int($payload['page'])) {
+            throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");
+        }
+
+        $this->payload = $payload;
     }
 }

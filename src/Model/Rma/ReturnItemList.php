@@ -16,6 +16,9 @@ final class ReturnItemList
         $this->returns = $returns;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Rma\ReturnItem[]
+     */
     public function returns(): array
     {
         return $this->returns;
