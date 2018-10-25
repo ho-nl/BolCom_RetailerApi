@@ -25,6 +25,7 @@ class AcceptHeaderMiddleware
                     'Accept header is explicitly required, consult https://api.bol.com/retailer/public/redoc/ for options.'
                 );
             }
+            $request = $request->withHeader('Content-Type', $request->getHeader('Accept'));
 
             return $handler($request, $options);
         };
