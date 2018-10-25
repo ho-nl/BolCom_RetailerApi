@@ -29,9 +29,10 @@ class Client extends \GuzzleHttp\Client
 {
     public function __construct(
         LoggerInterface $logger = null,
+        string $storagepath = '/tmp/bol_access_token.json',
+        string $apiUrl = 'https://api.bol.com/',
         string $apiKey = '4c25a73d-31a4-402d-ac4c-83f0f869bca1',
-        string $apiSecret = 'CqXYlOHp3t-8WSu_FWTZi1GU7ivy9opskEGKEvj4K5WrJh1Tkdj0K0FvRDrMnxV1oIIJ2T4mBeloaXxMuOp93Q',
-        string $storagepath = '/tmp/bol_access_token.json'
+        string $apiSecret = 'CqXYlOHp3t-8WSu_FWTZi1GU7ivy9opskEGKEvj4K5WrJh1Tkdj0K0FvRDrMnxV1oIIJ2T4mBeloaXxMuOp93Q'
     ) {
         $stack = new HandlerStack(\GuzzleHttp\choose_handler());
 
@@ -47,7 +48,7 @@ class Client extends \GuzzleHttp\Client
 
         parent::__construct([
             'handler' => $stack,
-            'base_uri' => 'https://api.bol.com/',
+            'base_uri' => $apiUrl,
             'headers' => [ 'User-Agent' => 'bol-com/retailer-api/1.0' ],
             'connect_timeout' => 10,
             'auth' => 'oauth'
