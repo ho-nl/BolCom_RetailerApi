@@ -19,15 +19,24 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
         array $ctx = []
     ) {
         if ($response === null || !($response->getBody() instanceof JsonResponse)) {
-            parent::create($request, $response);
+            return parent::create($request, $response);
         }
 
-        /** @noinspection PhpUndefinedMethodInspection */
-        $errorResponse = $response->getBody()->json();
+
+        try {
+            /** @noinspection PhpUndefinedMethodInspection */
+            $errorResponse = $response->getBody()->json();
+        } catch (\InvalidArgumentException $exception) {
+            return parent::create($request, $response);
+        }
+
 
         $additional = '';
         if (isset($errorResponse['violations'])) {
             $additional .= implode(', ', array_map(function($violation) {
+                if (isset($violation['name'])) {
+                    return "`{$violation['name']}`: {$violation['reason']}";
+                }
                 return $violation['reason'];
             }, $errorResponse['violations']));
         }
