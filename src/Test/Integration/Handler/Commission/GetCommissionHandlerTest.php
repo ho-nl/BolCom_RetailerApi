@@ -5,7 +5,7 @@
  */
 
 declare(strict_types=1);
-namespace BolCom\RetailerApi\Test\Integration\Infrastructure\Handler;
+namespace BolCom\RetailerApi\Test\Integration\Commission\Handler;
 
 use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionHandler;
@@ -22,7 +22,7 @@ class GetCommissionHandlerTest extends TestCase
      */
     public function should_get_commission_back(): void
     {
-        $handler = new GetCommissionHandler(new Client());
+        $handler = new GetCommissionHandler(new Client(null, __DIR__ . '/../token.json'));
 
         $commission = $handler(GetCommission::with(
             Ean::fromString('9781785882364'),
