@@ -13,7 +13,7 @@ final class UnreservedStock
 
     public function __construct(int $value)
     {
-        if (!\Assert\Assertion::betweenLength($value, 0, 999)) {
+        if (!\Assert\Assertion::between($value, 0, 999)) {
             throw new \InvalidArgumentException('');
         }
 

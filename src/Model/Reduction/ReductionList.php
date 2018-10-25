@@ -45,6 +45,6 @@ final class ReductionList
             $reductions[] = Reduction::fromArray($__value);
         }
 
-        return new self($reductions);
+        return new self(...$reductions);
     }
 }

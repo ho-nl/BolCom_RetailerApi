@@ -13,7 +13,6 @@ use Assert\Assertion;
 class AssertCurrency
 {
     /**
-     * @param float $value
      * @throws \Assert\AssertionFailedException
      */
     public static function assert(float $value): bool

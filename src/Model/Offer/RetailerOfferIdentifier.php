@@ -59,7 +59,7 @@ final class RetailerOfferIdentifier
     {
         return [
             'ean' => $this->ean->toString(),
-            'condition' => $this->condition->name(),
+            'condition' => $this->condition->value(),
         ];
     }
 }

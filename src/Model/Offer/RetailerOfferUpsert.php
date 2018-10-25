@@ -20,7 +20,7 @@ final class RetailerOfferUpsert
     private $title;
     private $fulfilmentMethod;
 
-    public function __construct(Ean $ean, Condition $condition, Price $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod)
+    public function __construct(Ean $ean, Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -44,7 +44,7 @@ final class RetailerOfferUpsert
         return $this->condition;
     }
 
-    public function price(): Price
+    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
         return $this->price;
     }
@@ -94,7 +94,7 @@ final class RetailerOfferUpsert
         return new self($this->ean, $condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
 
-    public function withPrice(Price $price): RetailerOfferUpsert
+    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): RetailerOfferUpsert
     {
         return new self($this->ean, $this->condition, $price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
     }
@@ -152,7 +152,7 @@ final class RetailerOfferUpsert
             throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
         }
 
-        $price = Price::fromScalar($data['price']);
+        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
 
         if (! isset($data['deliveryCode']) || ! \is_string($data['deliveryCode'])) {
             throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
@@ -214,15 +214,15 @@ final class RetailerOfferUpsert
     {
         return [
             'ean' => $this->ean->toString(),
-            'condition' => $this->condition->name(),
+            'condition' => $this->condition->value(),
             'price' => $this->price->toScalar(),
-            'deliveryCode' => $this->deliveryCode->name(),
+            'deliveryCode' => $this->deliveryCode->value(),
             'quantityInStock' => $this->quantityInStock->toScalar(),
             'publish' => $this->publish,
             'referenceCode' => $this->referenceCode->toString(),
             'description' => $this->description->toString(),
             'title' => $this->title->toString(),
-            'fulfilmentMethod' => $this->fulfilmentMethod->name(),
+            'fulfilmentMethod' => $this->fulfilmentMethod->value(),
         ];
     }
 }

@@ -45,6 +45,6 @@ final class CommissionList
             $commissions[] = Commission::fromArray($__value);
         }
 
-        return new self($commissions);
+        return new self(...$commissions);
     }
 }

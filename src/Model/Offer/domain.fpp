@@ -3,10 +3,10 @@ namespace BolCom\RetailerApi\Model\Offer {
          _: | !\Assert\Assertion::length($value, 13) => '';
 
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
-        _: | !\Assert\Assertion::betweenLength($value, 0, 999) => '';
+        _: | !\Assert\Assertion::between($value, 0, 999) => '';
 
     data UnreservedStock = Int deriving(FromScalar, ToScalar) where
-        _: | !\Assert\Assertion::betweenLength($value, 0, 999) => '';
+        _: | !\Assert\Assertion::between($value, 0, 999) => '';
 
     data ReferenceCode = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 20) => '';
@@ -28,8 +28,6 @@ namespace BolCom\RetailerApi\Model\Offer {
         string $errorCode,
         string $errorMessage
     } deriving (FromArray);
-
-    data Price = Float deriving(FromScalar, ToScalar);
 
     //We choose IsNew, because New is a protected key word
     data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum) with (
@@ -72,7 +70,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data RetailerOffer = RetailerOffer {
         Ean $ean,
         Condition $condition,
-        Price $price,
+        \BolCom\RetailerApi\Model\CurrencyAmount $price,
         DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
         UnreservedStock $unreservedStock,
@@ -87,7 +85,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data RetailerOfferUpsert = RetailerOfferUpsert {
         Ean $ean,
         Condition $condition,
-        Price $price,
+        \BolCom\RetailerApi\Model\CurrencyAmount $price,
         DeliveryCode $deliveryCode,
         QuantityInStock $quantityInStock,
         bool $publish,
@@ -110,7 +108,7 @@ namespace BolCom\RetailerApi\Model\Offer\Query {
 
 namespace BolCom\RetailerApi\Model\Offer\Command {
     data CreateOrUpdateOffer = CreateOrUpdateOffer {
-        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[] $retailOffer
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[] $retailerOffer
     } deriving (Command);
 
     data DeleteOffersInBulk = DeleteOffersInBulk {

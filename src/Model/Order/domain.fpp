@@ -45,7 +45,7 @@ namespace BolCom\RetailerApi\Model\Order {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
         Quantity $quantity,
-        \BolCom\RetailerApi\Model\Offer\Price $offerPrice,
+        \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
         float $transactionFee,
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,

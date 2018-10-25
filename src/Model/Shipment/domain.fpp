@@ -27,7 +27,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         \BolCom\RetailerApi\Model\Offer\Title $title,
         \BolCom\RetailerApi\Model\Order\Quantity $quantity,
-        \BolCom\RetailerApi\Model\Offer\Price $offerPrice,
+        \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
         \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference,
         FulfilmentMethod $fulfilmentMethod,

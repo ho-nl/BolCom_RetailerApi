@@ -22,7 +22,7 @@ final class ShipmentOrderItem
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\Offer\Price $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow)
     {
         $this->orderItemId = $orderItemId;
         $this->orderId = $orderId;
@@ -73,7 +73,7 @@ final class ShipmentOrderItem
         return $this->quantity;
     }
 
-    public function offerPrice(): \BolCom\RetailerApi\Model\Offer\Price
+    public function offerPrice(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
         return $this->offerPrice;
     }
@@ -133,7 +133,7 @@ final class ShipmentOrderItem
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withOfferPrice(\BolCom\RetailerApi\Model\Offer\Price $offerPrice): ShipmentOrderItem
+    public function withOfferPrice(\BolCom\RetailerApi\Model\CurrencyAmount $offerPrice): ShipmentOrderItem
     {
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -206,7 +206,7 @@ final class ShipmentOrderItem
             throw new \InvalidArgumentException("Key 'offerPrice' is missing in data array or is not a float");
         }
 
-        $offerPrice = \BolCom\RetailerApi\Model\Offer\Price::fromScalar($data['offerPrice']);
+        $offerPrice = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['offerPrice']);
 
         if (! isset($data['offerCondition']) || ! \is_string($data['offerCondition'])) {
             throw new \InvalidArgumentException("Key 'offerCondition' is missing in data array or is not a string");

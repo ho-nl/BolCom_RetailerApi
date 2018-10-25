@@ -31,15 +31,27 @@ final class GetCommissionList extends \Prooph\Common\Messaging\Query
 
     public static function with(\BolCom\RetailerApi\Model\Commission\CommissionQuery ...$commissionQueries): GetCommissionList
     {
+        $__array_commissionQueries = [];
+
+        foreach ($commissionQueries as $__value) {
+            $__array_commissionQueries[] = $__value->toArray();
+        }
+
         return new self([
-            'commissionQueries' => $commissionQueries,
+            'commissionQueries' => $__array_commissionQueries,
         ]);
     }
 
     protected function setPayload(array $payload): void
     {
-        if (! isset($payload['commissionQueries'])) {
-            throw new \InvalidArgumentException("Key 'commissionQueries' is missing in payload");
+        if (! isset($payload['commissionQueries']) || ! \is_array($payload['commissionQueries'])) {
+            throw new \InvalidArgumentException("Key 'commissionQueries' is missing in payload or is not an array");
+        }
+
+        foreach ($payload['commissionQueries'] as $__value) {
+            if (! \is_array($__value)) {
+                throw new \InvalidArgumentException("Key 'commissionQueries' is not an array of arrays in payload");
+            }
         }
 
         $this->payload = $payload;

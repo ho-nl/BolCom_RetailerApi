@@ -45,6 +45,6 @@ final class ShippingLabelList
             $purchasableShippingLabels[] = ShippingLabel::fromArray($__value);
         }
 
-        return new self($purchasableShippingLabels);
+        return new self(...$purchasableShippingLabels);
     }
 }

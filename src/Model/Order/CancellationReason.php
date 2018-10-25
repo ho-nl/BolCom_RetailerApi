@@ -10,32 +10,32 @@ namespace BolCom\RetailerApi\Model\Order;
 final class CancellationReason
 {
     public const OPTIONS = [
-        'OUT_OF_STOCK' => 0,
-        'REQUESTED_BY_CUSTOMER' => 1,
-        'BAD_CONDITION' => 2,
-        'HIGHER_SHIPCOST' => 3,
-        'INCORRECT_PRICE' => 4,
-        'NOT_AVAIL_IN_TIME' => 5,
-        'NO_BOL_GUARANTEE' => 6,
-        'ORDERED_TWICE' => 7,
-        'RETAIN_ITEM' => 8,
-        'TECH_ISSUE' => 9,
-        'UNFINDABLE_ITEM' => 10,
-        'OTHER' => 11,
+        'OUT_OF_STOCK' => 'OUT_OF_STOCK',
+        'REQUESTED_BY_CUSTOMER' => 'REQUESTED_BY_CUSTOMER',
+        'BAD_CONDITION' => 'BAD_CONDITION',
+        'HIGHER_SHIPCOST' => 'HIGHER_SHIPCOST',
+        'INCORRECT_PRICE' => 'INCORRECT_PRICE',
+        'NOT_AVAIL_IN_TIME' => 'NOT_AVAIL_IN_TIME',
+        'NO_BOL_GUARANTEE' => 'NO_BOL_GUARANTEE',
+        'ORDERED_TWICE' => 'ORDERED_TWICE',
+        'RETAIN_ITEM' => 'RETAIN_ITEM',
+        'TECH_ISSUE' => 'TECH_ISSUE',
+        'UNFINDABLE_ITEM' => 'UNFINDABLE_ITEM',
+        'OTHER' => 'OTHER',
     ];
 
-    public const OUT_OF_STOCK = 0;
-    public const REQUESTED_BY_CUSTOMER = 1;
-    public const BAD_CONDITION = 2;
-    public const HIGHER_SHIPCOST = 3;
-    public const INCORRECT_PRICE = 4;
-    public const NOT_AVAIL_IN_TIME = 5;
-    public const NO_BOL_GUARANTEE = 6;
-    public const ORDERED_TWICE = 7;
-    public const RETAIN_ITEM = 8;
-    public const TECH_ISSUE = 9;
-    public const UNFINDABLE_ITEM = 10;
-    public const OTHER = 11;
+    public const OUT_OF_STOCK = 'OUT_OF_STOCK';
+    public const REQUESTED_BY_CUSTOMER = 'REQUESTED_BY_CUSTOMER';
+    public const BAD_CONDITION = 'BAD_CONDITION';
+    public const HIGHER_SHIPCOST = 'HIGHER_SHIPCOST';
+    public const INCORRECT_PRICE = 'INCORRECT_PRICE';
+    public const NOT_AVAIL_IN_TIME = 'NOT_AVAIL_IN_TIME';
+    public const NO_BOL_GUARANTEE = 'NO_BOL_GUARANTEE';
+    public const ORDERED_TWICE = 'ORDERED_TWICE';
+    public const RETAIN_ITEM = 'RETAIN_ITEM';
+    public const TECH_ISSUE = 'TECH_ISSUE';
+    public const UNFINDABLE_ITEM = 'UNFINDABLE_ITEM';
+    public const OTHER = 'OTHER';
 
     private $name;
     private $value;

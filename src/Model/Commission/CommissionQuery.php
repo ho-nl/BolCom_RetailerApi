@@ -76,4 +76,13 @@ final class CommissionQuery
             $price
         );
     }
+
+    public function toArray(): array
+    {
+        return [
+            'ean' => $this->ean->toString(),
+            'condition' => $this->condition->value(),
+            'price' => $this->price->toScalar(),
+        ];
+    }
 }

@@ -45,6 +45,6 @@ final class OrderList
             $orders[] = Order::fromArray($__value);
         }
 
-        return new self($orders);
+        return new self(...$orders);
     }
 }

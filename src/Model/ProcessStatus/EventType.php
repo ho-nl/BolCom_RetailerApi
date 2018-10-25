@@ -10,18 +10,18 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 final class EventType
 {
     public const OPTIONS = [
-        'CONFIRM_SHIPMENT' => 0,
-        'CANCEL_ORDER' => 1,
-        'CHANGE_TRANSPORT' => 2,
-        'HANDLE_RETURN_ITEM' => 3,
-        'CREATE_INBOUND' => 4,
+        'CONFIRM_SHIPMENT' => 'CONFIRM_SHIPMENT',
+        'CANCEL_ORDER' => 'CANCEL_ORDER',
+        'CHANGE_TRANSPORT' => 'CHANGE_TRANSPORT',
+        'HANDLE_RETURN_ITEM' => 'HANDLE_RETURN_ITEM',
+        'CREATE_INBOUND' => 'CREATE_INBOUND',
     ];
 
-    public const CONFIRM_SHIPMENT = 0;
-    public const CANCEL_ORDER = 1;
-    public const CHANGE_TRANSPORT = 2;
-    public const HANDLE_RETURN_ITEM = 3;
-    public const CREATE_INBOUND = 4;
+    public const CONFIRM_SHIPMENT = 'CONFIRM_SHIPMENT';
+    public const CANCEL_ORDER = 'CANCEL_ORDER';
+    public const CHANGE_TRANSPORT = 'CHANGE_TRANSPORT';
+    public const HANDLE_RETURN_ITEM = 'HANDLE_RETURN_ITEM';
+    public const CREATE_INBOUND = 'CREATE_INBOUND';
 
     private $name;
     private $value;

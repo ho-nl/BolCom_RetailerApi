@@ -45,6 +45,6 @@ final class TimeslotList
             $timeslot[] = Timeslot::fromArray($__value);
         }
 
-        return new self($timeslot);
+        return new self(...$timeslot);
     }
 }

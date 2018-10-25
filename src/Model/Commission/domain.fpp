@@ -25,7 +25,7 @@ namespace BolCom\RetailerApi\Model\Commission {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         \BolCom\RetailerApi\Model\Offer\Condition $condition,
         \BolCom\RetailerApi\Model\CurrencyAmount $price
-    } deriving (FromArray);
+    } deriving (FromArray, ToArray);
 }
 
 namespace BolCom\RetailerApi\Model\Commission\Query {

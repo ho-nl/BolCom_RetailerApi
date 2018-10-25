@@ -45,6 +45,6 @@ final class ShippingLabelPdfList
             $pdfs[] = ShippingLabelPdf::fromString($__value);
         }
 
-        return new self($pdfs);
+        return new self(...$pdfs);
     }
 }

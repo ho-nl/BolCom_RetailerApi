@@ -10,16 +10,16 @@ namespace BolCom\RetailerApi\Model\Inbound;
 final class State
 {
     public const OPTIONS = [
-        'Draft' => 0,
-        'PreAnnounced' => 1,
-        'ArrivedAtWH' => 2,
-        'Cancelled' => 3,
+        'Draft' => 'Draft',
+        'PreAnnounced' => 'PreAnnounced',
+        'ArrivedAtWH' => 'ArrivedAtWH',
+        'Cancelled' => 'Cancelled',
     ];
 
-    public const Draft = 0;
-    public const PreAnnounced = 1;
-    public const ArrivedAtWH = 2;
-    public const Cancelled = 3;
+    public const Draft = 'Draft';
+    public const PreAnnounced = 'PreAnnounced';
+    public const ArrivedAtWH = 'ArrivedAtWH';
+    public const Cancelled = 'Cancelled';
 
     private $name;
     private $value;

@@ -22,7 +22,7 @@ final class RetailerOffer
     private $fulfilmentMethod;
     private $status;
 
-    public function __construct(Ean $ean, Condition $condition, Price $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, UnreservedStock $unreservedStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, RetailerOfferStatus $status)
+    public function __construct(Ean $ean, Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, UnreservedStock $unreservedStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, RetailerOfferStatus $status)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -48,7 +48,7 @@ final class RetailerOffer
         return $this->condition;
     }
 
-    public function price(): Price
+    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
         return $this->price;
     }
@@ -108,7 +108,7 @@ final class RetailerOffer
         return new self($this->ean, $condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod, $this->status);
     }
 
-    public function withPrice(Price $price): RetailerOffer
+    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): RetailerOffer
     {
         return new self($this->ean, $this->condition, $price, $this->deliveryCode, $this->quantityInStock, $this->unreservedStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod, $this->status);
     }
@@ -176,7 +176,7 @@ final class RetailerOffer
             throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
         }
 
-        $price = Price::fromScalar($data['price']);
+        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
 
         if (! isset($data['deliveryCode']) || ! \is_string($data['deliveryCode'])) {
             throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");

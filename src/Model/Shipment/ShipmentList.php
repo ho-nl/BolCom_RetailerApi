@@ -45,6 +45,6 @@ final class ShipmentList
             $shipments[] = Shipment::fromArray($__value);
         }
 
-        return new self($shipments);
+        return new self(...$shipments);
     }
 }

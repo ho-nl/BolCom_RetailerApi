@@ -18,39 +18,39 @@ final class CreateOrUpdateOffer extends \Prooph\Common\Messaging\Command
     /**
      * @return \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[]
      */
-    public function retailOffer(): array
+    public function retailerOffer(): array
     {
         $__returnValue = [];
 
-        foreach ($this->payload['retailOffer'] as $__value) {
+        foreach ($this->payload['retailerOffer'] as $__value) {
             $__returnValue[] = \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert::fromArray($__value);
         }
 
         return $__returnValue;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailOffer): CreateOrUpdateOffer
+    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailerOffer): CreateOrUpdateOffer
     {
-        $__array_retailOffer = [];
+        $__array_retailerOffer = [];
 
-        foreach ($retailOffer as $__value) {
-            $__array_retailOffer[] = $__value->toArray();
+        foreach ($retailerOffer as $__value) {
+            $__array_retailerOffer[] = $__value->toArray();
         }
 
         return new self([
-            'retailOffer' => $__array_retailOffer,
+            'retailerOffer' => $__array_retailerOffer,
         ]);
     }
 
     protected function setPayload(array $payload): void
     {
-        if (! isset($payload['retailOffer']) || ! \is_array($payload['retailOffer'])) {
-            throw new \InvalidArgumentException("Key 'retailOffer' is missing in payload or is not an array");
+        if (! isset($payload['retailerOffer']) || ! \is_array($payload['retailerOffer'])) {
+            throw new \InvalidArgumentException("Key 'retailerOffer' is missing in payload or is not an array");
         }
 
-        foreach ($payload['retailOffer'] as $__value) {
+        foreach ($payload['retailerOffer'] as $__value) {
             if (! \is_array($__value)) {
-                throw new \InvalidArgumentException("Key 'retailOffer' is not an array of arrays in payload");
+                throw new \InvalidArgumentException("Key 'retailerOffer' is not an array of arrays in payload");
             }
         }
 

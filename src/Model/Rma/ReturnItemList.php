@@ -45,6 +45,6 @@ final class ReturnItemList
             $returns[] = ReturnItem::fromArray($__value);
         }
 
-        return new self($returns);
+        return new self(...$returns);
     }
 }
