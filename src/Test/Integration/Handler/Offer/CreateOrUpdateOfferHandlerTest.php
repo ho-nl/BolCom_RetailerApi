@@ -18,10 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 class CreateOrUpdateOfferHandlerTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function should_get_commission_back(): void
+    public function test__invoke(): void
     {
         $handler = new CreateOrUpdateOfferHandler(new Client(null, __DIR__ . '/../token.json'));
 

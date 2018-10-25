@@ -8,13 +8,14 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Handler\Offer;
 
 use BolCom\RetailerApi\Client;
-use BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer;
-use BolCom\RetailerApi\Model\Offer\CommandHandler\CreateOrUpdateOfferHandlerInterface;
+use BolCom\RetailerApi\Model\Offer\Command\GenerateOfferCvs;
+use BolCom\RetailerApi\Model\Offer\CommandHandler\GenerateOfferCsvHandlerInterface;
+use BolCom\RetailerApi\Model\Offer\OfferCsv;
 
 /**
  * @deprecated Please use the v4 version of the offer api
  */
-class CreateOrUpdateOfferHandler implements CreateOrUpdateOfferHandlerInterface
+class GenerateOfferCsvHandler implements GenerateOfferCsvHandlerInterface
 {
     private $client;
 
@@ -23,13 +24,14 @@ class CreateOrUpdateOfferHandler implements CreateOrUpdateOfferHandlerInterface
         $this->client = $client;
     }
 
-    public function __invoke(CreateOrUpdateOffer $createOrUpdateOffer): void
+    public function __invoke(GenerateOfferCvs $generateOfferCvs): OfferCsv
     {
-        $this->client->put('/retailer/offers', [
-            'json' => $createOrUpdateOffer->payload(),
+        $response = $this->client->get('/retailer/offers/export', [
+            'json' => $generateOfferCvs->payload(),
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]
         ]);
+        return OfferCsv::fromArray($response->getBody()->json());
     }
 }
