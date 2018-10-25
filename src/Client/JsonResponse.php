@@ -10,12 +10,12 @@ namespace BolCom\RetailerApi\Client;
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
 use Psr\Http\Message\StreamInterface;
 
-class JsonStream implements StreamInterface
+class JsonResponse implements StreamInterface
 {
     use StreamDecoratorTrait;
 
     public function json()
     {
-        return \GuzzleHttp\json_decode((string)$this->getContents());
+        return \GuzzleHttp\json_decode((string)$this->getContents(), true);
     }
 }

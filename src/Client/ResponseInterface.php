@@ -8,5 +8,5 @@ namespace BolCom\RetailerApi\Client;
 
 interface ResponseInterface extends \Psr\Http\Message\ResponseInterface
 {
-    public function getBody() : JsonStream;
+    public function getBody() : JsonResponse;
 }

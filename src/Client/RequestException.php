@@ -5,9 +5,8 @@
  */
 
 declare(strict_types=1);
-namespace BolCom\RetailerApi\Client\Exception;
+namespace BolCom\RetailerApi\Client;
 
-use BolCom\RetailerApi\Client\JsonStream;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -19,20 +18,23 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
         \Exception $previous = null,
         array $ctx = []
     ) {
-        if ($response === null || !($response->getBody() instanceof JsonStream)) {
+        if ($response === null || !($response->getBody() instanceof JsonResponse)) {
             parent::create($request, $response);
         }
 
         /** @noinspection PhpUndefinedMethodInspection */
         $errorResponse = $response->getBody()->json();
 
-        $violations = implode(', ', array_map(function($violation) {
-            return $violation['reason'];
-        }, $errorResponse['violations']));
+        $additional = '';
+        if (isset($errorResponse['violations'])) {
+            $additional .= implode(', ', array_map(function($violation) {
+                return $violation['reason'];
+            }, $errorResponse['violations']));
+        }
 
         $newResponse = $response->withStatus(
             $response->getStatusCode(),
-            sprintf('%s: %s', $errorResponse['title'], $violations)
+            sprintf('%s: %s', $errorResponse['detail'], $additional)
         );
 
         return parent::create($request, $newResponse);
