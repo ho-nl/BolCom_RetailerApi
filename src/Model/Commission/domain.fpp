@@ -37,5 +37,5 @@ namespace BolCom\RetailerApi\Model\Commission\Query {
 
     data GetCommissionList = GetCommissionList {
         \BolCom\RetailerApi\Model\Commission\CommissionQuery[] $commissionQueries
-    } deriving (Query)
+    } deriving (Query);
 }

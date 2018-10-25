@@ -25,6 +25,7 @@ class GetCommissionListHandler implements GetCommissionListHandlerInterface
     {
         $response = $this->client->post('/retailer/commission', [
             'json' => $getCommissionList->payload(),
+            'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
         ]);
         return CommissionList::fromArray($response->getBody()->json());
     }

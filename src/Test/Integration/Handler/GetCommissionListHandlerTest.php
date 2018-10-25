@@ -9,6 +9,7 @@ namespace BolCom\RetailerApi\Test\Integration\Infrastructure\Handler;
 
 use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
+use BolCom\RetailerApi\Model\Commission\CommissionQuery;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\CurrencyAmount;
 use BolCom\RetailerApi\Model\Offer\Condition;
@@ -24,27 +25,31 @@ class GetCommissionListHandlerTest extends TestCase
     {
         $handler = new GetCommissionListHandler(new Client(null, 'username', 'password'));
 
-        $commissions = $handler(GetCommissionList::with([
-            Ean::fromString('1234455432'),
-            Condition::isNew(),
-            CurrencyAmount::fromScalar(10.10)
-        ]));
+        $commissions = $handler(GetCommissionList::with(
+            CommissionQuery::fromArray([
+                'ean' => '9781785882364',
+                'condition' => Condition::IS_NEW,
+                'price' => 10.10
+            ])
+        ));
 
         self::assertNotEmpty($commissions);
 
         foreach ($commissions->commissions() as $commission) {
-            $commission->fixedAmound()->toScalar();
+            $commission->fixedAmount()->toScalar();
             $commission->percentage()->toScalar();
             $commission->totalCost()->toScalar();
-            $commission->totalCostWithoutReduction()->toScalar();
+//            $commission->totalCostWithoutReduction()->toScalar();
 
-            self::assertNotEmpty($commission->reduction());
+//            self::assertNotEmpty($commission->reduction());
 
-            foreach ($commission->reduction() as $commissionReduction) {
-                $commissionReduction->maximumPrice()->toScalar();
-                $commissionReduction->costReduction()->toScalar();
-                $commissionReduction->startDate()->toString();
-                $commissionReduction->endDate()->toString();
+            if ($commission->reduction()) {
+                foreach ($commission->reduction() as $commissionReduction) {
+                    $commissionReduction->maximumPrice()->toScalar();
+                    $commissionReduction->costReduction()->toScalar();
+                    $commissionReduction->startDate()->toString();
+                    $commissionReduction->endDate()->toString();
+                }
             }
         }
     }

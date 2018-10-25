@@ -23,8 +23,12 @@ class GetCommissionHandler implements GetCommissionHandlerInterface
 
     public function __invoke(GetCommission $getCommission): Commission
     {
-        $response = $this->client->get("/retailer/commission/{$getCommission->ean()}", [
-            'query' => $getCommission->payload()
+        $response = $this->client->get("/retailer/commission/{$getCommission->ean()->value()}", [
+            'query' => [
+                'condition' => $getCommission->condition()->value(),
+                'price' => $getCommission->price()->value()
+            ],
+            'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
         ]);
         return Commission::fromArray($response->getBody()->json());
     }

@@ -25,23 +25,23 @@ class GetCommissionHandlerTest extends TestCase
         $handler = new GetCommissionHandler(new Client());
 
         $commission = $handler(GetCommission::with(
-            Ean::fromString('1234455432'),
-            Condition::isNew(),
+            Ean::fromString('9781785882364'),
+            Condition::IS_NEW(),
             CurrencyAmount::fromScalar(10.10)
         ));
 
-        $commission->fixedAmound()->toScalar();
+        $commission->fixedAmount()->toScalar();
         $commission->percentage()->toScalar();
         $commission->totalCost()->toScalar();
-        $commission->totalCostWithoutReduction()->toScalar();
+        $commission->totalCostWithoutReduction();
 
-        self::assertNotEmpty($commission->reduction());
-
-        foreach ($commission->reduction() as $commissionReduction) {
-            $commissionReduction->maximumPrice()->toScalar();
-            $commissionReduction->costReduction()->toScalar();
-            $commissionReduction->startDate()->toString();
-            $commissionReduction->endDate()->toString();
+        if ($commission->reduction()) {
+            foreach ($commission->reduction() as $commissionReduction) {
+                $commissionReduction->maximumPrice()->toScalar();
+                $commissionReduction->costReduction()->toScalar();
+                $commissionReduction->startDate()->toString();
+                $commissionReduction->endDate()->toString();
+            }
         }
     }
 }
