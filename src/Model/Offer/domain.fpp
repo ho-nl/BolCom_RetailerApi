@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Offer {
     data Ean = String deriving(FromString, ToString) where
-         _: | !\Assert\Assertion::length($value, 13) => '';
+         _: | !\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value) => '';
 
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::between($value, 0, 999) => '';
