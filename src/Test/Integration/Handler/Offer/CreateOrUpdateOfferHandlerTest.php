@@ -3,8 +3,8 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
+
 namespace BolCom\RetailerApi\Test\Integration\Commission\Handler;
 
 use BolCom\RetailerApi\Client;
@@ -20,7 +20,9 @@ class CreateOrUpdateOfferHandlerTest extends TestCase
 {
     public function test__invoke(): void
     {
-        $handler = new CreateOrUpdateOfferHandler(new Client(null, __DIR__ . '/../token.json'));
+        $handler = new CreateOrUpdateOfferHandler(
+            new Client(BOL_CLIENT_ID, BOL_CLIENT_SECRET, null, __DIR__ . '/../token.json')
+        );
 
         $handler(CreateOrUpdateOffer::with(
             RetailerOfferUpsert::fromArray([
@@ -38,4 +40,3 @@ class CreateOrUpdateOfferHandlerTest extends TestCase
         ));
     }
 }
-

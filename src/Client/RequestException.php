@@ -3,8 +3,8 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
+
 namespace BolCom\RetailerApi\Client;
 
 use Psr\Http\Message\RequestInterface;
@@ -22,14 +22,12 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
             return parent::create($request, $response);
         }
 
-
         try {
             /** @noinspection PhpUndefinedMethodInspection */
             $errorResponse = $response->getBody()->json();
         } catch (\InvalidArgumentException $exception) {
             return parent::create($request, $response);
         }
-
 
         $additional = '';
         if (isset($errorResponse['violations'])) {

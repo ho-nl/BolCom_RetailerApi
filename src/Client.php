@@ -28,30 +28,48 @@ use Psr\Log\LoggerInterface;
 class Client extends \GuzzleHttp\Client
 {
     public function __construct(
+        string $clientId,
+        string $clientSecret,
         LoggerInterface $logger = null,
         string $storagepath = '/tmp/bol_access_token.json',
-        string $apiUrl = 'https://api.bol.com/',
-        string $apiKey = '4c25a73d-31a4-402d-ac4c-83f0f869bca1',
-        string $apiSecret = 'CqXYlOHp3t-8WSu_FWTZi1GU7ivy9opskEGKEvj4K5WrJh1Tkdj0K0FvRDrMnxV1oIIJ2T4mBeloaXxMuOp93Q'
+        string $clientUrl = 'https://api.bol.com/'
     ) {
-        $stack = new HandlerStack(\GuzzleHttp\choose_handler());
+        $stack = $this->handlerStack($clientId, $clientSecret, $storagepath, $logger);
 
+        parent::__construct([
+            'handler' => $stack,
+            'base_uri' => $clientUrl,
+            'headers' => ['User-Agent' => 'bol-com/retailer-api/1.0'],
+            'connect_timeout' => 10,
+            'auth' => 'oauth'
+        ]);
+    }
+
+    /**
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $storagepath
+     * @param null|LoggerInterface $logger
+     *
+     * @return HandlerStack
+     */
+    protected function handlerStack(
+        string $clientId,
+        string $clientSecret,
+        string $storagepath,
+        ?LoggerInterface $logger
+    ): HandlerStack {
+        $stack = new HandlerStack(\GuzzleHttp\choose_handler());
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
-        $stack->push(new Oauth2Middleware($apiKey, $apiSecret, $storagepath), 'oauth');
+        $stack->push(new Oauth2Middleware($clientId, $clientSecret, $storagepath), 'oauth');
         $stack->push(new AcceptHeaderMiddleware());
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
 
         $logger && $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter()));
         $stack->push(new JsonResponseMiddleware());
 
-        parent::__construct([
-            'handler' => $stack,
-            'base_uri' => $apiUrl,
-            'headers' => [ 'User-Agent' => 'bol-com/retailer-api/1.0' ],
-            'connect_timeout' => 10,
-            'auth' => 'oauth'
-        ]);
+        return $stack;
     }
 }
