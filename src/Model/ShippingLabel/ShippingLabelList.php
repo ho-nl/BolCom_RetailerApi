@@ -11,6 +11,9 @@ final class ShippingLabelList
 {
     private $purchasableShippingLabels;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabel[]|null $purchasableShippingLabels
+     */
     public function __construct(ShippingLabel ...$purchasableShippingLabels)
     {
         $this->purchasableShippingLabels = $purchasableShippingLabels;
@@ -24,6 +27,10 @@ final class ShippingLabelList
         return $this->purchasableShippingLabels;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabel[]|null $purchasableShippingLabels
+     * @return \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelList
+     */
     public function withPurchasableShippingLabels(array $purchasableShippingLabels): ShippingLabelList
     {
         return new self(...$purchasableShippingLabels);

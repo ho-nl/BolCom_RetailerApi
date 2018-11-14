@@ -11,6 +11,9 @@ final class TimeslotList
 {
     private $timeslot;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Timeslot[]|null $timeslot
+     */
     public function __construct(Timeslot ...$timeslot)
     {
         $this->timeslot = $timeslot;
@@ -24,6 +27,10 @@ final class TimeslotList
         return $this->timeslot;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Timeslot[]|null $timeslot
+     * @return \BolCom\RetailerApi\Model\Inbound\TimeslotList
+     */
     public function withTimeslot(array $timeslot): TimeslotList
     {
         return new self(...$timeslot);

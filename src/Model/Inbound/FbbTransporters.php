@@ -11,6 +11,9 @@ final class FbbTransporters
 {
     private $fbbTransporters;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Transporter[]|null $fbbTransporters
+     */
     public function __construct(Transporter ...$fbbTransporters)
     {
         $this->fbbTransporters = $fbbTransporters;
@@ -24,6 +27,10 @@ final class FbbTransporters
         return $this->fbbTransporters;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Transporter[]|null $fbbTransporters
+     * @return \BolCom\RetailerApi\Model\Inbound\FbbTransporters
+     */
     public function withFbbTransporters(array $fbbTransporters): FbbTransporters
     {
         return new self(...$fbbTransporters);

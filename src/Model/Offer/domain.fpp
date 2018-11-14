@@ -17,7 +17,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data Title = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 500) => '';
 
-    data PublishStatus = Published | NotPublished deriving(Enum) with (Published:'published', NotPublished:'not-published');
+    data PublishStatus = PUBLISHED | NOT_PUBLISHED deriving(Enum(useValue)) with (PUBLISHED:1, NOT_PUBLISHED:0);
 
     data OfferCsv = OfferCsv {
         string $url
@@ -30,7 +30,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     } deriving (FromArray);
 
     //We choose IsNew, because New is a protected key word
-    data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum) with (
+    data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum(useValue)) with (
         IS_NEW:'NEW',
         AS_NEW:'AS_NEW',
         GOOD:'GOOD',
@@ -40,7 +40,7 @@ namespace BolCom\RetailerApi\Model\Offer {
 
     data DeliveryCode = DC24uurs23 | DC24uurs22 | DC24uurs21 | DC24uurs20 | DC24uurs19 | DC24uurs18 | DC24uurs17 |
         DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC34d | DC35d | DC48d | DC18d |
-        DCMijnLeverbelofte deriving (Enum) with(
+        DCMijnLeverbelofte deriving (Enum(useValue)) with(
             DC24uurs23: "24uurs-23",
             DC24uurs22: "24uurs-22",
             DC24uurs21: "24uurs-21",

@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Inbound {
     data Reference = String deriving(FromString, ToString);
-    data State = Draft | PreAnnounced | ArrivedAtWH | Cancelled deriving(Enum);
+    data State = Draft | PreAnnounced | ArrivedAtWH | Cancelled deriving(Enum(useValue));
     data BSku = String deriving(FromString, ToString);
 
     data InboundList = InboundList {
@@ -60,7 +60,7 @@ namespace BolCom\RetailerApi\Model\Inbound {
         Transporter[] $fbbTransporters
     };
 
-    data ProductLabelFormat = AVERY_J8159 | AVERY_J8160 | AVERY_3474 | DYMO_99012 | BROTHER_DK11208D | ZEBRA_Z_PERFORM_1000T deriving(Enum);
+    data ProductLabelFormat = AVERY_J8159 | AVERY_J8160 | AVERY_3474 | DYMO_99012 | BROTHER_DK11208D | ZEBRA_Z_PERFORM_1000T deriving(Enum(useValue));
 
     data ProductLabel = ProductLabel {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
@@ -70,8 +70,8 @@ namespace BolCom\RetailerApi\Model\Inbound {
     data InventoryQuantityInput = String deriving(FromString, ToString) where
         _: | !\BolCom\RetailerApi\Model\Assert\AssertIntRange::assert($value) => '';
 
-    data InventoryStock = sufficient | insufficient deriving(Enum);
-    data InventoryState = salable | unsalable deriving(Enum);
+    data InventoryStock = sufficient | insufficient deriving(Enum(useValue));
+    data InventoryState = salable | unsalable deriving(Enum(useValue));
 
     data InventoryList = InventoryList {
         int $totalCount,

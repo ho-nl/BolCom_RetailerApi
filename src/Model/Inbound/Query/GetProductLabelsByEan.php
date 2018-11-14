@@ -34,7 +34,11 @@ final class GetProductLabelsByEan extends \Prooph\Common\Messaging\Query
         return $__returnValue;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Inbound\ProductLabelFormat $format, array $productLabels): GetProductLabelsByEan
+        /**
+     * @param \BolCom\RetailerApi\Model\Inbound\ProductLabelFormat $format
+     * @param \BolCom\RetailerApi\Model\Inbound\ProductLabel[]|null $productLabels
+     */
+public static function with(\BolCom\RetailerApi\Model\Inbound\ProductLabelFormat $format, array $productLabels): GetProductLabelsByEan
     {
         return new self([
             'format' => $format->value(),

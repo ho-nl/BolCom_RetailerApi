@@ -18,6 +18,16 @@ final class Commission
     private $totalCostWithoutReduction;
     private $reduction;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Offer\Ean $ean
+     * @param \BolCom\RetailerApi\Model\Offer\Condition $condition
+     * @param \BolCom\RetailerApi\Model\CurrencyAmount $price
+     * @param \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount
+     * @param \BolCom\RetailerApi\Model\PercentageAmount $percentage
+     * @param \BolCom\RetailerApi\Model\CurrencyAmount $totalCost
+     * @param \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction
+     * @param \BolCom\RetailerApi\Model\Commission\CommissionReduction[] $reduction
+     */
     public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, ?\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, ?array $reduction)
     {
         $this->ean = $ean;
@@ -28,6 +38,7 @@ final class Commission
         $this->totalCost = $totalCost;
         $this->totalCostWithoutReduction = $totalCostWithoutReduction;
         if ($reduction !== null) {
+            $this->reduction = [];
             foreach ($reduction as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Commission\CommissionReduction) {
                     throw new \InvalidArgumentException('reduction expected an array of BolCom\RetailerApi\Model\Commission\CommissionReduction');
@@ -115,6 +126,10 @@ final class Commission
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $totalCostWithoutReduction, $this->reduction);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Commission\CommissionReduction[] $reduction
+     * @return \BolCom\RetailerApi\Model\Commission\Commission
+     */
     public function withReduction(?array $reduction): Commission
     {
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $reduction);

@@ -13,7 +13,7 @@ final class Ean
 
     public function __construct(string $value)
     {
-        if (!\Assert\Assertion::length($value, 13)) {
+        if (!\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value)) {
             throw new \InvalidArgumentException('');
         }
 

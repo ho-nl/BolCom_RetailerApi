@@ -16,11 +16,20 @@ final class Shipment
     private $transport;
     private $customerDetails;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Shipment\ShipmentId $shipmentId
+     * @param \BolCom\RetailerApi\Model\DateTime $shipmentDate
+     * @param string $shipmentReference
+     * @param \BolCom\RetailerApi\Model\Shipment\ShipmentItem[]|null $shipmentItems
+     * @param \BolCom\RetailerApi\Model\Transport\Transport $transport
+     * @param \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails
+     */
     public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference, array $shipmentItems, \BolCom\RetailerApi\Model\Transport\Transport $transport, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails)
     {
         $this->shipmentId = $shipmentId;
         $this->shipmentDate = $shipmentDate;
         $this->shipmentReference = $shipmentReference;
+            $this->shipmentItems = [];
             foreach ($shipmentItems as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Shipment\ShipmentItem) {
                     throw new \InvalidArgumentException('shipmentItems expected an array of BolCom\RetailerApi\Model\Shipment\ShipmentItem');
@@ -80,6 +89,10 @@ final class Shipment
         return new self($this->shipmentId, $this->shipmentDate, $shipmentReference, $this->shipmentItems, $this->transport, $this->customerDetails);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Shipment\ShipmentItem[]|null $shipmentItems
+     * @return \BolCom\RetailerApi\Model\Shipment\Shipment
+     */
     public function withShipmentItems(array $shipmentItems): Shipment
     {
         return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $shipmentItems, $this->transport, $this->customerDetails);

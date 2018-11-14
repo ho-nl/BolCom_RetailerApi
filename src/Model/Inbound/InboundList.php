@@ -13,10 +13,16 @@ final class InboundList
     private $totalPageCount;
     private $inbounds;
 
+    /**
+     * @param int $totalCount
+     * @param int $totalPageCount
+     * @param \BolCom\RetailerApi\Model\Inbound\Inbound[]|null $inbounds
+     */
     public function __construct(int $totalCount, int $totalPageCount, array $inbounds)
     {
         $this->totalCount = $totalCount;
         $this->totalPageCount = $totalPageCount;
+            $this->inbounds = [];
             foreach ($inbounds as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Inbound) {
                     throw new \InvalidArgumentException('inbounds expected an array of BolCom\RetailerApi\Model\Inbound\Inbound');
@@ -53,6 +59,10 @@ final class InboundList
         return new self($this->totalCount, $totalPageCount, $this->inbounds);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Inbound[]|null $inbounds
+     * @return \BolCom\RetailerApi\Model\Inbound\InboundList
+     */
     public function withInbounds(array $inbounds): InboundList
     {
         return new self($this->totalCount, $this->totalPageCount, $inbounds);

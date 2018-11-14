@@ -14,11 +14,18 @@ final class Order
     private $customerDetails;
     private $orderItems;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Order\OrderId $orderId
+     * @param \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced
+     * @param \BolCom\RetailerApi\Model\Order\OrderCustomerDetails $customerDetails
+     * @param \BolCom\RetailerApi\Model\Order\OrderItem[]|null $orderItems
+     */
     public function __construct(OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced, OrderCustomerDetails $customerDetails, array $orderItems)
     {
         $this->orderId = $orderId;
         $this->dateTimeOrderPlaced = $dateTimeOrderPlaced;
         $this->customerDetails = $customerDetails;
+            $this->orderItems = [];
             foreach ($orderItems as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Order\OrderItem) {
                     throw new \InvalidArgumentException('orderItems expected an array of BolCom\RetailerApi\Model\Order\OrderItem');
@@ -65,6 +72,10 @@ final class Order
         return new self($this->orderId, $this->dateTimeOrderPlaced, $customerDetails, $this->orderItems);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Order\OrderItem[]|null $orderItems
+     * @return \BolCom\RetailerApi\Model\Order\Order
+     */
     public function withOrderItems(array $orderItems): Order
     {
         return new self($this->orderId, $this->dateTimeOrderPlaced, $this->customerDetails, $orderItems);

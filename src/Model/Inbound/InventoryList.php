@@ -13,10 +13,16 @@ final class InventoryList
     private $totalPageCount;
     private $offers;
 
+    /**
+     * @param int $totalCount
+     * @param int $totalPageCount
+     * @param \BolCom\RetailerApi\Model\Inbound\InventoryOffer[]|null $offers
+     */
     public function __construct(int $totalCount, int $totalPageCount, array $offers)
     {
         $this->totalCount = $totalCount;
         $this->totalPageCount = $totalPageCount;
+            $this->offers = [];
             foreach ($offers as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\InventoryOffer) {
                     throw new \InvalidArgumentException('offers expected an array of BolCom\RetailerApi\Model\Inbound\InventoryOffer');
@@ -53,6 +59,10 @@ final class InventoryList
         return new self($this->totalCount, $totalPageCount, $this->offers);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\InventoryOffer[]|null $offers
+     * @return \BolCom\RetailerApi\Model\Inbound\InventoryList
+     */
     public function withOffers(array $offers): InventoryList
     {
         return new self($this->totalCount, $this->totalPageCount, $offers);

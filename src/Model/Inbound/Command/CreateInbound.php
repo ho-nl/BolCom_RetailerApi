@@ -49,7 +49,14 @@ final class CreateInbound extends \Prooph\Common\Messaging\Command
         return $__returnValue;
     }
 
-    public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot, \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter, bool $labellingService, array $products): CreateInbound
+        /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Reference $reference
+     * @param \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot
+     * @param \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter
+     * @param bool $labellingService
+     * @param \BolCom\RetailerApi\Model\Inbound\Product[]|null $products
+     */
+public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot, \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter, bool $labellingService, array $products): CreateInbound
     {
         return new self([
             'reference' => null === $reference ? null : $reference->toString(),

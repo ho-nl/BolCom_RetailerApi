@@ -10,12 +10,12 @@ namespace BolCom\RetailerApi\Model\Offer;
 final class PublishStatus
 {
     public const OPTIONS = [
-        'Published' => 'published',
-        'NotPublished' => 'not-published',
+        'PUBLISHED' => 1,
+        'NOT_PUBLISHED' => 0,
     ];
 
-    public const Published = 'published';
-    public const NotPublished = 'not-published';
+    public const PUBLISHED = 1;
+    public const NOT_PUBLISHED = 0;
 
     private $name;
     private $value;
@@ -26,14 +26,14 @@ final class PublishStatus
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function published(): self
+    public static function PUBLISHED(): self
     {
-        return new self('Published');
+        return new self('PUBLISHED');
     }
 
-    public static function notPublished(): self
+    public static function NOT_PUBLISHED(): self
     {
-        return new self('NotPublished');
+        return new self('NOT_PUBLISHED');
     }
 
     public static function fromName(string $value): self

@@ -24,9 +24,9 @@ namespace BolCom\RetailerApi\Model\Rma {
     } deriving (FromArray);
 
     data HandlingResult = RETURN_RECEIVED | EXCHANGE_PRODUCT | RETURN_DOES_NOT_MEET_CONDITIONS | REPAIR_PRODUCT
-        | CUSTOMER_KEEPS_PRODUCT_PAID | STILL_APPROVED deriving(Enum);
+        | CUSTOMER_KEEPS_PRODUCT_PAID | STILL_APPROVED deriving(Enum(useValue));
 
-    data ProcessingResult = PENDING | ACCEPTED | REJECTED deriving(Enum);
+    data ProcessingResult = PENDING | ACCEPTED | REJECTED deriving(Enum(useValue));
 
     data QuantityReturned = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 9999) => '';

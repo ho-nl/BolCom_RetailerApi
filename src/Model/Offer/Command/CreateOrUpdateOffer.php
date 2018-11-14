@@ -29,7 +29,10 @@ final class CreateOrUpdateOffer extends \Prooph\Common\Messaging\Command
         return $__returnValue;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailerOffer): CreateOrUpdateOffer
+        /**
+     * @param \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[]|null $retailerOffer
+     */
+public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert ...$retailerOffer): CreateOrUpdateOffer
     {
         $__array_retailerOffer = [];
 

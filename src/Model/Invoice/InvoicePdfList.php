@@ -11,6 +11,9 @@ final class InvoicePdfList
 {
     private $pdfs;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Invoice\InvoicePdf[]|null $pdfs
+     */
     public function __construct(InvoicePdf ...$pdfs)
     {
         $this->pdfs = $pdfs;
@@ -24,6 +27,10 @@ final class InvoicePdfList
         return $this->pdfs;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Invoice\InvoicePdf[]|null $pdfs
+     * @return \BolCom\RetailerApi\Model\Invoice\InvoicePdfList
+     */
     public function withPdfs(array $pdfs): InvoicePdfList
     {
         return new self(...$pdfs);

@@ -11,6 +11,9 @@ final class OrderList
 {
     private $orders;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Order\Order[]|null $orders
+     */
     public function __construct(Order ...$orders)
     {
         $this->orders = $orders;
@@ -24,6 +27,10 @@ final class OrderList
         return $this->orders;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Order\Order[]|null $orders
+     * @return \BolCom\RetailerApi\Model\Order\OrderList
+     */
     public function withOrders(array $orders): OrderList
     {
         return new self(...$orders);

@@ -29,7 +29,10 @@ final class DeleteOffersInBulk extends \Prooph\Common\Messaging\Command
         return $__returnValue;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier ...$retailerOfferIdentifier): DeleteOffersInBulk
+        /**
+     * @param \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier[]|null $retailerOfferIdentifier
+     */
+public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier ...$retailerOfferIdentifier): DeleteOffersInBulk
     {
         $__array_retailerOfferIdentifier = [];
 

@@ -11,6 +11,9 @@ final class ReturnItemList
 {
     private $returns;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returns
+     */
     public function __construct(ReturnItem ...$returns)
     {
         $this->returns = $returns;
@@ -24,6 +27,10 @@ final class ReturnItemList
         return $this->returns;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returns
+     * @return \BolCom\RetailerApi\Model\Rma\ReturnItemList
+     */
     public function withReturns(array $returns): ReturnItemList
     {
         return new self(...$returns);

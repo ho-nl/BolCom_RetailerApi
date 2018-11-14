@@ -5,7 +5,7 @@ namespace BolCom\RetailerApi\Model\Transport {
 
     data TransporterCode = BRIEFPOST | UPS | TNT | TNT_EXTRA | TNT_BRIEF | TNT_EXPRESS | DYL | DPD_NL | DPD_BE | BPOST_BE |
           BPOST_BRIEF | DHLFORYOU | GLS | FEDEX_NL | FEDEX_BE | OTHER | DHL | DHL_DE | DHL_GLOBAL_MAIL | TSN | FIEGE |
-          TRANSMISSION | PARCEL_NL | LOGOIX | PACKS | COURIER | RJP deriving(Enum) with (
+          TRANSMISSION | PARCEL_NL | LOGOIX | PACKS | COURIER | RJP deriving(Enum(useValue)) with (
             BRIEFPOST: "BRIEFPOST",
             UPS: "UPS",
             TNT: "TNT",

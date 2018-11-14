@@ -23,6 +23,21 @@ final class Inbound
     private $stateTransitions;
     private $fbbTransporter;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\InboundId $id
+     * @param \BolCom\RetailerApi\Model\Inbound\Reference $reference
+     * @param \BolCom\RetailerApi\Model\DateTime $creationDate
+     * @param \BolCom\RetailerApi\Model\Inbound\State $state
+     * @param bool $labellingService
+     * @param int $announcedBSKUs
+     * @param int $announcedQuantity
+     * @param int $receivedBSKUs
+     * @param int $receivedQuantity
+     * @param \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot
+     * @param \BolCom\RetailerApi\Model\Inbound\Product[]|null $products
+     * @param \BolCom\RetailerApi\Model\Inbound\StateTransition[]|null $stateTransitions
+     * @param \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter
+     */
     public function __construct(InboundId $id, Reference $reference, ?\BolCom\RetailerApi\Model\DateTime $creationDate, State $state, bool $labellingService, int $announcedBSKUs, int $announcedQuantity, int $receivedBSKUs, int $receivedQuantity, Timeslot $timeslot, array $products, array $stateTransitions, Transporter $fbbTransporter)
     {
         $this->id = $id;
@@ -35,6 +50,7 @@ final class Inbound
         $this->receivedBSKUs = $receivedBSKUs;
         $this->receivedQuantity = $receivedQuantity;
         $this->timeslot = $timeslot;
+            $this->products = [];
             foreach ($products as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\Product) {
                     throw new \InvalidArgumentException('products expected an array of BolCom\RetailerApi\Model\Inbound\Product');
@@ -42,6 +58,7 @@ final class Inbound
                 $this->products[] = $__value;
             }
 
+            $this->stateTransitions = [];
             foreach ($stateTransitions as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Inbound\StateTransition) {
                     throw new \InvalidArgumentException('stateTransitions expected an array of BolCom\RetailerApi\Model\Inbound\StateTransition');
@@ -173,11 +190,19 @@ final class Inbound
         return new self($this->id, $this->reference, $this->creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $timeslot, $this->products, $this->stateTransitions, $this->fbbTransporter);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\Product[]|null $products
+     * @return \BolCom\RetailerApi\Model\Inbound\Inbound
+     */
     public function withProducts(array $products): Inbound
     {
         return new self($this->id, $this->reference, $this->creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $this->timeslot, $products, $this->stateTransitions, $this->fbbTransporter);
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Inbound\StateTransition[]|null $stateTransitions
+     * @return \BolCom\RetailerApi\Model\Inbound\Inbound
+     */
     public function withStateTransitions(array $stateTransitions): Inbound
     {
         return new self($this->id, $this->reference, $this->creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $this->timeslot, $this->products, $stateTransitions, $this->fbbTransporter);

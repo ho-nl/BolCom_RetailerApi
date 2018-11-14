@@ -11,6 +11,9 @@ final class ReductionList
 {
     private $reductions;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Reduction\Reduction[]|null $reductions
+     */
     public function __construct(Reduction ...$reductions)
     {
         $this->reductions = $reductions;
@@ -24,6 +27,10 @@ final class ReductionList
         return $this->reductions;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Reduction\Reduction[]|null $reductions
+     * @return \BolCom\RetailerApi\Model\Reduction\ReductionList
+     */
     public function withReductions(array $reductions): ReductionList
     {
         return new self(...$reductions);

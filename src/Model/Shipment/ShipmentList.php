@@ -11,6 +11,9 @@ final class ShipmentList
 {
     private $shipments;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Shipment\Shipment[]|null $shipments
+     */
     public function __construct(Shipment ...$shipments)
     {
         $this->shipments = $shipments;
@@ -24,6 +27,10 @@ final class ShipmentList
         return $this->shipments;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\Shipment\Shipment[]|null $shipments
+     * @return \BolCom\RetailerApi\Model\Shipment\ShipmentList
+     */
     public function withShipments(array $shipments): ShipmentList
     {
         return new self(...$shipments);

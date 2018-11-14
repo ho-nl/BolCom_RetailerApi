@@ -11,6 +11,9 @@ final class ShippingLabelPdfList
 {
     private $pdfs;
 
+    /**
+     * @param \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdf[]|null $pdfs
+     */
     public function __construct(ShippingLabelPdf ...$pdfs)
     {
         $this->pdfs = $pdfs;
@@ -24,6 +27,10 @@ final class ShippingLabelPdfList
         return $this->pdfs;
     }
 
+    /**
+     * @param \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdf[]|null $pdfs
+     * @return \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdfList
+     */
     public function withPdfs(array $pdfs): ShippingLabelPdfList
     {
         return new self(...$pdfs);

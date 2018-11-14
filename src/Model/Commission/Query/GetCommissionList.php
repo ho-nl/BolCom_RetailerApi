@@ -29,7 +29,10 @@ final class GetCommissionList extends \Prooph\Common\Messaging\Query
         return $__returnValue;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Commission\CommissionQuery ...$commissionQueries): GetCommissionList
+        /**
+     * @param \BolCom\RetailerApi\Model\Commission\CommissionQuery[]|null $commissionQueries
+     */
+public static function with(\BolCom\RetailerApi\Model\Commission\CommissionQuery ...$commissionQueries): GetCommissionList
     {
         $__array_commissionQueries = [];
 
