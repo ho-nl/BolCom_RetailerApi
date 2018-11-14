@@ -22,7 +22,7 @@ class GenerateOfferCsvHandlerTest extends TestCase
         );
 
         $csv = $handler(GenerateOfferCvs::with(
-            PublishStatus::published()
+            PublishStatus::PUBLISHED()
         ));
 
         echo $csv->url();

@@ -10,12 +10,12 @@ namespace BolCom\RetailerApi\Model\Offer;
 final class PublishStatus
 {
     public const OPTIONS = [
-        'PUBLISHED' => 1,
-        'NOT_PUBLISHED' => 0,
+        'PUBLISHED' => 'published',
+        'NOT_PUBLISHED' => 'not-published',
     ];
 
-    public const PUBLISHED = 1;
-    public const NOT_PUBLISHED = 0;
+    public const PUBLISHED = 'published';
+    public const NOT_PUBLISHED = 'not-published';
 
     private $name;
     private $value;

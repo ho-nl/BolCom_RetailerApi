@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Offer {
     data Ean = String deriving(FromString, ToString) where
-         _: | !\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value) => '';
+         _: | !\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value) => 'EAN Code is invalid.';
 
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::between($value, 0, 999) => '';
@@ -17,7 +17,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data Title = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 500) => '';
 
-    data PublishStatus = PUBLISHED | NOT_PUBLISHED deriving(Enum(useValue)) with (PUBLISHED:1, NOT_PUBLISHED:0);
+    data PublishStatus = PUBLISHED | NOT_PUBLISHED deriving(Enum(useValue)) with (PUBLISHED:'published', NOT_PUBLISHED:'not-published');
 
     data OfferCsv = OfferCsv {
         string $url

@@ -14,7 +14,7 @@ final class Ean
     public function __construct(string $value)
     {
         if (!\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value)) {
-            throw new \InvalidArgumentException('');
+            throw new \InvalidArgumentException('EAN Code is invalid.');
         }
 
         $this->value = $value;

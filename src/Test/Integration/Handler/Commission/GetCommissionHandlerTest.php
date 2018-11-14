@@ -29,7 +29,7 @@ class GetCommissionHandlerTest extends TestCase
         $commission = $handler(GetCommission::with(
             Ean::fromString('9781785882364'),
             Condition::IS_NEW(),
-            CurrencyAmount::fromScalar(10.10)
+            CurrencyAmount::fromScalar(10.11)
         ));
 
         $commission->fixedAmount()->toScalar();
