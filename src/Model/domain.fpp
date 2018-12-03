@@ -8,5 +8,5 @@ namespace BolCom\RetailerApi\Model {
         _: | !\Assert\Assertion::date($value, 'Y-m-d') => '';
 
     data DateTime = String deriving(FromString, ToString) where
-        _: | !\Assert\Assertion::date($value, 'c') => '';
+        _: | !\Assert\Assertion::date($value, \DateTime::ATOM) => '';
 }

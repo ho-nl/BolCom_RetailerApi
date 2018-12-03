@@ -23,35 +23,35 @@ namespace BolCom\RetailerApi\Model\Order {
         string $surName,
         string $streetName,
         string $houseNumber,
-        string $houseNumberExtended,
-        string $addressSupplement,
-        string $extraAddressInformation,
+        ?string $houseNumberExtended,
+        ?string $addressSupplement,
+        ?string $extraAddressInformation,
         string $zipCode,
         string $city,
         string $countryCode,
         string $email,
-        string $company,
-        string $vatNumber,
-        string $deliveryPhoneNumber
+        ?string $company,
+        ?string $vatNumber,
+        ?string $deliveryPhoneNumber
     } deriving (FromArray);
 
-    data OrderItemId = String deriving (FromString, ToString);
+    data OrderItemId = String deriving(FromString, ToString);
 
     data Quantity = Int deriving(FromScalar, ToScalar);
 
     data OrderItem = OrderItem {
         OrderItemId $orderItemId,
-        string $orderReference,
+        string $offerReference,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
         Quantity $quantity,
         \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
-        float $transactionFee,
+        \BolCom\RetailerApi\Model\CurrencyAmount $transactionFee,
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
-        string $cancelRequest,
+        bool $cancelRequest,
         \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
-        SelectedDeliveryWindow $selectedDeliveryWindow
+        ?SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 
     data SelectedDeliveryWindow = SelectedDeliveryWindow {
@@ -70,7 +70,7 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 
     data GetAllOpenOrders = GetAllOpenOrders {
         int $page,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod
+        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
     } deriving (Query);
 }
 

@@ -25,7 +25,7 @@ final class AddressDetails
     private $vatNumber;
     private $deliveryPhoneNumber;
 
-    public function __construct(string $salutationCode, string $firstName, string $surName, string $streetName, string $houseNumber, string $houseNumberExtended, string $addressSupplement, string $extraAddressInformation, string $zipCode, string $city, string $countryCode, string $email, string $company, string $vatNumber, string $deliveryPhoneNumber)
+    public function __construct(string $salutationCode, string $firstName, string $surName, string $streetName, string $houseNumber, ?string $houseNumberExtended, ?string $addressSupplement, ?string $extraAddressInformation, string $zipCode, string $city, string $countryCode, string $email, ?string $company, ?string $vatNumber, ?string $deliveryPhoneNumber)
     {
         $this->salutationCode = $salutationCode;
         $this->firstName = $firstName;
@@ -69,17 +69,17 @@ final class AddressDetails
         return $this->houseNumber;
     }
 
-    public function houseNumberExtended(): string
+    public function houseNumberExtended(): ?string
     {
         return $this->houseNumberExtended;
     }
 
-    public function addressSupplement(): string
+    public function addressSupplement(): ?string
     {
         return $this->addressSupplement;
     }
 
-    public function extraAddressInformation(): string
+    public function extraAddressInformation(): ?string
     {
         return $this->extraAddressInformation;
     }
@@ -104,17 +104,17 @@ final class AddressDetails
         return $this->email;
     }
 
-    public function company(): string
+    public function company(): ?string
     {
         return $this->company;
     }
 
-    public function vatNumber(): string
+    public function vatNumber(): ?string
     {
         return $this->vatNumber;
     }
 
-    public function deliveryPhoneNumber(): string
+    public function deliveryPhoneNumber(): ?string
     {
         return $this->deliveryPhoneNumber;
     }
@@ -144,17 +144,17 @@ final class AddressDetails
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withHouseNumberExtended(string $houseNumberExtended): AddressDetails
+    public function withHouseNumberExtended(?string $houseNumberExtended): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withAddressSupplement(string $addressSupplement): AddressDetails
+    public function withAddressSupplement(?string $addressSupplement): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withExtraAddressInformation(string $extraAddressInformation): AddressDetails
+    public function withExtraAddressInformation(?string $extraAddressInformation): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
@@ -179,17 +179,17 @@ final class AddressDetails
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withCompany(string $company): AddressDetails
+    public function withCompany(?string $company): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withVatNumber(string $vatNumber): AddressDetails
+    public function withVatNumber(?string $vatNumber): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withDeliveryPhoneNumber(string $deliveryPhoneNumber): AddressDetails
+    public function withDeliveryPhoneNumber(?string $deliveryPhoneNumber): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $deliveryPhoneNumber);
     }
@@ -226,23 +226,35 @@ final class AddressDetails
 
         $houseNumber = $data['houseNumber'];
 
-        if (! isset($data['houseNumberExtended']) || ! \is_string($data['houseNumberExtended'])) {
-            throw new \InvalidArgumentException("Key 'houseNumberExtended' is missing in data array or is not a string");
+        if (isset($data['houseNumberExtended'])) {
+            if (! \is_string($data['houseNumberExtended'])) {
+                throw new \InvalidArgumentException("Value for 'houseNumberExtended' is not a string in data array");
+            }
+
+            $houseNumberExtended = $data['houseNumberExtended'];
+        } else {
+            $houseNumberExtended = null;
         }
 
-        $houseNumberExtended = $data['houseNumberExtended'];
+        if (isset($data['addressSupplement'])) {
+            if (! \is_string($data['addressSupplement'])) {
+                throw new \InvalidArgumentException("Value for 'addressSupplement' is not a string in data array");
+            }
 
-        if (! isset($data['addressSupplement']) || ! \is_string($data['addressSupplement'])) {
-            throw new \InvalidArgumentException("Key 'addressSupplement' is missing in data array or is not a string");
+            $addressSupplement = $data['addressSupplement'];
+        } else {
+            $addressSupplement = null;
         }
 
-        $addressSupplement = $data['addressSupplement'];
+        if (isset($data['extraAddressInformation'])) {
+            if (! \is_string($data['extraAddressInformation'])) {
+                throw new \InvalidArgumentException("Value for 'extraAddressInformation' is not a string in data array");
+            }
 
-        if (! isset($data['extraAddressInformation']) || ! \is_string($data['extraAddressInformation'])) {
-            throw new \InvalidArgumentException("Key 'extraAddressInformation' is missing in data array or is not a string");
+            $extraAddressInformation = $data['extraAddressInformation'];
+        } else {
+            $extraAddressInformation = null;
         }
-
-        $extraAddressInformation = $data['extraAddressInformation'];
 
         if (! isset($data['zipCode']) || ! \is_string($data['zipCode'])) {
             throw new \InvalidArgumentException("Key 'zipCode' is missing in data array or is not a string");
@@ -268,23 +280,35 @@ final class AddressDetails
 
         $email = $data['email'];
 
-        if (! isset($data['company']) || ! \is_string($data['company'])) {
-            throw new \InvalidArgumentException("Key 'company' is missing in data array or is not a string");
+        if (isset($data['company'])) {
+            if (! \is_string($data['company'])) {
+                throw new \InvalidArgumentException("Value for 'company' is not a string in data array");
+            }
+
+            $company = $data['company'];
+        } else {
+            $company = null;
         }
 
-        $company = $data['company'];
+        if (isset($data['vatNumber'])) {
+            if (! \is_string($data['vatNumber'])) {
+                throw new \InvalidArgumentException("Value for 'vatNumber' is not a string in data array");
+            }
 
-        if (! isset($data['vatNumber']) || ! \is_string($data['vatNumber'])) {
-            throw new \InvalidArgumentException("Key 'vatNumber' is missing in data array or is not a string");
+            $vatNumber = $data['vatNumber'];
+        } else {
+            $vatNumber = null;
         }
 
-        $vatNumber = $data['vatNumber'];
+        if (isset($data['deliveryPhoneNumber'])) {
+            if (! \is_string($data['deliveryPhoneNumber'])) {
+                throw new \InvalidArgumentException("Value for 'deliveryPhoneNumber' is not a string in data array");
+            }
 
-        if (! isset($data['deliveryPhoneNumber']) || ! \is_string($data['deliveryPhoneNumber'])) {
-            throw new \InvalidArgumentException("Key 'deliveryPhoneNumber' is missing in data array or is not a string");
+            $deliveryPhoneNumber = $data['deliveryPhoneNumber'];
+        } else {
+            $deliveryPhoneNumber = null;
         }
-
-        $deliveryPhoneNumber = $data['deliveryPhoneNumber'];
 
         return new self(
             $salutationCode,
