@@ -40,6 +40,6 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
 
         $response = \GuzzleHttp\json_decode((string) $response->getBody(), true);
 
-        return OrderList::fromArray($response);
+        return ! empty($response) ? OrderList::fromArray($response) : null;
     }
 }
