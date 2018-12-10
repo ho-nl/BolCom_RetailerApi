@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace BolCom\RetailerApi\Test\Integration\Commission\Handler;
+namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Handler\Offer\CreateOrUpdateOfferHandler;

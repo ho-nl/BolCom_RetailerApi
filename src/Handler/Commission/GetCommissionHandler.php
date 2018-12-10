@@ -3,8 +3,8 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
+
 namespace BolCom\RetailerApi\Handler\Commission;
 
 use BolCom\RetailerApi\Client;
@@ -30,6 +30,7 @@ class GetCommissionHandler implements GetCommissionHandlerInterface
             ],
             'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
         ]);
+
         return Commission::fromArray($response->getBody()->json());
     }
 }
