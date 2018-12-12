@@ -16,4 +16,6 @@ interface ClientConfigInterface
     public function clientUrl(): string;
 
     public function accessTokenPath(): string;
+
+    public function enabled(): bool;
 }

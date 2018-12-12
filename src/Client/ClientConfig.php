@@ -21,22 +21,28 @@ class ClientConfig implements ClientConfigInterface
     /** @var string $accessTokenPath */
     private $accessTokenPath;
 
+    /** @var bool $enabled */
+    private $enabled;
+
     /**
      * @param string $clientId
      * @param string $clientSecret
      * @param string $clientUrl
      * @param string $accessTokenPath
+     * @param bool $enabled
      */
     public function __construct(
         string $clientId,
         string $clientSecret,
         string $clientUrl = 'https://api.bol.com/retailer/',
-        string $accessTokenPath = '/tmp/bol_access_token.json'
+        string $accessTokenPath = '/tmp/bol_access_token.json',
+        bool $enabled = true
     ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->clientUrl = $clientUrl;
         $this->accessTokenPath = $accessTokenPath;
+        $this->enabled = $enabled;
     }
 
     public function clientId(): string
@@ -57,5 +63,10 @@ class ClientConfig implements ClientConfigInterface
     public function accessTokenPath(): string
     {
         return $this->accessTokenPath;
+    }
+
+    public function enabled(): bool
+    {
+        return $this->enabled;
     }
 }

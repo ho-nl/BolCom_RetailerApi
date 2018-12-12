@@ -12,21 +12,12 @@ use BolCom\RetailerApi\Client\JsonResponseMiddleware;
 use BolCom\RetailerApi\Client\AcceptHeaderMiddleware;
 use BolCom\RetailerApi\Client\Oauth2Middleware;
 use BolCom\RetailerApi\Client\RequestExceptionMiddleware;
-use BolCom\RetailerApi\Client\ResponseInterface;
+use BolCom\RetailerApi\Model\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use Psr\Http\Message\UriInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * @method ResponseInterface get(string|UriInterface $uri, array $options = [])
- * @method ResponseInterface head(string|UriInterface $uri, array $options = [])
- * @method ResponseInterface put(string|UriInterface $uri, array $options = [])
- * @method ResponseInterface post(string|UriInterface $uri, array $options = [])
- * @method ResponseInterface patch(string|UriInterface $uri, array $options = [])
- * @method ResponseInterface delete(string|UriInterface $uri, array $options = [])
- */
-class Client extends \GuzzleHttp\Client
+class Client extends \GuzzleHttp\Client implements ClientInterface
 {
     public function __construct(
         ClientConfigInterface $clientConfig,
