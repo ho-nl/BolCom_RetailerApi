@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi;
 
+use BolCom\RetailerApi\Client\ClientConfigInterface;
 use BolCom\RetailerApi\Client\JsonResponseMiddleware;
 use BolCom\RetailerApi\Client\AcceptHeaderMiddleware;
 use BolCom\RetailerApi\Client\Oauth2Middleware;
@@ -28,17 +29,14 @@ use Psr\Log\LoggerInterface;
 class Client extends \GuzzleHttp\Client
 {
     public function __construct(
-        string $clientId,
-        string $clientSecret,
-        LoggerInterface $logger = null,
-        string $storagepath = '/tmp/bol_access_token.json',
-        string $clientUrl = 'https://api.bol.com/'
+        ClientConfigInterface $clientConfig,
+        LoggerInterface $logger = null
     ) {
-        $stack = $this->handlerStack($clientId, $clientSecret, $storagepath, $logger);
+        $stack = $this->handlerStack($clientConfig, $logger);
 
         parent::__construct([
             'handler' => $stack,
-            'base_uri' => $clientUrl,
+            'base_uri' => $clientConfig->clientUrl(),
             'headers' => ['User-Agent' => 'bol-com/retailer-api/1.0'],
             'connect_timeout' => 10,
             'auth' => 'oauth'
@@ -46,24 +44,22 @@ class Client extends \GuzzleHttp\Client
     }
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param string $storagepath
+     * @param ClientConfigInterface $clientConfig
      * @param null|LoggerInterface $logger
      *
      * @return HandlerStack
      */
-    protected function handlerStack(
-        string $clientId,
-        string $clientSecret,
-        string $storagepath,
-        ?LoggerInterface $logger
-    ): HandlerStack {
+    protected function handlerStack(ClientConfigInterface $clientConfig, ?LoggerInterface $logger): HandlerStack
+    {
         $stack = new HandlerStack(\GuzzleHttp\choose_handler());
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
-        $stack->push(new Oauth2Middleware($clientId, $clientSecret, $storagepath), 'oauth');
+        $stack->push(new Oauth2Middleware(
+            $clientConfig->clientId(),
+            $clientConfig->clientSecret(),
+            $clientConfig->accessTokenPath()
+        ), 'oauth');
         $stack->push(new AcceptHeaderMiddleware());
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
 

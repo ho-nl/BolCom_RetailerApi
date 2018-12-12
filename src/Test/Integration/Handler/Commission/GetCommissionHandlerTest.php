@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Test\Integration\Handler\Commission;
 
 use BolCom\RetailerApi\Client;
+use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionHandler;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommission;
 use BolCom\RetailerApi\Model\CurrencyAmount;
 use BolCom\RetailerApi\Model\Offer\Condition;
 use BolCom\RetailerApi\Model\Offer\Ean;
-use PHPUnit\Framework\TestCase;
 
-class GetCommissionHandlerTest extends TestCase
+class GetCommissionHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -23,7 +23,7 @@ class GetCommissionHandlerTest extends TestCase
     public function should_get_commission_back(): void
     {
         $handler = new GetCommissionHandler(
-            new Client(BOL_CLIENT_ID, BOL_CLIENT_SECRET, null, __DIR__ . '/../token.json')
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET))
         );
 
         $commission = $handler(GetCommission::with(

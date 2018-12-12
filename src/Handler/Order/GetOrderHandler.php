@@ -30,14 +30,12 @@ class GetOrderHandler implements GetOrderHandlerInterface
      */
     public function __invoke(GetOrder $getOrder): Order
     {
-        $response = $this->client->get("/retailer-demo/orders/{$getOrder->orderId()}", [
+        $response = $this->client->get("orders/{$getOrder->orderId()}", [
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]
         ]);
 
-        $response = \GuzzleHttp\json_decode((string) $response->getBody(), true);
-
-        return Order::fromArray($response);
+        return Order::fromArray($response->getBody()->json());
     }
 }

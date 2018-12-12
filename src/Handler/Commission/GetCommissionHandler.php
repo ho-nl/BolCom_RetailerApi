@@ -14,16 +14,23 @@ use BolCom\RetailerApi\Model\Commission\QueryHandler\GetCommissionHandlerInterfa
 
 class GetCommissionHandler implements GetCommissionHandlerInterface
 {
+    /** @var Client $client */
     private $client;
 
+    /**
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __invoke(GetCommission $getCommission): Commission
     {
-        $response = $this->client->get("/retailer/commission/{$getCommission->ean()->value()}", [
+        $response = $this->client->get("commission/{$getCommission->ean()->value()}", [
             'query' => [
                 'condition' => $getCommission->condition()->value(),
                 'price' => $getCommission->price()->value()

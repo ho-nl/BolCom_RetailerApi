@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Test\Integration\Handler\Commission;
 
 use BolCom\RetailerApi\Client;
+use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
 use BolCom\RetailerApi\Model\Commission\CommissionQuery;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\Offer\Condition;
-use PHPUnit\Framework\TestCase;
 
-class GetCommissionListHandlerTest extends TestCase
+class GetCommissionListHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -22,7 +22,7 @@ class GetCommissionListHandlerTest extends TestCase
     public function should_get_commission_list_back()
     {
         $handler = new GetCommissionListHandler(
-            new Client(BOL_CLIENT_ID, BOL_CLIENT_SECRET, null, __DIR__ . '/../token.json')
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET))
         );
 
         $commissions = $handler(GetCommissionList::with(
@@ -39,9 +39,6 @@ class GetCommissionListHandlerTest extends TestCase
             $commission->fixedAmount()->toScalar();
             $commission->percentage()->toScalar();
             $commission->totalCost()->toScalar();
-//            $commission->totalCostWithoutReduction()->toScalar();
-
-//            self::assertNotEmpty($commission->reduction());
 
             if ($commission->reduction()) {
                 foreach ($commission->reduction() as $commissionReduction) {

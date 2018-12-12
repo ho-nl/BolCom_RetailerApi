@@ -3,8 +3,8 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
+
 namespace BolCom\RetailerApi\Client;
 
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
@@ -16,6 +16,6 @@ class JsonResponse implements StreamInterface
 
     public function json()
     {
-        return \GuzzleHttp\json_decode((string)$this->getContents(), true);
+        return \GuzzleHttp\json_decode((string) $this->getContents(), true);
     }
 }

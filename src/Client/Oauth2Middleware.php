@@ -3,10 +3,9 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
-namespace BolCom\RetailerApi\Client;
 
+namespace BolCom\RetailerApi\Client;
 
 use kamermans\OAuth2\GrantType\ClientCredentials;
 use kamermans\OAuth2\Persistence\FileTokenPersistence;
@@ -14,7 +13,6 @@ use kamermans\OAuth2\Signer;
 
 class Oauth2Middleware
 {
-
     /** @var \kamermans\OAuth2\OAuth2Middleware */
     private $middleware;
 

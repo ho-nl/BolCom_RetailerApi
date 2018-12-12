@@ -3,8 +3,8 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
+
 namespace BolCom\RetailerApi\Client;
 
 use Psr\Http\Message\RequestInterface;
@@ -17,7 +17,7 @@ class AcceptHeaderMiddleware
      * @param callable $handler
      * @return \Closure
      */
-    public function __invoke(callable $handler) : callable
+    public function __invoke(callable $handler): callable
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             if (! $request->hasHeader('Accept')) {

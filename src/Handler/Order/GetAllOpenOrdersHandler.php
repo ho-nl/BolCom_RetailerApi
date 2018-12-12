@@ -30,7 +30,7 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
      */
     public function __invoke(GetAllOpenOrders $getAllOpenOrders): ?OrderList
     {
-        $response = $this->client->get('/retailer-demo/orders', [
+        $response = $this->client->get('orders', [
             'page' => $getAllOpenOrders->page(),
             'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value(),
             'headers' => [
@@ -38,7 +38,7 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
             ]
         ]);
 
-        $response = \GuzzleHttp\json_decode((string) $response->getBody(), true);
+        $response = $response->getBody()->json();
 
         return ! empty($response) ? OrderList::fromArray($response) : null;
     }

@@ -31,7 +31,7 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
 
         $additional = '';
         if (isset($errorResponse['violations'])) {
-            $additional .= implode(', ', array_map(function($violation) {
+            $additional .= implode(', ', array_map(function ($violation) {
                 if (isset($violation['name'])) {
                     return "`{$violation['name']}`: {$violation['reason']}";
                 }

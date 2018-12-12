@@ -8,20 +8,20 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client;
+use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Handler\Offer\CreateOrUpdateOfferHandler;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer;
 use BolCom\RetailerApi\Model\Offer\Condition;
 use BolCom\RetailerApi\Model\Offer\DeliveryCode;
 use BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert;
 use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
-use PHPUnit\Framework\TestCase;
 
-class CreateOrUpdateOfferHandlerTest extends TestCase
+class CreateOrUpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke(): void
     {
         $handler = new CreateOrUpdateOfferHandler(
-            new Client(BOL_CLIENT_ID, BOL_CLIENT_SECRET, null, __DIR__ . '/../token.json')
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET))
         );
 
         $handler(CreateOrUpdateOffer::with(

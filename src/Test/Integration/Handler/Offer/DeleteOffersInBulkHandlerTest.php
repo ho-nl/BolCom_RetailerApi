@@ -8,18 +8,18 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client;
+use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Handler\Offer\DeleteOffersInBulkHandler;
 use BolCom\RetailerApi\Model\Offer\Command\DeleteOffersInBulk;
 use BolCom\RetailerApi\Model\Offer\Condition;
 use BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier;
-use PHPUnit\Framework\TestCase;
 
-class DeleteOffersInBulkHandlerTest extends TestCase
+class DeleteOffersInBulkHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke()
     {
         $handler = new DeleteOffersInBulkHandler(
-            new Client(BOL_CLIENT_ID, BOL_CLIENT_SECRET, null, __DIR__ . '/../token.json')
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET))
         );
 
         $handler(DeleteOffersInBulk::with(
