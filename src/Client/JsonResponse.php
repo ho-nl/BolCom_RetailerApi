@@ -16,6 +16,6 @@ class JsonResponse implements StreamInterface
 
     public function json()
     {
-        return \GuzzleHttp\json_decode((string) $this->getContents(), true);
+        return \GuzzleHttp\json_decode((string) $this, true);
     }
 }
