@@ -48,11 +48,12 @@ class ClientPool implements ClientPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function get(string $clientName) : ClientInterface
+    public function get(string $clientName): ClientInterface
     {
         if (! isset($this->clients[$clientName])) {
-            throw new \RuntimeException(sprintf('Client with name %s not defined', $clientName));
+            throw new \RuntimeException(sprintf('Client with name "%s" not defined or disabled.', $clientName));
         }
+
         return $this->clients[$clientName];
     }
 

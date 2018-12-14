@@ -9,25 +9,30 @@ namespace BolCom\RetailerApi\Client;
 
 use kamermans\OAuth2\GrantType\ClientCredentials;
 use kamermans\OAuth2\Persistence\FileTokenPersistence;
-use kamermans\OAuth2\Signer;
 
 class Oauth2Middleware
 {
-    /** @var \kamermans\OAuth2\OAuth2Middleware */
+    /** @var \kamermans\OAuth2\OAuth2Middleware $middleware */
     private $middleware;
 
+    /**
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $accessTokenPath
+     */
     public function __construct(
-        string $apiKey,
-        string $apiSecret,
-        string $tokenFilePath
+        string $clientId,
+        string $clientSecret,
+        string $accessTokenPath
     ) {
         $client = new \GuzzleHttp\Client(['base_uri' => 'https://login.bol.com/token']);
         $clientCredentials = new ClientCredentials($client, [
-            'client_id' => $apiKey,
-            'client_secret' => $apiSecret
+            'client_id' => $clientId,
+            'client_secret' => $clientSecret
         ]);
+
         $this->middleware = new \kamermans\OAuth2\OAuth2Middleware($clientCredentials);
-        $this->middleware->setTokenPersistence(new FileTokenPersistence($tokenFilePath));
+        $this->middleware->setTokenPersistence(new FileTokenPersistence($accessTokenPath));
     }
 
     public function __invoke(callable $handler)

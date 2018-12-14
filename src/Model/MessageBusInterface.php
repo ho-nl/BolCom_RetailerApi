@@ -9,5 +9,11 @@ namespace BolCom\RetailerApi\Model;
 
 interface MessageBusInterface
 {
+    /**
+     * @param $message
+     * @param string $clientName
+     *
+     * @return mixed
+     */
     public function dispatch($message, string $clientName = ClientPoolInterface::DEFAULT_CLIENT_NAME);
 }
