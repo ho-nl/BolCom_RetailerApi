@@ -32,8 +32,8 @@ class GetCommissionHandler implements GetCommissionHandlerInterface
     {
         $response = $this->client->get("commission/{$getCommission->ean()->value()}", [
             'query' => [
-                'condition' => $getCommission->condition()->value(),
-                'price' => $getCommission->price()->value()
+                'condition' => null === $getCommission->condition() ? null : $getCommission->condition()->value(),
+                'price' => null === $getCommission->price() ? null : $getCommission->price()->toScalar(),
             ],
             'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
         ]);

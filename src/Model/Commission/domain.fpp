@@ -6,7 +6,7 @@ namespace BolCom\RetailerApi\Model\Commission {
     data Commission = Commission {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         \BolCom\RetailerApi\Model\Offer\Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price,
+        ?\BolCom\RetailerApi\Model\CurrencyAmount $price,
         \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount,
         \BolCom\RetailerApi\Model\PercentageAmount $percentage,
         \BolCom\RetailerApi\Model\CurrencyAmount $totalCost,
@@ -31,8 +31,8 @@ namespace BolCom\RetailerApi\Model\Commission {
 namespace BolCom\RetailerApi\Model\Commission\Query {
     data GetCommission = GetCommission {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
-        \BolCom\RetailerApi\Model\Offer\Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price
+        ?\BolCom\RetailerApi\Model\Offer\Condition $condition,
+        ?\BolCom\RetailerApi\Model\CurrencyAmount $price
     } deriving (Query);
 
     data GetCommissionList = GetCommissionList {

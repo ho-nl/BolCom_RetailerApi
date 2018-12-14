@@ -28,7 +28,7 @@ final class Commission
      * @param \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction
      * @param \BolCom\RetailerApi\Model\Commission\CommissionReduction[] $reduction
      */
-    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, ?\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, ?array $reduction)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, ?\BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, ?\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, ?array $reduction)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -58,7 +58,7 @@ final class Commission
         return $this->condition;
     }
 
-    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function price(): ?\BolCom\RetailerApi\Model\CurrencyAmount
     {
         return $this->price;
     }
@@ -101,7 +101,7 @@ final class Commission
         return new self($this->ean, $condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
 
-    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): Commission
+    public function withPrice(?\BolCom\RetailerApi\Model\CurrencyAmount $price): Commission
     {
         return new self($this->ean, $this->condition, $price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
@@ -149,11 +149,15 @@ final class Commission
 
         $condition = \BolCom\RetailerApi\Model\Offer\Condition::fromValue($data['condition']);
 
-        if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
-            throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
-        }
+        if (isset($data['price'])) {
+            if (! \is_float($data['price']) && ! \is_int($data['price'])) {
+                throw new \InvalidArgumentException("Value for 'price' is not a float in data array");
+            }
 
-        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
+            $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
+        } else {
+            $price = null;
+        }
 
         if (! isset($data['fixedAmount']) || (! \is_float($data['fixedAmount']) && ! \is_int($data['fixedAmount']))) {
             throw new \InvalidArgumentException("Key 'fixedAmount' is missing in data array or is not a float");

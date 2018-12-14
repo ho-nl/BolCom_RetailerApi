@@ -6,19 +6,11 @@
 
 namespace BolCom\RetailerApi\Model\Assert;
 
-use Assert\Assertion;
-
 class AssertEan
 {
     public static function assert(string $value): bool
     {
-        Assertion::regex($value, '/^\d{13}$/');
-
-        if (self::validateBarCode($value) === false) {
-            throw new \InvalidArgumentException(__('EAN Code is invalid.'));
-        }
-
-        return true;
+        return self::validateBarCode($value);
     }
 
     /**

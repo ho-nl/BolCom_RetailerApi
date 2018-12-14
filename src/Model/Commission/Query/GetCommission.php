@@ -20,22 +20,22 @@ final class GetCommission extends \Prooph\Common\Messaging\Query
         return \BolCom\RetailerApi\Model\Offer\Ean::fromString($this->payload['ean']);
     }
 
-    public function condition(): \BolCom\RetailerApi\Model\Offer\Condition
+    public function condition(): ?\BolCom\RetailerApi\Model\Offer\Condition
     {
-        return \BolCom\RetailerApi\Model\Offer\Condition::fromValue($this->payload['condition']);
+        return isset($this->payload['condition']) ? \BolCom\RetailerApi\Model\Offer\Condition::fromValue($this->payload['condition']) : null;
     }
 
-    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function price(): ?\BolCom\RetailerApi\Model\CurrencyAmount
     {
-        return \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($this->payload['price']);
+        return isset($this->payload['price']) ? \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($this->payload['price']) : null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price): GetCommission
+    public static function with(\BolCom\RetailerApi\Model\Offer\Ean $ean, ?\BolCom\RetailerApi\Model\Offer\Condition $condition, ?\BolCom\RetailerApi\Model\CurrencyAmount $price): GetCommission
     {
         return new self([
             'ean' => $ean->toString(),
-            'condition' => $condition->value(),
-            'price' => $price->toScalar(),
+            'condition' => null === $condition ? null : $condition->value(),
+            'price' => null === $price ? null : $price->toScalar(),
         ]);
     }
 
@@ -45,12 +45,12 @@ final class GetCommission extends \Prooph\Common\Messaging\Query
             throw new \InvalidArgumentException("Key 'ean' is missing in payload or is not a string");
         }
 
-        if (! isset($payload['condition']) || ! \is_string($payload['condition'])) {
-            throw new \InvalidArgumentException("Key 'condition' is missing in payload or is not a string");
+        if (isset($payload['condition']) && ! \is_string($payload['condition'])) {
+            throw new \InvalidArgumentException("Value for 'condition' is not a string in payload");
         }
 
-        if (! isset($payload['price']) || (! \is_float($payload['price']) && ! \is_int($payload['price']))) {
-            throw new \InvalidArgumentException("Key 'price' is missing in payload or is not a float");
+        if (isset($payload['price']) && ! \is_float($payload['price']) && ! \is_int($payload['price'])) {
+            throw new \InvalidArgumentException("Value for 'price' is not a float in payload");
         }
 
         $this->payload = $payload;
