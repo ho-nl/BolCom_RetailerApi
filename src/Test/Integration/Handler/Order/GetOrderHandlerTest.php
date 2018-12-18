@@ -22,6 +22,5 @@ class GetOrderHandlerTest extends \PHPUnit\Framework\TestCase
         );
 
         $handler(GetOrder::with(OrderId::fromString('7616222250')));
-        sleep(8); // Prevent: 429 Too many requests.
     }
 }

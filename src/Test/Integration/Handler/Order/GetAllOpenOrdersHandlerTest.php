@@ -22,6 +22,5 @@ class GetAllOpenOrdersHandlerTest extends \PHPUnit\Framework\TestCase
         );
 
         $handler(GetAllOpenOrders::with(1, FulfilmentMethod::FBR()));
-        sleep(1); // Prevent: 429 Too many requests.
     }
 }

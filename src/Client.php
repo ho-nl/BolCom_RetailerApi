@@ -15,6 +15,7 @@ use BolCom\RetailerApi\Client\RequestExceptionMiddleware;
 use BolCom\RetailerApi\Model\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleRetry\GuzzleRetryMiddleware;
 use Psr\Log\LoggerInterface;
 
 class Client extends \GuzzleHttp\Client implements ClientInterface
@@ -53,6 +54,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
         ), 'oauth');
         $stack->push(new AcceptHeaderMiddleware());
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
+        $stack->push(GuzzleRetryMiddleware::factory());
 
         $logger && $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter()));
         $stack->push(new JsonResponseMiddleware());
