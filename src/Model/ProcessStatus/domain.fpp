@@ -1,5 +1,4 @@
 namespace BolCom\RetailerApi\Model\ProcessStatus {
-    data Id = String deriving(FromString, ToString);
     data EntityId = String deriving (FromString, ToString);
 
     data EventType = CONFIRM_SHIPMENT | CANCEL_ORDER | CHANGE_TRANSPORT | HANDLE_RETURN_ITEM | CREATE_INBOUND deriving(Enum(useValue));
@@ -7,11 +6,11 @@ namespace BolCom\RetailerApi\Model\ProcessStatus {
     data EventStatus = PENDING | SUCCESS | FAILURE | TIMEOUT deriving(Enum(useValue));
 
     data ProcessStatus = ProcessStatus {
-        Id $id,
+        int $id,
         EntityId $entityId,
         string $description,
         EventStatus $status,
-        string $errorMessage,
+        ?string $errorMessage,
         \BolCom\RetailerApi\Model\DateTime $createTimestamp
     } deriving (FromArray);
 }
@@ -24,6 +23,6 @@ namespace BolCom\RetailerApi\Model\ProcessStatus\Query {
     } deriving (Query);
 
     data GetStatusByProcessId = GetStatusByProcessId {
-        \BolCom\RetailerApi\Model\ProcessStatus\Id $id
+        int $id
     } deriving (Query);
 }

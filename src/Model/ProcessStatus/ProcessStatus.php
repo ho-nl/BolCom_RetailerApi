@@ -16,7 +16,7 @@ final class ProcessStatus
     private $errorMessage;
     private $createTimestamp;
 
-    public function __construct(Id $id, EntityId $entityId, string $description, EventStatus $status, string $errorMessage, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
+    public function __construct(int $id, EntityId $entityId, string $description, EventStatus $status, ?string $errorMessage, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
     {
         $this->id = $id;
         $this->entityId = $entityId;
@@ -26,7 +26,7 @@ final class ProcessStatus
         $this->createTimestamp = $createTimestamp;
     }
 
-    public function id(): Id
+    public function id(): int
     {
         return $this->id;
     }
@@ -46,7 +46,7 @@ final class ProcessStatus
         return $this->status;
     }
 
-    public function errorMessage(): string
+    public function errorMessage(): ?string
     {
         return $this->errorMessage;
     }
@@ -56,7 +56,7 @@ final class ProcessStatus
         return $this->createTimestamp;
     }
 
-    public function withId(Id $id): ProcessStatus
+    public function withId(int $id): ProcessStatus
     {
         return new self($id, $this->entityId, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
@@ -76,7 +76,7 @@ final class ProcessStatus
         return new self($this->id, $this->entityId, $this->description, $status, $this->errorMessage, $this->createTimestamp);
     }
 
-    public function withErrorMessage(string $errorMessage): ProcessStatus
+    public function withErrorMessage(?string $errorMessage): ProcessStatus
     {
         return new self($this->id, $this->entityId, $this->description, $this->status, $errorMessage, $this->createTimestamp);
     }
@@ -88,11 +88,11 @@ final class ProcessStatus
 
     public static function fromArray(array $data): ProcessStatus
     {
-        if (! isset($data['id']) || ! \is_string($data['id'])) {
-            throw new \InvalidArgumentException("Key 'id' is missing in data array or is not a string");
+        if (! isset($data['id']) || ! \is_int($data['id'])) {
+            throw new \InvalidArgumentException("Key 'id' is missing in data array or is not a int");
         }
 
-        $id = Id::fromString($data['id']);
+        $id = $data['id'];
 
         if (! isset($data['entityId']) || ! \is_string($data['entityId'])) {
             throw new \InvalidArgumentException("Key 'entityId' is missing in data array or is not a string");
@@ -112,11 +112,15 @@ final class ProcessStatus
 
         $status = EventStatus::fromValue($data['status']);
 
-        if (! isset($data['errorMessage']) || ! \is_string($data['errorMessage'])) {
-            throw new \InvalidArgumentException("Key 'errorMessage' is missing in data array or is not a string");
-        }
+        if (isset($data['errorMessage'])) {
+            if (! \is_string($data['errorMessage'])) {
+                throw new \InvalidArgumentException("Value for 'errorMessage' is not a string in data array");
+            }
 
-        $errorMessage = $data['errorMessage'];
+            $errorMessage = $data['errorMessage'];
+        } else {
+            $errorMessage = null;
+        }
 
         if (! isset($data['createTimestamp']) || ! \is_string($data['createTimestamp'])) {
             throw new \InvalidArgumentException("Key 'createTimestamp' is missing in data array or is not a string");

@@ -15,22 +15,22 @@ final class GetStatusByProcessId extends \Prooph\Common\Messaging\Query
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function id(): \BolCom\RetailerApi\Model\ProcessStatus\Id
+    public function id(): int
     {
-        return \BolCom\RetailerApi\Model\ProcessStatus\Id::fromString($this->payload['id']);
+        return $this->payload['id'];
     }
 
-    public static function with(\BolCom\RetailerApi\Model\ProcessStatus\Id $id): GetStatusByProcessId
+    public static function with(int $id): GetStatusByProcessId
     {
         return new self([
-            'id' => $id->toString(),
+            'id' => $id,
         ]);
     }
 
     protected function setPayload(array $payload): void
     {
-        if (! isset($payload['id']) || ! \is_string($payload['id'])) {
-            throw new \InvalidArgumentException("Key 'id' is missing in payload or is not a string");
+        if (! isset($payload['id']) || ! \is_int($payload['id'])) {
+            throw new \InvalidArgumentException("Key 'id' is missing in payload or is not a int");
         }
 
         $this->payload = $payload;

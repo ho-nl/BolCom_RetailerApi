@@ -13,7 +13,7 @@ final class DateTime
 
     public function __construct(string $value)
     {
-        if (!\Assert\Assertion::date($value, \DateTime::ATOM)) {
+        if (!\Assert\Assertion::date($value, \DateTime::ATOM, 'Value is not a valid ISO 8601 format.')) {
             throw new \InvalidArgumentException('');
         }
 
