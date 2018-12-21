@@ -14,6 +14,10 @@ final class TransportInstruction
 
     public function __construct(TransporterCode $transporterCode, ?TrackAndTrace $trackAndTrace)
     {
+        if ($trackAndTrace === null && !\Assert\Assertion::choice($transporterCode->toString(), [TransporterCode::BRIEFPOST, TransporterCode::OTHER], 'Track & Trace cannot be left empty for this Transporter Code.')) {
+            throw new \InvalidArgumentException('');
+        }
+
         $this->transporterCode = $transporterCode;
         $this->trackAndTrace = $trackAndTrace;
     }
@@ -61,9 +65,10 @@ final class TransportInstruction
 
     public function toArray(): array
     {
+        // https://github.com/prolic/fpp/issues/109
         return [
             'transporterCode' => $this->transporterCode->value(),
-            'trackAndTrace' => null === $this->trackAndTrace ? null : null === $this->trackAndTrace ? null : $this->trackAndTrace->toScalar(),
+            'trackAndTrace' => null === $this->trackAndTrace ? null : $this->trackAndTrace->toScalar(),
         ];
     }
 }

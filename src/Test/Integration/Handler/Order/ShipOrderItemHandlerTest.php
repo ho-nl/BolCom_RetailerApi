@@ -16,7 +16,7 @@ use BolCom\RetailerApi\Model\Transport\TransportInstruction;
 
 class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function testTransportInstruction(): void
     {
         $handler = new ShipOrderItemHandler(
             new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
@@ -24,6 +24,7 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 
         // @todo; Conflicting transport method: Either provide Transport or ShippingLabelCode.
         // Add checks when buying ShippingLabelCode is being implemented.
+
         $handler(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
@@ -32,6 +33,37 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
                 'transporterCode' => 'TNT',
                 'trackAndTrace' => '123456789'
             ])
+        ));
+    }
+
+    public function testTransportInstructionWithoutTrackAndTrace(): void
+    {
+        $handler = new ShipOrderItemHandler(
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
+        );
+
+        $this->expectException(\InvalidArgumentException::class);
+        $handler(ShipOrderItem::with(
+            OrderItemId::fromString('6107434013'),
+            'Shipment Reference',
+            null,
+            TransportInstruction::fromArray([
+                'transporterCode' => 'TNT'
+            ])
+        ));
+    }
+
+    public function testShippingLabelCode(): void
+    {
+        $handler = new ShipOrderItemHandler(
+            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
+        );
+
+        $handler(ShipOrderItem::with(
+            OrderItemId::fromString('6107434013'),
+            'Shipment Reference',
+            'PLR00000002',
+            null
         ));
     }
 }

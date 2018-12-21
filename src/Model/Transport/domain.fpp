@@ -41,7 +41,8 @@ namespace BolCom\RetailerApi\Model\Transport {
     data TransportInstruction = TransportInstruction {
         TransporterCode $transporterCode,
         ?TrackAndTrace $trackAndTrace
-    } deriving (FromArray, ToArray);
+    } deriving (FromArray, ToArray) where
+        _: | $trackAndTrace === null && !\Assert\Assertion::choice($transporterCode->toString(), [TransporterCode::BRIEFPOST, TransporterCode::OTHER], 'Track & Trace cannot be left empty for this Transporter Code.') => '';
 
     data Transport = Transport {
         TransportId $transportId,
