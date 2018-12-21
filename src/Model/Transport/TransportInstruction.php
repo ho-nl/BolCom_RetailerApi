@@ -12,7 +12,7 @@ final class TransportInstruction
     private $transporterCode;
     private $trackAndTrace;
 
-    public function __construct(TransporterCode $transporterCode, TrackAndTrace $trackAndTrace)
+    public function __construct(TransporterCode $transporterCode, ?TrackAndTrace $trackAndTrace)
     {
         $this->transporterCode = $transporterCode;
         $this->trackAndTrace = $trackAndTrace;
@@ -23,7 +23,7 @@ final class TransportInstruction
         return $this->transporterCode;
     }
 
-    public function trackAndTrace(): TrackAndTrace
+    public function trackAndTrace(): ?TrackAndTrace
     {
         return $this->trackAndTrace;
     }
@@ -33,7 +33,7 @@ final class TransportInstruction
         return new self($transporterCode, $this->trackAndTrace);
     }
 
-    public function withTrackAndTrace(TrackAndTrace $trackAndTrace): TransportInstruction
+    public function withTrackAndTrace(?TrackAndTrace $trackAndTrace): TransportInstruction
     {
         return new self($this->transporterCode, $trackAndTrace);
     }
@@ -46,12 +46,24 @@ final class TransportInstruction
 
         $transporterCode = TransporterCode::fromValue($data['transporterCode']);
 
-        if (! isset($data['trackAndTrace']) || ! \is_string($data['trackAndTrace'])) {
-            throw new \InvalidArgumentException("Key 'trackAndTrace' is missing in data array or is not a string");
+        if (isset($data['trackAndTrace'])) {
+            if (! \is_string($data['trackAndTrace'])) {
+                throw new \InvalidArgumentException("Value for 'trackAndTrace' is not a string in data array");
+            }
+
+            $trackAndTrace = TrackAndTrace::fromScalar($data['trackAndTrace']);
+        } else {
+            $trackAndTrace = null;
         }
 
-        $trackAndTrace = TrackAndTrace::fromScalar($data['trackAndTrace']);
-
         return new self($transporterCode, $trackAndTrace);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'transporterCode' => $this->transporterCode->value(),
+            'trackAndTrace' => null === $this->trackAndTrace ? null : null === $this->trackAndTrace ? null : $this->trackAndTrace->toScalar(),
+        ];
     }
 }

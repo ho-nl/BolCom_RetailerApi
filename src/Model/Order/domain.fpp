@@ -85,6 +85,6 @@ namespace BolCom\RetailerApi\Model\Order\Command {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
         ?string $shipmentReference,
         ?string $shippingLabelCode,
-        ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction
+        ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transport
     } deriving (Query);
 }

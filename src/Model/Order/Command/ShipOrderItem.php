@@ -30,18 +30,18 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
         return $this->payload['shippingLabelCode'] ?? null;
     }
 
-    public function transportInstruction(): ?\BolCom\RetailerApi\Model\Transport\TransportInstruction
+    public function transport(): ?\BolCom\RetailerApi\Model\Transport\TransportInstruction
     {
-        return isset($this->payload['transportInstruction']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transportInstruction']) : null;
+        return isset($this->payload['transport']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transport']) : null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transportInstruction): ShipOrderItem
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transport): ShipOrderItem
     {
         return new self([
             'orderItemId' => $orderItemId->toString(),
             'shipmentReference' => $shipmentReference,
             'shippingLabelCode' => $shippingLabelCode,
-            'transportInstruction' => $transportInstruction,
+            'transport' => null === $transport ? null : $transport->toArray(),
         ]);
     }
 
@@ -59,8 +59,8 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
             throw new \InvalidArgumentException("Value for 'shippingLabelCode' is not a string in payload");
         }
 
-        if (! isset($payload['transportInstruction'])) {
-            throw new \InvalidArgumentException("Key 'transportInstruction' is missing in payload");
+        if (isset($payload['transport']) && ! \is_array($payload['transport'])) {
+            throw new \InvalidArgumentException("Value for 'transport' is not an array in payload");
         }
 
         $this->payload = $payload;

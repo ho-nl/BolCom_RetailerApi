@@ -13,7 +13,7 @@ final class Transport
     private $transporterCode;
     private $trackAndTrace;
 
-    public function __construct(TransportId $transportId, TransporterCode $transporterCode, TrackAndTrace $trackAndTrace)
+    public function __construct(TransportId $transportId, TransporterCode $transporterCode, ?TrackAndTrace $trackAndTrace)
     {
         $this->transportId = $transportId;
         $this->transporterCode = $transporterCode;
@@ -30,7 +30,7 @@ final class Transport
         return $this->transporterCode;
     }
 
-    public function trackAndTrace(): TrackAndTrace
+    public function trackAndTrace(): ?TrackAndTrace
     {
         return $this->trackAndTrace;
     }
@@ -45,7 +45,7 @@ final class Transport
         return new self($this->transportId, $transporterCode, $this->trackAndTrace);
     }
 
-    public function withTrackAndTrace(TrackAndTrace $trackAndTrace): Transport
+    public function withTrackAndTrace(?TrackAndTrace $trackAndTrace): Transport
     {
         return new self($this->transportId, $this->transporterCode, $trackAndTrace);
     }
@@ -64,11 +64,15 @@ final class Transport
 
         $transporterCode = TransporterCode::fromValue($data['transporterCode']);
 
-        if (! isset($data['trackAndTrace']) || ! \is_string($data['trackAndTrace'])) {
-            throw new \InvalidArgumentException("Key 'trackAndTrace' is missing in data array or is not a string");
-        }
+        if (isset($data['trackAndTrace'])) {
+            if (! \is_string($data['trackAndTrace'])) {
+                throw new \InvalidArgumentException("Value for 'trackAndTrace' is not a string in data array");
+            }
 
-        $trackAndTrace = TrackAndTrace::fromScalar($data['trackAndTrace']);
+            $trackAndTrace = TrackAndTrace::fromScalar($data['trackAndTrace']);
+        } else {
+            $trackAndTrace = null;
+        }
 
         return new self(
             $transportId,

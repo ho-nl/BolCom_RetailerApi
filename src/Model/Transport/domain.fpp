@@ -40,13 +40,13 @@ namespace BolCom\RetailerApi\Model\Transport {
 
     data TransportInstruction = TransportInstruction {
         TransporterCode $transporterCode,
-        TrackAndTrace $trackAndTrace
-    } deriving (FromArray);
+        ?TrackAndTrace $trackAndTrace
+    } deriving (FromArray, ToArray);
 
     data Transport = Transport {
         TransportId $transportId,
         TransporterCode $transporterCode,
-        TrackAndTrace $trackAndTrace
+        ?TrackAndTrace $trackAndTrace
     } deriving (FromArray);
 }
 
@@ -54,7 +54,7 @@ namespace BolCom\RetailerApi\Model\Transport\Command {
     data AddTransportInformation = AddTransportInformation {
         TransportId $transportId,
         TransporterCode $transporterCode,
-        TrackAndTrace $trackAndTrace
+        ?TrackAndTrace $trackAndTrace
     };
 }
 
@@ -63,4 +63,3 @@ namespace BolCom\RetailerApi\Model\Transport\Query {
         \BolCom\RetailerApi\Model\Transport\TransportId $transportId
     } deriving (Query);
 }
-

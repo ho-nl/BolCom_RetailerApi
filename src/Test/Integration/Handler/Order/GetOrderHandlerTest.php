@@ -15,7 +15,7 @@ use BolCom\RetailerApi\Model\Order\Query\GetOrder;
 
 class GetOrderHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
+    public function test__invoke(): void
     {
         $handler = new GetOrderHandler(
             new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
