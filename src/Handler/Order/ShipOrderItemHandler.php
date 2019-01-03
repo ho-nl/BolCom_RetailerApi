@@ -33,6 +33,12 @@ class ShipOrderItemHandler implements ShipOrderItemHandlerInterface
         $payload = $orderItem->payload();
         unset($payload['orderItemId']);
 
+        // Although the API documentation tells us to omit the key "trackAndTrace",
+        // an error message is given when we do this. Set it to an empty string which will be accepted.
+        if (isset($payload['transport']) && $payload['transport']['trackAndTrace'] === null) {
+            $payload['transport']['trackAndTrace'] = '';
+        }
+
         // @todo; Conflicting transport method: Either provide Transport or ShippingLabelCode.
         // Add checks when buying ShippingLabelCode is being implemented.
         $response = $this->client->put("orders/{$orderItem->orderItemId()->toString()}/shipment", [
@@ -42,11 +48,8 @@ class ShipOrderItemHandler implements ShipOrderItemHandlerInterface
             ]
         ]);
 
-        /**
-         * @todo:
-         * [x] Contact bol.com to convert timestamp into ISO 8601 format.
-         * Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
-         */
+        // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
+        // Convert this timestamp into ISO 8601 format.
         $response = $response->getBody()->json();
         $response['createTimestamp'] = (new \DateTime($response['createTimestamp']))->format(\DateTime::ATOM);
 

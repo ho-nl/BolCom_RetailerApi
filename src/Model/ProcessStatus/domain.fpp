@@ -8,6 +8,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus {
     data ProcessStatus = ProcessStatus {
         int $id,
         EntityId $entityId,
+        EventType $eventType,
         string $description,
         EventStatus $status,
         ?string $errorMessage,

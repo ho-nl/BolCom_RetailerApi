@@ -11,15 +11,17 @@ final class ProcessStatus
 {
     private $id;
     private $entityId;
+    private $eventType;
     private $description;
     private $status;
     private $errorMessage;
     private $createTimestamp;
 
-    public function __construct(int $id, EntityId $entityId, string $description, EventStatus $status, ?string $errorMessage, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
+    public function __construct(int $id, EntityId $entityId, EventType $eventType, string $description, EventStatus $status, ?string $errorMessage, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
     {
         $this->id = $id;
         $this->entityId = $entityId;
+        $this->eventType = $eventType;
         $this->description = $description;
         $this->status = $status;
         $this->errorMessage = $errorMessage;
@@ -34,6 +36,11 @@ final class ProcessStatus
     public function entityId(): EntityId
     {
         return $this->entityId;
+    }
+
+    public function eventType(): EventType
+    {
+        return $this->eventType;
     }
 
     public function description(): string
@@ -58,32 +65,37 @@ final class ProcessStatus
 
     public function withId(int $id): ProcessStatus
     {
-        return new self($id, $this->entityId, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($id, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withEntityId(EntityId $entityId): ProcessStatus
     {
-        return new self($this->id, $entityId, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->id, $entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+    }
+
+    public function withEventType(EventType $eventType): ProcessStatus
+    {
+        return new self($this->id, $this->entityId, $eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withDescription(string $description): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->id, $this->entityId, $this->eventType, $description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withStatus(EventStatus $status): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->description, $status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->id, $this->entityId, $this->eventType, $this->description, $status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withErrorMessage(?string $errorMessage): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->description, $this->status, $errorMessage, $this->createTimestamp);
+        return new self($this->id, $this->entityId, $this->eventType, $this->description, $this->status, $errorMessage, $this->createTimestamp);
     }
 
     public function withCreateTimestamp(\BolCom\RetailerApi\Model\DateTime $createTimestamp): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->description, $this->status, $this->errorMessage, $createTimestamp);
+        return new self($this->id, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $createTimestamp);
     }
 
     public static function fromArray(array $data): ProcessStatus
@@ -99,6 +111,12 @@ final class ProcessStatus
         }
 
         $entityId = EntityId::fromString($data['entityId']);
+
+        if (! isset($data['eventType']) || ! \is_string($data['eventType'])) {
+            throw new \InvalidArgumentException("Key 'eventType' is missing in data array or is not a string");
+        }
+
+        $eventType = EventType::fromValue($data['eventType']);
 
         if (! isset($data['description']) || ! \is_string($data['description'])) {
             throw new \InvalidArgumentException("Key 'description' is missing in data array or is not a string");
@@ -131,6 +149,7 @@ final class ProcessStatus
         return new self(
             $id,
             $entityId,
+            $eventType,
             $description,
             $status,
             $errorMessage,
