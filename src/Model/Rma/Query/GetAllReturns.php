@@ -25,17 +25,17 @@ final class GetAllReturns extends \Prooph\Common\Messaging\Query
         return $this->payload['handled'];
     }
 
-    public function shipmentsMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
     {
-        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['shipmentsMethod']);
+        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
     }
 
-    public static function with(int $page, bool $handled, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $shipmentsMethod): GetAllReturns
+    public static function with(int $page, bool $handled, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): GetAllReturns
     {
         return new self([
             'page' => $page,
             'handled' => $handled,
-            'shipmentsMethod' => $shipmentsMethod->value(),
+            'fulfilmentMethod' => $fulfilmentMethod->value(),
         ]);
     }
 
@@ -49,8 +49,8 @@ final class GetAllReturns extends \Prooph\Common\Messaging\Query
             throw new \InvalidArgumentException("Key 'handled' is missing in payload or is not a bool");
         }
 
-        if (! isset($payload['shipmentsMethod']) || ! \is_string($payload['shipmentsMethod'])) {
-            throw new \InvalidArgumentException("Key 'shipmentsMethod' is missing in payload or is not a string");
+        if (! isset($payload['fulfilmentMethod']) || ! \is_string($payload['fulfilmentMethod'])) {
+            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

@@ -7,16 +7,12 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Rma;
 
-final class QuantityReturned
+final class RmaId
 {
     private $value;
 
     public function __construct(int $value)
     {
-        if (!\Assert\Assertion::betweenLength($value, 1, 9999)) {
-            throw new \InvalidArgumentException('');
-        }
-
         $this->value = $value;
     }
 
@@ -25,9 +21,9 @@ final class QuantityReturned
         return $this->value;
     }
 
-    public static function fromScalar(int $quantityReturned): QuantityReturned
+    public static function fromScalar(int $rmaId): RmaId
     {
-        return new self($quantityReturned);
+        return new self($rmaId);
     }
 
     public function toScalar(): int

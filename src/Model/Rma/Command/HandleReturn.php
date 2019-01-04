@@ -15,9 +15,9 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function returnNumber(): \BolCom\RetailerApi\Model\Rma\ReturnNumber
+    public function rmaId(): \BolCom\RetailerApi\Model\Rma\RmaId
     {
-        return \BolCom\RetailerApi\Model\Rma\ReturnNumber::fromScalar($this->payload['returnNumber']);
+        return \BolCom\RetailerApi\Model\Rma\RmaId::fromScalar($this->payload['rmaId']);
     }
 
     public function handlingResult(): \BolCom\RetailerApi\Model\Rma\HandlingResult
@@ -30,10 +30,10 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
         return \BolCom\RetailerApi\Model\Rma\QuantityReturned::fromScalar($this->payload['quantityReturned']);
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Rma\ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult, \BolCom\RetailerApi\Model\Rma\QuantityReturned $quantityReturned): HandleReturn
+    public static function with(\BolCom\RetailerApi\Model\Rma\RmaId $rmaId, \BolCom\RetailerApi\Model\Rma\HandlingResult $handlingResult, \BolCom\RetailerApi\Model\Rma\QuantityReturned $quantityReturned): HandleReturn
     {
         return new self([
-            'returnNumber' => $returnNumber->toScalar(),
+            'rmaId' => $rmaId->toScalar(),
             'handlingResult' => $handlingResult->value(),
             'quantityReturned' => $quantityReturned->toScalar(),
         ]);
@@ -41,8 +41,8 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
 
     protected function setPayload(array $payload): void
     {
-        if (! isset($payload['returnNumber']) || ! \is_int($payload['returnNumber'])) {
-            throw new \InvalidArgumentException("Key 'returnNumber' is missing in payload or is not a int");
+        if (! isset($payload['rmaId']) || ! \is_int($payload['rmaId'])) {
+            throw new \InvalidArgumentException("Key 'rmaId' is missing in payload or is not a int");
         }
 
         if (! isset($payload['handlingResult']) || ! \is_string($payload['handlingResult'])) {

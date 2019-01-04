@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Rma;
 
 final class ReturnItem
 {
-    private $returnNumber;
+    private $rmaId;
     private $orderId;
     private $ean;
     private $title;
@@ -24,9 +24,9 @@ final class ReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(ReturnNumber $returnNumber, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace, HandlingResult $handlingResult, ProcessingResult $processingResult, \BolCom\RetailerApi\Model\DateTime $processingDateTime)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, ?string $title, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, bool $handled, ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace, ?HandlingResult $handlingResult, ?ProcessingResult $processingResult, ?\BolCom\RetailerApi\Model\DateTime $processingDateTime)
     {
-        $this->returnNumber = $returnNumber;
+        $this->rmaId = $rmaId;
         $this->orderId = $orderId;
         $this->ean = $ean;
         $this->title = $title;
@@ -42,9 +42,9 @@ final class ReturnItem
         $this->processingDateTime = $processingDateTime;
     }
 
-    public function returnNumber(): ReturnNumber
+    public function rmaId(): RmaId
     {
-        return $this->returnNumber;
+        return $this->rmaId;
     }
 
     public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
@@ -57,7 +57,7 @@ final class ReturnItem
         return $this->ean;
     }
 
-    public function title(): string
+    public function title(): ?string
     {
         return $this->title;
     }
@@ -77,7 +77,7 @@ final class ReturnItem
         return $this->returnReasonComments;
     }
 
-    public function customerDetails(): \BolCom\RetailerApi\Model\Customer\CustomerDetails
+    public function customerDetails(): ?\BolCom\RetailerApi\Model\Customer\CustomerDetails
     {
         return $this->customerDetails;
     }
@@ -92,103 +92,103 @@ final class ReturnItem
         return $this->handled;
     }
 
-    public function trackAndTrace(): \BolCom\RetailerApi\Model\Transport\TrackAndTrace
+    public function trackAndTrace(): ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace
     {
         return $this->trackAndTrace;
     }
 
-    public function handlingResult(): HandlingResult
+    public function handlingResult(): ?HandlingResult
     {
         return $this->handlingResult;
     }
 
-    public function processingResult(): ProcessingResult
+    public function processingResult(): ?ProcessingResult
     {
         return $this->processingResult;
     }
 
-    public function processingDateTime(): \BolCom\RetailerApi\Model\DateTime
+    public function processingDateTime(): ?\BolCom\RetailerApi\Model\DateTime
     {
         return $this->processingDateTime;
     }
 
-    public function withReturnNumber(ReturnNumber $returnNumber): ReturnItem
+    public function withRmaId(RmaId $rmaId): ReturnItem
     {
-        return new self($returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ReturnItem
     {
-        return new self($this->returnNumber, $orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withTitle(string $title): ReturnItem
+    public function withTitle(?string $title): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withRegistrationDateTime(\BolCom\RetailerApi\Model\DateTime $registrationDateTime): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withReturnReason(string $returnReason): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withReturnReasonComments(string $returnReasonComments): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withCustomerDetails(\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails): ReturnItem
+    public function withCustomerDetails(?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
     public function withHandled(bool $handled): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withTrackAndTrace(\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace): ReturnItem
+    public function withTrackAndTrace(?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withHandlingResult(HandlingResult $handlingResult): ReturnItem
+    public function withHandlingResult(?HandlingResult $handlingResult): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $handlingResult, $this->processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withProcessingResult(ProcessingResult $processingResult): ReturnItem
+    public function withProcessingResult(?ProcessingResult $processingResult): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $processingResult, $this->processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $processingResult, $this->processingDateTime);
     }
 
-    public function withProcessingDateTime(\BolCom\RetailerApi\Model\DateTime $processingDateTime): ReturnItem
+    public function withProcessingDateTime(?\BolCom\RetailerApi\Model\DateTime $processingDateTime): ReturnItem
     {
-        return new self($this->returnNumber, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $processingDateTime);
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $processingDateTime);
     }
 
     public static function fromArray(array $data): ReturnItem
     {
-        if (! isset($data['returnNumber']) || ! \is_int($data['returnNumber'])) {
-            throw new \InvalidArgumentException("Key 'returnNumber' is missing in data array or is not a int");
+        if (! isset($data['rmaId']) || ! \is_int($data['rmaId'])) {
+            throw new \InvalidArgumentException("Key 'rmaId' is missing in data array or is not a int");
         }
 
-        $returnNumber = ReturnNumber::fromScalar($data['returnNumber']);
+        $rmaId = RmaId::fromScalar($data['rmaId']);
 
         if (! isset($data['orderId']) || ! \is_string($data['orderId'])) {
             throw new \InvalidArgumentException("Key 'orderId' is missing in data array or is not a string");
@@ -202,11 +202,15 @@ final class ReturnItem
 
         $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
-        if (! isset($data['title']) || ! \is_string($data['title'])) {
-            throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
-        }
+        if (isset($data['title'])) {
+            if (! \is_string($data['title'])) {
+                throw new \InvalidArgumentException("Value for 'title' is not a string in data array");
+            }
 
-        $title = $data['title'];
+            $title = $data['title'];
+        } else {
+            $title = null;
+        }
 
         if (! isset($data['registrationDateTime']) || ! \is_string($data['registrationDateTime'])) {
             throw new \InvalidArgumentException("Key 'registrationDateTime' is missing in data array or is not a string");
@@ -226,11 +230,15 @@ final class ReturnItem
 
         $returnReasonComments = $data['returnReasonComments'];
 
-        if (! isset($data['customerDetails']) || ! \is_array($data['customerDetails'])) {
-            throw new \InvalidArgumentException("Key 'customerDetails' is missing in data array or is not an array");
-        }
+        if (isset($data['customerDetails'])) {
+            if (! \is_array($data['customerDetails'])) {
+                throw new \InvalidArgumentException("Value for 'customerDetails' is not an array in data array");
+            }
 
-        $customerDetails = \BolCom\RetailerApi\Model\Customer\CustomerDetails::fromArray($data['customerDetails']);
+            $customerDetails = \BolCom\RetailerApi\Model\Customer\CustomerDetails::fromArray($data['customerDetails']);
+        } else {
+            $customerDetails = null;
+        }
 
         if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
@@ -244,32 +252,48 @@ final class ReturnItem
 
         $handled = $data['handled'];
 
-        if (! isset($data['trackAndTrace']) || ! \is_string($data['trackAndTrace'])) {
-            throw new \InvalidArgumentException("Key 'trackAndTrace' is missing in data array or is not a string");
+        if (isset($data['trackAndTrace'])) {
+            if (! \is_string($data['trackAndTrace'])) {
+                throw new \InvalidArgumentException("Value for 'trackAndTrace' is not a string in data array");
+            }
+
+            $trackAndTrace = \BolCom\RetailerApi\Model\Transport\TrackAndTrace::fromScalar($data['trackAndTrace']);
+        } else {
+            $trackAndTrace = null;
         }
 
-        $trackAndTrace = \BolCom\RetailerApi\Model\Transport\TrackAndTrace::fromScalar($data['trackAndTrace']);
+        if (isset($data['handlingResult'])) {
+            if (! \is_string($data['handlingResult'])) {
+                throw new \InvalidArgumentException("Value for 'handlingResult' is not a string in data array");
+            }
 
-        if (! isset($data['handlingResult']) || ! \is_string($data['handlingResult'])) {
-            throw new \InvalidArgumentException("Key 'handlingResult' is missing in data array or is not a string");
+            $handlingResult = HandlingResult::fromValue($data['handlingResult']);
+        } else {
+            $handlingResult = null;
         }
 
-        $handlingResult = HandlingResult::fromValue($data['handlingResult']);
+        if (isset($data['processingResult'])) {
+            if (! \is_string($data['processingResult'])) {
+                throw new \InvalidArgumentException("Value for 'processingResult' is not a string in data array");
+            }
 
-        if (! isset($data['processingResult']) || ! \is_string($data['processingResult'])) {
-            throw new \InvalidArgumentException("Key 'processingResult' is missing in data array or is not a string");
+            $processingResult = ProcessingResult::fromValue($data['processingResult']);
+        } else {
+            $processingResult = null;
         }
 
-        $processingResult = ProcessingResult::fromValue($data['processingResult']);
+        if (isset($data['processingDateTime'])) {
+            if (! \is_string($data['processingDateTime'])) {
+                throw new \InvalidArgumentException("Value for 'processingDateTime' is not a string in data array");
+            }
 
-        if (! isset($data['processingDateTime']) || ! \is_string($data['processingDateTime'])) {
-            throw new \InvalidArgumentException("Key 'processingDateTime' is missing in data array or is not a string");
+            $processingDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['processingDateTime']);
+        } else {
+            $processingDateTime = null;
         }
-
-        $processingDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['processingDateTime']);
 
         return new self(
-            $returnNumber,
+            $rmaId,
             $orderId,
             $ean,
             $title,
