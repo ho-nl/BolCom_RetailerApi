@@ -13,7 +13,7 @@ final class QuantityReturned
 
     public function __construct(int $value)
     {
-        if (!\Assert\Assertion::betweenLength($value, 1, 9999)) {
+        if (!\Assert\Assertion::between($value, 1, 9999)) {
             throw new \InvalidArgumentException('');
         }
 

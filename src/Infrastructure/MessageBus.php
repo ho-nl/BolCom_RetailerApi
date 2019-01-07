@@ -12,6 +12,7 @@ use BolCom\RetailerApi\Handler\Order\CancelOrderHandler;
 use BolCom\RetailerApi\Handler\Order\GetOrderHandler;
 use BolCom\RetailerApi\Handler\Order\ShipOrderItemHandler;
 use BolCom\RetailerApi\Handler\Rma\GetAllReturnsHandler;
+use BolCom\RetailerApi\Handler\Rma\HandleReturnHandler;
 use BolCom\RetailerApi\Model\ClientPoolInterface;
 use BolCom\RetailerApi\Handler\Order\GetAllOpenOrdersHandler;
 use BolCom\RetailerApi\Model\MessageBusInterface;
@@ -20,6 +21,7 @@ use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
 use BolCom\RetailerApi\Model\Order\Query\GetOrder;
+use BolCom\RetailerApi\Model\Rma\Command\HandleReturn;
 use BolCom\RetailerApi\Model\Rma\Query\GetAllReturns;
 
 class MessageBus implements MessageBusInterface
@@ -41,7 +43,8 @@ class MessageBus implements MessageBusInterface
             CancelOrder::class => CancelOrderHandler::class,
             ShipOrderItem::class => ShipOrderItemHandler::class,
             CreateOrUpdateOffer::class => CreateOrUpdateOfferHandler::class,
-            GetAllReturns::class => GetAllReturnsHandler::class
+            GetAllReturns::class => GetAllReturnsHandler::class,
+            HandleReturn::class => HandleReturnHandler::class
         ];
 
         $this->clientPool = $clientPool;

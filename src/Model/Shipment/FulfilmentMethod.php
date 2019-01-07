@@ -11,11 +11,11 @@ final class FulfilmentMethod
 {
     public const OPTIONS = [
         'FBR' => 'FBR',
-        'FFB' => 'FFB',
+        'FBB' => 'FBB',
     ];
 
     public const FBR = 'FBR';
-    public const FFB = 'FFB';
+    public const FBB = 'FBB';
 
     private $name;
     private $value;
@@ -31,9 +31,9 @@ final class FulfilmentMethod
         return new self('FBR');
     }
 
-    public static function FFB(): self
+    public static function FBB(): self
     {
-        return new self('FFB');
+        return new self('FBB');
     }
 
     public static function fromName(string $value): self

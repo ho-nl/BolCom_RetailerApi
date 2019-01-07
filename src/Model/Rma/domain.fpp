@@ -29,7 +29,7 @@ namespace BolCom\RetailerApi\Model\Rma {
     data ProcessingResult = PENDING | ACCEPTED | REJECTED deriving(Enum(useValue));
 
     data QuantityReturned = Int deriving(FromScalar, ToScalar) where
-        _: | !\Assert\Assertion::betweenLength($value, 1, 9999) => '';
+        _: | !\Assert\Assertion::between($value, 1, 9999) => '';
 }
 
 namespace BolCom\RetailerApi\Model\Rma\Query {

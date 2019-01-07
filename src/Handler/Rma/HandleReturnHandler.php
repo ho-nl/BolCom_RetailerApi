@@ -5,14 +5,14 @@
  */
 declare(strict_types=1);
 
-namespace BolCom\RetailerApi\Handler\Order;
+namespace BolCom\RetailerApi\Handler\Rma;
 
 use BolCom\RetailerApi\Client;
-use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
-use BolCom\RetailerApi\Model\Order\CommandHandler\CancelOrderHandlerInterface;
 use BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus;
+use BolCom\RetailerApi\Model\Rma\Command\HandleReturn;
+use BolCom\RetailerApi\Model\Rma\CommandHandler\HandleReturnHandlerInterface;
 
-class CancelOrderHandler implements CancelOrderHandlerInterface
+class HandleReturnHandler implements HandleReturnHandlerInterface
 {
     /** @var Client $client */
     private $client;
@@ -28,12 +28,12 @@ class CancelOrderHandler implements CancelOrderHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(CancelOrder $cancelOrder): ProcessStatus
+    public function __invoke(HandleReturn $handleReturn): ProcessStatus
     {
-        $payload = $cancelOrder->payload();
-        unset($payload['orderItemId']);
+        $payload = $handleReturn->payload();
+        unset($payload['rmaId']);
 
-        $response = $this->client->put("orders/{$cancelOrder->orderItemId()->toString()}/cancellation", [
+        $response = $this->client->put("returns/{$handleReturn->rmaId()->toScalar()}", [
             'json' => $payload,
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'

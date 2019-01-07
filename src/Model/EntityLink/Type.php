@@ -13,11 +13,13 @@ final class Type
         'CART' => 'cart',
         'ORDER' => 'order',
         'ORDER_ITEM' => 'order_item',
+        'RETURN_ITEM' => 'return_item',
     ];
 
     public const CART = 'cart';
     public const ORDER = 'order';
     public const ORDER_ITEM = 'order_item';
+    public const RETURN_ITEM = 'return_item';
 
     private $name;
     private $value;
@@ -41,6 +43,11 @@ final class Type
     public static function ORDER_ITEM(): self
     {
         return new self('ORDER_ITEM');
+    }
+
+    public static function RETURN_ITEM(): self
+    {
+        return new self('RETURN_ITEM');
     }
 
     public static function fromName(string $value): self
