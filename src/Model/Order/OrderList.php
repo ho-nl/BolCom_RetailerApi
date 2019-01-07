@@ -12,15 +12,15 @@ final class OrderList
     private $orders;
 
     /**
-     * @param \BolCom\RetailerApi\Model\Order\Order[]|null $orders
+     * @param \BolCom\RetailerApi\Model\Order\OrderListItem[]|null $orders
      */
-    public function __construct(Order ...$orders)
+    public function __construct(OrderListItem ...$orders)
     {
         $this->orders = $orders;
     }
 
     /**
-     * @return \BolCom\RetailerApi\Model\Order\Order[]
+     * @return \BolCom\RetailerApi\Model\Order\OrderListItem[]
      */
     public function orders(): array
     {
@@ -28,7 +28,7 @@ final class OrderList
     }
 
     /**
-     * @param \BolCom\RetailerApi\Model\Order\Order[]|null $orders
+     * @param \BolCom\RetailerApi\Model\Order\OrderListItem[]|null $orders
      * @return \BolCom\RetailerApi\Model\Order\OrderList
      */
     public function withOrders(array $orders): OrderList
@@ -49,7 +49,7 @@ final class OrderList
                 throw new \InvalidArgumentException("Key 'orders' in data array or is not an array of arrays");
             }
 
-            $orders[] = Order::fromArray($__value);
+            $orders[] = OrderListItem::fromArray($__value);
         }
 
         return new self(...$orders);

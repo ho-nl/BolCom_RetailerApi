@@ -8,8 +8,13 @@ namespace BolCom\RetailerApi\Model\Order {
         OrderItem[] $orderItems,
     } deriving (FromArray);
 
+    data OrderListItem = OrderListItem {
+        OrderId $orderId,
+        \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced
+    } deriving (FromArray);
+
     data OrderList = OrderList {
-        Order[] $orders
+        OrderListItem[] $orders
     } deriving (FromArray);
 
     data OrderCustomerDetails = OrderCustomerDetails {
