@@ -14,6 +14,7 @@ use BolCom\RetailerApi\Handler\Order\ShipOrderItemHandler;
 use BolCom\RetailerApi\Handler\Rma\GetAllReturnsHandler;
 use BolCom\RetailerApi\Handler\Rma\HandleReturnHandler;
 use BolCom\RetailerApi\Handler\ShippingLabel\GetShippingLabelsHandler;
+use BolCom\RetailerApi\Handler\Transport\GetShippingLabelHandler;
 use BolCom\RetailerApi\Model\ClientPoolInterface;
 use BolCom\RetailerApi\Handler\Order\GetAllOpenOrdersHandler;
 use BolCom\RetailerApi\Model\MessageBusInterface;
@@ -25,6 +26,7 @@ use BolCom\RetailerApi\Model\Order\Query\GetOrder;
 use BolCom\RetailerApi\Model\Rma\Command\HandleReturn;
 use BolCom\RetailerApi\Model\Rma\Query\GetAllReturns;
 use BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels;
+use BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel;
 
 class MessageBus implements MessageBusInterface
 {
@@ -47,7 +49,8 @@ class MessageBus implements MessageBusInterface
             CreateOrUpdateOffer::class => CreateOrUpdateOfferHandler::class,
             GetAllReturns::class => GetAllReturnsHandler::class,
             HandleReturn::class => HandleReturnHandler::class,
-            GetShippingLabels::class => GetShippingLabelsHandler::class
+            GetShippingLabels::class => GetShippingLabelsHandler::class,
+            GetShippingLabel::class => GetShippingLabelHandler::class
         ];
 
         $this->clientPool = $clientPool;
