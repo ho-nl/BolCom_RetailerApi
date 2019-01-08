@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
+namespace BolCom\RetailerApi\Test\Integration\Handler\Rma;
 
 use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Client\ClientConfig;
