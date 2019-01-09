@@ -18,7 +18,7 @@ final class ShippingLabel
     private $discount;
     private $shippingLabelCode;
 
-    public function __construct(\BolCom\RetailerApi\Model\Transport\TransporterCode $transporterCode, string $labelType, string $maxWeight, string $maxDimensions, float $retailerPrice, float $purchasePrice, float $discount, float $shippingLabelCode)
+    public function __construct(\BolCom\RetailerApi\Model\Transport\TransporterCode $transporterCode, string $labelType, string $maxWeight, string $maxDimensions, float $retailerPrice, float $purchasePrice, float $discount, string $shippingLabelCode)
     {
         $this->transporterCode = $transporterCode;
         $this->labelType = $labelType;
@@ -65,7 +65,7 @@ final class ShippingLabel
         return $this->discount;
     }
 
-    public function shippingLabelCode(): float
+    public function shippingLabelCode(): string
     {
         return $this->shippingLabelCode;
     }
@@ -105,7 +105,7 @@ final class ShippingLabel
         return new self($this->transporterCode, $this->labelType, $this->maxWeight, $this->maxDimensions, $this->retailerPrice, $this->purchasePrice, $discount, $this->shippingLabelCode);
     }
 
-    public function withShippingLabelCode(float $shippingLabelCode): ShippingLabel
+    public function withShippingLabelCode(string $shippingLabelCode): ShippingLabel
     {
         return new self($this->transporterCode, $this->labelType, $this->maxWeight, $this->maxDimensions, $this->retailerPrice, $this->purchasePrice, $this->discount, $shippingLabelCode);
     }
@@ -154,8 +154,8 @@ final class ShippingLabel
 
         $discount = $data['discount'];
 
-        if (! isset($data['shippingLabelCode']) || (! \is_float($data['shippingLabelCode']) && ! \is_int($data['shippingLabelCode']))) {
-            throw new \InvalidArgumentException("Key 'shippingLabelCode' is missing in data array or is not a float");
+        if (! isset($data['shippingLabelCode']) || ! \is_string($data['shippingLabelCode'])) {
+            throw new \InvalidArgumentException("Key 'shippingLabelCode' is missing in data array or is not a string");
         }
 
         $shippingLabelCode = $data['shippingLabelCode'];

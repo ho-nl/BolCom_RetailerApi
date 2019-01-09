@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\ShippingLabel {
         float $retailerPrice,
         float $purchasePrice,
         float $discount,
-        float $shippingLabelCode
+        string $shippingLabelCode
     } deriving (FromArray);
 
     data ShippingLabelList = ShippingLabelList {
