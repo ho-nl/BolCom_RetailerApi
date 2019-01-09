@@ -14,6 +14,10 @@ namespace BolCom\RetailerApi\Model\ProcessStatus {
         ?string $errorMessage,
         \BolCom\RetailerApi\Model\DateTime $createTimestamp
     } deriving (FromArray);
+
+    data ProcessStatuses = ProcessStatuses {
+        ProcessStatus[] $processStatuses
+    } deriving (FromArray);
 }
 
 namespace BolCom\RetailerApi\Model\ProcessStatus\Query {

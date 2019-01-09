@@ -11,6 +11,7 @@ use BolCom\RetailerApi\Handler\Offer\CreateOrUpdateOfferHandler;
 use BolCom\RetailerApi\Handler\Order\CancelOrderHandler;
 use BolCom\RetailerApi\Handler\Order\GetOrderHandler;
 use BolCom\RetailerApi\Handler\Order\ShipOrderItemHandler;
+use BolCom\RetailerApi\Handler\ProcessStatus\GetStatusByEntityHandler;
 use BolCom\RetailerApi\Handler\Rma\GetAllReturnsHandler;
 use BolCom\RetailerApi\Handler\Rma\HandleReturnHandler;
 use BolCom\RetailerApi\Handler\ShippingLabel\GetShippingLabelsHandler;
@@ -23,6 +24,7 @@ use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
 use BolCom\RetailerApi\Model\Order\Query\GetOrder;
+use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity;
 use BolCom\RetailerApi\Model\Rma\Command\HandleReturn;
 use BolCom\RetailerApi\Model\Rma\Query\GetAllReturns;
 use BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels;
@@ -50,7 +52,8 @@ class MessageBus implements MessageBusInterface
             GetAllReturns::class => GetAllReturnsHandler::class,
             HandleReturn::class => HandleReturnHandler::class,
             GetShippingLabels::class => GetShippingLabelsHandler::class,
-            GetShippingLabel::class => GetShippingLabelHandler::class
+            GetShippingLabel::class => GetShippingLabelHandler::class,
+            GetStatusByEntity::class => GetStatusByEntityHandler::class
         ];
 
         $this->clientPool = $clientPool;
