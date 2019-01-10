@@ -32,9 +32,11 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
     public function __invoke(GetShipmentList $getShipmentList): ?ShipmentList
     {
         $response = $this->client->get('shipments', [
-            'page' => $getShipmentList->page(),
-            'order-id' => $getShipmentList->orderid()->toString(),
-            'fulfilment-method' => $getShipmentList->fulfilmentMethod()->value(),
+            'query' => [
+                'page' => $getShipmentList->page(),
+                'order-id' => $getShipmentList->orderid()->toString(),
+                'fulfilment-method' => $getShipmentList->fulfilmentMethod()->value()
+            ],
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]

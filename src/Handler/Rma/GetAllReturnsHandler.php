@@ -31,9 +31,11 @@ class GetAllReturnsHandler implements GetAllReturnsHandlerInterface
     public function __invoke(GetAllReturns $getAllReturns): ?ReturnItemList
     {
         $response = $this->client->get('returns', [
-            'page' => $getAllReturns->page(),
-            'handled' => $getAllReturns->handled(),
-            'fulfilment-method' => $getAllReturns->fulfilmentMethod()->value(),
+            'query' => [
+                'page' => $getAllReturns->page(),
+                'handled' => $getAllReturns->handled(),
+                'fulfilment-method' => $getAllReturns->fulfilmentMethod()->value()
+            ],
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]

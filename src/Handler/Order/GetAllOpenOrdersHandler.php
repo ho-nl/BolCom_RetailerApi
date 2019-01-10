@@ -31,8 +31,10 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
     public function __invoke(GetAllOpenOrders $getAllOpenOrders): ?OrderList
     {
         $response = $this->client->get('orders', [
-            'page' => $getAllOpenOrders->page(),
-            'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value(),
+            'query' => [
+                'page' => $getAllOpenOrders->page(),
+                'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value()
+            ],
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]
