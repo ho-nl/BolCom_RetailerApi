@@ -14,12 +14,14 @@ final class Type
         'ORDER' => 'order',
         'ORDER_ITEM' => 'order_item',
         'RETURN_ITEM' => 'return_item',
+        'PROCESS_STATUS_CONFIRM_SHIPMENT' => 'process_status_confirm_shipment',
     ];
 
     public const CART = 'cart';
     public const ORDER = 'order';
     public const ORDER_ITEM = 'order_item';
     public const RETURN_ITEM = 'return_item';
+    public const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
 
     private $name;
     private $value;
@@ -48,6 +50,11 @@ final class Type
     public static function RETURN_ITEM(): self
     {
         return new self('RETURN_ITEM');
+    }
+
+    public static function PROCESS_STATUS_CONFIRM_SHIPMENT(): self
+    {
+        return new self('PROCESS_STATUS_CONFIRM_SHIPMENT');
     }
 
     public static function fromName(string $value): self

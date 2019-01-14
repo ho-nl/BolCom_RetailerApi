@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Handler\ProcessStatus;
 
 use BolCom\RetailerApi\Client;
-use BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus;
 use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessId;
 use BolCom\RetailerApi\Model\ProcessStatus\QueryHandler\GetStatusByProcessIdHandlerInterface;
+use GuzzleHttp\Promise\PromiseInterface;
 
 class GetStatusByProcessIdHandler implements GetStatusByProcessIdHandlerInterface
 {
@@ -28,14 +28,14 @@ class GetStatusByProcessIdHandler implements GetStatusByProcessIdHandlerInterfac
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetStatusByProcessId $getStatusByProcessId): ProcessStatus
+    public function __invoke(GetStatusByProcessId $getStatusByProcessId): PromiseInterface
     {
-        $response = $this->client->get("process-status/{$getStatusByProcessId->id()}", [
+        $response = $this->client->getAsync("process-status/{$getStatusByProcessId->id()}", [
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'
             ]
         ]);
 
-        return ProcessStatus::fromArray($response->getBody()->json());
+        return $response;
     }
 }
