@@ -7,9 +7,8 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Test\Integration\Handler\Transport;
 
-use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Client\ClientConfig;
-use BolCom\RetailerApi\Handler\Transport\GetShippingLabelHandler;
+use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel;
 use BolCom\RetailerApi\Model\Transport\TransportId;
 
@@ -19,10 +18,13 @@ class GetShippingLabelTest extends \PHPUnit\Framework\TestCase
     {
         $this->markTestSkipped('Unable to fetch shipping label, contacted bol.com about this issue.');
 
-        $handler = new GetShippingLabelHandler(
-            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
-        );
+        $clientPool = ClientPool::configure(new ClientConfig(
+            BOL_CLIENT_ID,
+            BOL_CLIENT_SECRET,
+            'https://api.bol.com/retailer-demo/'
+        ));
+        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $handler(GetShippingLabel::with(TransportId::fromScalar(312778947)));
+        $messageBus->dispatch(GetShippingLabel::with(TransportId::fromScalar(312778947)));
     }
 }

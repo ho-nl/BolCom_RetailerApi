@@ -7,9 +7,8 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
 
-use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Client\ClientConfig;
-use BolCom\RetailerApi\Handler\Order\CancelOrderHandler;
+use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\DateTime;
 use BolCom\RetailerApi\Model\Order\CancellationReason;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
@@ -19,11 +18,14 @@ class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke(): void
     {
-        $handler = new CancelOrderHandler(
-            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
-        );
+        $clientPool = ClientPool::configure(new ClientConfig(
+            BOL_CLIENT_ID,
+            BOL_CLIENT_SECRET,
+            'https://api.bol.com/retailer-demo/'
+        ));
+        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $handler(CancelOrder::with(
+        $messageBus->dispatch(CancelOrder::with(
             OrderItemId::fromString('6107434013'),
             DateTime::fromString((new \DateTime())->format(\DateTime::ATOM)),
             CancellationReason::REQUESTED_BY_CUSTOMER()

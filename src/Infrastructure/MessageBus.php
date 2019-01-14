@@ -7,7 +7,11 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Infrastructure;
 
+use BolCom\RetailerApi\Handler\Commission\GetCommissionHandler;
+use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
 use BolCom\RetailerApi\Handler\Offer\CreateOrUpdateOfferHandler;
+use BolCom\RetailerApi\Handler\Offer\DeleteOffersInBulkHandler;
+use BolCom\RetailerApi\Handler\Offer\GenerateOfferCsvHandler;
 use BolCom\RetailerApi\Handler\Order\CancelOrderHandler;
 use BolCom\RetailerApi\Handler\Order\GetOrderHandler;
 use BolCom\RetailerApi\Handler\Order\ShipOrderItemHandler;
@@ -21,8 +25,12 @@ use BolCom\RetailerApi\Handler\ShippingLabel\GetShippingLabelsHandler;
 use BolCom\RetailerApi\Handler\Transport\GetShippingLabelHandler;
 use BolCom\RetailerApi\Model\ClientPoolInterface;
 use BolCom\RetailerApi\Handler\Order\GetAllOpenOrdersHandler;
+use BolCom\RetailerApi\Model\Commission\Query\GetCommission;
+use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\MessageBusInterface;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer;
+use BolCom\RetailerApi\Model\Offer\Command\DeleteOffersInBulk;
+use BolCom\RetailerApi\Model\Offer\Command\GenerateOfferCvs;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
@@ -50,11 +58,15 @@ class MessageBus implements MessageBusInterface
     public function __construct(ClientPoolInterface $clientPool)
     {
         $this->handlerMapping = [
+            GetCommission::class => GetCommissionHandler::class,
+            GetCommissionList::class => GetCommissionListHandler::class,
             GetAllOpenOrders::class => GetAllOpenOrdersHandler::class,
             GetOrder::class => GetOrderHandler::class,
             CancelOrder::class => CancelOrderHandler::class,
             ShipOrderItem::class => ShipOrderItemHandler::class,
             CreateOrUpdateOffer::class => CreateOrUpdateOfferHandler::class,
+            DeleteOffersInBulk::class => DeleteOffersInBulkHandler::class,
+            GenerateOfferCvs::class=> GenerateOfferCsvHandler::class,
             GetAllReturns::class => GetAllReturnsHandler::class,
             HandleReturn::class => HandleReturnHandler::class,
             GetShippingLabels::class => GetShippingLabelsHandler::class,

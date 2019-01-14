@@ -7,9 +7,8 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
 
-use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Client\ClientConfig;
-use BolCom\RetailerApi\Handler\Order\GetOrderHandler;
+use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Order\OrderId;
 use BolCom\RetailerApi\Model\Order\Query\GetOrder;
 
@@ -17,10 +16,13 @@ class GetOrderHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke(): void
     {
-        $handler = new GetOrderHandler(
-            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, 'https://api.bol.com/retailer-demo/'))
-        );
+        $clientPool = ClientPool::configure(new ClientConfig(
+            BOL_CLIENT_ID,
+            BOL_CLIENT_SECRET,
+            'https://api.bol.com/retailer-demo/'
+        ));
+        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $handler(GetOrder::with(OrderId::fromString('7616222250')));
+        $messageBus->dispatch(GetOrder::with(OrderId::fromString('7616222250')));
     }
 }

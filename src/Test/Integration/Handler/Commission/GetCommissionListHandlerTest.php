@@ -7,9 +7,8 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Test\Integration\Handler\Commission;
 
-use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Client\ClientConfig;
-use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
+use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Commission\CommissionQuery;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\Offer\Condition;
@@ -21,11 +20,10 @@ class GetCommissionListHandlerTest extends \PHPUnit\Framework\TestCase
      */
     public function should_get_commission_list_back()
     {
-        $handler = new GetCommissionListHandler(
-            new Client(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET))
-        );
+        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET));
+        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $commissions = $handler(GetCommissionList::with(
+        $commissions = $messageBus->dispatch(GetCommissionList::with(
             CommissionQuery::fromArray([
                 'ean' => '9781785882364',
                 'condition' => Condition::IS_NEW,
