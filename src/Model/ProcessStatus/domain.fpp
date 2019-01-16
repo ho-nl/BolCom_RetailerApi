@@ -27,7 +27,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus\Query {
         int $page
     } deriving (Query);
 
-    data GetStatusByProcessId = GetStatusByProcessId {
-        int $id
+    data GetStatusByProcessIds = GetStatusByProcessIds {
+        int[] $ids
     } deriving (Query);
 }

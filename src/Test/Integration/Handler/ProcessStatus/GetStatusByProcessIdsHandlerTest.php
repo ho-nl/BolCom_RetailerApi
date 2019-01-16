@@ -9,9 +9,9 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\ProcessStatus;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
-use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessId;
+use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessIds;
 
-class GetStatusByProcessIdHandlerTest extends \PHPUnit\Framework\TestCase
+class GetStatusByProcessIdsHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke(): void
     {
@@ -24,6 +24,6 @@ class GetStatusByProcessIdHandlerTest extends \PHPUnit\Framework\TestCase
         ));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetStatusByProcessId::with(6107432387));
+        $messageBus->dispatch(GetStatusByProcessIds::with(...[6107432387]));
     }
 }
