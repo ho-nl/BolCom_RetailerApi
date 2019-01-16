@@ -43,6 +43,17 @@ class GetAllReturnsHandler implements GetAllReturnsHandlerInterface
 
         $response = $response->getBody()->json();
 
-        return ! empty($response) ? ReturnItemList::fromArray($response) : null;
+        if (! empty($response)) {
+            foreach ($response['returns'] as &$return) {
+                // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
+                // Convert this timestamp into ISO 8601 format.
+                $return['registrationDateTime'] = (new \DateTime($return['registrationDateTime']))
+                    ->format(\DateTime::ATOM);
+            }
+
+            return ReturnItemList::fromArray($response);
+        }
+
+        return null;
     }
 }
