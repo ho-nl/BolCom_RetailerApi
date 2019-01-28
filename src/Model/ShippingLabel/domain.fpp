@@ -17,9 +17,6 @@ namespace BolCom\RetailerApi\Model\ShippingLabel {
     } deriving (FromArray);
 
     data ShippingLabelPdf = String deriving (FromString, ToString);
-    data ShippingLabelPdfList = ShippingLabelPdfList {
-        ShippingLabelPdf[] $pdfs
-    } deriving (FromArray);
 }
 
 namespace BolCom\RetailerApi\Model\ShippingLabel\Query {

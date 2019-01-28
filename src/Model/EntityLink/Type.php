@@ -13,6 +13,7 @@ final class Type
         'CART' => 'cart',
         'ORDER' => 'order',
         'ORDER_ITEM' => 'order_item',
+        'SHIPMENT' => 'shipment',
         'RETURN_ITEM' => 'return_item',
         'PROCESS_STATUS_CONFIRM_SHIPMENT' => 'process_status_confirm_shipment',
     ];
@@ -20,6 +21,7 @@ final class Type
     public const CART = 'cart';
     public const ORDER = 'order';
     public const ORDER_ITEM = 'order_item';
+    public const SHIPMENT = 'shipment';
     public const RETURN_ITEM = 'return_item';
     public const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
 
@@ -45,6 +47,11 @@ final class Type
     public static function ORDER_ITEM(): self
     {
         return new self('ORDER_ITEM');
+    }
+
+    public static function SHIPMENT(): self
+    {
+        return new self('SHIPMENT');
     }
 
     public static function RETURN_ITEM(): self

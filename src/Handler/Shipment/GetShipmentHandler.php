@@ -36,6 +36,13 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
             ]
         ]);
 
-        return Shipment::fromArray($response->getBody()->json());
+        $response = $response->getBody()->json();
+        $response['shipmentItems'] = array_map(function (array $item) {
+            $item['latestDeliveryDate'] = (new \DateTime($item['latestDeliveryDate']))->format('Y-m-d');
+
+            return $item;
+        }, $response['shipmentItems']);
+
+        return Shipment::fromArray($response);
     }
 }

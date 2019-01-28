@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Handler\Transport;
 
 use BolCom\RetailerApi\Client;
-use BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdfList;
+use BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdf;
 use BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel;
 use BolCom\RetailerApi\Model\Transport\QueryHandler\GetShippingLabelHandlerInterface;
 
@@ -28,7 +28,7 @@ class GetShippingLabelHandler implements GetShippingLabelHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetShippingLabel $shippingLabel): ShippingLabelPdfList
+    public function __invoke(GetShippingLabel $shippingLabel): ShippingLabelPdf
     {
         $response = $this->client->get("transports/{$shippingLabel->transportId()->toScalar()}/shipping-label", [
             'headers' => [
@@ -36,6 +36,6 @@ class GetShippingLabelHandler implements GetShippingLabelHandlerInterface
             ]
         ]);
 
-        return ShippingLabelPdfList::fromArray($response->getBody()->json());
+        return ShippingLabelPdf::fromString((string) $response->getBody());
     }
 }

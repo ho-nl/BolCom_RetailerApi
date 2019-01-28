@@ -11,7 +11,7 @@ final class CustomerDetails
 {
     private $salutationCode;
     private $firstName;
-    private $surName;
+    private $surname;
     private $streetName;
     private $houseNumber;
     private $houseNumberExtended;
@@ -21,15 +21,15 @@ final class CustomerDetails
     private $city;
     private $countryCode;
     private $email;
-    private $deliveryPhoneNumber;
     private $company;
     private $vatNumber;
+    private $deliveryPhoneNumber;
 
-    public function __construct(string $salutationCode, string $firstName, string $surName, string $streetName, string $houseNumber, string $houseNumberExtended, string $addressSupplement, string $extraAddressInformation, string $zipCode, string $city, string $countryCode, string $email, string $deliveryPhoneNumber, string $company, string $vatNumber)
+    public function __construct(string $salutationCode, string $firstName, string $surname, string $streetName, string $houseNumber, ?string $houseNumberExtended, ?string $addressSupplement, ?string $extraAddressInformation, string $zipCode, string $city, string $countryCode, string $email, ?string $company, ?string $vatNumber, ?string $deliveryPhoneNumber)
     {
         $this->salutationCode = $salutationCode;
         $this->firstName = $firstName;
-        $this->surName = $surName;
+        $this->surname = $surname;
         $this->streetName = $streetName;
         $this->houseNumber = $houseNumber;
         $this->houseNumberExtended = $houseNumberExtended;
@@ -39,9 +39,9 @@ final class CustomerDetails
         $this->city = $city;
         $this->countryCode = $countryCode;
         $this->email = $email;
-        $this->deliveryPhoneNumber = $deliveryPhoneNumber;
         $this->company = $company;
         $this->vatNumber = $vatNumber;
+        $this->deliveryPhoneNumber = $deliveryPhoneNumber;
     }
 
     public function salutationCode(): string
@@ -54,9 +54,9 @@ final class CustomerDetails
         return $this->firstName;
     }
 
-    public function surName(): string
+    public function surname(): string
     {
-        return $this->surName;
+        return $this->surname;
     }
 
     public function streetName(): string
@@ -69,17 +69,17 @@ final class CustomerDetails
         return $this->houseNumber;
     }
 
-    public function houseNumberExtended(): string
+    public function houseNumberExtended(): ?string
     {
         return $this->houseNumberExtended;
     }
 
-    public function addressSupplement(): string
+    public function addressSupplement(): ?string
     {
         return $this->addressSupplement;
     }
 
-    public function extraAddressInformation(): string
+    public function extraAddressInformation(): ?string
     {
         return $this->extraAddressInformation;
     }
@@ -104,94 +104,94 @@ final class CustomerDetails
         return $this->email;
     }
 
-    public function deliveryPhoneNumber(): string
-    {
-        return $this->deliveryPhoneNumber;
-    }
-
-    public function company(): string
+    public function company(): ?string
     {
         return $this->company;
     }
 
-    public function vatNumber(): string
+    public function vatNumber(): ?string
     {
         return $this->vatNumber;
     }
 
+    public function deliveryPhoneNumber(): ?string
+    {
+        return $this->deliveryPhoneNumber;
+    }
+
     public function withSalutationCode(string $salutationCode): CustomerDetails
     {
-        return new self($salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withFirstName(string $firstName): CustomerDetails
     {
-        return new self($this->salutationCode, $firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withSurName(string $surName): CustomerDetails
+    public function withSurname(string $surname): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withStreetName(string $streetName): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withHouseNumber(string $houseNumber): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withHouseNumberExtended(string $houseNumberExtended): CustomerDetails
+    public function withHouseNumberExtended(?string $houseNumberExtended): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withAddressSupplement(string $addressSupplement): CustomerDetails
+    public function withAddressSupplement(?string $addressSupplement): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withExtraAddressInformation(string $extraAddressInformation): CustomerDetails
+    public function withExtraAddressInformation(?string $extraAddressInformation): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withZipCode(string $zipCode): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withCity(string $city): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withCountryCode(string $countryCode): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
     public function withEmail(string $email): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $email, $this->deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withDeliveryPhoneNumber(string $deliveryPhoneNumber): CustomerDetails
+    public function withCompany(?string $company): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $deliveryPhoneNumber, $this->company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withCompany(string $company): CustomerDetails
+    public function withVatNumber(?string $vatNumber): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $company, $this->vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withVatNumber(string $vatNumber): CustomerDetails
+    public function withDeliveryPhoneNumber(?string $deliveryPhoneNumber): CustomerDetails
     {
-        return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->deliveryPhoneNumber, $this->company, $vatNumber);
+        return new self($this->salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $deliveryPhoneNumber);
     }
 
     public static function fromArray(array $data): CustomerDetails
@@ -208,11 +208,11 @@ final class CustomerDetails
 
         $firstName = $data['firstName'];
 
-        if (! isset($data['surName']) || ! \is_string($data['surName'])) {
-            throw new \InvalidArgumentException("Key 'surName' is missing in data array or is not a string");
+        if (! isset($data['surname']) || ! \is_string($data['surname'])) {
+            throw new \InvalidArgumentException("Key 'surname' is missing in data array or is not a string");
         }
 
-        $surName = $data['surName'];
+        $surname = $data['surname'];
 
         if (! isset($data['streetName']) || ! \is_string($data['streetName'])) {
             throw new \InvalidArgumentException("Key 'streetName' is missing in data array or is not a string");
@@ -226,23 +226,35 @@ final class CustomerDetails
 
         $houseNumber = $data['houseNumber'];
 
-        if (! isset($data['houseNumberExtended']) || ! \is_string($data['houseNumberExtended'])) {
-            throw new \InvalidArgumentException("Key 'houseNumberExtended' is missing in data array or is not a string");
+        if (isset($data['houseNumberExtended'])) {
+            if (! \is_string($data['houseNumberExtended'])) {
+                throw new \InvalidArgumentException("Value for 'houseNumberExtended' is not a string in data array");
+            }
+
+            $houseNumberExtended = $data['houseNumberExtended'];
+        } else {
+            $houseNumberExtended = null;
         }
 
-        $houseNumberExtended = $data['houseNumberExtended'];
+        if (isset($data['addressSupplement'])) {
+            if (! \is_string($data['addressSupplement'])) {
+                throw new \InvalidArgumentException("Value for 'addressSupplement' is not a string in data array");
+            }
 
-        if (! isset($data['addressSupplement']) || ! \is_string($data['addressSupplement'])) {
-            throw new \InvalidArgumentException("Key 'addressSupplement' is missing in data array or is not a string");
+            $addressSupplement = $data['addressSupplement'];
+        } else {
+            $addressSupplement = null;
         }
 
-        $addressSupplement = $data['addressSupplement'];
+        if (isset($data['extraAddressInformation'])) {
+            if (! \is_string($data['extraAddressInformation'])) {
+                throw new \InvalidArgumentException("Value for 'extraAddressInformation' is not a string in data array");
+            }
 
-        if (! isset($data['extraAddressInformation']) || ! \is_string($data['extraAddressInformation'])) {
-            throw new \InvalidArgumentException("Key 'extraAddressInformation' is missing in data array or is not a string");
+            $extraAddressInformation = $data['extraAddressInformation'];
+        } else {
+            $extraAddressInformation = null;
         }
-
-        $extraAddressInformation = $data['extraAddressInformation'];
 
         if (! isset($data['zipCode']) || ! \is_string($data['zipCode'])) {
             throw new \InvalidArgumentException("Key 'zipCode' is missing in data array or is not a string");
@@ -268,28 +280,40 @@ final class CustomerDetails
 
         $email = $data['email'];
 
-        if (! isset($data['deliveryPhoneNumber']) || ! \is_string($data['deliveryPhoneNumber'])) {
-            throw new \InvalidArgumentException("Key 'deliveryPhoneNumber' is missing in data array or is not a string");
+        if (isset($data['company'])) {
+            if (! \is_string($data['company'])) {
+                throw new \InvalidArgumentException("Value for 'company' is not a string in data array");
+            }
+
+            $company = $data['company'];
+        } else {
+            $company = null;
         }
 
-        $deliveryPhoneNumber = $data['deliveryPhoneNumber'];
+        if (isset($data['vatNumber'])) {
+            if (! \is_string($data['vatNumber'])) {
+                throw new \InvalidArgumentException("Value for 'vatNumber' is not a string in data array");
+            }
 
-        if (! isset($data['company']) || ! \is_string($data['company'])) {
-            throw new \InvalidArgumentException("Key 'company' is missing in data array or is not a string");
+            $vatNumber = $data['vatNumber'];
+        } else {
+            $vatNumber = null;
         }
 
-        $company = $data['company'];
+        if (isset($data['deliveryPhoneNumber'])) {
+            if (! \is_string($data['deliveryPhoneNumber'])) {
+                throw new \InvalidArgumentException("Value for 'deliveryPhoneNumber' is not a string in data array");
+            }
 
-        if (! isset($data['vatNumber']) || ! \is_string($data['vatNumber'])) {
-            throw new \InvalidArgumentException("Key 'vatNumber' is missing in data array or is not a string");
+            $deliveryPhoneNumber = $data['deliveryPhoneNumber'];
+        } else {
+            $deliveryPhoneNumber = null;
         }
-
-        $vatNumber = $data['vatNumber'];
 
         return new self(
             $salutationCode,
             $firstName,
-            $surName,
+            $surname,
             $streetName,
             $houseNumber,
             $houseNumberExtended,
@@ -299,9 +323,9 @@ final class CustomerDetails
             $city,
             $countryCode,
             $email,
-            $deliveryPhoneNumber,
             $company,
-            $vatNumber
+            $vatNumber,
+            $deliveryPhoneNumber
         );
     }
 }

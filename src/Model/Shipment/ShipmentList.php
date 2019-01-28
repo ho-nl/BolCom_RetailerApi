@@ -12,15 +12,15 @@ final class ShipmentList
     private $shipments;
 
     /**
-     * @param \BolCom\RetailerApi\Model\Shipment\Shipment[]|null $shipments
+     * @param \BolCom\RetailerApi\Model\Shipment\ShipmentListItem[]|null $shipments
      */
-    public function __construct(Shipment ...$shipments)
+    public function __construct(ShipmentListItem ...$shipments)
     {
         $this->shipments = $shipments;
     }
 
     /**
-     * @return \BolCom\RetailerApi\Model\Shipment\Shipment[]
+     * @return \BolCom\RetailerApi\Model\Shipment\ShipmentListItem[]
      */
     public function shipments(): array
     {
@@ -28,7 +28,7 @@ final class ShipmentList
     }
 
     /**
-     * @param \BolCom\RetailerApi\Model\Shipment\Shipment[]|null $shipments
+     * @param \BolCom\RetailerApi\Model\Shipment\ShipmentListItem[]|null $shipments
      * @return \BolCom\RetailerApi\Model\Shipment\ShipmentList
      */
     public function withShipments(array $shipments): ShipmentList
@@ -49,7 +49,7 @@ final class ShipmentList
                 throw new \InvalidArgumentException("Key 'shipments' in data array or is not an array of arrays");
             }
 
-            $shipments[] = Shipment::fromArray($__value);
+            $shipments[] = ShipmentListItem::fromArray($__value);
         }
 
         return new self(...$shipments);

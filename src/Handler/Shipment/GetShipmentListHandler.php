@@ -34,7 +34,6 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
         $response = $this->client->get('shipments', [
             'query' => [
                 'page' => $getShipmentList->page(),
-                'order-id' => $getShipmentList->orderid()->toString(),
                 'fulfilment-method' => $getShipmentList->fulfilmentMethod()->value()
             ],
             'headers' => [
