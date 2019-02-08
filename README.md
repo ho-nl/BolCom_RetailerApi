@@ -119,7 +119,7 @@ $order = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetOrder::w
 ```
 
 #### ShipOrderItemHandler
-Either provide `Transport` or `ShippingLabelCode`, not both. @Todo, Implement in code.
+Either provide Transport or ShippingLabelCode, not both.
 
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */

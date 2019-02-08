@@ -24,9 +24,6 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         ));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        // @todo; Conflicting transport method: Either provide Transport or ShippingLabelCode.
-        // Add checks when buying ShippingLabelCode is being implemented.
-
         $messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
@@ -72,6 +69,27 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
             'Shipment Reference',
             'PLR00000002',
             null
+        ));
+    }
+
+    public function testShippingLabelCodeAndTransportInstruction(): void
+    {
+        $clientPool = ClientPool::configure(new ClientConfig(
+            BOL_CLIENT_ID,
+            BOL_CLIENT_SECRET,
+            'https://api.bol.com/retailer-demo/'
+        ));
+        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+
+        $this->expectException(\RuntimeException::class);
+        $messageBus->dispatch(ShipOrderItem::with(
+            OrderItemId::fromString('6107434013'),
+            'Shipment Reference',
+            'PLR00000002',
+            TransportInstruction::fromArray([
+                'transporterCode' => 'TNT',
+                'trackAndTrace' => '123456789'
+            ])
         ));
     }
 }

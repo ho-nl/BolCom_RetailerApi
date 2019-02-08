@@ -39,8 +39,12 @@ class ShipOrderItemHandler implements ShipOrderItemHandlerInterface
             $payload['transport']['trackAndTrace'] = '';
         }
 
-        // @todo; Conflicting transport method: Either provide Transport or ShippingLabelCode.
-        // Add checks when buying ShippingLabelCode is being implemented.
+        if ($payload['shippingLabelCode'] !== null && $payload['transport'] !== null) {
+            throw new \RuntimeException(
+                'Conflicting transport method: Either provide Transport or ShippingLabelCode. The current request contains both.' // @codingStandardsIgnoreLine
+            );
+        }
+
         $response = $this->client->put("orders/{$orderItem->orderItemId()->toString()}/shipment", [
             'json' => $payload,
             'headers' => [
