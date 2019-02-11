@@ -28,7 +28,7 @@ class GetStatusByEntityHandler implements GetStatusByEntityHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetStatusByEntity $getStatusByEntity): ?ProcessStatuses
+    public function __invoke(GetStatusByEntity $getStatusByEntity)
     {
         $response = $this->client->get('process-status', [
             'query' => [

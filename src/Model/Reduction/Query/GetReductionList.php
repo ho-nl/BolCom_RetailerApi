@@ -11,11 +11,11 @@ final class GetReductionList extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Reduction\Query\GetReductionList';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Reduction\Query\GetReductionList';
 
     protected $messageName = self::MESSAGE_NAME;
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         $this->payload = $payload;
     }

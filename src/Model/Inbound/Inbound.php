@@ -38,7 +38,7 @@ final class Inbound
      * @param \BolCom\RetailerApi\Model\Inbound\StateTransition[]|null $stateTransitions
      * @param \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter
      */
-    public function __construct(InboundId $id, Reference $reference, ?\BolCom\RetailerApi\Model\DateTime $creationDate, State $state, bool $labellingService, int $announcedBSKUs, int $announcedQuantity, int $receivedBSKUs, int $receivedQuantity, Timeslot $timeslot, array $products, array $stateTransitions, Transporter $fbbTransporter)
+    public function __construct(InboundId $id, Reference $reference, \BolCom\RetailerApi\Model\DateTime $creationDate = null, State $state, bool $labellingService, int $announcedBSKUs, int $announcedQuantity, int $receivedBSKUs, int $receivedQuantity, Timeslot $timeslot, array $products, array $stateTransitions, Transporter $fbbTransporter)
     {
         $this->id = $id;
         $this->reference = $reference;
@@ -79,7 +79,7 @@ final class Inbound
         return $this->reference;
     }
 
-    public function creationDate(): ?\BolCom\RetailerApi\Model\DateTime
+    public function creationDate()
     {
         return $this->creationDate;
     }
@@ -150,7 +150,7 @@ final class Inbound
         return new self($this->id, $reference, $this->creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $this->timeslot, $this->products, $this->stateTransitions, $this->fbbTransporter);
     }
 
-    public function withCreationDate(?\BolCom\RetailerApi\Model\DateTime $creationDate): Inbound
+    public function withCreationDate(\BolCom\RetailerApi\Model\DateTime $creationDate = null): Inbound
     {
         return new self($this->id, $this->reference, $creationDate, $this->state, $this->labellingService, $this->announcedBSKUs, $this->announcedQuantity, $this->receivedBSKUs, $this->receivedQuantity, $this->timeslot, $this->products, $this->stateTransitions, $this->fbbTransporter);
     }

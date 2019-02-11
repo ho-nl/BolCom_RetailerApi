@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model;
 
 interface ClientPoolInterface
 {
-    public const DEFAULT_CLIENT_NAME = 'default';
+    const DEFAULT_CLIENT_NAME = 'default';
 
     /**
      * @return array

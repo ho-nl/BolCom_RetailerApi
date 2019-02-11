@@ -28,7 +28,7 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetAllOpenOrders $getAllOpenOrders): ?OrderList
+    public function __invoke(GetAllOpenOrders $getAllOpenOrders)
     {
         $response = $this->client->get('orders', [
             'query' => [

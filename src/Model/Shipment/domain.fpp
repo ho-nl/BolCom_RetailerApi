@@ -54,7 +54,3 @@ namespace BolCom\RetailerApi\Model\Shipment\Query {
         \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
     } deriving (Query);
 }
-
-namespace BolCom\RetailerApi\Model\Shipment\Command {
-
-}

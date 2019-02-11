@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Offer;
 
 final class DeliveryCode
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'DC24uurs23' => '24uurs-23',
         'DC24uurs22' => '24uurs-22',
         'DC24uurs21' => '24uurs-21',
@@ -31,25 +31,25 @@ final class DeliveryCode
         'DCMijnLeverbelofte' => 'MijnLeverbelofte',
     ];
 
-    public const DC24uurs23 = '24uurs-23';
-    public const DC24uurs22 = '24uurs-22';
-    public const DC24uurs21 = '24uurs-21';
-    public const DC24uurs20 = '24uurs-20';
-    public const DC24uurs19 = '24uurs-19';
-    public const DC24uurs18 = '24uurs-18';
-    public const DC24uurs17 = '24uurs-17';
-    public const DC24uurs16 = '24uurs-16';
-    public const DC24uurs15 = '24uurs-15';
-    public const DC24uurs14 = '24uurs-14';
-    public const DC24uurs13 = '24uurs-13';
-    public const DC24uurs12 = '24uurs-12';
-    public const DC12d = '1-2d';
-    public const DC23d = '2-3d';
-    public const DC34d = '3-4d';
-    public const DC35d = '3-5d';
-    public const DC48d = '4-8d';
-    public const DC18d = '1-8d';
-    public const DCMijnLeverbelofte = 'MijnLeverbelofte';
+    const DC24uurs23 = '24uurs-23';
+    const DC24uurs22 = '24uurs-22';
+    const DC24uurs21 = '24uurs-21';
+    const DC24uurs20 = '24uurs-20';
+    const DC24uurs19 = '24uurs-19';
+    const DC24uurs18 = '24uurs-18';
+    const DC24uurs17 = '24uurs-17';
+    const DC24uurs16 = '24uurs-16';
+    const DC24uurs15 = '24uurs-15';
+    const DC24uurs14 = '24uurs-14';
+    const DC24uurs13 = '24uurs-13';
+    const DC24uurs12 = '24uurs-12';
+    const DC12d = '1-2d';
+    const DC23d = '2-3d';
+    const DC34d = '3-4d';
+    const DC35d = '3-5d';
+    const DC48d = '4-8d';
+    const DC18d = '1-8d';
+    const DCMijnLeverbelofte = 'MijnLeverbelofte';
 
     private $name;
     private $value;

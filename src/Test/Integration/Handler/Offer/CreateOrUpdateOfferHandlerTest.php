@@ -17,7 +17,7 @@ use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
 
 class CreateOrUpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);

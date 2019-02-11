@@ -30,7 +30,7 @@ class CreateOrUpdateOfferHandler implements CreateOrUpdateOfferHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(CreateOrUpdateOffer $createOrUpdateOffer): void
+    public function __invoke(CreateOrUpdateOffer $createOrUpdateOffer)
     {
         $this->client->put('offers', [
             'json' => $createOrUpdateOffer->payload(),

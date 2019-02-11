@@ -16,7 +16,7 @@ use BolCom\RetailerApi\Model\Order\OrderItemId;
 
 class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,

@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Order;
 
 final class CancellationReason
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'OUT_OF_STOCK' => 'OUT_OF_STOCK',
         'REQUESTED_BY_CUSTOMER' => 'REQUESTED_BY_CUSTOMER',
         'BAD_CONDITION' => 'BAD_CONDITION',
@@ -24,18 +24,18 @@ final class CancellationReason
         'OTHER' => 'OTHER',
     ];
 
-    public const OUT_OF_STOCK = 'OUT_OF_STOCK';
-    public const REQUESTED_BY_CUSTOMER = 'REQUESTED_BY_CUSTOMER';
-    public const BAD_CONDITION = 'BAD_CONDITION';
-    public const HIGHER_SHIPCOST = 'HIGHER_SHIPCOST';
-    public const INCORRECT_PRICE = 'INCORRECT_PRICE';
-    public const NOT_AVAIL_IN_TIME = 'NOT_AVAIL_IN_TIME';
-    public const NO_BOL_GUARANTEE = 'NO_BOL_GUARANTEE';
-    public const ORDERED_TWICE = 'ORDERED_TWICE';
-    public const RETAIN_ITEM = 'RETAIN_ITEM';
-    public const TECH_ISSUE = 'TECH_ISSUE';
-    public const UNFINDABLE_ITEM = 'UNFINDABLE_ITEM';
-    public const OTHER = 'OTHER';
+    const OUT_OF_STOCK = 'OUT_OF_STOCK';
+    const REQUESTED_BY_CUSTOMER = 'REQUESTED_BY_CUSTOMER';
+    const BAD_CONDITION = 'BAD_CONDITION';
+    const HIGHER_SHIPCOST = 'HIGHER_SHIPCOST';
+    const INCORRECT_PRICE = 'INCORRECT_PRICE';
+    const NOT_AVAIL_IN_TIME = 'NOT_AVAIL_IN_TIME';
+    const NO_BOL_GUARANTEE = 'NO_BOL_GUARANTEE';
+    const ORDERED_TWICE = 'ORDERED_TWICE';
+    const RETAIN_ITEM = 'RETAIN_ITEM';
+    const TECH_ISSUE = 'TECH_ISSUE';
+    const UNFINDABLE_ITEM = 'UNFINDABLE_ITEM';
+    const OTHER = 'OTHER';
 
     private $name;
     private $value;

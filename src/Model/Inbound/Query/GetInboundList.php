@@ -11,41 +11,41 @@ final class GetInboundList extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetInboundList';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetInboundList';
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function reference(): ?\BolCom\RetailerApi\Model\Inbound\Reference
+    public function reference()
     {
         return isset($this->payload['reference']) ? \BolCom\RetailerApi\Model\Inbound\Reference::fromString($this->payload['reference']) : null;
     }
 
-    public function bsku(): ?\BolCom\RetailerApi\Model\Inbound\BSku
+    public function bsku()
     {
         return isset($this->payload['bsku']) ? \BolCom\RetailerApi\Model\Inbound\BSku::fromString($this->payload['bsku']) : null;
     }
 
-    public function creationStart(): ?\BolCom\RetailerApi\Model\Date
+    public function creationStart()
     {
         return isset($this->payload['creationStart']) ? \BolCom\RetailerApi\Model\Date::fromString($this->payload['creationStart']) : null;
     }
 
-    public function creationEnd(): ?\BolCom\RetailerApi\Model\Date
+    public function creationEnd()
     {
         return isset($this->payload['creationEnd']) ? \BolCom\RetailerApi\Model\Date::fromString($this->payload['creationEnd']) : null;
     }
 
-    public function state(): ?\BolCom\RetailerApi\Model\Inbound\State
+    public function state()
     {
         return isset($this->payload['state']) ? \BolCom\RetailerApi\Model\Inbound\State::fromValue($this->payload['state']) : null;
     }
 
-    public function page(): ?int
+    public function page()
     {
         return $this->payload['page'] ?? null;
     }
 
-    public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, ?\BolCom\RetailerApi\Model\Inbound\BSku $bsku, ?\BolCom\RetailerApi\Model\Date $creationStart, ?\BolCom\RetailerApi\Model\Date $creationEnd, ?\BolCom\RetailerApi\Model\Inbound\State $state, ?int $page): GetInboundList
+    public static function with(\BolCom\RetailerApi\Model\Inbound\Reference $reference = null, \BolCom\RetailerApi\Model\Inbound\BSku $bsku = null, \BolCom\RetailerApi\Model\Date $creationStart = null, \BolCom\RetailerApi\Model\Date $creationEnd = null, \BolCom\RetailerApi\Model\Inbound\State $state = null, int $page = null): GetInboundList
     {
         return new self([
             'reference' => null === $reference ? null : $reference->toString(),
@@ -57,7 +57,7 @@ final class GetInboundList extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (isset($payload['reference']) && ! \is_string($payload['reference'])) {
             throw new \InvalidArgumentException("Value for 'reference' is not a string in payload");

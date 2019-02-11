@@ -11,7 +11,7 @@ final class CreateOrUpdateOffer extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\CreateOrUpdateOffer';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -45,7 +45,7 @@ public static function with(\BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert 
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['retailerOffer']) || ! \is_array($payload['retailerOffer'])) {
             throw new \InvalidArgumentException("Key 'retailerOffer' is missing in payload or is not an array");

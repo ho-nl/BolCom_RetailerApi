@@ -19,7 +19,7 @@ class GetCommissionHandlerTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      */
-    public function should_get_commission_back(): void
+    public function should_get_commission_back()
     {
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);

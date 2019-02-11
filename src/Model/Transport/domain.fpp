@@ -53,9 +53,9 @@ namespace BolCom\RetailerApi\Model\Transport {
 
 namespace BolCom\RetailerApi\Model\Transport\Command {
     data AddTransportInformation = AddTransportInformation {
-        TransportId $transportId,
-        TransporterCode $transporterCode,
-        ?TrackAndTrace $trackAndTrace
+        \BolCom\RetailerApi\Model\Transport\TransportId $transportId,
+        \BolCom\RetailerApi\Model\Transport\TransporterCode $transporterCode,
+        ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace
     };
 }
 

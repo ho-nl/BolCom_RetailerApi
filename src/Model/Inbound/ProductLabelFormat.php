@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Inbound;
 
 final class ProductLabelFormat
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'AVERY_J8159' => 'AVERY_J8159',
         'AVERY_J8160' => 'AVERY_J8160',
         'AVERY_3474' => 'AVERY_3474',
@@ -18,12 +18,12 @@ final class ProductLabelFormat
         'ZEBRA_Z_PERFORM_1000T' => 'ZEBRA_Z_PERFORM_1000T',
     ];
 
-    public const AVERY_J8159 = 'AVERY_J8159';
-    public const AVERY_J8160 = 'AVERY_J8160';
-    public const AVERY_3474 = 'AVERY_3474';
-    public const DYMO_99012 = 'DYMO_99012';
-    public const BROTHER_DK11208D = 'BROTHER_DK11208D';
-    public const ZEBRA_Z_PERFORM_1000T = 'ZEBRA_Z_PERFORM_1000T';
+    const AVERY_J8159 = 'AVERY_J8159';
+    const AVERY_J8160 = 'AVERY_J8160';
+    const AVERY_3474 = 'AVERY_3474';
+    const DYMO_99012 = 'DYMO_99012';
+    const BROTHER_DK11208D = 'BROTHER_DK11208D';
+    const ZEBRA_Z_PERFORM_1000T = 'ZEBRA_Z_PERFORM_1000T';
 
     private $name;
     private $value;

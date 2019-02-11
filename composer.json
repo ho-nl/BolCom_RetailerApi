@@ -1,18 +1,27 @@
 {
-  "name": "bol-com/retailer-api",
-  "type": "library",
-  "description": "API Package to talk to the bol.com API.",
-  "license": "Apache",
-  "require": {
-    "guzzlehttp/guzzle": "~6.0",
-    "kamermans/guzzle-oauth2-subscriber": "^1.0",
-    "caseyamcl/guzzle_retry_middleware": "^2.2",
-    "php": "^7.1",
-    "prooph/common" : "^4.2.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "BolCom\\RetailerApi\\": "src"
+    "name": "bol-com/retailer-api",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Reach Digital",
+            "email": "info@reachdigital.nl",
+            "homepage": "https://www.reachdigital.nl/"
+        }
+    ],
+    "description": "API Package to talk to the bol.com API.",
+    "license": "Apache",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "kamermans/guzzle-oauth2-subscriber": "^1.0",
+        "caseyamcl/guzzle_retry_middleware": "^2.2",
+        "php": "^7.0",
+        "ramsey/uuid": "^3.6.0",
+        "beberlei/assert": "^2.7.1||^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BolCom\\RetailerApi\\": "src",
+            "Prooph\\Common\\": "prooph/common"
+        }
     }
-  }
 }

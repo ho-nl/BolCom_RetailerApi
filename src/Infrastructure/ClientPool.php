@@ -31,8 +31,10 @@ class ClientPool implements ClientPoolInterface
      * @param string $name
      *
      * @param ClientInterface $client
+     *
+     * @return void
      */
-    private function add(string $name, ClientInterface $client): void
+    private function add(string $name, ClientInterface $client)
     {
         $this->clients[$name] = $client;
     }

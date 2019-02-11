@@ -12,5 +12,10 @@ use BolCom\RetailerApi\Model\Rma\ReturnItemList;
 
 interface GetAllReturnsHandlerInterface
 {
-    public function __invoke(GetAllReturns $getAllReturns): ?ReturnItemList;
+    /**
+     * @param GetAllReturns $getAllReturns
+     *
+     * @return ReturnItemList|null
+     */
+    public function __invoke(GetAllReturns $getAllReturns);
 }

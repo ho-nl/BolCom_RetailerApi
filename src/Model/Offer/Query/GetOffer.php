@@ -11,7 +11,7 @@ final class GetOffer extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOffer';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOffer';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -27,7 +27,7 @@ final class GetOffer extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['retailerOfferIdentifier']) || ! \is_array($payload['retailerOfferIdentifier'])) {
             throw new \InvalidArgumentException("Key 'retailerOfferIdentifier' is missing in payload or is not an array");

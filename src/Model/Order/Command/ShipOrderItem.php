@@ -11,7 +11,7 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Command\ShipOrderItem';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Command\ShipOrderItem';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -20,22 +20,22 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
         return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
     }
 
-    public function shipmentReference(): ?string
+    public function shipmentReference()
     {
         return $this->payload['shipmentReference'] ?? null;
     }
 
-    public function shippingLabelCode(): ?string
+    public function shippingLabelCode()
     {
         return $this->payload['shippingLabelCode'] ?? null;
     }
 
-    public function transport(): ?\BolCom\RetailerApi\Model\Transport\TransportInstruction
+    public function transport()
     {
         return isset($this->payload['transport']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transport']) : null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ?string $shipmentReference, ?string $shippingLabelCode, ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transport): ShipOrderItem
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, string $shipmentReference = null, string $shippingLabelCode = null, \BolCom\RetailerApi\Model\Transport\TransportInstruction $transport = null): ShipOrderItem
     {
         return new self([
             'orderItemId' => $orderItemId->toString(),
@@ -45,7 +45,7 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
             throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");

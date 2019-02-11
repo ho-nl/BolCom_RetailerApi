@@ -41,7 +41,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
      *
      * @return HandlerStack
      */
-    protected function handlerStack(ClientConfigInterface $clientConfig, ?LoggerInterface $logger): HandlerStack
+    protected function handlerStack(ClientConfigInterface $clientConfig, LoggerInterface $logger = null): HandlerStack
     {
         $stack = new HandlerStack(\GuzzleHttp\choose_handler());
         $stack->push(Middleware::redirect(), 'allow_redirects');

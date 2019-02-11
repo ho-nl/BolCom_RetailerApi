@@ -11,23 +11,23 @@ final class GenerateOfferCvs extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\GenerateOfferCvs';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Command\GenerateOfferCvs';
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function filter(): ?\BolCom\RetailerApi\Model\Offer\PublishStatus
+    public function filter()
     {
         return isset($this->payload['filter']) ? \BolCom\RetailerApi\Model\Offer\PublishStatus::fromValue($this->payload['filter']) : null;
     }
 
-    public static function with(?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter): GenerateOfferCvs
+    public static function with(\BolCom\RetailerApi\Model\Offer\PublishStatus $filter = null): GenerateOfferCvs
     {
         return new self([
             'filter' => null === $filter ? null : $filter->value(),
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (isset($payload['filter']) && ! \is_string($payload['filter'])) {
             throw new \InvalidArgumentException("Value for 'filter' is not a string in payload");

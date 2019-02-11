@@ -14,7 +14,7 @@ use BolCom\RetailerApi\Model\Shipment\ShipmentId;
 
 class GetShipmentHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $this->markTestSkipped('Unable to fetch shipment, contacted bol.com about this issue.');
 

@@ -11,21 +11,21 @@ final class GetDeliveryWindow extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetDeliveryWindows';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Query\GetDeliveryWindows';
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function deliveryDate(): ?\BolCom\RetailerApi\Model\DateTime
+    public function deliveryDate()
     {
         return isset($this->payload['deliveryDate']) ? \BolCom\RetailerApi\Model\DateTime::fromString($this->payload['deliveryDate']) : null;
     }
 
-    public function itemsToSend(): ?\BolCom\RetailerApi\Model\Inbound\ItemsToSend
+    public function itemsToSend()
     {
         return isset($this->payload['itemsToSend']) ? \BolCom\RetailerApi\Model\Inbound\ItemsToSend::fromScalar($this->payload['itemsToSend']) : null;
     }
 
-    public static function with(?\BolCom\RetailerApi\Model\DateTime $deliveryDate, ?\BolCom\RetailerApi\Model\Inbound\ItemsToSend $itemsToSend): GetDeliveryWindow
+    public static function with(\BolCom\RetailerApi\Model\DateTime $deliveryDate = null, \BolCom\RetailerApi\Model\Inbound\ItemsToSend $itemsToSend = null): GetDeliveryWindow
     {
         return new self([
             'deliveryDate' => null === $deliveryDate ? null : $deliveryDate->toString(),
@@ -33,7 +33,7 @@ final class GetDeliveryWindow extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (isset($payload['deliveryDate']) && ! \is_string($payload['deliveryDate'])) {
             throw new \InvalidArgumentException("Value for 'deliveryDate' is not a string in payload");

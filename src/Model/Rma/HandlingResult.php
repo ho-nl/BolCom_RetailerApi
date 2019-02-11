@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Rma;
 
 final class HandlingResult
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'RETURN_RECEIVED' => 'RETURN_RECEIVED',
         'EXCHANGE_PRODUCT' => 'EXCHANGE_PRODUCT',
         'RETURN_DOES_NOT_MEET_CONDITIONS' => 'RETURN_DOES_NOT_MEET_CONDITIONS',
@@ -18,12 +18,12 @@ final class HandlingResult
         'STILL_APPROVED' => 'STILL_APPROVED',
     ];
 
-    public const RETURN_RECEIVED = 'RETURN_RECEIVED';
-    public const EXCHANGE_PRODUCT = 'EXCHANGE_PRODUCT';
-    public const RETURN_DOES_NOT_MEET_CONDITIONS = 'RETURN_DOES_NOT_MEET_CONDITIONS';
-    public const REPAIR_PRODUCT = 'REPAIR_PRODUCT';
-    public const CUSTOMER_KEEPS_PRODUCT_PAID = 'CUSTOMER_KEEPS_PRODUCT_PAID';
-    public const STILL_APPROVED = 'STILL_APPROVED';
+    const RETURN_RECEIVED = 'RETURN_RECEIVED';
+    const EXCHANGE_PRODUCT = 'EXCHANGE_PRODUCT';
+    const RETURN_DOES_NOT_MEET_CONDITIONS = 'RETURN_DOES_NOT_MEET_CONDITIONS';
+    const REPAIR_PRODUCT = 'REPAIR_PRODUCT';
+    const CUSTOMER_KEEPS_PRODUCT_PAID = 'CUSTOMER_KEEPS_PRODUCT_PAID';
+    const STILL_APPROVED = 'STILL_APPROVED';
 
     private $name;
     private $value;

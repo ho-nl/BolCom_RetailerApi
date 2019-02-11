@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\EntityLink;
 
 final class Type
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'CART' => 'cart',
         'ORDER' => 'order',
         'ORDER_ITEM' => 'order_item',
@@ -18,12 +18,12 @@ final class Type
         'PROCESS_STATUS_CONFIRM_SHIPMENT' => 'process_status_confirm_shipment',
     ];
 
-    public const CART = 'cart';
-    public const ORDER = 'order';
-    public const ORDER_ITEM = 'order_item';
-    public const SHIPMENT = 'shipment';
-    public const RETURN_ITEM = 'return_item';
-    public const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
+    const CART = 'cart';
+    const ORDER = 'order';
+    const ORDER_ITEM = 'order_item';
+    const SHIPMENT = 'shipment';
+    const RETURN_ITEM = 'return_item';
+    const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
 
     private $name;
     private $value;

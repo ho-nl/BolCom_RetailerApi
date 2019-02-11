@@ -13,39 +13,39 @@ final class AddTransportInformation
     private $transporterCode;
     private $trackAndTrace;
 
-    public function __construct(TransportId $transportId, TransporterCode $transporterCode, ?TrackAndTrace $trackAndTrace)
+    public function __construct(\BolCom\RetailerApi\Model\Transport\TransportId $transportId, \BolCom\RetailerApi\Model\Transport\TransporterCode $transporterCode, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null)
     {
         $this->transportId = $transportId;
         $this->transporterCode = $transporterCode;
         $this->trackAndTrace = $trackAndTrace;
     }
 
-    public function transportId(): TransportId
+    public function transportId(): \BolCom\RetailerApi\Model\Transport\TransportId
     {
         return $this->transportId;
     }
 
-    public function transporterCode(): TransporterCode
+    public function transporterCode(): \BolCom\RetailerApi\Model\Transport\TransporterCode
     {
         return $this->transporterCode;
     }
 
-    public function trackAndTrace(): ?TrackAndTrace
+    public function trackAndTrace()
     {
         return $this->trackAndTrace;
     }
 
-    public function withTransportId(TransportId $transportId): AddTransportInformation
+    public function withTransportId(\BolCom\RetailerApi\Model\Transport\TransportId $transportId): AddTransportInformation
     {
         return new self($transportId, $this->transporterCode, $this->trackAndTrace);
     }
 
-    public function withTransporterCode(TransporterCode $transporterCode): AddTransportInformation
+    public function withTransporterCode(\BolCom\RetailerApi\Model\Transport\TransporterCode $transporterCode): AddTransportInformation
     {
         return new self($this->transportId, $transporterCode, $this->trackAndTrace);
     }
 
-    public function withTrackAndTrace(?TrackAndTrace $trackAndTrace): AddTransportInformation
+    public function withTrackAndTrace(\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null): AddTransportInformation
     {
         return new self($this->transportId, $this->transporterCode, $trackAndTrace);
     }

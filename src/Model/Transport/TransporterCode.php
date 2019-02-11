@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Transport;
 
 final class TransporterCode
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'BRIEFPOST' => 'BRIEFPOST',
         'UPS' => 'UPS',
         'TNT' => 'TNT',
@@ -39,33 +39,33 @@ final class TransporterCode
         'RJP' => 'RJP',
     ];
 
-    public const BRIEFPOST = 'BRIEFPOST';
-    public const UPS = 'UPS';
-    public const TNT = 'TNT';
-    public const TNT_EXTRA = 'TNT-EXTRA';
-    public const TNT_BRIEF = 'TNT_BRIEF';
-    public const TNT_EXPRESS = 'TNT-EXPRESS';
-    public const DYL = 'DYL';
-    public const DPD_NL = 'DPD-NL';
-    public const DPD_BE = 'DPD-BE';
-    public const BPOST_BE = 'BPOST_BE';
-    public const BPOST_BRIEF = 'BPOST_BRIEF';
-    public const DHLFORYOU = 'DHLFORYOU';
-    public const GLS = 'GLS';
-    public const FEDEX_NL = 'FEDEX_NL';
-    public const FEDEX_BE = 'FEDEX_BE';
-    public const OTHER = 'OTHER';
-    public const DHL = 'DHL';
-    public const DHL_DE = 'DHL_DE';
-    public const DHL_GLOBAL_MAIL = 'DHL-GLOBAL-MAIL';
-    public const TSN = 'TSN';
-    public const FIEGE = 'FIEGE';
-    public const TRANSMISSION = 'TRANSMISSION';
-    public const PARCEL_NL = 'PARCEL-NL';
-    public const LOGOIX = 'LOGOIX';
-    public const PACKS = 'PACKS';
-    public const COURIER = 'COURIER';
-    public const RJP = 'RJP';
+    const BRIEFPOST = 'BRIEFPOST';
+    const UPS = 'UPS';
+    const TNT = 'TNT';
+    const TNT_EXTRA = 'TNT-EXTRA';
+    const TNT_BRIEF = 'TNT_BRIEF';
+    const TNT_EXPRESS = 'TNT-EXPRESS';
+    const DYL = 'DYL';
+    const DPD_NL = 'DPD-NL';
+    const DPD_BE = 'DPD-BE';
+    const BPOST_BE = 'BPOST_BE';
+    const BPOST_BRIEF = 'BPOST_BRIEF';
+    const DHLFORYOU = 'DHLFORYOU';
+    const GLS = 'GLS';
+    const FEDEX_NL = 'FEDEX_NL';
+    const FEDEX_BE = 'FEDEX_BE';
+    const OTHER = 'OTHER';
+    const DHL = 'DHL';
+    const DHL_DE = 'DHL_DE';
+    const DHL_GLOBAL_MAIL = 'DHL-GLOBAL-MAIL';
+    const TSN = 'TSN';
+    const FIEGE = 'FIEGE';
+    const TRANSMISSION = 'TRANSMISSION';
+    const PARCEL_NL = 'PARCEL-NL';
+    const LOGOIX = 'LOGOIX';
+    const PACKS = 'PACKS';
+    const COURIER = 'COURIER';
+    const RJP = 'RJP';
 
     private $name;
     private $value;

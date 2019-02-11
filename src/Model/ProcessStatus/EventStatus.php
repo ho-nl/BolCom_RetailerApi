@@ -9,17 +9,17 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 
 final class EventStatus
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'PENDING' => 'PENDING',
         'SUCCESS' => 'SUCCESS',
         'FAILURE' => 'FAILURE',
         'TIMEOUT' => 'TIMEOUT',
     ];
 
-    public const PENDING = 'PENDING';
-    public const SUCCESS = 'SUCCESS';
-    public const FAILURE = 'FAILURE';
-    public const TIMEOUT = 'TIMEOUT';
+    const PENDING = 'PENDING';
+    const SUCCESS = 'SUCCESS';
+    const FAILURE = 'FAILURE';
+    const TIMEOUT = 'TIMEOUT';
 
     private $name;
     private $value;

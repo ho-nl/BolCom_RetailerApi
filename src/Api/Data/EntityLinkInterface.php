@@ -13,10 +13,10 @@ use BolCom\RetailerApi\Model\EntityLink\Type;
 
 interface EntityLinkInterface
 {
-    public const ENTITY_TYPE = 'entity_type';
-    public const INTERNAL_REFERENCE = 'internal_reference';
-    public const EXTERNAL_REFERENCE = 'external_reference';
-    public const CREATED_AT = 'created_at';
+    const ENTITY_TYPE = 'entity_type';
+    const INTERNAL_REFERENCE = 'internal_reference';
+    const EXTERNAL_REFERENCE = 'external_reference';
+    const CREATED_AT = 'created_at';
 
     /**
      * @return Type

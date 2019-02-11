@@ -11,7 +11,7 @@ final class GetShippingLabel extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -27,7 +27,7 @@ final class GetShippingLabel extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['transportId']) || ! \is_int($payload['transportId'])) {
             throw new \InvalidArgumentException("Key 'transportId' is missing in payload or is not a int");

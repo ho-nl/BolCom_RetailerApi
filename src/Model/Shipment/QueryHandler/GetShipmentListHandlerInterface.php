@@ -12,5 +12,10 @@ use BolCom\RetailerApi\Model\Shipment\ShipmentList;
 
 interface GetShipmentListHandlerInterface
 {
-    public function __invoke(GetShipmentList $getShipmentList): ?ShipmentList;
+    /**
+     * @param GetShipmentList $getShipmentList
+     *
+     * @return ShipmentList|null
+     */
+    public function __invoke(GetShipmentList $getShipmentList);
 }

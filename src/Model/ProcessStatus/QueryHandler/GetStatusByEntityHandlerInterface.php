@@ -12,5 +12,10 @@ use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity;
 
 interface GetStatusByEntityHandlerInterface
 {
-    public function __invoke(GetStatusByEntity $getStatusByEntity): ?ProcessStatuses;
+    /**
+     * @param GetStatusByEntity $getStatusByEntity
+     *
+     * @return ProcessStatuses|null
+     */
+    public function __invoke(GetStatusByEntity $getStatusByEntity);
 }

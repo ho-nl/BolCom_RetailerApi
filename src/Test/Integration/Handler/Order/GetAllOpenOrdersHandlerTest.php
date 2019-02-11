@@ -14,7 +14,7 @@ use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
 
 class GetAllOpenOrdersHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,

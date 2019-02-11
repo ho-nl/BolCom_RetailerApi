@@ -20,7 +20,7 @@ final class ShipmentListItem
      * @param string $shipmentReference
      * @param \BolCom\RetailerApi\Model\Shipment\ShipmentItemListItem[]|null $shipmentItems
      */
-    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, ?string $shipmentReference, array $shipmentItems)
+    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference = null, array $shipmentItems)
     {
         $this->shipmentId = $shipmentId;
         $this->shipmentDate = $shipmentDate;
@@ -44,7 +44,7 @@ final class ShipmentListItem
         return $this->shipmentDate;
     }
 
-    public function shipmentReference(): ?string
+    public function shipmentReference()
     {
         return $this->shipmentReference;
     }
@@ -67,7 +67,7 @@ final class ShipmentListItem
         return new self($this->shipmentId, $shipmentDate, $this->shipmentReference, $this->shipmentItems);
     }
 
-    public function withShipmentReference(?string $shipmentReference): ShipmentListItem
+    public function withShipmentReference(string $shipmentReference = null): ShipmentListItem
     {
         return new self($this->shipmentId, $this->shipmentDate, $shipmentReference, $this->shipmentItems);
     }

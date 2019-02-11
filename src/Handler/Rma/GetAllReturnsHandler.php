@@ -28,7 +28,7 @@ class GetAllReturnsHandler implements GetAllReturnsHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetAllReturns $getAllReturns): ?ReturnItemList
+    public function __invoke(GetAllReturns $getAllReturns)
     {
         $response = $this->client->get('returns', [
             'query' => [

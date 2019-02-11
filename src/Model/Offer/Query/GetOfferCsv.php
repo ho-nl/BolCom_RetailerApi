@@ -11,7 +11,7 @@ final class GetOfferCsv extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOfferCsv';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Offer\Query\GetOfferCsv';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -27,7 +27,7 @@ final class GetOfferCsv extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['filename']) || ! \is_string($payload['filename'])) {
             throw new \InvalidArgumentException("Key 'filename' is missing in payload or is not a string");

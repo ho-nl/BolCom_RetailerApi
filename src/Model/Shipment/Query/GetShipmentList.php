@@ -11,7 +11,7 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -33,7 +33,7 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['page']) || ! \is_int($payload['page'])) {
             throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");

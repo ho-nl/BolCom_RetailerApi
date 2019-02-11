@@ -28,8 +28,7 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
     /**
      * {@inheritdoc}
      */
-
-    public function __invoke(GetShipmentList $getShipmentList): ?ShipmentList
+    public function __invoke(GetShipmentList $getShipmentList)
     {
         $response = $this->client->get('shipments', [
             'query' => [

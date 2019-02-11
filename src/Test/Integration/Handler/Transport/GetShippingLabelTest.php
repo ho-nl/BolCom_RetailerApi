@@ -14,7 +14,7 @@ use BolCom\RetailerApi\Model\Transport\TransportId;
 
 class GetShippingLabelTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $this->markTestSkipped('Unable to fetch shipping label, contacted bol.com about this issue.');
 

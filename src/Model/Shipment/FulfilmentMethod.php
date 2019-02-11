@@ -9,13 +9,13 @@ namespace BolCom\RetailerApi\Model\Shipment;
 
 final class FulfilmentMethod
 {
-    public const OPTIONS = [
+    const OPTIONS = [
         'FBR' => 'FBR',
         'FBB' => 'FBB',
     ];
 
-    public const FBR = 'FBR';
-    public const FBB = 'FBB';
+    const FBR = 'FBR';
+    const FBB = 'FBB';
 
     private $name;
     private $value;

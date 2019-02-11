@@ -30,7 +30,7 @@ class DeleteOffersInBulkHandler implements DeleteOffersInBulkHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(DeleteOffersInBulk $deleteOffersInBulk): void
+    public function __invoke(DeleteOffersInBulk $deleteOffersInBulk)
     {
         $this->client->delete('offers', [
             'json' => $deleteOffersInBulk->payload(),

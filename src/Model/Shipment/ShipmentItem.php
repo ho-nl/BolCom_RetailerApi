@@ -22,7 +22,7 @@ final class ShipmentItem
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, FulfilmentMethod $fulfilmentMethod, ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference, FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->orderId = $orderId;
@@ -93,7 +93,7 @@ final class ShipmentItem
         return $this->fulfilmentMethod;
     }
 
-    public function selectedDeliveryWindow(): ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow
+    public function selectedDeliveryWindow()
     {
         return $this->selectedDeliveryWindow;
     }
@@ -153,7 +153,7 @@ final class ShipmentItem
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withSelectedDeliveryWindow(?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow): ShipmentItem
+    public function withSelectedDeliveryWindow(\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null): ShipmentItem
     {
         return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $selectedDeliveryWindow);
     }

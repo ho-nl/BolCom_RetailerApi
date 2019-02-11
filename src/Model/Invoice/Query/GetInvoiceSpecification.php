@@ -11,7 +11,7 @@ final class GetInvoiceSpecification extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Invoice\Query\GetInvoiceSpecification';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Invoice\Query\GetInvoiceSpecification';
 
     protected $messageName = self::MESSAGE_NAME;
 
@@ -20,12 +20,12 @@ final class GetInvoiceSpecification extends \Prooph\Common\Messaging\Query
         return \BolCom\RetailerApi\Model\Invoice\InvoiceId::fromScalar($this->payload['invoiceId']);
     }
 
-    public function page(): ?int
+    public function page()
     {
         return $this->payload['page'] ?? null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, ?int $page): GetInvoiceSpecification
+    public static function with(\BolCom\RetailerApi\Model\Invoice\InvoiceId $invoiceId, int $page = null): GetInvoiceSpecification
     {
         return new self([
             'invoiceId' => $invoiceId->toScalar(),
@@ -33,7 +33,7 @@ final class GetInvoiceSpecification extends \Prooph\Common\Messaging\Query
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (! isset($payload['invoiceId']) || ! \is_int($payload['invoiceId'])) {
             throw new \InvalidArgumentException("Key 'invoiceId' is missing in payload or is not a int");

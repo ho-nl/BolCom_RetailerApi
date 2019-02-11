@@ -25,7 +25,7 @@ final class AddressDetails
     private $vatNumber;
     private $deliveryPhoneNumber;
 
-    public function __construct(string $salutationCode, string $firstName, string $surName, string $streetName, string $houseNumber, ?string $houseNumberExtended, ?string $addressSupplement, ?string $extraAddressInformation, string $zipCode, string $city, string $countryCode, string $email, ?string $company, ?string $vatNumber, ?string $deliveryPhoneNumber)
+    public function __construct(string $salutationCode, string $firstName, string $surName, string $streetName, string $houseNumber, string $houseNumberExtended = null, string $addressSupplement = null, string $extraAddressInformation = null, string $zipCode, string $city, string $countryCode, string $email, string $company = null, string $vatNumber = null, string $deliveryPhoneNumber = null)
     {
         $this->salutationCode = $salutationCode;
         $this->firstName = $firstName;
@@ -69,17 +69,17 @@ final class AddressDetails
         return $this->houseNumber;
     }
 
-    public function houseNumberExtended(): ?string
+    public function houseNumberExtended()
     {
         return $this->houseNumberExtended;
     }
 
-    public function addressSupplement(): ?string
+    public function addressSupplement()
     {
         return $this->addressSupplement;
     }
 
-    public function extraAddressInformation(): ?string
+    public function extraAddressInformation()
     {
         return $this->extraAddressInformation;
     }
@@ -104,17 +104,17 @@ final class AddressDetails
         return $this->email;
     }
 
-    public function company(): ?string
+    public function company()
     {
         return $this->company;
     }
 
-    public function vatNumber(): ?string
+    public function vatNumber()
     {
         return $this->vatNumber;
     }
 
-    public function deliveryPhoneNumber(): ?string
+    public function deliveryPhoneNumber()
     {
         return $this->deliveryPhoneNumber;
     }
@@ -144,17 +144,17 @@ final class AddressDetails
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withHouseNumberExtended(?string $houseNumberExtended): AddressDetails
+    public function withHouseNumberExtended(string $houseNumberExtended = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withAddressSupplement(?string $addressSupplement): AddressDetails
+    public function withAddressSupplement(string $addressSupplement = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withExtraAddressInformation(?string $extraAddressInformation): AddressDetails
+    public function withExtraAddressInformation(string $extraAddressInformation = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
@@ -179,17 +179,17 @@ final class AddressDetails
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withCompany(?string $company): AddressDetails
+    public function withCompany(string $company = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withVatNumber(?string $vatNumber): AddressDetails
+    public function withVatNumber(string $vatNumber = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withDeliveryPhoneNumber(?string $deliveryPhoneNumber): AddressDetails
+    public function withDeliveryPhoneNumber(string $deliveryPhoneNumber = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $deliveryPhoneNumber);
     }

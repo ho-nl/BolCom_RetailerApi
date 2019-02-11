@@ -15,7 +15,7 @@ use BolCom\RetailerApi\Model\Transport\TransportInstruction;
 
 class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function testTransportInstruction(): void
+    public function testTransportInstruction()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
@@ -35,7 +35,7 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testTransportInstructionWithoutTrackAndTrace(): void
+    public function testTransportInstructionWithoutTrackAndTrace()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
@@ -55,7 +55,7 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testShippingLabelCode(): void
+    public function testShippingLabelCode()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
@@ -72,7 +72,7 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testShippingLabelCodeAndTransportInstruction(): void
+    public function testShippingLabelCodeAndTransportInstruction()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,

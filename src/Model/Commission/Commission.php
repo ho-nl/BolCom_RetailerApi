@@ -28,7 +28,7 @@ final class Commission
      * @param \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction
      * @param \BolCom\RetailerApi\Model\Commission\CommissionReduction[] $reduction
      */
-    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, ?\BolCom\RetailerApi\Model\CurrencyAmount $price, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, ?\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction, ?array $reduction)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price = null, \BolCom\RetailerApi\Model\CurrencyAmount $fixedAmount, \BolCom\RetailerApi\Model\PercentageAmount $percentage, \BolCom\RetailerApi\Model\CurrencyAmount $totalCost, \BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction = null, array $reduction = null)
     {
         $this->ean = $ean;
         $this->condition = $condition;
@@ -58,7 +58,7 @@ final class Commission
         return $this->condition;
     }
 
-    public function price(): ?\BolCom\RetailerApi\Model\CurrencyAmount
+    public function price()
     {
         return $this->price;
     }
@@ -78,7 +78,7 @@ final class Commission
         return $this->totalCost;
     }
 
-    public function totalCostWithoutReduction(): ?\BolCom\RetailerApi\Model\CurrencyAmount
+    public function totalCostWithoutReduction()
     {
         return $this->totalCostWithoutReduction;
     }
@@ -86,7 +86,7 @@ final class Commission
     /**
      * @return \BolCom\RetailerApi\Model\Commission\CommissionReduction[]|null
      */
-    public function reduction(): ?array
+    public function reduction()
     {
         return $this->reduction;
     }
@@ -101,7 +101,7 @@ final class Commission
         return new self($this->ean, $condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
 
-    public function withPrice(?\BolCom\RetailerApi\Model\CurrencyAmount $price): Commission
+    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price = null): Commission
     {
         return new self($this->ean, $this->condition, $price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
@@ -121,7 +121,7 @@ final class Commission
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmount, $this->percentage, $totalCost, $this->totalCostWithoutReduction, $this->reduction);
     }
 
-    public function withTotalCostWithoutReduction(?\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction): Commission
+    public function withTotalCostWithoutReduction(\BolCom\RetailerApi\Model\CurrencyAmount $totalCostWithoutReduction = null): Commission
     {
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $totalCostWithoutReduction, $this->reduction);
     }
@@ -130,7 +130,7 @@ final class Commission
      * @param \BolCom\RetailerApi\Model\Commission\CommissionReduction[] $reduction
      * @return \BolCom\RetailerApi\Model\Commission\Commission
      */
-    public function withReduction(?array $reduction): Commission
+    public function withReduction(array $reduction = null): Commission
     {
         return new self($this->ean, $this->condition, $this->price, $this->fixedAmount, $this->percentage, $this->totalCost, $this->totalCostWithoutReduction, $reduction);
     }

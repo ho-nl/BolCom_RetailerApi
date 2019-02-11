@@ -12,5 +12,10 @@ use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
 
 interface GetAllOpenOrdersHandlerInterface
 {
-    public function __invoke(GetAllOpenOrders $getAllOpenOrders): ?OrderList;
+    /**
+     * @param GetAllOpenOrders $getAllOpenOrders
+     *
+     * @return OrderList|null
+     */
+    public function __invoke(GetAllOpenOrders $getAllOpenOrders);
 }

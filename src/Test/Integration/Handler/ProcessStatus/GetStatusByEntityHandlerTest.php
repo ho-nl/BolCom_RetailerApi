@@ -15,7 +15,7 @@ use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity;
 
 class GetStatusByEntityHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke(): void
+    public function test__invoke()
     {
         $this->markTestSkipped('Unable to fetch Process Status, contacted bol.com about this issue.');
 

@@ -11,11 +11,11 @@ final class CreateInbound extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    public const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Command\CreateInbound';
+    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Inbound\Command\CreateInbound';
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function reference(): ?\BolCom\RetailerApi\Model\Inbound\Reference
+    public function reference()
     {
         return isset($this->payload['reference']) ? \BolCom\RetailerApi\Model\Inbound\Reference::fromString($this->payload['reference']) : null;
     }
@@ -56,7 +56,7 @@ final class CreateInbound extends \Prooph\Common\Messaging\Command
      * @param bool $labellingService
      * @param \BolCom\RetailerApi\Model\Inbound\Product[]|null $products
      */
-public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $reference, \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot, \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter, bool $labellingService, array $products): CreateInbound
+public static function with(\BolCom\RetailerApi\Model\Inbound\Reference $reference = null, \BolCom\RetailerApi\Model\Inbound\Timeslot $timeslot, \BolCom\RetailerApi\Model\Inbound\Transporter $fbbTransporter, bool $labellingService, array $products): CreateInbound
     {
         return new self([
             'reference' => null === $reference ? null : $reference->toString(),
@@ -67,7 +67,7 @@ public static function with(?\BolCom\RetailerApi\Model\Inbound\Reference $refere
         ]);
     }
 
-    protected function setPayload(array $payload): void
+    protected function setPayload(array $payload)
     {
         if (isset($payload['reference']) && ! \is_string($payload['reference'])) {
             throw new \InvalidArgumentException("Value for 'reference' is not a string in payload");
