@@ -27,7 +27,7 @@ class GetCommissionListHandlerTest extends \PHPUnit\Framework\TestCase
             CommissionQuery::fromArray([
                 'ean' => '9781785882364',
                 'condition' => Condition::IS_NEW,
-                'price' => 10.11
+                'price' => 10
             ])
         ));
 

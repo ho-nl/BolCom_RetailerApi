@@ -17,7 +17,7 @@ final class ProcessStatus
     private $errorMessage;
     private $createTimestamp;
 
-    public function __construct(int $id, EntityId $entityId, EventType $eventType, string $description, EventStatus $status, string $errorMessage = null, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
+    public function __construct(int $id, EntityId $entityId = null, EventType $eventType, string $description, EventStatus $status, string $errorMessage = null, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
     {
         $this->id = $id;
         $this->entityId = $entityId;
@@ -33,7 +33,7 @@ final class ProcessStatus
         return $this->id;
     }
 
-    public function entityId(): EntityId
+    public function entityId()
     {
         return $this->entityId;
     }
@@ -68,7 +68,7 @@ final class ProcessStatus
         return new self($id, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
-    public function withEntityId(EntityId $entityId): ProcessStatus
+    public function withEntityId(EntityId $entityId = null): ProcessStatus
     {
         return new self($this->id, $entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
@@ -106,11 +106,15 @@ final class ProcessStatus
 
         $id = $data['id'];
 
-        if (! isset($data['entityId']) || ! \is_string($data['entityId'])) {
-            throw new \InvalidArgumentException("Key 'entityId' is missing in data array or is not a string");
-        }
+        if (isset($data['entityId'])) {
+            if (! \is_string($data['entityId'])) {
+                throw new \InvalidArgumentException("Value for 'entityId' is not a string in data array");
+            }
 
-        $entityId = EntityId::fromString($data['entityId']);
+            $entityId = EntityId::fromString($data['entityId']);
+        } else {
+            $entityId = null;
+        }
 
         if (! isset($data['eventType']) || ! \is_string($data['eventType'])) {
             throw new \InvalidArgumentException("Key 'eventType' is missing in data array or is not a string");

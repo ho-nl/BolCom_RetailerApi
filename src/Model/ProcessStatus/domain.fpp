@@ -1,13 +1,19 @@
 namespace BolCom\RetailerApi\Model\ProcessStatus {
     data EntityId = String deriving (FromString, ToString);
 
-    data EventType = CONFIRM_SHIPMENT | CANCEL_ORDER | CHANGE_TRANSPORT | HANDLE_RETURN_ITEM | CREATE_INBOUND deriving(Enum(useValue));
+    data EventType = CREATE_OFFER
+        | CONFIRM_SHIPMENT
+        | CANCEL_ORDER
+        | CHANGE_TRANSPORT
+        | HANDLE_RETURN_ITEM
+        | CREATE_INBOUND
+    deriving(Enum(useValue));
 
     data EventStatus = PENDING | SUCCESS | FAILURE | TIMEOUT deriving(Enum(useValue));
 
     data ProcessStatus = ProcessStatus {
         int $id,
-        EntityId $entityId,
+        ?EntityId $entityId,
         EventType $eventType,
         string $description,
         EventStatus $status,

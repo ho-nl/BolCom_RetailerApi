@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer;
 
-final class Description
+final class ConditionComment
 {
     private $value;
 
@@ -25,9 +25,9 @@ final class Description
         return $this->value;
     }
 
-    public static function fromString(string $description): Description
+    public static function fromString(string $conditionComment): ConditionComment
     {
-        return new self($description);
+        return new self($conditionComment);
     }
 
     public function toString(): string

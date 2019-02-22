@@ -11,27 +11,23 @@ final class RetailerOfferUpsert
 {
     private $ean;
     private $condition;
-    private $price;
-    private $deliveryCode;
-    private $quantityInStock;
-    private $publish;
     private $referenceCode;
-    private $description;
-    private $title;
-    private $fulfilmentMethod;
+    private $onHoldByRetailer;
+    private $unknownProductTitle;
+    private $pricing;
+    private $stock;
+    private $fulfilment;
 
-    public function __construct(Ean $ean, Condition $condition, \BolCom\RetailerApi\Model\CurrencyAmount $price, DeliveryCode $deliveryCode, QuantityInStock $quantityInStock, bool $publish, ReferenceCode $referenceCode, Description $description, Title $title, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod)
+    public function __construct(Ean $ean, OfferCondition $condition, ReferenceCode $referenceCode = null, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, Stock $stock, Fulfilment $fulfilment)
     {
         $this->ean = $ean;
         $this->condition = $condition;
-        $this->price = $price;
-        $this->deliveryCode = $deliveryCode;
-        $this->quantityInStock = $quantityInStock;
-        $this->publish = $publish;
         $this->referenceCode = $referenceCode;
-        $this->description = $description;
-        $this->title = $title;
-        $this->fulfilmentMethod = $fulfilmentMethod;
+        $this->onHoldByRetailer = $onHoldByRetailer;
+        $this->unknownProductTitle = $unknownProductTitle;
+        $this->pricing = $pricing;
+        $this->stock = $stock;
+        $this->fulfilment = $fulfilment;
     }
 
     public function ean(): Ean
@@ -39,99 +35,79 @@ final class RetailerOfferUpsert
         return $this->ean;
     }
 
-    public function condition(): Condition
+    public function condition(): OfferCondition
     {
         return $this->condition;
     }
 
-    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
-    {
-        return $this->price;
-    }
-
-    public function deliveryCode(): DeliveryCode
-    {
-        return $this->deliveryCode;
-    }
-
-    public function quantityInStock(): QuantityInStock
-    {
-        return $this->quantityInStock;
-    }
-
-    public function publish(): bool
-    {
-        return $this->publish;
-    }
-
-    public function referenceCode(): ReferenceCode
+    public function referenceCode()
     {
         return $this->referenceCode;
     }
 
-    public function description(): Description
+    public function onHoldByRetailer(): bool
     {
-        return $this->description;
+        return $this->onHoldByRetailer;
     }
 
-    public function title(): Title
+    public function unknownProductTitle()
     {
-        return $this->title;
+        return $this->unknownProductTitle;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function pricing(): Pricing
     {
-        return $this->fulfilmentMethod;
+        return $this->pricing;
+    }
+
+    public function stock(): Stock
+    {
+        return $this->stock;
+    }
+
+    public function fulfilment(): Fulfilment
+    {
+        return $this->fulfilment;
     }
 
     public function withEan(Ean $ean): RetailerOfferUpsert
     {
-        return new self($ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($ean, $this->condition, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withCondition(Condition $condition): RetailerOfferUpsert
+    public function withCondition(OfferCondition $condition): RetailerOfferUpsert
     {
-        return new self($this->ean, $condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $condition, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): RetailerOfferUpsert
+    public function withReferenceCode(ReferenceCode $referenceCode = null): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $this->condition, $referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withDeliveryCode(DeliveryCode $deliveryCode): RetailerOfferUpsert
+    public function withOnHoldByRetailer(bool $onHoldByRetailer): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $this->price, $deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $this->condition, $this->referenceCode, $onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withQuantityInStock(QuantityInStock $quantityInStock): RetailerOfferUpsert
+    public function withUnknownProductTitle(Title $unknownProductTitle = null): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $this->condition, $this->referenceCode, $this->onHoldByRetailer, $unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withPublish(bool $publish): RetailerOfferUpsert
+    public function withPricing(Pricing $pricing): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $publish, $this->referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $this->condition, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $pricing, $this->stock, $this->fulfilment);
     }
 
-    public function withReferenceCode(ReferenceCode $referenceCode): RetailerOfferUpsert
+    public function withStock(Stock $stock): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $referenceCode, $this->description, $this->title, $this->fulfilmentMethod);
+        return new self($this->ean, $this->condition, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $stock, $this->fulfilment);
     }
 
-    public function withDescription(Description $description): RetailerOfferUpsert
+    public function withFulfilment(Fulfilment $fulfilment): RetailerOfferUpsert
     {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $description, $this->title, $this->fulfilmentMethod);
-    }
-
-    public function withTitle(Title $title): RetailerOfferUpsert
-    {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $title, $this->fulfilmentMethod);
-    }
-
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): RetailerOfferUpsert
-    {
-        return new self($this->ean, $this->condition, $this->price, $this->deliveryCode, $this->quantityInStock, $this->publish, $this->referenceCode, $this->description, $this->title, $fulfilmentMethod);
+        return new self($this->ean, $this->condition, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $fulfilment);
     }
 
     public static function fromArray(array $data): RetailerOfferUpsert
@@ -142,71 +118,65 @@ final class RetailerOfferUpsert
 
         $ean = Ean::fromString($data['ean']);
 
-        if (! isset($data['condition']) || ! \is_string($data['condition'])) {
-            throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not a string");
+        if (! isset($data['condition']) || ! \is_array($data['condition'])) {
+            throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not an array");
         }
 
-        $condition = Condition::fromValue($data['condition']);
+        $condition = OfferCondition::fromArray($data['condition']);
 
-        if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
-            throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
+        if (isset($data['referenceCode'])) {
+            if (! \is_string($data['referenceCode'])) {
+                throw new \InvalidArgumentException("Value for 'referenceCode' is not a string in data array");
+            }
+
+            $referenceCode = ReferenceCode::fromString($data['referenceCode']);
+        } else {
+            $referenceCode = null;
         }
 
-        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
-
-        if (! isset($data['deliveryCode']) || ! \is_string($data['deliveryCode'])) {
-            throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
+        if (! isset($data['onHoldByRetailer']) || ! \is_bool($data['onHoldByRetailer'])) {
+            throw new \InvalidArgumentException("Key 'onHoldByRetailer' is missing in data array or is not a bool");
         }
 
-        $deliveryCode = DeliveryCode::fromValue($data['deliveryCode']);
+        $onHoldByRetailer = $data['onHoldByRetailer'];
 
-        if (! isset($data['quantityInStock']) || ! \is_int($data['quantityInStock'])) {
-            throw new \InvalidArgumentException("Key 'quantityInStock' is missing in data array or is not a int");
+        if (isset($data['unknownProductTitle'])) {
+            if (! \is_string($data['unknownProductTitle'])) {
+                throw new \InvalidArgumentException("Value for 'unknownProductTitle' is not a string in data array");
+            }
+
+            $unknownProductTitle = Title::fromString($data['unknownProductTitle']);
+        } else {
+            $unknownProductTitle = null;
         }
 
-        $quantityInStock = QuantityInStock::fromScalar($data['quantityInStock']);
-
-        if (! isset($data['publish']) || ! \is_bool($data['publish'])) {
-            throw new \InvalidArgumentException("Key 'publish' is missing in data array or is not a bool");
+        if (! isset($data['pricing']) || ! \is_array($data['pricing'])) {
+            throw new \InvalidArgumentException("Key 'pricing' is missing in data array or is not an array");
         }
 
-        $publish = $data['publish'];
+        $pricing = Pricing::fromArray($data['pricing']);
 
-        if (! isset($data['referenceCode']) || ! \is_string($data['referenceCode'])) {
-            throw new \InvalidArgumentException("Key 'referenceCode' is missing in data array or is not a string");
+        if (! isset($data['stock']) || ! \is_array($data['stock'])) {
+            throw new \InvalidArgumentException("Key 'stock' is missing in data array or is not an array");
         }
 
-        $referenceCode = ReferenceCode::fromString($data['referenceCode']);
+        $stock = Stock::fromArray($data['stock']);
 
-        if (! isset($data['description']) || ! \is_string($data['description'])) {
-            throw new \InvalidArgumentException("Key 'description' is missing in data array or is not a string");
+        if (! isset($data['fulfilment']) || ! \is_array($data['fulfilment'])) {
+            throw new \InvalidArgumentException("Key 'fulfilment' is missing in data array or is not an array");
         }
 
-        $description = Description::fromString($data['description']);
-
-        if (! isset($data['title']) || ! \is_string($data['title'])) {
-            throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
-        }
-
-        $title = Title::fromString($data['title']);
-
-        if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
-            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
-        }
-
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
+        $fulfilment = Fulfilment::fromArray($data['fulfilment']);
 
         return new self(
             $ean,
             $condition,
-            $price,
-            $deliveryCode,
-            $quantityInStock,
-            $publish,
             $referenceCode,
-            $description,
-            $title,
-            $fulfilmentMethod
+            $onHoldByRetailer,
+            $unknownProductTitle,
+            $pricing,
+            $stock,
+            $fulfilment
         );
     }
 
@@ -214,15 +184,13 @@ final class RetailerOfferUpsert
     {
         return [
             'ean' => $this->ean->toString(),
-            'condition' => $this->condition->value(),
-            'price' => $this->price->toScalar(),
-            'deliveryCode' => $this->deliveryCode->value(),
-            'quantityInStock' => $this->quantityInStock->toScalar(),
-            'publish' => $this->publish,
-            'referenceCode' => $this->referenceCode->toString(),
-            'description' => $this->description->toString(),
-            'title' => $this->title->toString(),
-            'fulfilmentMethod' => $this->fulfilmentMethod->value(),
+            'condition' => $this->condition->toArray(),
+            'referenceCode' => null === $this->referenceCode ? null : $this->referenceCode->toString(),
+            'onHoldByRetailer' => $this->onHoldByRetailer,
+            'unknownProductTitle' => null === $this->unknownProductTitle ? null : $this->unknownProductTitle->toString(),
+            'pricing' => $this->pricing->toArray(),
+            'stock' => $this->stock->toArray(),
+            'fulfilment' => $this->fulfilment->toArray(),
         ];
     }
 }

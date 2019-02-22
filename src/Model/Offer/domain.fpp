@@ -6,23 +6,13 @@ namespace BolCom\RetailerApi\Model\Offer {
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::between($value, 0, 999) => '';
 
-    data UnreservedStock = Int deriving(FromScalar, ToScalar) where
-        _: | !\Assert\Assertion::between($value, 0, 999) => '';
-
     data ReferenceCode = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 20) => '';
-
-    data Description = String deriving(FromString, ToString) where
-        _: | !\Assert\Assertion::betweenLength($value, 0, 2000) => '';
 
     data Title = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 500) => '';
 
     data PublishStatus = PUBLISHED | NOT_PUBLISHED deriving(Enum(useValue)) with (PUBLISHED:'published', NOT_PUBLISHED:'not-published');
-
-    data OfferCsv = OfferCsv {
-        string $url
-    } deriving (FromArray);
 
     data RetailerOfferStatus = RetailerOfferStatus {
         bool $valid,
@@ -30,7 +20,28 @@ namespace BolCom\RetailerApi\Model\Offer {
         string $errorMessage
     } deriving (FromArray);
 
-    //We choose IsNew, because New is a protected key word
+    data BundlePrice = BundlePrice {
+        int $quantity,
+        \BolCom\RetailerApi\Model\CurrencyAmount $price
+    } deriving (FromArray, ToArray);
+
+    data Pricing = Pricing {
+        BundlePrice[] $bundlePrices
+    } deriving (FromArray, ToArray);
+
+    data Stock = Stock {
+        QuantityInStock $amount,
+        bool $managedByRetailer
+    } deriving (FromArray, ToArray);
+
+    data FulfilmentMethod = FBR | FBB deriving(Enum(useValue));
+
+    data Fulfilment = Fulfilment {
+        FulfilmentMethod $type,
+        DeliveryCode $deliveryCode
+    } deriving (FromArray, ToArray);
+
+    // We choose IsNew, because New is a protected key word
     data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum(useValue)) with (
         IS_NEW:'NEW',
         AS_NEW:'AS_NEW',
@@ -38,6 +49,21 @@ namespace BolCom\RetailerApi\Model\Offer {
         REASONABLE:'REASONABLE',
         MODERATE:'MODERATE'
     );
+
+    // We choose IsNew, because New is a protected key word
+    data ConditionCategory = IS_NEW | SECONDHAND deriving(Enum(useValue)) with (
+        IS_NEW:'NEW',
+        SECONDHAND:'SECONDHAND'
+    );
+
+    data ConditionComment = String deriving(FromString, ToString) where
+        _: | !\Assert\Assertion::betweenLength($value, 0, 2000) => '';
+
+    data OfferCondition = OfferCondition {
+        Condition $name,
+        ?ConditionCategory $category,
+        ?ConditionComment $comment
+    } deriving (FromArray, ToArray);
 
     data DeliveryCode = DC24uurs23 | DC24uurs22 | DC24uurs21 | DC24uurs20 | DC24uurs19 | DC24uurs18 | DC24uurs17 |
         DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC34d | DC35d | DC48d | DC18d |
@@ -68,56 +94,29 @@ namespace BolCom\RetailerApi\Model\Offer {
         Condition $condition,
     } deriving (FromArray, ToArray);
 
-    data RetailerOffer = RetailerOffer {
-        Ean $ean,
-        Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price,
-        DeliveryCode $deliveryCode,
-        QuantityInStock $quantityInStock,
-        UnreservedStock $unreservedStock,
-        bool $publish,
-        ReferenceCode $referenceCode,
-        Description $description,
-        Title $title,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
-        RetailerOfferStatus $status
-    } deriving (FromArray);
-
     data RetailerOfferUpsert = RetailerOfferUpsert {
         Ean $ean,
-        Condition $condition,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price,
-        DeliveryCode $deliveryCode,
-        QuantityInStock $quantityInStock,
-        bool $publish,
-        ReferenceCode $referenceCode,
-        Description $description,
-        Title $title,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
+        OfferCondition $condition,
+        ?ReferenceCode $referenceCode,
+        bool $onHoldByRetailer,
+        ?Title $unknownProductTitle,
+        Pricing $pricing,
+        Stock $stock,
+        Fulfilment $fulfilment
     } deriving (FromArray, ToArray);
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Query {
-    data GetOfferCsv = GetOfferCsv {
-        string $filename
-    } deriving (Query);
-
-    data GetOffer = GetOffer {
-        \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier $retailerOfferIdentifier
-    } deriving (Query);
+    // @todo: Retrieve an offer by its offer id.
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Command {
-    data CreateOrUpdateOffer = CreateOrUpdateOffer {
-        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert[] $retailerOffer
+    data CreateOffer = CreateOffer {
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailerOffer
     } deriving (Command);
 
     data DeleteOffersInBulk = DeleteOffersInBulk {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier[] $retailerOfferIdentifier
     } deriving (Command) where
         _: | count($retailerOfferIdentifier) === 0 => 'You should at least provide a single Offer to delete';
-
-    data GenerateOfferCvs = GenerateOfferCvs {
-        ?\BolCom\RetailerApi\Model\Offer\PublishStatus $filter
-    } deriving (Command);
 }

@@ -10,6 +10,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 final class EventType
 {
     const OPTIONS = [
+        'CREATE_OFFER' => 'CREATE_OFFER',
         'CONFIRM_SHIPMENT' => 'CONFIRM_SHIPMENT',
         'CANCEL_ORDER' => 'CANCEL_ORDER',
         'CHANGE_TRANSPORT' => 'CHANGE_TRANSPORT',
@@ -17,6 +18,7 @@ final class EventType
         'CREATE_INBOUND' => 'CREATE_INBOUND',
     ];
 
+    const CREATE_OFFER = 'CREATE_OFFER';
     const CONFIRM_SHIPMENT = 'CONFIRM_SHIPMENT';
     const CANCEL_ORDER = 'CANCEL_ORDER';
     const CHANGE_TRANSPORT = 'CHANGE_TRANSPORT';
@@ -30,6 +32,11 @@ final class EventType
     {
         $this->name = $name;
         $this->value = self::OPTIONS[$name];
+    }
+
+    public static function CREATE_OFFER(): self
+    {
+        return new self('CREATE_OFFER');
     }
 
     public static function CONFIRM_SHIPMENT(): self

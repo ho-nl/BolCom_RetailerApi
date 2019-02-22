@@ -1,6 +1,7 @@
 namespace BolCom\RetailerApi\Model\Shipment {
     data ShipmentId = Int deriving(FromScalar, ToScalar);
 
+    // @todo: Moved to \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     data FulfilmentMethod = FBR | FBB deriving(Enum(useValue));
 
     data Shipment = Shipment {

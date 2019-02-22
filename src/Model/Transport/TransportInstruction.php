@@ -65,7 +65,6 @@ final class TransportInstruction
 
     public function toArray(): array
     {
-        // https://github.com/prolic/fpp/issues/109
         return [
             'transporterCode' => $this->transporterCode->value(),
             'trackAndTrace' => null === $this->trackAndTrace ? null : $this->trackAndTrace->toScalar(),
