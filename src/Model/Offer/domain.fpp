@@ -94,6 +94,28 @@ namespace BolCom\RetailerApi\Model\Offer {
         Condition $condition,
     } deriving (FromArray, ToArray);
 
+    data OfferId = OfferId deriving(Uuid);
+
+    data OfferStock = OfferStock {
+        QuantityInStock $amount,
+        QuantityInStock $correctedStock,
+        bool $managedByRetailer
+    } deriving (FromArray, ToArray);
+
+    data RetailerOffer = RetailerOffer {
+        OfferId $offerId,
+        Ean $ean,
+        ReferenceCode $referenceCode,
+        bool $onHoldByRetailer,
+        Title $unknownProductTitle,
+        Pricing $pricing,
+        OfferStock $stock,
+        Fulfilment $fulfilment,
+        // Store
+        OfferCondition $condition,
+        // notPublishableReasons
+    } deriving (FromArray, ToArray);
+
     data RetailerOfferUpsert = RetailerOfferUpsert {
         Ean $ean,
         OfferCondition $condition,
@@ -107,7 +129,9 @@ namespace BolCom\RetailerApi\Model\Offer {
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Query {
-    // @todo: Retrieve an offer by its offer id.
+    data GetOffer = GetOffer {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId
+    } deriving (Query);
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Command {

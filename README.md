@@ -106,7 +106,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\C
 /** @var null|\BolCom\RetailerApi\Model\Order\OrderList $orderList */
 $orderList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders::with(
     1,
-    \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::FBR()
+    \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::FBR()
 ));
 ```
 
@@ -170,7 +170,7 @@ $processStatuses = $messageBus->dispatch(\BolCom\RetailerApi\Model\ProcessStatus
 $returnItemList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetAllReturns::with(
     1,
     false,
-    \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::FBR()
+    \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::FBR()
 ));
 ```
 
@@ -198,7 +198,7 @@ $shipment = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\GetSh
 /** @var null|\BolCom\RetailerApi\Model\Shipment\ShipmentList $shipmentList */
 $shipmentList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList::with(
     1,
-    \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::FBR(),
+    \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::FBR(),
     \BolCom\RetailerApi\Model\Order\OrderId::fromString('7616222250')
 ));
 ```

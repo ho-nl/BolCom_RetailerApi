@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Rma;
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Rma\Query\GetAllReturns;
-use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 
 class GetAllReturnsHandlerTest extends \PHPUnit\Framework\TestCase
 {

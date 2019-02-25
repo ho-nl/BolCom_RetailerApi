@@ -22,7 +22,7 @@ final class OrderItem
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(OrderItemId $orderItemId, string $offerReference, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title, Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\CurrencyAmount $transactionFee, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, bool $cancelRequest, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(OrderItemId $orderItemId, string $offerReference, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title, Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\CurrencyAmount $transactionFee, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, bool $cancelRequest, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->offerReference = $offerReference;
@@ -88,7 +88,7 @@ final class OrderItem
         return $this->cancelRequest;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -148,7 +148,7 @@ final class OrderItem
         return new self($this->orderItemId, $this->offerReference, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $cancelRequest, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): OrderItem
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): OrderItem
     {
         return new self($this->orderItemId, $this->offerReference, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->transactionFee, $this->latestDeliveryDate, $this->offerCondition, $this->cancelRequest, $fulfilmentMethod, $this->selectedDeliveryWindow);
     }
@@ -224,7 +224,7 @@ final class OrderItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
 
         if (isset($data['selectedDeliveryWindow'])) {
             if (! \is_array($data['selectedDeliveryWindow'])) {

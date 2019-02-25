@@ -1,9 +1,6 @@
 namespace BolCom\RetailerApi\Model\Shipment {
     data ShipmentId = Int deriving(FromScalar, ToScalar);
 
-    // @todo: Moved to \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
-    data FulfilmentMethod = FBR | FBB deriving(Enum(useValue));
-
     data Shipment = Shipment {
         ShipmentId $shipmentId,
         \BolCom\RetailerApi\Model\DateTime $shipmentDate,
@@ -40,7 +37,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
         \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference,
-        FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 }
@@ -52,6 +49,6 @@ namespace BolCom\RetailerApi\Model\Shipment\Query {
 
     data GetShipmentList = GetShipmentList {
         int $page,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
     } deriving (Query);
 }

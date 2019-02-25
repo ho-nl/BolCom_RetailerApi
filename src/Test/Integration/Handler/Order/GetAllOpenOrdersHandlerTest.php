@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
-use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 
 class GetAllOpenOrdersHandlerTest extends \PHPUnit\Framework\TestCase
 {

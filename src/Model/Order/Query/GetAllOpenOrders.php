@@ -20,12 +20,12 @@ final class GetAllOpenOrders extends \Prooph\Common\Messaging\Query
         return $this->payload['page'];
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     {
-        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
+        return \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
     }
 
-    public static function with(int $page, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): GetAllOpenOrders
+    public static function with(int $page, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): GetAllOpenOrders
     {
         return new self([
             'page' => $page,

@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Shipment;
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Order\OrderId;
-use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 use BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList;
 
 class GetShipmentListHandlerTest extends \PHPUnit\Framework\TestCase

@@ -55,7 +55,7 @@ namespace BolCom\RetailerApi\Model\Order {
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
         bool $cancelRequest,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         ?SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 
@@ -75,7 +75,7 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 
     data GetAllOpenOrders = GetAllOpenOrders {
         int $page,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
     } deriving (Query);
 }
 

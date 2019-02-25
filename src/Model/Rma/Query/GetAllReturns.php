@@ -25,12 +25,12 @@ final class GetAllReturns extends \Prooph\Common\Messaging\Query
         return $this->payload['handled'];
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     {
-        return \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
+        return \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
     }
 
-    public static function with(int $page, bool $handled, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): GetAllReturns
+    public static function with(int $page, bool $handled, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): GetAllReturns
     {
         return new self([
             'page' => $page,

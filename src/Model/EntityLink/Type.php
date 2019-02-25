@@ -15,7 +15,9 @@ final class Type
         'ORDER_ITEM' => 'order_item',
         'SHIPMENT' => 'shipment',
         'RETURN_ITEM' => 'return_item',
+        'OFFER' => 'offer',
         'PROCESS_STATUS_CONFIRM_SHIPMENT' => 'process_status_confirm_shipment',
+        'PROCESS_STATUS_OFFER' => 'process_status_offer',
     ];
 
     const CART = 'cart';
@@ -23,7 +25,9 @@ final class Type
     const ORDER_ITEM = 'order_item';
     const SHIPMENT = 'shipment';
     const RETURN_ITEM = 'return_item';
+    const OFFER = 'offer';
     const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
+    const PROCESS_STATUS_OFFER = 'process_status_offer';
 
     private $name;
     private $value;
@@ -59,9 +63,19 @@ final class Type
         return new self('RETURN_ITEM');
     }
 
+    public static function OFFER(): self
+    {
+        return new self('OFFER');
+    }
+
     public static function PROCESS_STATUS_CONFIRM_SHIPMENT(): self
     {
         return new self('PROCESS_STATUS_CONFIRM_SHIPMENT');
+    }
+
+    public static function PROCESS_STATUS_OFFER(): self
+    {
+        return new self('PROCESS_STATUS_OFFER');
     }
 
     public static function fromName(string $value): self

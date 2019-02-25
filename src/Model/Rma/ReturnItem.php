@@ -24,7 +24,7 @@ final class ReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
     {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
@@ -82,7 +82,7 @@ final class ReturnItem
         return $this->customerDetails;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod
+    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
     }
@@ -152,7 +152,7 @@ final class ReturnItem
         return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod): ReturnItem
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): ReturnItem
     {
         return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -244,7 +244,7 @@ final class ReturnItem
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
+        $fulfilmentMethod = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
 
         if (! isset($data['handled']) || ! \is_bool($data['handled'])) {
             throw new \InvalidArgumentException("Key 'handled' is missing in data array or is not a bool");

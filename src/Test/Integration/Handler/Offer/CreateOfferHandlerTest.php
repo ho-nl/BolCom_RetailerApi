@@ -14,7 +14,7 @@ use BolCom\RetailerApi\Model\Offer\ConditionCategory;
 use BolCom\RetailerApi\Model\Offer\Condition;
 use BolCom\RetailerApi\Model\Offer\DeliveryCode;
 use BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert;
-use BolCom\RetailerApi\Model\Shipment\FulfilmentMethod;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 
 class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
 {

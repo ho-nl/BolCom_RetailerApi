@@ -11,7 +11,7 @@ namespace BolCom\RetailerApi\Model\Rma {
         string $returnReason,
         string $returnReasonComments,
         ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod,
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
         ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace,
         ?HandlingResult $handlingResult,
@@ -36,7 +36,7 @@ namespace BolCom\RetailerApi\Model\Rma\Query {
     data GetAllReturns = GetAllReturns {
         int $page,
         bool $handled,
-        \BolCom\RetailerApi\Model\Shipment\FulfilmentMethod $fulfilmentMethod
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
     } deriving (Query);
 }
 
