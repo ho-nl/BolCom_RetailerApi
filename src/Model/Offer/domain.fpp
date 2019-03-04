@@ -102,18 +102,32 @@ namespace BolCom\RetailerApi\Model\Offer {
         bool $managedByRetailer
     } deriving (FromArray, ToArray);
 
+    data CountryCode = CountryCode {
+        string $countryCode
+    } deriving (FromArray, ToArray);
+
+    data Store = Store {
+        Title $productTitle,
+        ?CountryCode[] $visible
+    } deriving (FromArray, ToArray);
+
+    data NotPublishableReasons = NotPublishableReasons {
+        string $code,
+        ?string $description
+    } deriving (FromArray, ToArray);
+
     data RetailerOffer = RetailerOffer {
         OfferId $offerId,
         Ean $ean,
         ReferenceCode $referenceCode,
         bool $onHoldByRetailer,
-        Title $unknownProductTitle,
+        ?Title $unknownProductTitle,
         Pricing $pricing,
         OfferStock $stock,
         Fulfilment $fulfilment,
-        // Store
+        Store $store,
         OfferCondition $condition,
-        // notPublishableReasons
+        NotPublishableReasons[] $notPublishableReasons
     } deriving (FromArray, ToArray);
 
     data RetailerOfferUpsert = RetailerOfferUpsert {

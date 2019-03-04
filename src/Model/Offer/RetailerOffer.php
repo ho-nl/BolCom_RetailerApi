@@ -17,9 +17,24 @@ final class RetailerOffer
     private $pricing;
     private $stock;
     private $fulfilment;
+    private $store;
     private $condition;
+    private $notPublishableReasons;
 
-    public function __construct(OfferId $offerId, Ean $ean, ReferenceCode $referenceCode, bool $onHoldByRetailer, Title $unknownProductTitle, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, OfferCondition $condition)
+    /**
+     * @param \BolCom\RetailerApi\Model\Offer\OfferId $offerId
+     * @param \BolCom\RetailerApi\Model\Offer\Ean $ean
+     * @param \BolCom\RetailerApi\Model\Offer\ReferenceCode $referenceCode
+     * @param bool $onHoldByRetailer
+     * @param \BolCom\RetailerApi\Model\Offer\Title $unknownProductTitle
+     * @param \BolCom\RetailerApi\Model\Offer\Pricing $pricing
+     * @param \BolCom\RetailerApi\Model\Offer\OfferStock $stock
+     * @param \BolCom\RetailerApi\Model\Offer\Fulfilment $fulfilment
+     * @param \BolCom\RetailerApi\Model\Offer\Store $store
+     * @param \BolCom\RetailerApi\Model\Offer\OfferCondition $condition
+     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]|null $notPublishableReasons
+     */
+    public function __construct(OfferId $offerId, Ean $ean, ReferenceCode $referenceCode, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, Store $store, OfferCondition $condition, array $notPublishableReasons)
     {
         $this->offerId = $offerId;
         $this->ean = $ean;
@@ -29,7 +44,15 @@ final class RetailerOffer
         $this->pricing = $pricing;
         $this->stock = $stock;
         $this->fulfilment = $fulfilment;
+        $this->store = $store;
         $this->condition = $condition;
+            $this->notPublishableReasons = [];
+            foreach ($notPublishableReasons as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Offer\NotPublishableReasons) {
+                    throw new \InvalidArgumentException('notPublishableReasons expected an array of BolCom\RetailerApi\Model\Offer\NotPublishableReasons');
+                }
+                $this->notPublishableReasons[] = $__value;
+            }
     }
 
     public function offerId(): OfferId
@@ -52,7 +75,7 @@ final class RetailerOffer
         return $this->onHoldByRetailer;
     }
 
-    public function unknownProductTitle(): Title
+    public function unknownProductTitle()
     {
         return $this->unknownProductTitle;
     }
@@ -72,54 +95,81 @@ final class RetailerOffer
         return $this->fulfilment;
     }
 
+    public function store(): Store
+    {
+        return $this->store;
+    }
+
     public function condition(): OfferCondition
     {
         return $this->condition;
     }
 
+    /**
+     * @return \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]
+     */
+    public function notPublishableReasons(): array
+    {
+        return $this->notPublishableReasons;
+    }
+
     public function withOfferId(OfferId $offerId): RetailerOffer
     {
-        return new self($offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withEan(Ean $ean): RetailerOffer
     {
-        return new self($this->offerId, $ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withReferenceCode(ReferenceCode $referenceCode): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withOnHoldByRetailer(bool $onHoldByRetailer): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
-    public function withUnknownProductTitle(Title $unknownProductTitle): RetailerOffer
+    public function withUnknownProductTitle(Title $unknownProductTitle = null): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withPricing(Pricing $pricing): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $pricing, $this->stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withStock(OfferStock $stock): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $stock, $this->fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withFulfilment(Fulfilment $fulfilment): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $fulfilment, $this->condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+    }
+
+    public function withStore(Store $store): RetailerOffer
+    {
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withCondition(OfferCondition $condition): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $condition);
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $condition, $this->notPublishableReasons);
+    }
+
+    /**
+     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]|null $notPublishableReasons
+     * @return \BolCom\RetailerApi\Model\Offer\RetailerOffer
+     */
+    public function withNotPublishableReasons(array $notPublishableReasons): RetailerOffer
+    {
+        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $notPublishableReasons);
     }
 
     public static function fromArray(array $data): RetailerOffer
@@ -148,11 +198,15 @@ final class RetailerOffer
 
         $onHoldByRetailer = $data['onHoldByRetailer'];
 
-        if (! isset($data['unknownProductTitle']) || ! \is_string($data['unknownProductTitle'])) {
-            throw new \InvalidArgumentException("Key 'unknownProductTitle' is missing in data array or is not a string");
-        }
+        if (isset($data['unknownProductTitle'])) {
+            if (! \is_string($data['unknownProductTitle'])) {
+                throw new \InvalidArgumentException("Value for 'unknownProductTitle' is not a string in data array");
+            }
 
-        $unknownProductTitle = Title::fromString($data['unknownProductTitle']);
+            $unknownProductTitle = Title::fromString($data['unknownProductTitle']);
+        } else {
+            $unknownProductTitle = null;
+        }
 
         if (! isset($data['pricing']) || ! \is_array($data['pricing'])) {
             throw new \InvalidArgumentException("Key 'pricing' is missing in data array or is not an array");
@@ -172,11 +226,31 @@ final class RetailerOffer
 
         $fulfilment = Fulfilment::fromArray($data['fulfilment']);
 
+        if (! isset($data['store']) || ! \is_array($data['store'])) {
+            throw new \InvalidArgumentException("Key 'store' is missing in data array or is not an array");
+        }
+
+        $store = Store::fromArray($data['store']);
+
         if (! isset($data['condition']) || ! \is_array($data['condition'])) {
             throw new \InvalidArgumentException("Key 'condition' is missing in data array or is not an array");
         }
 
         $condition = OfferCondition::fromArray($data['condition']);
+
+        if (! isset($data['notPublishableReasons']) || ! \is_array($data['notPublishableReasons'])) {
+            throw new \InvalidArgumentException("Key 'notPublishableReasons' is missing in data array or is not an array");
+        }
+
+        $notPublishableReasons = [];
+
+        foreach ($data['notPublishableReasons'] as $__value) {
+            if (! \is_array($data['notPublishableReasons'])) {
+                throw new \InvalidArgumentException("Key 'notPublishableReasons' in data array or is not an array of arrays");
+            }
+
+            $notPublishableReasons[] = NotPublishableReasons::fromArray($__value);
+        }
 
         return new self(
             $offerId,
@@ -187,22 +261,32 @@ final class RetailerOffer
             $pricing,
             $stock,
             $fulfilment,
-            $condition
+            $store,
+            $condition,
+            $notPublishableReasons
         );
     }
 
     public function toArray(): array
     {
+        $notPublishableReasons = [];
+
+        foreach ($this->notPublishableReasons as $__value) {
+            $notPublishableReasons[] = $__value->toArray();
+        }
+
         return [
             'offerId' => $this->offerId->toString(),
             'ean' => $this->ean->toString(),
             'referenceCode' => $this->referenceCode->toString(),
             'onHoldByRetailer' => $this->onHoldByRetailer,
-            'unknownProductTitle' => $this->unknownProductTitle->toString(),
+            'unknownProductTitle' => null === $this->unknownProductTitle ? null : $this->unknownProductTitle->toString(),
             'pricing' => $this->pricing->toArray(),
             'stock' => $this->stock->toArray(),
             'fulfilment' => $this->fulfilment->toArray(),
+            'store' => $this->store->toArray(),
             'condition' => $this->condition->toArray(),
+            'notPublishableReasons' => $notPublishableReasons,
         ];
     }
 }

@@ -192,7 +192,15 @@ final class Commission
                 throw new \InvalidArgumentException("Value for 'reduction' is not an array in data array");
             }
 
-            $reduction = CommissionReduction::fromArray($data['reduction']);
+            $reduction = [];
+
+            foreach ($data['reduction'] as $__value) {
+                if (! \is_array($data['reduction'])) {
+                    throw new \InvalidArgumentException("Key 'reduction' in data array or is not an array of arrays");
+                }
+
+                $reduction[] = CommissionReduction::fromArray($__value);
+            }
         } else {
             $reduction = null;
         }
