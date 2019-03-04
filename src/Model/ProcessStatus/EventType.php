@@ -16,6 +16,7 @@ final class EventType
         'CHANGE_TRANSPORT' => 'CHANGE_TRANSPORT',
         'HANDLE_RETURN_ITEM' => 'HANDLE_RETURN_ITEM',
         'CREATE_INBOUND' => 'CREATE_INBOUND',
+        'DELETE_OFFER' => 'DELETE_OFFER',
     ];
 
     const CREATE_OFFER = 'CREATE_OFFER';
@@ -24,6 +25,7 @@ final class EventType
     const CHANGE_TRANSPORT = 'CHANGE_TRANSPORT';
     const HANDLE_RETURN_ITEM = 'HANDLE_RETURN_ITEM';
     const CREATE_INBOUND = 'CREATE_INBOUND';
+    const DELETE_OFFER = 'DELETE_OFFER';
 
     private $name;
     private $value;
@@ -62,6 +64,11 @@ final class EventType
     public static function CREATE_INBOUND(): self
     {
         return new self('CREATE_INBOUND');
+    }
+
+    public static function DELETE_OFFER(): self
+    {
+        return new self('DELETE_OFFER');
     }
 
     public static function fromName(string $value): self

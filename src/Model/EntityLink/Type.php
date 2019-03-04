@@ -18,6 +18,7 @@ final class Type
         'OFFER' => 'offer',
         'PROCESS_STATUS_CONFIRM_SHIPMENT' => 'process_status_confirm_shipment',
         'PROCESS_STATUS_OFFER' => 'process_status_offer',
+        'PROCESS_STATUS_DELETE_OFFER' => 'process_status_delete_offer',
     ];
 
     const CART = 'cart';
@@ -28,6 +29,7 @@ final class Type
     const OFFER = 'offer';
     const PROCESS_STATUS_CONFIRM_SHIPMENT = 'process_status_confirm_shipment';
     const PROCESS_STATUS_OFFER = 'process_status_offer';
+    const PROCESS_STATUS_DELETE_OFFER = 'process_status_delete_offer';
 
     private $name;
     private $value;
@@ -76,6 +78,11 @@ final class Type
     public static function PROCESS_STATUS_OFFER(): self
     {
         return new self('PROCESS_STATUS_OFFER');
+    }
+
+    public static function PROCESS_STATUS_DELETE_OFFER(): self
+    {
+        return new self('PROCESS_STATUS_DELETE_OFFER');
     }
 
     public static function fromName(string $value): self

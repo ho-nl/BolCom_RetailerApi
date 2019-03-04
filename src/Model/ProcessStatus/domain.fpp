@@ -7,6 +7,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus {
         | CHANGE_TRANSPORT
         | HANDLE_RETURN_ITEM
         | CREATE_INBOUND
+        | DELETE_OFFER
     deriving(Enum(useValue));
 
     data EventStatus = PENDING | SUCCESS | FAILURE | TIMEOUT deriving(Enum(useValue));

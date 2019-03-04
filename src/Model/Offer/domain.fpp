@@ -89,11 +89,6 @@ namespace BolCom\RetailerApi\Model\Offer {
             DCMijnLeverbelofte: "MijnLeverbelofte"
         );
 
-    data RetailerOfferIdentifier = RetailerOfferIdentifier {
-        Ean $ean,
-        Condition $condition,
-    } deriving (FromArray, ToArray);
-
     data OfferId = OfferId deriving(Uuid);
 
     data OfferStock = OfferStock {
@@ -153,8 +148,7 @@ namespace BolCom\RetailerApi\Model\Offer\Command {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailerOffer
     } deriving (Command);
 
-    data DeleteOffersInBulk = DeleteOffersInBulk {
-        \BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier[] $retailerOfferIdentifier
-    } deriving (Command) where
-        _: | count($retailerOfferIdentifier) === 0 => 'You should at least provide a single Offer to delete';
+    data DeleteOffer = DeleteOffer {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId
+    } deriving (Command);
 }

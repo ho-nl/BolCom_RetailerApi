@@ -9,22 +9,27 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
-use BolCom\RetailerApi\Model\Offer\Command\DeleteOffersInBulk;
-use BolCom\RetailerApi\Model\Offer\Condition;
-use BolCom\RetailerApi\Model\Offer\RetailerOfferIdentifier;
+use BolCom\RetailerApi\Model\Offer\Command\DeleteOffer;
 
 class DeleteOffersInBulkHandlerTest extends \PHPUnit\Framework\TestCase
 {
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
+
+    protected function setUp()
+    {
+        $clientPool = ClientPool::configure(new ClientConfig(
+            BOL_CLIENT_ID,
+            BOL_CLIENT_SECRET,
+            'https://api.bol.com/retailer-demo/'
+        ));
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
+
     public function test__invoke()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
-
-        $messageBus->dispatch(DeleteOffersInBulk::with(
-            RetailerOfferIdentifier::fromArray([
-                'ean' => '9781785882364',
-                'condition' => Condition::IS_NEW
-            ])
+        $this->messageBus->dispatch(DeleteOffer::with(
+            \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')
         ));
     }
 }
