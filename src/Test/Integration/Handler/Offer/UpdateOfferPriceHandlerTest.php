@@ -9,10 +9,11 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
+use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice;
 use BolCom\RetailerApi\Model\Offer\OfferId;
-use BolCom\RetailerApi\Model\Offer\Query\GetOffer;
+use BolCom\RetailerApi\Model\Offer\Pricing;
 
-class GetOfferHandlerTest extends \PHPUnit\Framework\TestCase
+class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
     private $messageBus;
@@ -29,8 +30,14 @@ class GetOfferHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function test__invoke()
     {
-        $this->markTestSkipped('Unable to fetch Offer, contacted bol.com about this issue.');
-
-        $this->messageBus->dispatch(GetOffer::with(OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')));
+        $this->messageBus->dispatch(UpdateOfferPrice::with(
+            OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+            Pricing::fromArray([
+                'bundlePrices' => [
+                    ['quantity' => 1, 'price' => 12]
+                    // @todo response: pricing.bundlePrices: Collection with only 1 element is allowed at this time.
+                ]
+            ])
+        ));
     }
 }

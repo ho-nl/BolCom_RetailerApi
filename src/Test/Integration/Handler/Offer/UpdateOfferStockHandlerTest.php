@@ -9,9 +9,11 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Offer;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
-use BolCom\RetailerApi\Model\Offer\Command\DeleteOffer;
+use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock;
+use BolCom\RetailerApi\Model\Offer\OfferId;
+use BolCom\RetailerApi\Model\Offer\Stock;
 
-class DeleteOffersInBulkHandlerTest extends \PHPUnit\Framework\TestCase
+class UpdateOfferStockHandlerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
     private $messageBus;
@@ -28,8 +30,12 @@ class DeleteOffersInBulkHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function test__invoke()
     {
-        $this->messageBus->dispatch(DeleteOffer::with(
-            \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')
+        $this->messageBus->dispatch(UpdateOfferStock::with(
+            OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+            Stock::fromArray([
+                'amount' => 97,
+                'managedByRetailer' => false
+            ])
         ));
     }
 }

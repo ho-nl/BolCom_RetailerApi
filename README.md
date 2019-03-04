@@ -88,7 +88,97 @@ $commissionList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Que
 ```
 
 ### Offer
-@Todo, add this when v4 of API is merged into v3.
+#### CreateOfferHandler
+@todo: `pricing.bundlePrices: Collection with only 1 element is allowed at this time.`
+
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\CreateOffer::with(
+    \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert::fromArray([
+        'ean' => '9781785882364',
+        'condition' => [
+            'name' => \BolCom\RetailerApi\Model\Offer\Condition::IS_NEW,
+            'category' => \BolCom\RetailerApi\Model\Offer\ConditionCategory::IS_NEW
+        ],
+        'referenceCode' => 'SKU123',
+        'onHoldByRetailer' => false,
+        'unknownProductTitle' => 'My Title',
+        'pricing' => [
+            'bundlePrices' => [
+                ['quantity' => 1, 'price' => 10]
+            ]
+        ],
+        'stock' => [
+            'amount' => 12,
+            'managedByRetailer' => true
+        ],
+        'fulfilment' => [
+            'type' => \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::FBR,
+            'deliveryCode' => \BolCom\RetailerApi\Model\Offer\DeliveryCode::DC12d
+        ]
+    ])
+));
+```
+
+#### DeleteOfferHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\DeleteOffer::with(
+    \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')
+));
+```
+
+#### GetOfferHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\Offer\RetailerOffer $offer */
+$offer = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\GetOffer::with(
+    \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')
+));
+```
+
+#### UpdateOfferHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOffer::with(
+    \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+    \BolCom\RetailerApi\Model\Offer\RetailerOfferUpdate::fromArray([
+        'referenceCode' => 'SKU123',
+        'onHoldByRetailer' => false,
+        'unknownProductTitle' => 'My Title',
+        'fulfilment' => [
+            'type' => \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::FBR,
+            'deliveryCode' => \BolCom\RetailerApi\Model\Offer\DeliveryCode::DC12d
+        ]
+    ])
+));
+```
+
+#### UpdateOfferPriceHandler
+@todo: `pricing.bundlePrices: Collection with only 1 element is allowed at this time.`
+
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice::with(
+    \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+    \BolCom\RetailerApi\Model\Offer\Pricing::fromArray([
+        'bundlePrices' => [
+            ['quantity' => 1, 'price' => 12]
+        ]
+    ])
+));
+```
+
+#### UpdateOfferStockHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock::with(
+    \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+    \BolCom\RetailerApi\Model\Offer\Stock::fromArray([
+        'amount' => 97,
+        'managedByRetailer' => false
+    ])
+));
+```
 
 ### Order
 #### CancelOrderHandler

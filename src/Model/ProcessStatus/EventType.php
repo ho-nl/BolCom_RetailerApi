@@ -17,6 +17,9 @@ final class EventType
         'HANDLE_RETURN_ITEM' => 'HANDLE_RETURN_ITEM',
         'CREATE_INBOUND' => 'CREATE_INBOUND',
         'DELETE_OFFER' => 'DELETE_OFFER',
+        'UPDATE_OFFER' => 'UPDATE_OFFER',
+        'UPDATE_OFFER_PRICE' => 'UPDATE_OFFER_PRICE',
+        'UPDATE_OFFER_STOCK' => 'UPDATE_OFFER_STOCK',
     ];
 
     const CREATE_OFFER = 'CREATE_OFFER';
@@ -26,6 +29,9 @@ final class EventType
     const HANDLE_RETURN_ITEM = 'HANDLE_RETURN_ITEM';
     const CREATE_INBOUND = 'CREATE_INBOUND';
     const DELETE_OFFER = 'DELETE_OFFER';
+    const UPDATE_OFFER = 'UPDATE_OFFER';
+    const UPDATE_OFFER_PRICE = 'UPDATE_OFFER_PRICE';
+    const UPDATE_OFFER_STOCK = 'UPDATE_OFFER_STOCK';
 
     private $name;
     private $value;
@@ -69,6 +75,21 @@ final class EventType
     public static function DELETE_OFFER(): self
     {
         return new self('DELETE_OFFER');
+    }
+
+    public static function UPDATE_OFFER(): self
+    {
+        return new self('UPDATE_OFFER');
+    }
+
+    public static function UPDATE_OFFER_PRICE(): self
+    {
+        return new self('UPDATE_OFFER_PRICE');
+    }
+
+    public static function UPDATE_OFFER_STOCK(): self
+    {
+        return new self('UPDATE_OFFER_STOCK');
     }
 
     public static function fromName(string $value): self

@@ -135,6 +135,13 @@ namespace BolCom\RetailerApi\Model\Offer {
         Stock $stock,
         Fulfilment $fulfilment
     } deriving (FromArray, ToArray);
+
+    data RetailerOfferUpdate = RetailerOfferUpdate {
+        ?ReferenceCode $referenceCode,
+        bool $onHoldByRetailer,
+        ?Title $unknownProductTitle,
+        Fulfilment $fulfilment
+    } deriving (FromArray, ToArray);
 }
 
 namespace BolCom\RetailerApi\Model\Offer\Query {
@@ -146,6 +153,21 @@ namespace BolCom\RetailerApi\Model\Offer\Query {
 namespace BolCom\RetailerApi\Model\Offer\Command {
     data CreateOffer = CreateOffer {
         \BolCom\RetailerApi\Model\Offer\RetailerOfferUpsert $retailerOffer
+    } deriving (Command);
+
+    data UpdateOffer = UpdateOffer {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
+        \BolCom\RetailerApi\Model\Offer\RetailerOfferUpdate $retailerOffer
+    } deriving (Command);
+
+    data UpdateOfferPrice = UpdateOfferPrice {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
+        \BolCom\RetailerApi\Model\Offer\Pricing $pricing
+    } deriving (Command);
+
+    data UpdateOfferStock = UpdateOfferStock {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
+        \BolCom\RetailerApi\Model\Offer\Stock $stock
     } deriving (Command);
 
     data DeleteOffer = DeleteOffer {

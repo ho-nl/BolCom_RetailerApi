@@ -12,6 +12,9 @@ use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
 use BolCom\RetailerApi\Handler\Offer\CreateOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\DeleteOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\GetOfferHandler;
+use BolCom\RetailerApi\Handler\Offer\UpdateOfferHandler;
+use BolCom\RetailerApi\Handler\Offer\UpdateOfferPriceHandler;
+use BolCom\RetailerApi\Handler\Offer\UpdateOfferStockHandler;
 use BolCom\RetailerApi\Handler\Order\CancelOrderHandler;
 use BolCom\RetailerApi\Handler\Order\GetOrderHandler;
 use BolCom\RetailerApi\Handler\Order\ShipOrderItemHandler;
@@ -30,6 +33,9 @@ use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\MessageBusInterface;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOffer;
 use BolCom\RetailerApi\Model\Offer\Command\DeleteOffer;
+use BolCom\RetailerApi\Model\Offer\Command\UpdateOffer;
+use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice;
+use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock;
 use BolCom\RetailerApi\Model\Offer\Query\GetOffer;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
@@ -65,6 +71,9 @@ class MessageBus implements MessageBusInterface
             CancelOrder::class => CancelOrderHandler::class,
             ShipOrderItem::class => ShipOrderItemHandler::class,
             CreateOffer::class => CreateOfferHandler::class,
+            UpdateOffer::class => UpdateOfferHandler::class,
+            UpdateOfferPrice::class => UpdateOfferPriceHandler::class,
+            UpdateOfferStock::class => UpdateOfferStockHandler::class,
             GetOffer::class => GetOfferHandler::class,
             DeleteOffer::class => DeleteOfferHandler::class,
             GetAllReturns::class => GetAllReturnsHandler::class,
