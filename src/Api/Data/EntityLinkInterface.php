@@ -16,6 +16,7 @@ interface EntityLinkInterface
     const ENTITY_TYPE = 'entity_type';
     const INTERNAL_REFERENCE = 'internal_reference';
     const EXTERNAL_REFERENCE = 'external_reference';
+    const SCOPE = 'scope';
     const CREATED_AT = 'created_at';
 
     /**
@@ -53,6 +54,18 @@ interface EntityLinkInterface
      * @return EntityLinkInterface
      */
     public function setExternalReference(ExternalReference $reference): self;
+
+    /**
+     * @return string
+     */
+    public function getScope(): string;
+
+    /**
+     * @param string $scope
+     *
+     * @return EntityLinkInterface
+     */
+    public function setScope(string $scope): self;
 
     /**
      * @return \DateTime
