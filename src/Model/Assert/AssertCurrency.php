@@ -3,7 +3,6 @@
  * Copyright © Reach Digital (https://www.reachdigital.io/)
  * See LICENSE.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Assert;
@@ -17,7 +16,6 @@ class AssertCurrency
      */
     public static function assert(float $value): bool
     {
-        Assertion::eq(round($value, 2), $value);
-        return true;
+        return Assertion::lessThan(abs($value - $value), 0.00001);
     }
 }
