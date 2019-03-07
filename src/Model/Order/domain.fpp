@@ -82,7 +82,6 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 namespace BolCom\RetailerApi\Model\Order\Command {
     data CancelOrder = CancelOrder {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        ?\BolCom\RetailerApi\Model\DateTime $dateTime,
         ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
     } deriving (Query);
 

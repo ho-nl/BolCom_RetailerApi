@@ -9,7 +9,6 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
-use BolCom\RetailerApi\Model\DateTime;
 use BolCom\RetailerApi\Model\Order\CancellationReason;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\OrderItemId;
@@ -27,7 +26,6 @@ class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
 
         $messageBus->dispatch(CancelOrder::with(
             OrderItemId::fromString('6107434013'),
-            DateTime::fromString((new \DateTime())->format(\DateTime::ATOM)),
             CancellationReason::REQUESTED_BY_CUSTOMER()
         ));
     }

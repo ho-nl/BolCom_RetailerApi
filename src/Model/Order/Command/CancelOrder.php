@@ -20,21 +20,15 @@ final class CancelOrder extends \Prooph\Common\Messaging\Query
         return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
     }
 
-    public function dateTime()
-    {
-        return isset($this->payload['dateTime']) ? \BolCom\RetailerApi\Model\DateTime::fromString($this->payload['dateTime']) : null;
-    }
-
     public function reasonCode()
     {
         return isset($this->payload['reasonCode']) ? \BolCom\RetailerApi\Model\Order\CancellationReason::fromValue($this->payload['reasonCode']) : null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\DateTime $dateTime = null, \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode = null): CancelOrder
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode = null): CancelOrder
     {
         return new self([
             'orderItemId' => $orderItemId->toString(),
-            'dateTime' => null === $dateTime ? null : $dateTime->toString(),
             'reasonCode' => null === $reasonCode ? null : $reasonCode->value(),
         ]);
     }
@@ -43,10 +37,6 @@ final class CancelOrder extends \Prooph\Common\Messaging\Query
     {
         if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
             throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
-        }
-
-        if (isset($payload['dateTime']) && ! \is_string($payload['dateTime'])) {
-            throw new \InvalidArgumentException("Value for 'dateTime' is not a string in payload");
         }
 
         if (isset($payload['reasonCode']) && ! \is_string($payload['reasonCode'])) {
