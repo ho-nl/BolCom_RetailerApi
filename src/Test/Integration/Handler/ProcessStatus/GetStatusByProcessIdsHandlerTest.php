@@ -15,8 +15,6 @@ class GetStatusByProcessIdsHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke()
     {
-        $this->markTestSkipped('Unable to fetch Process Status, contacted bol.com about this issue.');
-
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
@@ -24,6 +22,6 @@ class GetStatusByProcessIdsHandlerTest extends \PHPUnit\Framework\TestCase
         ));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetStatusByProcessIds::with(...[6107432387]));
+        $messageBus->dispatch(GetStatusByProcessIds::with(...[1, 2, 3, 4]));
     }
 }
