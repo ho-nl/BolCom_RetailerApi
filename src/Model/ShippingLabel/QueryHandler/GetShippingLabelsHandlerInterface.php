@@ -12,5 +12,10 @@ use BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelList;
 
 interface GetShippingLabelsHandlerInterface
 {
-    public function __invoke(GetShippingLabels $getShippingLabels): ShippingLabelList;
+    /**
+     * @param GetShippingLabels $getShippingLabels
+     *
+     * @return ShippingLabelList|null
+     */
+    public function __invoke(GetShippingLabels $getShippingLabels);
 }

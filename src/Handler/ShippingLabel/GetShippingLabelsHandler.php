@@ -28,7 +28,7 @@ class GetShippingLabelsHandler implements GetShippingLabelsHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetShippingLabels $getShippingLabels): ShippingLabelList
+    public function __invoke(GetShippingLabels $getShippingLabels)
     {
         $response = $this->client->get("purchasable-shippinglabels/{$getShippingLabels->orderItemId()->toString()}", [
             'headers' => [
@@ -36,6 +36,8 @@ class GetShippingLabelsHandler implements GetShippingLabelsHandlerInterface
             ]
         ]);
 
-        return ShippingLabelList::fromArray($response->getBody()->json());
+        $response = $response->getBody()->json();
+
+        return ! empty($response) ? ShippingLabelList::fromArray($response) : null;
     }
 }
