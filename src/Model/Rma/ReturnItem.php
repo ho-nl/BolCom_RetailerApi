@@ -24,7 +24,7 @@ final class ReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
     {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
@@ -72,7 +72,7 @@ final class ReturnItem
         return $this->returnReason;
     }
 
-    public function returnReasonComments(): string
+    public function returnReasonComments()
     {
         return $this->returnReasonComments;
     }
@@ -142,7 +142,7 @@ final class ReturnItem
         return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withReturnReasonComments(string $returnReasonComments): ReturnItem
+    public function withReturnReasonComments(string $returnReasonComments = null): ReturnItem
     {
         return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->registrationDateTime, $this->returnReason, $returnReasonComments, $this->customerDetails, $this->fulfilmentMethod, $this->handled, $this->trackAndTrace, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -224,11 +224,15 @@ final class ReturnItem
 
         $returnReason = $data['returnReason'];
 
-        if (! isset($data['returnReasonComments']) || ! \is_string($data['returnReasonComments'])) {
-            throw new \InvalidArgumentException("Key 'returnReasonComments' is missing in data array or is not a string");
-        }
+        if (isset($data['returnReasonComments'])) {
+            if (! \is_string($data['returnReasonComments'])) {
+                throw new \InvalidArgumentException("Value for 'returnReasonComments' is not a string in data array");
+            }
 
-        $returnReasonComments = $data['returnReasonComments'];
+            $returnReasonComments = $data['returnReasonComments'];
+        } else {
+            $returnReasonComments = null;
+        }
 
         if (isset($data['customerDetails'])) {
             if (! \is_array($data['customerDetails'])) {
