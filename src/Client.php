@@ -22,14 +22,15 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
 {
     public function __construct(
         ClientConfigInterface $clientConfig,
-        LoggerInterface $logger = null
+        LoggerInterface $logger = null,
+        string $userAgent = 'bol-com/retailer-api/1.0'
     ) {
         $stack = $this->handlerStack($clientConfig, $logger);
 
         parent::__construct([
             'handler' => $stack,
             'base_uri' => $clientConfig->clientUrl(),
-            'headers' => ['User-Agent' => 'bol-com/retailer-api/1.0'],
+            'headers' => ['User-Agent' => $userAgent],
             'connect_timeout' => 10,
             'auth' => 'oauth'
         ]);
