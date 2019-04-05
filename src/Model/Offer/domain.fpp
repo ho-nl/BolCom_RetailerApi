@@ -4,7 +4,7 @@ namespace BolCom\RetailerApi\Model\Offer {
             | !\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value) => 'EAN Code is invalid.';
 
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
-        _: | !\Assert\Assertion::between($value, 0, 999) => '';
+        _: | !\Assert\Assertion::between($value, 0, 999) => 'Stock amount should be between 0 and 999.';
 
     data ReferenceCode = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 20) => '';

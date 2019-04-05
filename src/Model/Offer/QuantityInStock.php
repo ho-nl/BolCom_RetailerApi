@@ -14,7 +14,7 @@ final class QuantityInStock
     public function __construct(int $value)
     {
         if (!\Assert\Assertion::between($value, 0, 999)) {
-            throw new \InvalidArgumentException('');
+            throw new \InvalidArgumentException('Stock amount should be between 0 and 999.');
         }
 
         $this->value = $value;
