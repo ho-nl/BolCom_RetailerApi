@@ -10,10 +10,12 @@ namespace BolCom\RetailerApi\Api\Data;
 use BolCom\RetailerApi\Model\EntityLink\ExternalReference;
 use BolCom\RetailerApi\Model\EntityLink\InternalReference;
 use BolCom\RetailerApi\Model\EntityLink\Type;
+use BolCom\RetailerApi\Model\ProcessStatus\EventType;
 
 interface EntityLinkInterface
 {
     const ENTITY_TYPE = 'entity_type';
+    const EVENT_TYPE = 'event_type';
     const INTERNAL_REFERENCE = 'internal_reference';
     const EXTERNAL_REFERENCE = 'external_reference';
     const SCOPE = 'scope';
@@ -30,6 +32,18 @@ interface EntityLinkInterface
      * @return EntityLinkInterface
      */
     public function setEntityType(Type $entityType): self;
+
+    /**
+     * @return EventType
+     */
+    public function getEventType(): EventType;
+
+    /**
+     * @param EventType $eventType
+     *
+     * @return EntityLinkInterface
+     */
+    public function setEventType(EventType $eventType): self;
 
     /**
      * @return InternalReference
