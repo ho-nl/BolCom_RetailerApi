@@ -9,7 +9,6 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Shipment;
 
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
-use BolCom\RetailerApi\Model\Order\OrderId;
 use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 use BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList;
 
@@ -17,7 +16,7 @@ class GetShipmentListHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke()
     {
-        $this->markTestSkipped('Unable to fetch shipments, contacted bol.com about this issue.');
+        $this->markTestSkipped('Unable to fetch shipments in demo environment.');
 
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
@@ -26,6 +25,6 @@ class GetShipmentListHandlerTest extends \PHPUnit\Framework\TestCase
         ));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetShipmentList::with(1, FulfilmentMethod::FBR(), OrderId::fromString('7616222250')));
+        $messageBus->dispatch(GetShipmentList::with(1, FulfilmentMethod::FBR()));
     }
 }

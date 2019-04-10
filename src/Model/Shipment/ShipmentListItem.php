@@ -13,14 +13,16 @@ final class ShipmentListItem
     private $shipmentDate;
     private $shipmentReference;
     private $shipmentItems;
+    private $transport;
 
     /**
      * @param \BolCom\RetailerApi\Model\Shipment\ShipmentId $shipmentId
      * @param \BolCom\RetailerApi\Model\DateTime $shipmentDate
      * @param string $shipmentReference
      * @param \BolCom\RetailerApi\Model\Shipment\ShipmentItemListItem[]|null $shipmentItems
+     * @param \BolCom\RetailerApi\Model\Transport\ReducedTransport $transport
      */
-    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference = null, array $shipmentItems)
+    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference = null, array $shipmentItems, \BolCom\RetailerApi\Model\Transport\ReducedTransport $transport)
     {
         $this->shipmentId = $shipmentId;
         $this->shipmentDate = $shipmentDate;
@@ -32,6 +34,8 @@ final class ShipmentListItem
                 }
                 $this->shipmentItems[] = $__value;
             }
+
+        $this->transport = $transport;
     }
 
     public function shipmentId(): ShipmentId
@@ -57,19 +61,24 @@ final class ShipmentListItem
         return $this->shipmentItems;
     }
 
+    public function transport(): \BolCom\RetailerApi\Model\Transport\ReducedTransport
+    {
+        return $this->transport;
+    }
+
     public function withShipmentId(ShipmentId $shipmentId): ShipmentListItem
     {
-        return new self($shipmentId, $this->shipmentDate, $this->shipmentReference, $this->shipmentItems);
+        return new self($shipmentId, $this->shipmentDate, $this->shipmentReference, $this->shipmentItems, $this->transport);
     }
 
     public function withShipmentDate(\BolCom\RetailerApi\Model\DateTime $shipmentDate): ShipmentListItem
     {
-        return new self($this->shipmentId, $shipmentDate, $this->shipmentReference, $this->shipmentItems);
+        return new self($this->shipmentId, $shipmentDate, $this->shipmentReference, $this->shipmentItems, $this->transport);
     }
 
     public function withShipmentReference(string $shipmentReference = null): ShipmentListItem
     {
-        return new self($this->shipmentId, $this->shipmentDate, $shipmentReference, $this->shipmentItems);
+        return new self($this->shipmentId, $this->shipmentDate, $shipmentReference, $this->shipmentItems, $this->transport);
     }
 
     /**
@@ -78,7 +87,12 @@ final class ShipmentListItem
      */
     public function withShipmentItems(array $shipmentItems): ShipmentListItem
     {
-        return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $shipmentItems);
+        return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $shipmentItems, $this->transport);
+    }
+
+    public function withTransport(\BolCom\RetailerApi\Model\Transport\ReducedTransport $transport): ShipmentListItem
+    {
+        return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $this->shipmentItems, $transport);
     }
 
     public static function fromArray(array $data): ShipmentListItem
@@ -119,11 +133,18 @@ final class ShipmentListItem
             $shipmentItems[] = ShipmentItemListItem::fromArray($__value);
         }
 
+        if (! isset($data['transport']) || ! \is_array($data['transport'])) {
+            throw new \InvalidArgumentException("Key 'transport' is missing in data array or is not an array");
+        }
+
+        $transport = \BolCom\RetailerApi\Model\Transport\ReducedTransport::fromArray($data['transport']);
+
         return new self(
             $shipmentId,
             $shipmentDate,
             $shipmentReference,
-            $shipmentItems
+            $shipmentItems,
+            $transport
         );
     }
 }

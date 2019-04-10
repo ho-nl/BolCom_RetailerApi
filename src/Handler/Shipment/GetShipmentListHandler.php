@@ -30,10 +30,19 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
      */
     public function __invoke(GetShipmentList $getShipmentList)
     {
+        if ($getShipmentList->fulfilmentMethod() !== null && $getShipmentList->orderId() !== null) {
+            throw new \RuntimeException(
+                'Request contains invalid value(s): query parameters, either provide fulfilment-method or order-id.'
+            );
+        }
+
         $response = $this->client->get('shipments', [
             'query' => [
                 'page' => $getShipmentList->page(),
-                'fulfilment-method' => $getShipmentList->fulfilmentMethod()->value()
+                'fulfilment-method' => $getShipmentList->fulfilmentMethod()
+                    ? $getShipmentList->fulfilmentMethod()->value()
+                    : null,
+                'order-id' => $getShipmentList->orderId() ? $getShipmentList->orderId()->toString() : null
             ],
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+json'

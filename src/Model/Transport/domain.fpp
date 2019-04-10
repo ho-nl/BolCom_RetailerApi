@@ -49,6 +49,10 @@ namespace BolCom\RetailerApi\Model\Transport {
         TransporterCode $transporterCode,
         ?TrackAndTrace $trackAndTrace
     } deriving (FromArray);
+
+    data ReducedTransport = ReducedTransport {
+        TransportId $transportId
+    } deriving (FromArray);
 }
 
 namespace BolCom\RetailerApi\Model\Transport\Command {

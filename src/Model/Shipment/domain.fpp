@@ -15,6 +15,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\DateTime $shipmentDate,
         ?string $shipmentReference,
         ShipmentItemListItem[] $shipmentItems,
+        \BolCom\RetailerApi\Model\Transport\ReducedTransport $transport
     } deriving (FromArray);
 
     data ShipmentList = ShipmentList {
@@ -49,6 +50,7 @@ namespace BolCom\RetailerApi\Model\Shipment\Query {
 
     data GetShipmentList = GetShipmentList {
         int $page,
-        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
+        ?\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
+        ?\BolCom\RetailerApi\Model\Order\OrderId $orderId
     } deriving (Query);
 }

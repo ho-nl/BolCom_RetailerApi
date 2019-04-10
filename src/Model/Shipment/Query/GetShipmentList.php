@@ -20,16 +20,22 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
         return $this->payload['page'];
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
+    public function fulfilmentMethod()
     {
-        return \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']);
+        return isset($this->payload['fulfilmentMethod']) ? \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($this->payload['fulfilmentMethod']) : null;
     }
 
-    public static function with(int $page, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): GetShipmentList
+    public function orderId()
+    {
+        return isset($this->payload['orderId']) ? \BolCom\RetailerApi\Model\Order\OrderId::fromString($this->payload['orderId']) : null;
+    }
+
+    public static function with(int $page, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null, \BolCom\RetailerApi\Model\Order\OrderId $orderId = null): GetShipmentList
     {
         return new self([
             'page' => $page,
-            'fulfilmentMethod' => $fulfilmentMethod->value(),
+            'fulfilmentMethod' => null === $fulfilmentMethod ? null : $fulfilmentMethod->value(),
+            'orderId' => null === $orderId ? null : $orderId->toString(),
         ]);
     }
 
@@ -39,8 +45,12 @@ final class GetShipmentList extends \Prooph\Common\Messaging\Query
             throw new \InvalidArgumentException("Key 'page' is missing in payload or is not a int");
         }
 
-        if (! isset($payload['fulfilmentMethod']) || ! \is_string($payload['fulfilmentMethod'])) {
-            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in payload or is not a string");
+        if (isset($payload['fulfilmentMethod']) && ! \is_string($payload['fulfilmentMethod'])) {
+            throw new \InvalidArgumentException("Value for 'fulfilmentMethod' is not a string in payload");
+        }
+
+        if (isset($payload['orderId']) && ! \is_string($payload['orderId'])) {
+            throw new \InvalidArgumentException("Value for 'orderId' is not a string in payload");
         }
 
         $this->payload = $payload;
