@@ -57,7 +57,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
         $stack->push(GuzzleRetryMiddleware::factory());
 
-        $logger && $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter(\GuzzleHttp\MessageFormatter::DEBUG)));
+        $logger && $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter()));
         $stack->push(new JsonResponseMiddleware());
 
         return $stack;

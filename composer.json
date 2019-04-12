@@ -1,6 +1,7 @@
 {
     "name": "bol-com/retailer-api",
     "type": "library",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Reach Digital",
@@ -9,7 +10,7 @@
         }
     ],
     "description": "API Package to talk to the bol.com API.",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "require": {
         "guzzlehttp/guzzle": "~6.0",
         "kamermans/guzzle-oauth2-subscriber": "^1.0",
