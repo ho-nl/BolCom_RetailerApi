@@ -11,6 +11,7 @@ use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOffer;
 use BolCom\RetailerApi\Model\Offer\CommandHandler\CreateOfferHandlerInterface;
 use BolCom\RetailerApi\Model\Offer\Condition;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 use BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus;
 
 class CreateOfferHandler implements CreateOfferHandlerInterface
@@ -38,6 +39,12 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
             throw new \RuntimeException(
                 'conditionComment is only allowed in combination with conditionName(s): AS_NEW, GOOD, REASONABLE, MODERATE.' // @codingStandardsIgnoreLine
             );
+        }
+
+        if ($createOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
+            && $createOffer->retailerOffer()->fulfilment()->type()->equals(FulfilmentMethod::FBB())
+        ) {
+            throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
         }
 
         $response = $this->client->post('offers', [

@@ -91,4 +91,34 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
             ])
         ));
     }
+
+    public function testCreateNewOfferWithFBBAndDelivery()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->messageBus->dispatch(CreateOffer::with(
+            RetailerOfferUpsert::fromArray([
+                'ean' => '9781785882364',
+                'condition' => [
+                    'name' => Condition::IS_NEW,
+                    'category' => ConditionCategory::IS_NEW,
+                ],
+                'referenceCode' => 'SKU123',
+                'onHoldByRetailer' => false,
+                'unknownProductTitle' => 'My Title',
+                'pricing' => [
+                    'bundlePrices' => [
+                        ['quantity' => 1, 'price' => 10]
+                    ]
+                ],
+                'stock' => [
+                    'amount' => 12,
+                    'managedByRetailer' => true
+                ],
+                'fulfilment' => [
+                    'type' => FulfilmentMethod::FBB,
+                    'deliveryCode' => DeliveryCode::DC12d
+                ]
+            ])
+        ));
+    }
 }

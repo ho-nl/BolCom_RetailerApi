@@ -38,7 +38,7 @@ namespace BolCom\RetailerApi\Model\Offer {
 
     data Fulfilment = Fulfilment {
         FulfilmentMethod $type,
-        DeliveryCode $deliveryCode
+        ?DeliveryCode $deliveryCode
     } deriving (FromArray, ToArray);
 
     // We choose IsNew, because New is a protected key word

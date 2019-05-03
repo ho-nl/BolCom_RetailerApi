@@ -12,7 +12,7 @@ final class Fulfilment
     private $type;
     private $deliveryCode;
 
-    public function __construct(FulfilmentMethod $type, DeliveryCode $deliveryCode)
+    public function __construct(FulfilmentMethod $type, DeliveryCode $deliveryCode = null)
     {
         $this->type = $type;
         $this->deliveryCode = $deliveryCode;
@@ -23,7 +23,7 @@ final class Fulfilment
         return $this->type;
     }
 
-    public function deliveryCode(): DeliveryCode
+    public function deliveryCode()
     {
         return $this->deliveryCode;
     }
@@ -33,7 +33,7 @@ final class Fulfilment
         return new self($type, $this->deliveryCode);
     }
 
-    public function withDeliveryCode(DeliveryCode $deliveryCode): Fulfilment
+    public function withDeliveryCode(DeliveryCode $deliveryCode = null): Fulfilment
     {
         return new self($this->type, $deliveryCode);
     }
@@ -46,11 +46,15 @@ final class Fulfilment
 
         $type = FulfilmentMethod::fromValue($data['type']);
 
-        if (! isset($data['deliveryCode']) || ! \is_string($data['deliveryCode'])) {
-            throw new \InvalidArgumentException("Key 'deliveryCode' is missing in data array or is not a string");
-        }
+        if (isset($data['deliveryCode'])) {
+            if (! \is_string($data['deliveryCode'])) {
+                throw new \InvalidArgumentException("Value for 'deliveryCode' is not a string in data array");
+            }
 
-        $deliveryCode = DeliveryCode::fromValue($data['deliveryCode']);
+            $deliveryCode = DeliveryCode::fromValue($data['deliveryCode']);
+        } else {
+            $deliveryCode = null;
+        }
 
         return new self($type, $deliveryCode);
     }
@@ -59,7 +63,7 @@ final class Fulfilment
     {
         return [
             'type' => $this->type->value(),
-            'deliveryCode' => $this->deliveryCode->value(),
+            'deliveryCode' => null === $this->deliveryCode ? null : $this->deliveryCode->value(),
         ];
     }
 }
