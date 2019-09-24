@@ -13,6 +13,7 @@ use BolCom\RetailerApi\Model\Offer\Command\UpdateOffer;
 use BolCom\RetailerApi\Model\Offer\CommandHandler\CreateOfferHandlerInterface;
 use BolCom\RetailerApi\Model\Offer\CommandHandler\UpdateOfferHandlerInterface;
 use BolCom\RetailerApi\Model\Offer\Condition;
+use BolCom\RetailerApi\Model\Offer\FulfilmentMethod;
 use BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus;
 
 class UpdateOfferHandler implements UpdateOfferHandlerInterface
@@ -33,6 +34,12 @@ class UpdateOfferHandler implements UpdateOfferHandlerInterface
      */
     public function __invoke(UpdateOffer $updateOffer): ProcessStatus
     {
+        if ($updateOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
+            && $updateOffer->retailerOffer()->fulfilment()->type()->equals(FulfilmentMethod::FBB())
+        ) {
+            throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
+        }
+
         $response = $this->client->put("offers/{$updateOffer->offerId()->toString()}", [
             'json' => $updateOffer->retailerOffer()->toArray(),
             'headers' => [

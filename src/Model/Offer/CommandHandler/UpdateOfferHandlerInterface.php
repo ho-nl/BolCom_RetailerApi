@@ -15,6 +15,8 @@ interface UpdateOfferHandlerInterface
     /**
      * @param UpdateOffer $updateOffer
      *
+     * @throws \RuntimeException
+     *
      * @return ProcessStatus
      */
     public function __invoke(UpdateOffer $updateOffer): ProcessStatus;

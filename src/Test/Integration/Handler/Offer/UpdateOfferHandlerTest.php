@@ -45,4 +45,21 @@ class UpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
             ])
         ));
     }
+
+    public function testUpdateNewOfferWithFBBAndDelivery()
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->messageBus->dispatch(UpdateOffer::with(
+            OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+            RetailerOfferUpdate::fromArray([
+                'referenceCode' => 'SKU123',
+                'onHoldByRetailer' => false,
+                'unknownProductTitle' => 'My Title',
+                'fulfilment' => [
+                    'type' => FulfilmentMethod::FBB,
+                    'deliveryCode' => DeliveryCode::DC12d
+                ]
+            ])
+        ));
+    }
 }

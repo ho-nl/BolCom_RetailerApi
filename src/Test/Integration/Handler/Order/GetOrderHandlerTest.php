@@ -23,6 +23,6 @@ class GetOrderHandlerTest extends \PHPUnit\Framework\TestCase
         ));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetOrder::with(OrderId::fromString('7616222250')));
+        $messageBus->dispatch(GetOrder::with(OrderId::fromString('1042831430')));
     }
 }

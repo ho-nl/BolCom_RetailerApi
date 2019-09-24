@@ -37,7 +37,7 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
         ]);
 
         $response = $response->getBody()->json();
-        $response['shipmentItems'] = array_map(function (array $item) {
+        $response['shipmentItems'] = array_map(static function (array $item) {
             $item['latestDeliveryDate'] = (new \DateTime($item['latestDeliveryDate']))->format('Y-m-d');
 
             return $item;

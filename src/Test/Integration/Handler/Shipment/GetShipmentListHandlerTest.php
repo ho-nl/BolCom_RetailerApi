@@ -14,17 +14,22 @@ use BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList;
 
 class GetShipmentListHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
-    {
-        $this->markTestSkipped('Unable to fetch shipments in demo environment.');
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
 
+    protected function setUp()
+    {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
             'https://api.bol.com/retailer-demo/'
         ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
 
-        $messageBus->dispatch(GetShipmentList::with(1, FulfilmentMethod::FBR()));
+    public function test__invoke()
+    {
+        $this->messageBus->dispatch(GetShipmentList::with(1, FulfilmentMethod::FBR()));
+        $this->messageBus->dispatch(GetShipmentList::with(1, FulfilmentMethod::FBB()));
     }
 }

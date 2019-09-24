@@ -13,15 +13,21 @@ use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessIds;
 
 class GetStatusByProcessIdsHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
+
+    protected function setUp()
     {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
             'https://api.bol.com/retailer-demo/'
         ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
 
-        $messageBus->dispatch(GetStatusByProcessIds::with(...[1, 2, 3, 4]));
+    public function test__invoke()
+    {
+        $this->messageBus->dispatch(GetStatusByProcessIds::with(...[1, 2, 3, 4]));
     }
 }

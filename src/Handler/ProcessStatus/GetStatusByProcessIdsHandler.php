@@ -44,7 +44,7 @@ class GetStatusByProcessIdsHandler implements GetStatusByProcessIdsHandlerInterf
             return $promise['state'] === PromiseInterface::FULFILLED;
         });
 
-        $response['processStatuses'] = array_map(function (array $promise) {
+        $response['processStatuses'] = array_map(static function (array $promise) {
             // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
             // Convert this timestamp into ISO 8601 format.
             $response = $promise['value']->getBody()->json();

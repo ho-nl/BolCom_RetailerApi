@@ -14,17 +14,21 @@ use BolCom\RetailerApi\Model\Shipment\ShipmentId;
 
 class GetShipmentHandlerTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
-    {
-        $this->markTestSkipped('Unable to fetch shipment, contacted bol.com about this issue.');
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
 
+    protected function setUp()
+    {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
             'https://api.bol.com/retailer-demo/'
         ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
 
-        $messageBus->dispatch(GetShipment::with(ShipmentId::fromScalar(541757635)));
+    public function test__invoke()
+    {
+        $this->messageBus->dispatch(GetShipment::with(ShipmentId::fromScalar(914587795)));
     }
 }

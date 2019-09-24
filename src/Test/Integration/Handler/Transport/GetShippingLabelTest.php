@@ -14,17 +14,21 @@ use BolCom\RetailerApi\Model\Transport\TransportId;
 
 class GetShippingLabelTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
-    {
-        $this->markTestSkipped('Unable to fetch shipping label, contacted bol.com about this issue.');
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
 
+    protected function setUp()
+    {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
             'https://api.bol.com/retailer-demo/'
         ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
 
-        $messageBus->dispatch(GetShippingLabel::with(TransportId::fromScalar(312778947)));
+    public function test__invoke()
+    {
+        $this->messageBus->dispatch(GetShippingLabel::with(TransportId::fromScalar(356972369)));
     }
 }

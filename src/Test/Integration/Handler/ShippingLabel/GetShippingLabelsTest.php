@@ -14,17 +14,21 @@ use BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels;
 
 class GetShippingLabelsTest extends \PHPUnit\Framework\TestCase
 {
-    public function test__invoke()
-    {
-        $this->markTestSkipped('Unable to fetch shipping labels, contacted bol.com about this issue.');
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
 
+    protected function setUp()
+    {
         $clientPool = ClientPool::configure(new ClientConfig(
             BOL_CLIENT_ID,
             BOL_CLIENT_SECRET,
             'https://api.bol.com/retailer-demo/'
         ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
 
-        $messageBus->dispatch(GetShippingLabels::with(OrderItemId::fromString('6107434013')));
+    public function test__invoke()
+    {
+        $this->messageBus->dispatch(GetShippingLabels::with(OrderItemId::fromString('6702312887')));
     }
 }

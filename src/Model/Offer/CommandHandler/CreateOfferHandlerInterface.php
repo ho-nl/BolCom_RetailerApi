@@ -15,6 +15,8 @@ interface CreateOfferHandlerInterface
     /**
      * @param CreateOffer $createOffer
      *
+     * @throws \RuntimeException
+     *
      * @return ProcessStatus
      */
     public function __invoke(CreateOffer $createOffer): ProcessStatus;
