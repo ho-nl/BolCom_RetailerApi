@@ -29,8 +29,6 @@ class GetOfferHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function test__invoke()
     {
-        $this->markTestSkipped('Unable to fetch Offer, contacted bol.com about this issue.');
-
         $this->messageBus->dispatch(GetOffer::with(OfferId::fromString('13722de8-8182-d161-5422-4a0a1caab5c8')));
     }
 }

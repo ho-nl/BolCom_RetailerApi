@@ -33,9 +33,9 @@ final class RetailerOffer
      * @param \BolCom\RetailerApi\Model\Offer\Fulfilment $fulfilment
      * @param \BolCom\RetailerApi\Model\Offer\Store $store
      * @param \BolCom\RetailerApi\Model\Offer\OfferCondition $condition
-     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]|null $notPublishableReasons
+     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[] $notPublishableReasons
      */
-    public function __construct(OfferId $offerId, Ean $ean, ReferenceCode $referenceCode, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, Store $store, OfferCondition $condition, array $notPublishableReasons)
+    public function __construct(OfferId $offerId, Ean $ean, ReferenceCode $referenceCode, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, Store $store, OfferCondition $condition, array $notPublishableReasons = null)
     {
         $this->offerId = $offerId;
         $this->ean = $ean;
@@ -47,6 +47,7 @@ final class RetailerOffer
         $this->fulfilment = $fulfilment;
         $this->store = $store;
         $this->condition = $condition;
+        if ($notPublishableReasons !== null) {
             $this->notPublishableReasons = [];
             foreach ($notPublishableReasons as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Offer\NotPublishableReasons) {
@@ -54,6 +55,7 @@ final class RetailerOffer
                 }
                 $this->notPublishableReasons[] = $__value;
             }
+        }
     }
 
     public function offerId(): OfferId
@@ -107,9 +109,9 @@ final class RetailerOffer
     }
 
     /**
-     * @return \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]
+     * @return \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]|null
      */
-    public function notPublishableReasons(): array
+    public function notPublishableReasons()
     {
         return $this->notPublishableReasons;
     }
@@ -165,10 +167,10 @@ final class RetailerOffer
     }
 
     /**
-     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[]|null $notPublishableReasons
+     * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[] $notPublishableReasons
      * @return \BolCom\RetailerApi\Model\Offer\RetailerOffer
      */
-    public function withNotPublishableReasons(array $notPublishableReasons): RetailerOffer
+    public function withNotPublishableReasons(array $notPublishableReasons = null): RetailerOffer
     {
         return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $notPublishableReasons);
     }
@@ -239,18 +241,22 @@ final class RetailerOffer
 
         $condition = OfferCondition::fromArray($data['condition']);
 
-        if (! isset($data['notPublishableReasons']) || ! \is_array($data['notPublishableReasons'])) {
-            throw new \InvalidArgumentException("Key 'notPublishableReasons' is missing in data array or is not an array");
-        }
-
-        $notPublishableReasons = [];
-
-        foreach ($data['notPublishableReasons'] as $__value) {
+        if (isset($data['notPublishableReasons'])) {
             if (! \is_array($data['notPublishableReasons'])) {
-                throw new \InvalidArgumentException("Key 'notPublishableReasons' in data array or is not an array of arrays");
+                throw new \InvalidArgumentException("Value for 'notPublishableReasons' is not an array in data array");
             }
 
-            $notPublishableReasons[] = NotPublishableReasons::fromArray($__value);
+            $notPublishableReasons = [];
+
+            foreach ($data['notPublishableReasons'] as $__value) {
+                if (! \is_array($data['notPublishableReasons'])) {
+                    throw new \InvalidArgumentException("Key 'notPublishableReasons' in data array or is not an array of arrays");
+                }
+
+                $notPublishableReasons[] = NotPublishableReasons::fromArray($__value);
+            }
+        } else {
+            $notPublishableReasons = null;
         }
 
         return new self(
@@ -270,10 +276,12 @@ final class RetailerOffer
 
     public function toArray(): array
     {
-        $notPublishableReasons = [];
+         $notPublishableReasons = null;
 
-        foreach ($this->notPublishableReasons as $__value) {
-            $notPublishableReasons[] = $__value->toArray();
+        if (null !== $this->notPublishableReasons) {
+            foreach ($this->notPublishableReasons as $__value) {
+                $notPublishableReasons[] = $__value->toArray();
+            }
         }
 
         return [

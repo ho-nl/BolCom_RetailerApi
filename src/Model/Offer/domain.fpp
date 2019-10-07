@@ -122,7 +122,7 @@ namespace BolCom\RetailerApi\Model\Offer {
         Fulfilment $fulfilment,
         Store $store,
         OfferCondition $condition,
-        NotPublishableReasons[] $notPublishableReasons
+        ?NotPublishableReasons[] $notPublishableReasons
     } deriving (FromArray, ToArray);
 
     data RetailerOfferUpsert = RetailerOfferUpsert {

@@ -89,14 +89,12 @@ final class Store
 
     public function toArray(): array
     {
-        if (null === $this->visible) {
-            return null;
-        }
+         $visible = null;
 
-        $visible = [];
-
-        foreach ($this->visible as $__value) {
-            $visible[] = $__value->toArray();
+        if (null !== $this->visible) {
+            foreach ($this->visible as $__value) {
+                $visible[] = $__value->toArray();
+            }
         }
 
         return [
