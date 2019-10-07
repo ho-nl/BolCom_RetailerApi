@@ -21,14 +21,14 @@ class GetCommissionHandlerTest extends \PHPUnit\Framework\TestCase
      */
     public function should_get_commission_back()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET));
+        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
         $commission = $messageBus->dispatch(
             GetCommission::with(
-                Ean::fromString('9781785882364'),
-                Condition::IS_NEW(),
-                CurrencyAmount::fromScalar(10.11)
+                Ean::fromString('8712626055143'),
+                Condition::GOOD(),
+                CurrencyAmount::fromScalar(24.50)
             )
         );
 

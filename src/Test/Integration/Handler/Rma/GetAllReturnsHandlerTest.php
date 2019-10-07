@@ -16,11 +16,7 @@ class GetAllReturnsHandlerTest extends \PHPUnit\Framework\TestCase
 {
     public function test__invoke()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
+        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
         $messageBus->dispatch(GetAllReturns::with(1, false, FulfilmentMethod::FBR()));

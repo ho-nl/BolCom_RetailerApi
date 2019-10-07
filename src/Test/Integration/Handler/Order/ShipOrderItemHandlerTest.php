@@ -15,16 +15,18 @@ use BolCom\RetailerApi\Model\Transport\TransportInstruction;
 
 class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 {
+    /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
+    private $messageBus;
+
+    protected function setUp()
+    {
+        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
+        $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
+    }
+
     public function testTransportInstruction()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
-
-        $messageBus->dispatch(ShipOrderItem::with(
+        $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
             null,
@@ -37,15 +39,8 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function testTransportInstructionWithoutTrackAndTrace()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
-
         $this->expectException(\InvalidArgumentException::class);
-        $messageBus->dispatch(ShipOrderItem::with(
+        $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
             null,
@@ -57,14 +52,7 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function testShippingLabelCode()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
-
-        $messageBus->dispatch(ShipOrderItem::with(
+        $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
             'PLR00000002',
@@ -74,15 +62,8 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function testShippingLabelCodeAndTransportInstruction()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
-        $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
-
         $this->expectException(\RuntimeException::class);
-        $messageBus->dispatch(ShipOrderItem::with(
+        $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
             'PLR00000002',

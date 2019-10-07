@@ -9,6 +9,9 @@ namespace BolCom\RetailerApi\Client;
 
 class ClientConfig implements ClientConfigInterface
 {
+    const API_URL = 'https://api.bol.com/retailer/';
+    const TEST_API_URL = 'https://api.bol.com/retailer-demo/';
+
     /** @var string $clientId */
     private $clientId;
 
@@ -27,20 +30,20 @@ class ClientConfig implements ClientConfigInterface
     /**
      * @param string $clientId
      * @param string $clientSecret
-     * @param string $clientUrl
+     * @param bool $testMode
      * @param string $accessTokenPath
      * @param bool $enabled
      */
     public function __construct(
         string $clientId,
         string $clientSecret,
-        string $clientUrl = 'https://api.bol.com/retailer/',
+        bool $testMode = false,
         string $accessTokenPath = '/tmp/bol_access_token.json',
         bool $enabled = true
     ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
-        $this->clientUrl = $clientUrl;
+        $this->clientUrl = $testMode === false ? static::API_URL : static::TEST_API_URL;
         $this->accessTokenPath = $accessTokenPath;
         $this->enabled = $enabled;
     }

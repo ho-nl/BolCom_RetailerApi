@@ -22,11 +22,7 @@ class UpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $clientPool = ClientPool::configure(new ClientConfig(
-            BOL_CLIENT_ID,
-            BOL_CLIENT_SECRET,
-            'https://api.bol.com/retailer-demo/'
-        ));
+        $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
     }
 
