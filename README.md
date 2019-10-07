@@ -180,6 +180,19 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ));
 ```
 
+### Inventory
+#### GetInventoryHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\Inventory\InventoryOfferList $inventoryOfferList */
+$inventoryOfferList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Inventory\Query\GetInventory::with(
+    1,
+    '8718526069334'
+    \BolCom\RetailerApi\Model\Inventory\Stock::fromValue('SUFFICIENT')
+    \BolCom\RetailerApi\Model\Inventory\State::fromValue('SALEABLE')
+    ['0-10', '20-30']
+));
+```
+
 ### Order
 #### CancelOrderHandler
 ```PHP

@@ -9,6 +9,7 @@ namespace BolCom\RetailerApi\Infrastructure;
 
 use BolCom\RetailerApi\Handler\Commission\GetCommissionHandler;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
+use BolCom\RetailerApi\Handler\Inventory\GetInventoryHandler;
 use BolCom\RetailerApi\Handler\Offer\CreateOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\DeleteOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\GetOfferHandler;
@@ -30,6 +31,7 @@ use BolCom\RetailerApi\Model\ClientPoolInterface;
 use BolCom\RetailerApi\Handler\Order\GetAllOpenOrdersHandler;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommission;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
+use BolCom\RetailerApi\Model\Inventory\Query\GetInventory;
 use BolCom\RetailerApi\Model\MessageBusInterface;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOffer;
 use BolCom\RetailerApi\Model\Offer\Command\DeleteOffer;
@@ -83,7 +85,8 @@ class MessageBus implements MessageBusInterface
             GetStatusByEntity::class => GetStatusByEntityHandler::class,
             GetStatusByProcessIds::class => GetStatusByProcessIdsHandler::class,
             GetShipment::class => GetShipmentHandler::class,
-            GetShipmentList::class => GetShipmentListHandler::class
+            GetShipmentList::class => GetShipmentListHandler::class,
+            GetInventory::class => GetInventoryHandler::class
         ];
 
         $this->clientPool = $clientPool;
