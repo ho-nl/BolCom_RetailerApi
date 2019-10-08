@@ -26,6 +26,8 @@ class AssertEan
             return false;
         }
 
+        $barcode = self::appendZeroesToEan($barcode);
+
         $oddSum = 0;
         $evenSum = 0;
 
@@ -40,5 +42,13 @@ class AssertEan
 
         /** @noinspection TypeUnsafeComparisonInspection */
         return $checkDigit == $barcode[12];
+    }
+
+    /**
+     * @param string $ean
+     * @return string
+     */
+    public static function appendZeroesToEan(string $ean) {
+        return str_pad($ean, 13, "0", STR_PAD_LEFT);
     }
 }
