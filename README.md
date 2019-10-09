@@ -277,6 +277,14 @@ $returnItemList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetA
 ));
 ```
 
+#### GetReturnHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\Rma\ReturnItem $returnItem */
+$returnItem = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetReturn::with(
+    \BolCom\RetailerApi\Model\Rma\RmaId::fromScalar(86127199)
+));
+```
+
 #### HandleReturnHandler
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */

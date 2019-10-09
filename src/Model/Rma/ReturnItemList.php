@@ -13,15 +13,15 @@ final class ReturnItemList
     private $returns;
 
     /**
-     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returns
+     * @param \BolCom\RetailerApi\Model\Rma\ReducedReturnItem[]|null $returns
      */
-    public function __construct(ReturnItem ...$returns)
+    public function __construct(ReducedReturnItem ...$returns)
     {
         $this->returns = $returns;
     }
 
     /**
-     * @return \BolCom\RetailerApi\Model\Rma\ReturnItem[]
+     * @return \BolCom\RetailerApi\Model\Rma\ReducedReturnItem[]
      */
     public function returns(): array
     {
@@ -29,7 +29,7 @@ final class ReturnItemList
     }
 
     /**
-     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returns
+     * @param \BolCom\RetailerApi\Model\Rma\ReducedReturnItem[]|null $returns
      * @return \BolCom\RetailerApi\Model\Rma\ReturnItemList
      */
     public function withReturns(array $returns): ReturnItemList
@@ -50,7 +50,7 @@ final class ReturnItemList
                 throw new \InvalidArgumentException("Key 'returns' in data array or is not an array of arrays");
             }
 
-            $returns[] = ReturnItem::fromArray($__value);
+            $returns[] = ReducedReturnItem::fromArray($__value);
         }
 
         return new self(...$returns);

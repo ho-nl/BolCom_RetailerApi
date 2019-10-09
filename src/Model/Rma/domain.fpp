@@ -2,11 +2,27 @@
 namespace BolCom\RetailerApi\Model\Rma {
     data RmaId = Int deriving(FromScalar, ToScalar);
 
+    data ReducedReturnItem = ReducedReturnItem {
+        RmaId $rmaId,
+        \BolCom\RetailerApi\Model\Order\OrderId $orderId,
+        \BolCom\RetailerApi\Model\Offer\Ean $ean,
+        int $quantity,
+        \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
+        string $returnReason,
+        string $returnReasonComments,
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
+        bool $handled,
+        ?HandlingResult $handlingResult,
+        ?ProcessingResult $processingResult,
+        ?\BolCom\RetailerApi\Model\DateTime $processingDateTime
+    } deriving (FromArray);
+
     data ReturnItem = ReturnItem {
         RmaId $rmaId,
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
-        ?string $title,
+        string $title,
+        int $quantity,
         \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
         string $returnReason,
         ?string $returnReasonComments,
@@ -20,7 +36,7 @@ namespace BolCom\RetailerApi\Model\Rma {
     } deriving (FromArray);
 
     data ReturnItemList = ReturnItemList {
-        ReturnItem[] $returns
+        ReducedReturnItem[] $returns
     } deriving (FromArray);
 
     data HandlingResult = RETURN_RECEIVED | EXCHANGE_PRODUCT | RETURN_DOES_NOT_MEET_CONDITIONS | REPAIR_PRODUCT
@@ -37,6 +53,10 @@ namespace BolCom\RetailerApi\Model\Rma\Query {
         int $page,
         bool $handled,
         \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
+    } deriving (Query);
+
+    data GetReturn = GetReturn {
+        \BolCom\RetailerApi\Model\Rma\RmaId $rmaId
     } deriving (Query);
 }
 
