@@ -19,10 +19,10 @@ class AcceptHeaderMiddleware
      */
     public function __invoke(callable $handler): callable
     {
-        return function (RequestInterface $request, array $options) use ($handler) {
+        return static function (RequestInterface $request, array $options) use ($handler) {
             if (! $request->hasHeader('Accept')) {
                 throw new \InvalidArgumentException(
-                    'Accept header is explicitly required, consult https://api.bol.com/retailer/public/redoc/ for options.'
+                    'Accept header is explicitly required, consult https://api.bol.com/retailer/public/redoc/ for options.' // phpcs:ignore
                 );
             }
             $request = $request->withHeader('Content-Type', $request->getHeader('Accept'));

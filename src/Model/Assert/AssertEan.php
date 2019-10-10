@@ -22,6 +22,7 @@ class AssertEan
      */
     private static function validateBarCode(string $barcode): bool
     {
+        $barcode = str_pad($barcode, 13, '0', STR_PAD_LEFT);
         if ($barcode === '0000000000000') {
             return false;
         }

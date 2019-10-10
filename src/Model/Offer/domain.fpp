@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Offer {
     data Ean = String deriving(FromString, ToString) where
-         _: | !\Assert\Assertion::regex($value, '/^\d{13}$/', 'EAN Code should be 13 characters long.') => ''
+         _: | !\Assert\Assertion::maxLength($value, 13) => 'EAN Code should not be more than 13 characters.'
             | !\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value) => 'EAN Code is invalid.';
 
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
