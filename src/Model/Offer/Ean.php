@@ -14,6 +14,10 @@ final class Ean
 
     public function __construct(string $value)
     {
+        if (!\Assert\Assertion::maxLength($value, 13)) {
+            throw new \InvalidArgumentException('EAN Code should not be more than 13 characters.');
+        }
+
         if (!\BolCom\RetailerApi\Model\Assert\AssertEan::assert($value)) {
             throw new \InvalidArgumentException('EAN Code is invalid.');
         }
