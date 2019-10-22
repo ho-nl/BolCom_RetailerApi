@@ -42,7 +42,6 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                 'pricing' => [
                     'bundlePrices' => [
                         ['quantity' => 1, 'price' => 10]
-                        // @todo response: pricing.bundlePrices: Collection with only 1 element is allowed at this time.
                     ]
                 ],
                 'stock' => [

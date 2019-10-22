@@ -89,8 +89,6 @@ $commissionList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Que
 
 ### Offer
 #### CreateOfferHandler
-@todo: `pricing.bundlePrices: Collection with only 1 element is allowed at this time.`
-
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\CreateOffer::with(
@@ -105,7 +103,8 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\C
         'unknownProductTitle' => 'My Title',
         'pricing' => [
             'bundlePrices' => [
-                ['quantity' => 1, 'price' => 10]
+                ['quantity' => 1, 'price' => 10],
+                ['quantity' => 10, 'price' => 8]
             ]
         ],
         'stock' => [
@@ -154,8 +153,6 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ```
 
 #### UpdateOfferPriceHandler
-@todo: `pricing.bundlePrices: Collection with only 1 element is allowed at this time.`
-
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice::with(
@@ -163,6 +160,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
     \BolCom\RetailerApi\Model\Offer\Pricing::fromArray([
         'bundlePrices' => [
             ['quantity' => 1, 'price' => 12]
+            ['quantity' => 10, 'price' => 10]
         ]
     ])
 ));

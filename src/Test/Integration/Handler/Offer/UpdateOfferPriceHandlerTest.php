@@ -30,8 +30,8 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             Pricing::fromArray([
                 'bundlePrices' => [
-                    ['quantity' => 1, 'price' => 12]
-                    // @todo response: pricing.bundlePrices: Collection with only 1 element is allowed at this time.
+                    ['quantity' => 1, 'price' => 12],
+                    ['quantity' => 10, 'price' => 10]
                 ]
             ])
         ));

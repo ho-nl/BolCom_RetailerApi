@@ -9,7 +9,7 @@
             "homepage": "https://www.reachdigital.nl/"
         }
     ],
-    "description": "API Package to talk to the bol.com API.",
+    "description": "Package to talk to the bol.com v3 API.",
     "license": "Apache-2.0",
     "require": {
         "guzzlehttp/guzzle": "~6.0",
