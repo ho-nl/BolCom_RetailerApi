@@ -1,3 +1,9 @@
+<div align="center">
+    <a href="https://travis-ci.com/ho-nl/BolCom_RetailerApi">
+        <img src="https://travis-ci.com/ho-nl/BolCom_RetailerApi.svg?branch=master">
+    </a>
+</div>
+
 # BolCom_Api
 Bol.com API documentation can be found [here](https://api.bol.com/retailer/public/redoc/v3).
 
