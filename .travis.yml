@@ -14,4 +14,4 @@ install:
   - composer install --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit
-  - vendor/bin/phpcs --ignore=/vendor/ --standard=PSR2 -p .
+  - vendor/bin/phpcs --ignore=/vendor/ --ignore=*/Test/* --standard=PSR2 -p .
