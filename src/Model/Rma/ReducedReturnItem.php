@@ -23,7 +23,7 @@ final class ReducedReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
     {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
@@ -69,7 +69,7 @@ final class ReducedReturnItem
         return $this->returnReason;
     }
 
-    public function returnReasonComments(): string
+    public function returnReasonComments()
     {
         return $this->returnReasonComments;
     }
@@ -129,7 +129,7 @@ final class ReducedReturnItem
         return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withReturnReasonComments(string $returnReasonComments): ReducedReturnItem
+    public function withReturnReasonComments(string $returnReasonComments = null): ReducedReturnItem
     {
         return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -197,11 +197,15 @@ final class ReducedReturnItem
 
         $returnReason = $data['returnReason'];
 
-        if (! isset($data['returnReasonComments']) || ! \is_string($data['returnReasonComments'])) {
-            throw new \InvalidArgumentException("Key 'returnReasonComments' is missing in data array or is not a string");
-        }
+        if (isset($data['returnReasonComments'])) {
+            if (! \is_string($data['returnReasonComments'])) {
+                throw new \InvalidArgumentException("Value for 'returnReasonComments' is not a string in data array");
+            }
 
-        $returnReasonComments = $data['returnReasonComments'];
+            $returnReasonComments = $data['returnReasonComments'];
+        } else {
+            $returnReasonComments = null;
+        }
 
         if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");

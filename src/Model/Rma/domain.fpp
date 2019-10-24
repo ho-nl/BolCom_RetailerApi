@@ -9,7 +9,7 @@ namespace BolCom\RetailerApi\Model\Rma {
         int $quantity,
         \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
         string $returnReason,
-        string $returnReasonComments,
+        ?string $returnReasonComments,
         \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
         ?HandlingResult $handlingResult,
