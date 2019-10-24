@@ -1,0 +1,16 @@
+language: php
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+cache:
+  directories:
+    - ${HOME}/.composer/cache
+before_install:
+  - export PATH=$PATH:$HOME/.composer/vendor/bin
+install:
+  - composer install --prefer-dist --no-interaction
+script:
+  - vendor/bin/phpunit
+  - vendor/bin/phpcs --ignore=/vendor/ --standard=PSR2 -p .

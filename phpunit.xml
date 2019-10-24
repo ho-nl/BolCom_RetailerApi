@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ Copyright © Reach Digital (https://www.reachdigital.io/)
+  ~ See LICENSE.txt for license details.
+  -->
+
+<phpunit processIsolation="false"
+         stopOnFailure="false"
+         colors="true"
+         bootstrap="./vendor/autoload.php"
+         stderr="true">
+    <testsuites>
+        <testsuite name="Bol.com retailer API">
+            <directory suffix=".php">./src/Test</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
