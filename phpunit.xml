@@ -6,7 +6,6 @@
 
 <phpunit processIsolation="false"
          stopOnFailure="false"
-         strict="false"
          beStrictAboutTestsThatDoNotTestAnything="false"
          colors="true"
          bootstrap="./vendor/autoload.php"
