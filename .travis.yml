@@ -10,6 +10,7 @@ cache:
 before_install:
   - export PATH=$PATH:$HOME/.composer/vendor/bin
 install:
+  - src/Test/Script/install.sh
   - composer install --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit

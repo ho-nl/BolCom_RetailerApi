@@ -14,4 +14,8 @@
             <directory suffix=".php">./src/Test</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <const name="BOL_CLIENT_ID" value="BOL_CLIENT_ID_VALUE"/>
+        <const name="BOL_CLIENT_SECRET" value="BOL_CLIENT_SECRET_VALUE"/>
+    </php>
 </phpunit>
