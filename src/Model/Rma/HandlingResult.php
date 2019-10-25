@@ -23,6 +23,7 @@ final class HandlingResult
         'EXCESSIVE_RETURN' => 'EXCESSIVE_RETURN',
         'STILL_RECEIVED' => 'STILL_RECEIVED',
         'CANCELLED_BY_CUSTOMER' => 'CANCELLED_BY_CUSTOMER',
+        'FAILED_TO_COLLECT_BY_TRANSPORTER' => 'FAILED_TO_COLLECT_BY_TRANSPORTER',
     ];
 
     const RETURN_RECEIVED = 'RETURN_RECEIVED';
@@ -37,6 +38,7 @@ final class HandlingResult
     const EXCESSIVE_RETURN = 'EXCESSIVE_RETURN';
     const STILL_RECEIVED = 'STILL_RECEIVED';
     const CANCELLED_BY_CUSTOMER = 'CANCELLED_BY_CUSTOMER';
+    const FAILED_TO_COLLECT_BY_TRANSPORTER = 'FAILED_TO_COLLECT_BY_TRANSPORTER';
 
     private $name;
     private $value;
@@ -105,6 +107,11 @@ final class HandlingResult
     public static function CANCELLED_BY_CUSTOMER(): self
     {
         return new self('CANCELLED_BY_CUSTOMER');
+    }
+
+    public static function FAILED_TO_COLLECT_BY_TRANSPORTER(): self
+    {
+        return new self('FAILED_TO_COLLECT_BY_TRANSPORTER');
     }
 
     public static function fromName(string $value): self
