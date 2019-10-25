@@ -20,5 +20,6 @@ class GetAllReturnsHandlerTest extends \PHPUnit\Framework\TestCase
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
         $messageBus->dispatch(GetAllReturns::with(1, false, FulfilmentMethod::FBR()));
+        $messageBus->dispatch(GetAllReturns::with(1, true, FulfilmentMethod::FBB()));
     }
 }

@@ -36,6 +36,17 @@ class GetReturnHandler implements GetReturnHandlerInterface
             ]
         ]);
 
-        return ReturnItem::fromArray($response->getBody()->json());
+        // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
+        // Convert this timestamp into ISO 8601 format.
+        $response = $response->getBody()->json();
+        $response['registrationDateTime'] = (new \DateTime($response['registrationDateTime']))
+            ->format(\DateTime::ATOM);
+
+        if (isset($response['processingDateTime'])) {
+            $response['processingDateTime'] = (new \DateTime($response['processingDateTime']))
+                ->format(\DateTime::ATOM);
+        }
+
+        return ReturnItem::fromArray($response);
     }
 }
