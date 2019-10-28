@@ -23,7 +23,7 @@ final class ReducedReturnItem
     private $processingResult;
     private $processingDateTime;
 
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason = null, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
     {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
@@ -64,7 +64,7 @@ final class ReducedReturnItem
         return $this->registrationDateTime;
     }
 
-    public function returnReason(): string
+    public function returnReason()
     {
         return $this->returnReason;
     }
@@ -124,7 +124,7 @@ final class ReducedReturnItem
         return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
 
-    public function withReturnReason(string $returnReason): ReducedReturnItem
+    public function withReturnReason(string $returnReason = null): ReducedReturnItem
     {
         return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
     }
@@ -191,11 +191,15 @@ final class ReducedReturnItem
 
         $registrationDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['registrationDateTime']);
 
-        if (! isset($data['returnReason']) || ! \is_string($data['returnReason'])) {
-            throw new \InvalidArgumentException("Key 'returnReason' is missing in data array or is not a string");
-        }
+        if (isset($data['returnReason'])) {
+            if (! \is_string($data['returnReason'])) {
+                throw new \InvalidArgumentException("Value for 'returnReason' is not a string in data array");
+            }
 
-        $returnReason = $data['returnReason'];
+            $returnReason = $data['returnReason'];
+        } else {
+            $returnReason = null;
+        }
 
         if (isset($data['returnReasonComments'])) {
             if (! \is_string($data['returnReasonComments'])) {

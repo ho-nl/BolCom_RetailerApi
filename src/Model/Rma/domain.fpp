@@ -8,7 +8,7 @@ namespace BolCom\RetailerApi\Model\Rma {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         int $quantity,
         \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
-        string $returnReason,
+        ?string $returnReason,
         ?string $returnReasonComments,
         \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
