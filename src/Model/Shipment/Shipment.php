@@ -25,7 +25,7 @@ final class Shipment
      * @param \BolCom\RetailerApi\Model\Transport\Transport $transport
      * @param \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails
      */
-    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference, array $shipmentItems, \BolCom\RetailerApi\Model\Transport\Transport $transport, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails)
+    public function __construct(ShipmentId $shipmentId, \BolCom\RetailerApi\Model\DateTime $shipmentDate, string $shipmentReference = null, array $shipmentItems, \BolCom\RetailerApi\Model\Transport\Transport $transport = null, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null)
     {
         $this->shipmentId = $shipmentId;
         $this->shipmentDate = $shipmentDate;
@@ -52,7 +52,7 @@ final class Shipment
         return $this->shipmentDate;
     }
 
-    public function shipmentReference(): string
+    public function shipmentReference()
     {
         return $this->shipmentReference;
     }
@@ -65,12 +65,12 @@ final class Shipment
         return $this->shipmentItems;
     }
 
-    public function transport(): \BolCom\RetailerApi\Model\Transport\Transport
+    public function transport()
     {
         return $this->transport;
     }
 
-    public function customerDetails(): \BolCom\RetailerApi\Model\Customer\CustomerDetails
+    public function customerDetails()
     {
         return $this->customerDetails;
     }
@@ -85,7 +85,7 @@ final class Shipment
         return new self($this->shipmentId, $shipmentDate, $this->shipmentReference, $this->shipmentItems, $this->transport, $this->customerDetails);
     }
 
-    public function withShipmentReference(string $shipmentReference): Shipment
+    public function withShipmentReference(string $shipmentReference = null): Shipment
     {
         return new self($this->shipmentId, $this->shipmentDate, $shipmentReference, $this->shipmentItems, $this->transport, $this->customerDetails);
     }
@@ -99,12 +99,12 @@ final class Shipment
         return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $shipmentItems, $this->transport, $this->customerDetails);
     }
 
-    public function withTransport(\BolCom\RetailerApi\Model\Transport\Transport $transport): Shipment
+    public function withTransport(\BolCom\RetailerApi\Model\Transport\Transport $transport = null): Shipment
     {
         return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $this->shipmentItems, $transport, $this->customerDetails);
     }
 
-    public function withCustomerDetails(\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails): Shipment
+    public function withCustomerDetails(\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null): Shipment
     {
         return new self($this->shipmentId, $this->shipmentDate, $this->shipmentReference, $this->shipmentItems, $this->transport, $customerDetails);
     }
@@ -123,11 +123,15 @@ final class Shipment
 
         $shipmentDate = \BolCom\RetailerApi\Model\DateTime::fromString($data['shipmentDate']);
 
-        if (! isset($data['shipmentReference']) || ! \is_string($data['shipmentReference'])) {
-            throw new \InvalidArgumentException("Key 'shipmentReference' is missing in data array or is not a string");
-        }
+        if (isset($data['shipmentReference'])) {
+            if (! \is_string($data['shipmentReference'])) {
+                throw new \InvalidArgumentException("Value for 'shipmentReference' is not a string in data array");
+            }
 
-        $shipmentReference = $data['shipmentReference'];
+            $shipmentReference = $data['shipmentReference'];
+        } else {
+            $shipmentReference = null;
+        }
 
         if (! isset($data['shipmentItems']) || ! \is_array($data['shipmentItems'])) {
             throw new \InvalidArgumentException("Key 'shipmentItems' is missing in data array or is not an array");
@@ -143,17 +147,25 @@ final class Shipment
             $shipmentItems[] = ShipmentItem::fromArray($__value);
         }
 
-        if (! isset($data['transport']) || ! \is_array($data['transport'])) {
-            throw new \InvalidArgumentException("Key 'transport' is missing in data array or is not an array");
+        if (isset($data['transport'])) {
+            if (! \is_array($data['transport'])) {
+                throw new \InvalidArgumentException("Value for 'transport' is not an array in data array");
+            }
+
+            $transport = \BolCom\RetailerApi\Model\Transport\Transport::fromArray($data['transport']);
+        } else {
+            $transport = null;
         }
 
-        $transport = \BolCom\RetailerApi\Model\Transport\Transport::fromArray($data['transport']);
+        if (isset($data['customerDetails'])) {
+            if (! \is_array($data['customerDetails'])) {
+                throw new \InvalidArgumentException("Value for 'customerDetails' is not an array in data array");
+            }
 
-        if (! isset($data['customerDetails']) || ! \is_array($data['customerDetails'])) {
-            throw new \InvalidArgumentException("Key 'customerDetails' is missing in data array or is not an array");
+            $customerDetails = \BolCom\RetailerApi\Model\Customer\CustomerDetails::fromArray($data['customerDetails']);
+        } else {
+            $customerDetails = null;
         }
-
-        $customerDetails = \BolCom\RetailerApi\Model\Customer\CustomerDetails::fromArray($data['customerDetails']);
 
         return new self(
             $shipmentId,

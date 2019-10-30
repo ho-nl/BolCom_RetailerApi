@@ -4,10 +4,10 @@ namespace BolCom\RetailerApi\Model\Shipment {
     data Shipment = Shipment {
         ShipmentId $shipmentId,
         \BolCom\RetailerApi\Model\DateTime $shipmentDate,
-        string $shipmentReference,
+        ?string $shipmentReference,
         ShipmentItem[] $shipmentItems,
-        \BolCom\RetailerApi\Model\Transport\Transport $transport,
-        \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails
+        ?\BolCom\RetailerApi\Model\Transport\Transport $transport,
+        ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails
     } deriving (FromArray);
 
     data ShipmentListItem = ShipmentListItem {
@@ -37,7 +37,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\Order\Quantity $quantity,
         \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
-        \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference,
+        ?\BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference,
         \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
