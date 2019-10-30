@@ -46,11 +46,12 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data OrderItem = OrderItem {
         OrderItemId $orderItemId,
-        string $offerReference,
+        ?string $offerReference,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
         Quantity $quantity,
         \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
         \BolCom\RetailerApi\Model\CurrencyAmount $transactionFee,
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
