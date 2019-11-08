@@ -66,7 +66,8 @@ namespace BolCom\RetailerApi\Model\Offer {
     } deriving (FromArray, ToArray);
 
     data DeliveryCode = DC24uurs23 | DC24uurs22 | DC24uurs21 | DC24uurs20 | DC24uurs19 | DC24uurs18 | DC24uurs17 |
-        DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC35d | DC48d | DC18d deriving (Enum(useValue)) with(
+        DC24uurs16 | DC24uurs15 | DC24uurs14 | DC24uurs13 | DC24uurs12 | DC12d | DC23d | DC35d | DC48d | DC18d |
+        DCMijnLeverbelofte deriving (Enum(useValue)) with(
             DC24uurs23: "24uurs-23",
             DC24uurs22: "24uurs-22",
             DC24uurs21: "24uurs-21",
@@ -83,7 +84,8 @@ namespace BolCom\RetailerApi\Model\Offer {
             DC23d: "2-3d",
             DC35d: "3-5d",
             DC48d: "4-8d",
-            DC18d: "1-8d"
+            DC18d: "1-8d",
+            DCMijnLeverbelofte: "MijnLeverbelofte"
         );
 
     data OfferId = OfferId deriving(Uuid);

@@ -28,6 +28,7 @@ final class DeliveryCode
         'DC35d' => '3-5d',
         'DC48d' => '4-8d',
         'DC18d' => '1-8d',
+        'DCMijnLeverbelofte' => 'MijnLeverbelofte',
     ];
 
     const DC24uurs23 = '24uurs-23';
@@ -47,6 +48,7 @@ final class DeliveryCode
     const DC35d = '3-5d';
     const DC48d = '4-8d';
     const DC18d = '1-8d';
+    const DCMijnLeverbelofte = 'MijnLeverbelofte';
 
     private $name;
     private $value;
@@ -140,6 +142,11 @@ final class DeliveryCode
     public static function dC18d(): self
     {
         return new self('DC18d');
+    }
+
+    public static function dCMijnLeverbelofte(): self
+    {
+        return new self('DCMijnLeverbelofte');
     }
 
     public static function fromName(string $value): self
