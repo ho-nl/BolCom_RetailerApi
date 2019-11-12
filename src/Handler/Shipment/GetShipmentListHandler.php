@@ -51,6 +51,17 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
 
         $response = $response->getBody()->json();
 
-        return ! empty($response) ? ShipmentList::fromArray($response) : null;
+        if (! empty($response)) {
+            foreach ($response['shipments'] as &$shipment) {
+                // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
+                // Convert this timestamp into ISO 8601 format.
+                $shipment['shipmentDate'] = (new \DateTime($shipment['shipmentDate']))
+                    ->format(\DateTime::ATOM);
+            }
+
+            return ShipmentList::fromArray($response);
+        }
+
+        return null;
     }
 }
