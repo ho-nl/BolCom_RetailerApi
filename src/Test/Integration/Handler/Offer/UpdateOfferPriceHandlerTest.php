@@ -24,14 +24,27 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
         $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
     }
 
-    public function test__invoke()
+    public function testPriceWithinBoundry()
     {
         $this->messageBus->dispatch(UpdateOfferPrice::with(
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             Pricing::fromArray([
                 'bundlePrices' => [
                     ['quantity' => 1, 'price' => 12],
-                    ['quantity' => 10, 'price' => 10]
+                    ['quantity' => 10, 'price' => 1]
+                ]
+            ])
+        ));
+    }
+
+    public function testPriceOufOfBoundry()
+    {
+        $this->expectException(\Assert\InvalidArgumentException::class);
+        $this->messageBus->dispatch(UpdateOfferPrice::with(
+            OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
+            Pricing::fromArray([
+                'bundlePrices' => [
+                    ['quantity' => 1, 'price' => 99999]
                 ]
             ])
         ));

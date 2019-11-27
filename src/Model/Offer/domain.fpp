@@ -20,9 +20,13 @@ namespace BolCom\RetailerApi\Model\Offer {
         string $errorMessage
     } deriving (FromArray);
 
+    data Price = Float deriving(FromScalar, ToScalar) where
+        _: | !\BolCom\RetailerApi\Model\Assert\AssertCurrency::assert($value) => ''
+           | !\Assert\Assertion::between($value, 1, 9999, 'Price must be between 1 and 9999.') => '';
+
     data BundlePrice = BundlePrice {
         int $quantity,
-        \BolCom\RetailerApi\Model\CurrencyAmount $price
+        Price $price
     } deriving (FromArray, ToArray);
 
     data Pricing = Pricing {

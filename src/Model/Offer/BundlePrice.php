@@ -13,7 +13,7 @@ final class BundlePrice
     private $quantity;
     private $price;
 
-    public function __construct(int $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $price)
+    public function __construct(int $quantity, Price $price)
     {
         $this->quantity = $quantity;
         $this->price = $price;
@@ -24,7 +24,7 @@ final class BundlePrice
         return $this->quantity;
     }
 
-    public function price(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function price(): Price
     {
         return $this->price;
     }
@@ -34,7 +34,7 @@ final class BundlePrice
         return new self($quantity, $this->price);
     }
 
-    public function withPrice(\BolCom\RetailerApi\Model\CurrencyAmount $price): BundlePrice
+    public function withPrice(Price $price): BundlePrice
     {
         return new self($this->quantity, $price);
     }
@@ -51,7 +51,7 @@ final class BundlePrice
             throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
         }
 
-        $price = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['price']);
+        $price = Price::fromScalar($data['price']);
 
         return new self($quantity, $price);
     }
