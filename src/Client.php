@@ -23,7 +23,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
     public function __construct(
         ClientConfigInterface $clientConfig,
         LoggerInterface $logger = null,
-        string $userAgent = 'bol-com/retailer-api/1.0'
+        string $userAgent = 'bol-com/retailer-api/1.1'
     ) {
         $stack = $this->handlerStack($clientConfig, $logger);
 
