@@ -136,7 +136,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\D
 #### GetOfferHandler
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Offer\RetailerOffer $offer */
-$offer = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\GetOffer::with(
+$offer = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Query\GetOffer::with(
     \BolCom\RetailerApi\Model\Offer\OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5')
 ));
 ```
