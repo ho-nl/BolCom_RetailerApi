@@ -16,22 +16,22 @@ final class ExportFile extends \Prooph\Common\Messaging\Query
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function exportId(): int
+    public function entityId(): string
     {
-        return $this->payload['exportId'];
+        return $this->payload['entityId'];
     }
 
-    public static function with(int $exportId): ExportFile
+    public static function with(string $entityId): ExportFile
     {
         return new self([
-            'exportId' => $exportId,
+            'entityId' => $entityId,
         ]);
     }
 
     protected function setPayload(array $payload)
     {
-        if (! isset($payload['exportId']) || ! \is_int($payload['exportId'])) {
-            throw new \InvalidArgumentException("Key 'exportId' is missing in payload or is not a string");
+        if (! isset($payload['entityId']) || ! \is_string($payload['entityId'])) {
+            throw new \InvalidArgumentException("Key 'entityId' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

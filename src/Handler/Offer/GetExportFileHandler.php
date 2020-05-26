@@ -11,6 +11,7 @@ use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Model\Offer\Query\ExportFile;
 use BolCom\RetailerApi\Model\Offer\QueryHandler\GetExportFileHandlerInterface;
 use BolCom\RetailerApi\Model\Offer\RetailerExportFileRequest;
+use Psr\Http\Message\StreamInterface;
 
 class GetExportFileHandler implements GetExportFileHandlerInterface
 {
@@ -28,9 +29,9 @@ class GetExportFileHandler implements GetExportFileHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(ExportFile $export): ExportFile
+    public function __invoke(ExportFile $entityId): StreamInterface
     {
-        $response = $this->client->get("offers/export/{$export->exportId()}", [
+        $response = $this->client->get("offers/export/{$entityId->entityId()}", [
             'headers' => [
                 'Accept' => 'application/vnd.retailer.v3+csv'
             ]
