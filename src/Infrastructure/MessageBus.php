@@ -11,7 +11,9 @@ use BolCom\RetailerApi\Handler\Commission\GetCommissionHandler;
 use BolCom\RetailerApi\Handler\Commission\GetCommissionListHandler;
 use BolCom\RetailerApi\Handler\Inventory\GetInventoryHandler;
 use BolCom\RetailerApi\Handler\Offer\CreateOfferHandler;
+use BolCom\RetailerApi\Handler\Offer\CreateOfferExportHandler;
 use BolCom\RetailerApi\Handler\Offer\DeleteOfferHandler;
+use BolCom\RetailerApi\Handler\Offer\GetOfferExportHandler;
 use BolCom\RetailerApi\Handler\Offer\GetOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\UpdateOfferHandler;
 use BolCom\RetailerApi\Handler\Offer\UpdateOfferPriceHandler;
@@ -35,11 +37,13 @@ use BolCom\RetailerApi\Model\Commission\Query\GetCommissionList;
 use BolCom\RetailerApi\Model\Inventory\Query\GetInventory;
 use BolCom\RetailerApi\Model\MessageBusInterface;
 use BolCom\RetailerApi\Model\Offer\Command\CreateOffer;
+use BolCom\RetailerApi\Model\Offer\Command\CreateOfferExport;
 use BolCom\RetailerApi\Model\Offer\Command\DeleteOffer;
 use BolCom\RetailerApi\Model\Offer\Command\UpdateOffer;
 use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice;
 use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock;
 use BolCom\RetailerApi\Model\Offer\Query\GetOffer;
+use BolCom\RetailerApi\Model\Offer\Query\GetOfferExport;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
@@ -89,7 +93,9 @@ class MessageBus implements MessageBusInterface
             GetStatusByProcessIds::class => GetStatusByProcessIdsHandler::class,
             GetShipment::class => GetShipmentHandler::class,
             GetShipmentList::class => GetShipmentListHandler::class,
-            GetInventory::class => GetInventoryHandler::class
+            GetInventory::class => GetInventoryHandler::class,
+			CreateOfferExport::class => CreateOfferExportHandler::class,
+			GetOfferExport::class => GetOfferExportHandler::class
         ];
 
         $this->clientPool = $clientPool;
