@@ -46,12 +46,13 @@ namespace BolCom\RetailerApi\Model\Offer {
     } deriving (FromArray, ToArray);
 
     // We choose IsNew, because New is a protected key word
-    data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE deriving(Enum(useValue)) with (
+    data Condition = IS_NEW | AS_NEW | GOOD | REASONABLE | MODERATE | UNKNOWN deriving(Enum(useValue)) with (
         IS_NEW:'NEW',
         AS_NEW:'AS_NEW',
         GOOD:'GOOD',
         REASONABLE:'REASONABLE',
-        MODERATE:'MODERATE'
+        MODERATE:'MODERATE',
+        UNKNOWN:'UNKNOWN'
     );
 
     // We choose IsNew, because New is a protected key word

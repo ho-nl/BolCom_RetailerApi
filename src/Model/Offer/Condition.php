@@ -16,6 +16,7 @@ final class Condition
         'GOOD' => 'GOOD',
         'REASONABLE' => 'REASONABLE',
         'MODERATE' => 'MODERATE',
+        'UNKNOWN' => 'UNKNOWN',
     ];
 
     const IS_NEW = 'NEW';
@@ -23,6 +24,7 @@ final class Condition
     const GOOD = 'GOOD';
     const REASONABLE = 'REASONABLE';
     const MODERATE = 'MODERATE';
+    const UNKNOWN = 'UNKNOWN';
 
     private $name;
     private $value;
@@ -56,6 +58,11 @@ final class Condition
     public static function MODERATE(): self
     {
         return new self('MODERATE');
+    }
+
+    public static function UNKNOWN(): self
+    {
+        return new self('UNKNOWN');
     }
 
     public static function fromName(string $value): self
