@@ -26,22 +26,16 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
         return $this->payload['shipmentReference'] ?? null;
     }
 
-    public function shippingLabelCode()
-    {
-        return $this->payload['shippingLabelCode'] ?? null;
-    }
-
     public function transport()
     {
         return isset($this->payload['transport']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transport']) : null;
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, string $shipmentReference = null, string $shippingLabelCode = null, \BolCom\RetailerApi\Model\Transport\TransportInstruction $transport = null): ShipOrderItem
+    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, string $shipmentReference = null, \BolCom\RetailerApi\Model\Transport\TransportInstruction $transport = null): ShipOrderItem
     {
         return new self([
             'orderItemId' => $orderItemId->toString(),
             'shipmentReference' => $shipmentReference,
-            'shippingLabelCode' => $shippingLabelCode,
             'transport' => null === $transport ? null : $transport->toArray(),
         ]);
     }
@@ -54,10 +48,6 @@ final class ShipOrderItem extends \Prooph\Common\Messaging\Query
 
         if (isset($payload['shipmentReference']) && ! \is_string($payload['shipmentReference'])) {
             throw new \InvalidArgumentException("Value for 'shipmentReference' is not a string in payload");
-        }
-
-        if (isset($payload['shippingLabelCode']) && ! \is_string($payload['shippingLabelCode'])) {
-            throw new \InvalidArgumentException("Value for 'shippingLabelCode' is not a string in payload");
         }
 
         if (isset($payload['transport']) && ! \is_array($payload['transport'])) {

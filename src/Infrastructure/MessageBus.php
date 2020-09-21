@@ -26,8 +26,6 @@ use BolCom\RetailerApi\Handler\Rma\GetReturnHandler;
 use BolCom\RetailerApi\Handler\Rma\HandleReturnHandler;
 use BolCom\RetailerApi\Handler\Shipment\GetShipmentHandler;
 use BolCom\RetailerApi\Handler\Shipment\GetShipmentListHandler;
-use BolCom\RetailerApi\Handler\ShippingLabel\GetShippingLabelsHandler;
-use BolCom\RetailerApi\Handler\Transport\GetShippingLabelHandler;
 use BolCom\RetailerApi\Model\ClientPoolInterface;
 use BolCom\RetailerApi\Handler\Order\GetAllOpenOrdersHandler;
 use BolCom\RetailerApi\Model\Commission\Query\GetCommission;
@@ -51,8 +49,6 @@ use BolCom\RetailerApi\Model\Rma\Query\GetAllReturns;
 use BolCom\RetailerApi\Model\Rma\Query\GetReturn;
 use BolCom\RetailerApi\Model\Shipment\Query\GetShipment;
 use BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList;
-use BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels;
-use BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel;
 
 class MessageBus implements MessageBusInterface
 {
@@ -83,8 +79,6 @@ class MessageBus implements MessageBusInterface
             GetAllReturns::class => GetAllReturnsHandler::class,
             GetReturn::class => GetReturnHandler::class,
             HandleReturn::class => HandleReturnHandler::class,
-            GetShippingLabels::class => GetShippingLabelsHandler::class,
-            GetShippingLabel::class => GetShippingLabelHandler::class,
             GetStatusByEntity::class => GetStatusByEntityHandler::class,
             GetStatusByProcessIds::class => GetStatusByProcessIdsHandler::class,
             GetShipment::class => GetShipmentHandler::class,

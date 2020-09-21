@@ -62,9 +62,3 @@ namespace BolCom\RetailerApi\Model\Transport\Command {
         ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace
     };
 }
-
-namespace BolCom\RetailerApi\Model\Transport\Query {
-    data GetShippingLabel = GetShippingLabel {
-        \BolCom\RetailerApi\Model\Transport\TransportId $transportId
-    } deriving (Query);
-}

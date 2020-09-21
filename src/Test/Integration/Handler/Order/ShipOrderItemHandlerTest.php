@@ -29,7 +29,6 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
-            null,
             TransportInstruction::fromArray([
                 'transporterCode' => 'TNT',
                 'trackAndTrace' => '123456789'
@@ -43,33 +42,8 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
         $this->messageBus->dispatch(ShipOrderItem::with(
             OrderItemId::fromString('6107434013'),
             'Shipment Reference',
-            null,
             TransportInstruction::fromArray([
                 'transporterCode' => 'TNT'
-            ])
-        ));
-    }
-
-    public function testShippingLabelCode()
-    {
-        $this->messageBus->dispatch(ShipOrderItem::with(
-            OrderItemId::fromString('6107434013'),
-            'Shipment Reference',
-            'PLR00000002',
-            null
-        ));
-    }
-
-    public function testShippingLabelCodeAndTransportInstruction()
-    {
-        $this->expectException(\RuntimeException::class);
-        $this->messageBus->dispatch(ShipOrderItem::with(
-            OrderItemId::fromString('6107434013'),
-            'Shipment Reference',
-            'PLR00000002',
-            TransportInstruction::fromArray([
-                'transporterCode' => 'TNT',
-                'trackAndTrace' => '123456789'
             ])
         ));
     }

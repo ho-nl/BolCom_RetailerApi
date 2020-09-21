@@ -317,21 +317,3 @@ $shipmentList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\G
     \BolCom\RetailerApi\Model\Order\OrderId::fromString('7616222250')
 ));
 ```
-
-### ShippingLabel
-#### GetShippingLabelsHandler
-```PHP
-/** @var \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelList $shippingLabelList */
-$shippingLabelList = $messageBus->dispatch(\BolCom\RetailerApi\Model\ShippingLabel\Query\GetShippingLabels::with(
-    \BolCom\RetailerApi\Model\Order\OrderItemId::fromString('6107434013')
-));
-```
-
-### Transport
-#### GetShippingLabelHandler
-```PHP
-/** @var \BolCom\RetailerApi\Model\ShippingLabel\ShippingLabelPdfList $shippingLabelPdfList */
-$shippingLabelPdfList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Transport\Query\GetShippingLabel::with(
-    \BolCom\RetailerApi\Model\Transport\TransportId::fromScalar(312778947)
-));
-```
