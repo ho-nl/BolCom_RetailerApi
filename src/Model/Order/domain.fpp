@@ -34,7 +34,7 @@ namespace BolCom\RetailerApi\Model\Order {
         string $zipCode,
         string $city,
         string $countryCode,
-        string $email,
+        ?string $email,
         ?string $company,
         ?string $vatNumber,
         ?string $deliveryPhoneNumber

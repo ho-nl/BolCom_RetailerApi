@@ -26,7 +26,7 @@ final class AddressDetails
     private $vatNumber;
     private $deliveryPhoneNumber;
 
-    public function __construct(string $salutationCode, string $firstName = null, string $surName = null, string $streetName, string $houseNumber, string $houseNumberExtended = null, string $addressSupplement = null, string $extraAddressInformation = null, string $zipCode, string $city, string $countryCode, string $email, string $company = null, string $vatNumber = null, string $deliveryPhoneNumber = null)
+    public function __construct(string $salutationCode, string $firstName = null, string $surName = null, string $streetName, string $houseNumber, string $houseNumberExtended = null, string $addressSupplement = null, string $extraAddressInformation = null, string $zipCode, string $city, string $countryCode, string $email = null, string $company = null, string $vatNumber = null, string $deliveryPhoneNumber = null)
     {
         $this->salutationCode = $salutationCode;
         $this->firstName = $firstName;
@@ -100,7 +100,7 @@ final class AddressDetails
         return $this->countryCode;
     }
 
-    public function email(): string
+    public function email()
     {
         return $this->email;
     }
@@ -175,7 +175,7 @@ final class AddressDetails
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
 
-    public function withEmail(string $email): AddressDetails
+    public function withEmail(string $email = null): AddressDetails
     {
         return new self($this->salutationCode, $this->firstName, $this->surName, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
@@ -283,11 +283,15 @@ final class AddressDetails
 
         $countryCode = $data['countryCode'];
 
-        if (! isset($data['email']) || ! \is_string($data['email'])) {
-            throw new \InvalidArgumentException("Key 'email' is missing in data array or is not a string");
-        }
+        if (isset($data['email'])) {
+            if (! \is_string($data['email'])) {
+                throw new \InvalidArgumentException("Value for 'email' is not a string in data array");
+            }
 
-        $email = $data['email'];
+            $email = $data['email'];
+        } else {
+            $email = null;
+        }
 
         if (isset($data['company'])) {
             if (! \is_string($data['company'])) {
