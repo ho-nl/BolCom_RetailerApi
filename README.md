@@ -39,8 +39,8 @@ To support multiple accounts you can create your own `ClientPool` and add multip
 <?php declare(strict_types=1);
 
 $clientPool = new \BolCom\RetailerApi\Infrastructure\ClientPool([
-  'account1' => new \BolCom\RetailerApi\Client(new \BolCom\RetailerApi\Client\ClientConfig('clientId1', 'clientSecret1')),
-  'account2' => new \BolCom\RetailerApi\Client(new \BolCom\RetailerApi\Client\ClientConfig('clientId2', 'clientSecret2')),
+  'account1' => new \BolCom\RetailerApi\Client(new \BolCom\RetailerApi\Client\ClientConfig('clientId1', 'clientSecret1', false, '/tmp/bol_access_token_clientId1.json')),
+  'account2' => new \BolCom\RetailerApi\Client(new \BolCom\RetailerApi\Client\ClientConfig('clientId2', 'clientSecret2', false, '/tmp/bol_access_token_clientId2.json')),
 ]);
 $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
