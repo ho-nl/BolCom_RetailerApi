@@ -24,8 +24,8 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data AddressDetails = AddressDetails {
         string $salutationCode,
-        string $firstName,
-        string $surName,
+        ?string $firstName,
+        ?string $surName,
         string $streetName,
         string $houseNumber,
         ?string $houseNumberExtended,
