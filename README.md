@@ -226,28 +226,15 @@ $order = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetOrder::w
 ```
 
 #### ShipOrderItemHandler
-Either provide Transport or ShippingLabelCode, not both.
-
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\ShipOrderItem::with(
     \BolCom\RetailerApi\Model\Order\OrderItemId::fromString('6107434013'),
     'Shipment Reference',
-    null,
     \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray([
         'transporterCode' => 'TNT',
         'trackAndTrace' => '123456789'
     ])
-));
-```
-
-```PHP
-/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
-$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\ShipOrderItem::with(
-    \BolCom\RetailerApi\Model\Order\OrderItemId::fromString('6107434013'),
-    'Shipment Reference',
-    'PLR00000001',
-    null
 ));
 ```
 
