@@ -21,6 +21,7 @@ final class EventType
         'UPDATE_OFFER' => 'UPDATE_OFFER',
         'UPDATE_OFFER_PRICE' => 'UPDATE_OFFER_PRICE',
         'UPDATE_OFFER_STOCK' => 'UPDATE_OFFER_STOCK',
+        'CREATE_OFFER_EXPORT' => 'CREATE_OFFER_EXPORT',
     ];
 
     const CREATE_OFFER = 'CREATE_OFFER';
@@ -33,6 +34,7 @@ final class EventType
     const UPDATE_OFFER = 'UPDATE_OFFER';
     const UPDATE_OFFER_PRICE = 'UPDATE_OFFER_PRICE';
     const UPDATE_OFFER_STOCK = 'UPDATE_OFFER_STOCK';
+    const CREATE_OFFER_EXPORT = 'CREATE_OFFER_EXPORT';
 
     private $name;
     private $value;
@@ -91,6 +93,11 @@ final class EventType
     public static function UPDATE_OFFER_STOCK(): self
     {
         return new self('UPDATE_OFFER_STOCK');
+    }
+
+    public static function CREATE_OFFER_EXPORT(): self
+    {
+        return new self('CREATE_OFFER_EXPORT');
     }
 
     public static function fromName(string $value): self

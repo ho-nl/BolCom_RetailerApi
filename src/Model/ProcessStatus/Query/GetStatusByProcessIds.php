@@ -27,7 +27,7 @@ final class GetStatusByProcessIds extends \Prooph\Common\Messaging\Query
         /**
      * @param int[]|null $ids
      */
-public static function with(int ...$ids): GetStatusByProcessIds
+    public static function with(int ...$ids): GetStatusByProcessIds
     {
         return new self([
             'ids' => $ids,
