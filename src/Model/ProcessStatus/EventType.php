@@ -12,6 +12,7 @@ final class EventType
 {
     const OPTIONS = [
         'CREATE_OFFER' => 'CREATE_OFFER',
+        'CREATE_OFFER_EXPORT' => 'CREATE_OFFER_EXPORT',
         'CONFIRM_SHIPMENT' => 'CONFIRM_SHIPMENT',
         'CANCEL_ORDER' => 'CANCEL_ORDER',
         'CHANGE_TRANSPORT' => 'CHANGE_TRANSPORT',
@@ -24,6 +25,7 @@ final class EventType
     ];
 
     const CREATE_OFFER = 'CREATE_OFFER';
+    const CREATE_OFFER_EXPORT = 'CREATE_OFFER_EXPORT';
     const CONFIRM_SHIPMENT = 'CONFIRM_SHIPMENT';
     const CANCEL_ORDER = 'CANCEL_ORDER';
     const CHANGE_TRANSPORT = 'CHANGE_TRANSPORT';
@@ -47,6 +49,11 @@ final class EventType
     {
         return new self('CREATE_OFFER');
     }
+
+	public static function CREATE_OFFER_EXPORT(): self
+	{
+		return new self('CREATE_OFFER_EXPORT');
+	}
 
     public static function CONFIRM_SHIPMENT(): self
     {
@@ -110,7 +117,7 @@ final class EventType
             }
         }
 
-        throw new \InvalidArgumentException('Unknown enum value given');
+        throw new \InvalidArgumentException('Unknown enum value given "'.$value.'"');
     }
 
     public function equals(EventType $other): bool
