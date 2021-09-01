@@ -64,8 +64,6 @@ class MessageBus implements MessageBusInterface
     public function __construct(ClientPoolInterface $clientPool)
     {
         $this->handlerMapping = [
-            GetCommission::class => GetCommissionHandler::class,
-            GetCommissionList::class => GetCommissionListHandler::class,
             GetAllOpenOrders::class => GetAllOpenOrdersHandler::class,
             GetOrder::class => GetOrderHandler::class,
             CancelOrder::class => CancelOrderHandler::class,
