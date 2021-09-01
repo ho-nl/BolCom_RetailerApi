@@ -18,7 +18,7 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
     /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
     private $messageBus;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
