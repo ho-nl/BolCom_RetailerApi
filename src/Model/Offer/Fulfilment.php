@@ -10,18 +10,18 @@ namespace BolCom\RetailerApi\Model\Offer;
 
 final class Fulfilment
 {
-    private $type;
+    private $method;
     private $deliveryCode;
 
-    public function __construct(FulfilmentMethod $type, DeliveryCode $deliveryCode = null)
+    public function __construct(FulfilmentMethod $method, DeliveryCode $deliveryCode = null)
     {
-        $this->type = $type;
+        $this->method = $method;
         $this->deliveryCode = $deliveryCode;
     }
 
-    public function type(): FulfilmentMethod
+    public function method(): FulfilmentMethod
     {
-        return $this->type;
+        return $this->method;
     }
 
     public function deliveryCode()
@@ -29,23 +29,23 @@ final class Fulfilment
         return $this->deliveryCode;
     }
 
-    public function withType(FulfilmentMethod $type): Fulfilment
+    public function withMethod(FulfilmentMethod $method): Fulfilment
     {
-        return new self($type, $this->deliveryCode);
+        return new self($method, $this->deliveryCode);
     }
 
     public function withDeliveryCode(DeliveryCode $deliveryCode = null): Fulfilment
     {
-        return new self($this->type, $deliveryCode);
+        return new self($this->method, $deliveryCode);
     }
 
     public static function fromArray(array $data): Fulfilment
     {
-        if (! isset($data['type']) || ! \is_string($data['type'])) {
-            throw new \InvalidArgumentException("Key 'type' is missing in data array or is not a string");
+        if (! isset($data['method']) || ! \is_string($data['method'])) {
+            throw new \InvalidArgumentException("Key 'method' is missing in data array or is not a string");
         }
 
-        $type = FulfilmentMethod::fromValue($data['type']);
+        $method = FulfilmentMethod::fromValue($data['method']);
 
         if (isset($data['deliveryCode'])) {
             if (! \is_string($data['deliveryCode'])) {
@@ -57,13 +57,13 @@ final class Fulfilment
             $deliveryCode = null;
         }
 
-        return new self($type, $deliveryCode);
+        return new self($method, $deliveryCode);
     }
 
     public function toArray(): array
     {
         return [
-            'type' => $this->type->value(),
+            'method' => $this->method->value(),
             'deliveryCode' => null === $this->deliveryCode ? null : $this->deliveryCode->value(),
         ];
     }

@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Offer;
 
-final class ReferenceCode
+final class Reference
 {
     private $value;
 
@@ -26,9 +26,9 @@ final class ReferenceCode
         return $this->value;
     }
 
-    public static function fromString(string $referenceCode): ReferenceCode
+    public static function fromString(string $reference): Reference
     {
-        return new self($referenceCode);
+        return new self($reference);
     }
 
     public function toString(): string

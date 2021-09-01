@@ -36,12 +36,12 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'name' => Condition::IS_NEW,
                     'category' => ConditionCategory::IS_NEW
                 ],
-                'referenceCode' => 'SKU123',
+                'reference' => 'SKU123',
                 'onHoldByRetailer' => false,
                 'unknownProductTitle' => 'My Title',
                 'pricing' => [
                     'bundlePrices' => [
-                        ['quantity' => 1, 'price' => 10]
+                        ['quantity' => 1, 'unitPrice' => 10]
                     ]
                 ],
                 'stock' => [
@@ -49,7 +49,7 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'managedByRetailer' => true
                 ],
                 'fulfilment' => [
-                    'type' => FulfilmentMethod::FBR,
+                    'method' => FulfilmentMethod::FBR,
                     'deliveryCode' => DeliveryCode::DC12d
                 ]
             ])
@@ -67,12 +67,12 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'category' => ConditionCategory::IS_NEW,
                     'comment' => 'Excellent condition.'
                 ],
-                'referenceCode' => 'SKU123',
+                'reference' => 'SKU123',
                 'onHoldByRetailer' => false,
                 'unknownProductTitle' => 'My Title',
                 'pricing' => [
                     'bundlePrices' => [
-                        ['quantity' => 1, 'price' => 10]
+                        ['quantity' => 1, 'unitPrice' => 10]
                     ]
                 ],
                 'stock' => [
@@ -80,7 +80,7 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'managedByRetailer' => true
                 ],
                 'fulfilment' => [
-                    'type' => FulfilmentMethod::FBR,
+                    'method' => FulfilmentMethod::FBR,
                     'deliveryCode' => DeliveryCode::DC12d
                 ]
             ])
@@ -97,12 +97,12 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'name' => Condition::IS_NEW,
                     'category' => ConditionCategory::IS_NEW,
                 ],
-                'referenceCode' => 'SKU123',
+                'reference' => 'SKU123',
                 'onHoldByRetailer' => false,
                 'unknownProductTitle' => 'My Title',
                 'pricing' => [
                     'bundlePrices' => [
-                        ['quantity' => 1, 'price' => 10]
+                        ['quantity' => 1, 'unitPrice' => 10]
                     ]
                 ],
                 'stock' => [
@@ -110,7 +110,7 @@ class CreateOfferHandlerTest extends \PHPUnit\Framework\TestCase
                     'managedByRetailer' => true
                 ],
                 'fulfilment' => [
-                    'type' => FulfilmentMethod::FBB,
+                    'method' => FulfilmentMethod::FBB,
                     'deliveryCode' => DeliveryCode::DC12d
                 ]
             ])

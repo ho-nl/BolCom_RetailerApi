@@ -35,7 +35,7 @@ class UpdateOfferHandler implements UpdateOfferHandlerInterface
     public function __invoke(UpdateOffer $updateOffer): ProcessStatus
     {
         if ($updateOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
-            && $updateOffer->retailerOffer()->fulfilment()->type()->equals(FulfilmentMethod::FBB())
+            && $updateOffer->retailerOffer()->fulfilment()->method()->equals(FulfilmentMethod::FBB())
         ) {
             throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
         }

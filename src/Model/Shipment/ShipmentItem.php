@@ -12,6 +12,7 @@ final class ShipmentItem
 {
     private $orderItemId;
     private $orderId;
+    private $offer;
     private $orderDate;
     private $latestDeliveryDate;
     private $ean;
@@ -19,14 +20,14 @@ final class ShipmentItem
     private $quantity;
     private $offerPrice;
     private $offerCondition;
-    private $offerReference;
     private $fulfilmentMethod;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, Offer $offer, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->orderId = $orderId;
+        $this->offer = $offer;
         $this->orderDate = $orderDate;
         $this->latestDeliveryDate = $latestDeliveryDate;
         $this->ean = $ean;
@@ -34,7 +35,6 @@ final class ShipmentItem
         $this->quantity = $quantity;
         $this->offerPrice = $offerPrice;
         $this->offerCondition = $offerCondition;
-        $this->offerReference = $offerReference;
         $this->fulfilmentMethod = $fulfilmentMethod;
         $this->selectedDeliveryWindow = $selectedDeliveryWindow;
     }
@@ -47,6 +47,11 @@ final class ShipmentItem
     public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
     {
         return $this->orderId;
+    }
+
+    public function offer(): Offer
+    {
+        return $this->offer;
     }
 
     public function orderDate(): \BolCom\RetailerApi\Model\DateTime
@@ -84,11 +89,6 @@ final class ShipmentItem
         return $this->offerCondition;
     }
 
-    public function offerReference()
-    {
-        return $this->offerReference;
-    }
-
     public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
     {
         return $this->fulfilmentMethod;
@@ -101,62 +101,62 @@ final class ShipmentItem
 
     public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): ShipmentItem
     {
-        return new self($orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ShipmentItem
     {
-        return new self($this->orderItemId, $orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+    }
+
+    public function withOffer(Offer $offer): ShipmentItem
+    {
+        return new self($this->orderItemId, $this->orderId, $offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withOrderDate(\BolCom\RetailerApi\Model\DateTime $orderDate): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withLatestDeliveryDate(\BolCom\RetailerApi\Model\Date $latestDeliveryDate): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withTitle(\BolCom\RetailerApi\Model\Offer\Title $title): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withQuantity(\BolCom\RetailerApi\Model\Order\Quantity $quantity): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withOfferPrice(\BolCom\RetailerApi\Model\CurrencyAmount $offerPrice): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withOfferCondition(\BolCom\RetailerApi\Model\Offer\Condition $offerCondition): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $offerCondition, $this->offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
-    }
-
-    public function withOfferReference(\BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference = null): ShipmentItem
-    {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $offerReference, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $fulfilmentMethod, $this->selectedDeliveryWindow);
     }
 
     public function withSelectedDeliveryWindow(\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->offerReference, $this->fulfilmentMethod, $selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $selectedDeliveryWindow);
     }
 
     public static function fromArray(array $data): ShipmentItem
@@ -172,6 +172,12 @@ final class ShipmentItem
         }
 
         $orderId = \BolCom\RetailerApi\Model\Order\OrderId::fromString($data['orderId']);
+
+        if (! isset($data['offer']) || ! \is_array($data['offer'])) {
+            throw new \InvalidArgumentException("Key 'offer' is missing in data array or is not an array");
+        }
+
+        $offer = Offer::fromArray($data['offer']);
 
         if (! isset($data['orderDate']) || ! \is_string($data['orderDate'])) {
             throw new \InvalidArgumentException("Key 'orderDate' is missing in data array or is not a string");
@@ -215,16 +221,6 @@ final class ShipmentItem
 
         $offerCondition = \BolCom\RetailerApi\Model\Offer\Condition::fromValue($data['offerCondition']);
 
-        if (isset($data['offerReference'])) {
-            if (! \is_string($data['offerReference'])) {
-                throw new \InvalidArgumentException("Value for 'offerReference' is not a string in data array");
-            }
-
-            $offerReference = \BolCom\RetailerApi\Model\Offer\ReferenceCode::fromString($data['offerReference']);
-        } else {
-            $offerReference = null;
-        }
-
         if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
             throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
         }
@@ -244,6 +240,7 @@ final class ShipmentItem
         return new self(
             $orderItemId,
             $orderId,
+            $offer,
             $orderDate,
             $latestDeliveryDate,
             $ean,
@@ -251,7 +248,6 @@ final class ShipmentItem
             $quantity,
             $offerPrice,
             $offerCondition,
-            $offerReference,
             $fulfilmentMethod,
             $selectedDeliveryWindow
         );

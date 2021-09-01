@@ -12,7 +12,7 @@ final class RetailerOffer
 {
     private $offerId;
     private $ean;
-    private $referenceCode;
+    private $reference;
     private $onHoldByRetailer;
     private $unknownProductTitle;
     private $pricing;
@@ -25,7 +25,7 @@ final class RetailerOffer
     /**
      * @param \BolCom\RetailerApi\Model\Offer\OfferId $offerId
      * @param \BolCom\RetailerApi\Model\Offer\Ean $ean
-     * @param \BolCom\RetailerApi\Model\Offer\ReferenceCode $referenceCode
+     * @param \BolCom\RetailerApi\Model\Offer\Reference $reference
      * @param bool $onHoldByRetailer
      * @param \BolCom\RetailerApi\Model\Offer\Title $unknownProductTitle
      * @param \BolCom\RetailerApi\Model\Offer\Pricing $pricing
@@ -35,11 +35,11 @@ final class RetailerOffer
      * @param \BolCom\RetailerApi\Model\Offer\OfferCondition $condition
      * @param \BolCom\RetailerApi\Model\Offer\NotPublishableReasons[] $notPublishableReasons
      */
-    public function __construct(OfferId $offerId, Ean $ean, ReferenceCode $referenceCode, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, Store $store, OfferCondition $condition, array $notPublishableReasons = null)
+    public function __construct(OfferId $offerId, Ean $ean, Reference $reference, bool $onHoldByRetailer, Title $unknownProductTitle = null, Pricing $pricing, OfferStock $stock, Fulfilment $fulfilment, Store $store, OfferCondition $condition, array $notPublishableReasons = null)
     {
         $this->offerId = $offerId;
         $this->ean = $ean;
-        $this->referenceCode = $referenceCode;
+        $this->reference = $reference;
         $this->onHoldByRetailer = $onHoldByRetailer;
         $this->unknownProductTitle = $unknownProductTitle;
         $this->pricing = $pricing;
@@ -68,9 +68,9 @@ final class RetailerOffer
         return $this->ean;
     }
 
-    public function referenceCode(): ReferenceCode
+    public function reference(): Reference
     {
-        return $this->referenceCode;
+        return $this->reference;
     }
 
     public function onHoldByRetailer(): bool
@@ -118,52 +118,52 @@ final class RetailerOffer
 
     public function withOfferId(OfferId $offerId): RetailerOffer
     {
-        return new self($offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withEan(Ean $ean): RetailerOffer
     {
-        return new self($this->offerId, $ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
-    public function withReferenceCode(ReferenceCode $referenceCode): RetailerOffer
+    public function withReference(Reference $reference): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withOnHoldByRetailer(bool $onHoldByRetailer): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withUnknownProductTitle(Title $unknownProductTitle = null): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withPricing(Pricing $pricing): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withStock(OfferStock $stock): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $stock, $this->fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withFulfilment(Fulfilment $fulfilment): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $fulfilment, $this->store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withStore(Store $store): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $store, $this->condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $store, $this->condition, $this->notPublishableReasons);
     }
 
     public function withCondition(OfferCondition $condition): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $condition, $this->notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $condition, $this->notPublishableReasons);
     }
 
     /**
@@ -172,7 +172,7 @@ final class RetailerOffer
      */
     public function withNotPublishableReasons(array $notPublishableReasons = null): RetailerOffer
     {
-        return new self($this->offerId, $this->ean, $this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $notPublishableReasons);
+        return new self($this->offerId, $this->ean, $this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->pricing, $this->stock, $this->fulfilment, $this->store, $this->condition, $notPublishableReasons);
     }
 
     public static function fromArray(array $data): RetailerOffer
@@ -189,11 +189,11 @@ final class RetailerOffer
 
         $ean = Ean::fromString($data['ean']);
 
-        if (! isset($data['referenceCode']) || ! \is_string($data['referenceCode'])) {
-            throw new \InvalidArgumentException("Key 'referenceCode' is missing in data array or is not a string");
+        if (! isset($data['reference']) || ! \is_string($data['reference'])) {
+            throw new \InvalidArgumentException("Key 'reference' is missing in data array or is not a string");
         }
 
-        $referenceCode = ReferenceCode::fromString($data['referenceCode']);
+        $reference = Reference::fromString($data['reference']);
 
         if (! isset($data['onHoldByRetailer']) || ! \is_bool($data['onHoldByRetailer'])) {
             throw new \InvalidArgumentException("Key 'onHoldByRetailer' is missing in data array or is not a bool");
@@ -262,7 +262,7 @@ final class RetailerOffer
         return new self(
             $offerId,
             $ean,
-            $referenceCode,
+            $reference,
             $onHoldByRetailer,
             $unknownProductTitle,
             $pricing,
@@ -287,7 +287,7 @@ final class RetailerOffer
         return [
             'offerId' => $this->offerId->toString(),
             'ean' => $this->ean->toString(),
-            'referenceCode' => $this->referenceCode->toString(),
+            'reference' => $this->reference->toString(),
             'onHoldByRetailer' => $this->onHoldByRetailer,
             'unknownProductTitle' => null === $this->unknownProductTitle ? null : $this->unknownProductTitle->toString(),
             'pricing' => $this->pricing->toArray(),

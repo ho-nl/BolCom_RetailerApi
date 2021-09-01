@@ -42,7 +42,7 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
         }
 
         if ($createOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
-            && $createOffer->retailerOffer()->fulfilment()->type()->equals(FulfilmentMethod::FBB())
+            && $createOffer->retailerOffer()->fulfilment()->method()->equals(FulfilmentMethod::FBB())
         ) {
             throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
         }

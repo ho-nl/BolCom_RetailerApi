@@ -27,9 +27,16 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\Order\OrderId $orderId
     } deriving (FromArray);
 
+    data Offer = Offer {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
+        \BolCom\RetailerApi\Model\Offer\Reference $reference,
+
+    } deriving (FromArray);
+
     data ShipmentItem = ShipmentItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
+        Offer $offer,
         \BolCom\RetailerApi\Model\DateTime $orderDate,
         \BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
@@ -37,7 +44,6 @@ namespace BolCom\RetailerApi\Model\Shipment {
         \BolCom\RetailerApi\Model\Order\Quantity $quantity,
         \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
         \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
-        ?\BolCom\RetailerApi\Model\Offer\ReferenceCode $offerReference,
         \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);

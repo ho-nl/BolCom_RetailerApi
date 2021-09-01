@@ -31,11 +31,11 @@ class UpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
         $this->messageBus->dispatch(UpdateOffer::with(
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             RetailerOfferUpdate::fromArray([
-                'referenceCode' => 'SKU123',
+                'reference' => 'SKU123',
                 'onHoldByRetailer' => false,
                 'unknownProductTitle' => 'My Title',
                 'fulfilment' => [
-                    'type' => FulfilmentMethod::FBR,
+                    'method' => FulfilmentMethod::FBR,
                     'deliveryCode' => DeliveryCode::DC12d
                 ]
             ])
@@ -48,11 +48,11 @@ class UpdateOfferHandlerTest extends \PHPUnit\Framework\TestCase
         $this->messageBus->dispatch(UpdateOffer::with(
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             RetailerOfferUpdate::fromArray([
-                'referenceCode' => 'SKU123',
+                'reference' => 'SKU123',
                 'onHoldByRetailer' => false,
                 'unknownProductTitle' => 'My Title',
                 'fulfilment' => [
-                    'type' => FulfilmentMethod::FBB,
+                    'method' => FulfilmentMethod::FBB,
                     'deliveryCode' => DeliveryCode::DC12d
                 ]
             ])
