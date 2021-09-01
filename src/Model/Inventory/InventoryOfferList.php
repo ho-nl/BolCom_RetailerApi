@@ -10,62 +10,62 @@ namespace BolCom\RetailerApi\Model\Inventory;
 
 final class InventoryOfferList
 {
-    private $offers;
+    private $inventory;
 
     /**
-     * @param \BolCom\RetailerApi\Model\Inventory\InventoryOffer[]|null $offers
+     * @param \BolCom\RetailerApi\Model\Inventory\InventoryOffer[]|null $inventory
      */
-    public function __construct(InventoryOffer ...$offers)
+    public function __construct(InventoryOffer ...$inventory)
     {
-        $this->offers = $offers;
+        $this->inventory = $inventory;
     }
 
     /**
      * @return \BolCom\RetailerApi\Model\Inventory\InventoryOffer[]
      */
-    public function offers(): array
+    public function inventory(): array
     {
-        return $this->offers;
+        return $this->inventory;
     }
 
     /**
-     * @param \BolCom\RetailerApi\Model\Inventory\InventoryOffer[]|null $offers
+     * @param \BolCom\RetailerApi\Model\Inventory\InventoryOffer[]|null $inventory
      * @return \BolCom\RetailerApi\Model\Inventory\InventoryOfferList
      */
-    public function withOffers(array $offers): InventoryOfferList
+    public function withInventory(array $inventory): InventoryOfferList
     {
-        return new self(...$offers);
+        return new self(...$inventory);
     }
 
     public function toArray(): array
     {
-        $offers = [];
+        $inventory = [];
 
-        foreach ($this->offers as $__value) {
-            $offers[] = $__value->toArray();
+        foreach ($this->inventory as $__value) {
+            $inventory[] = $__value->toArray();
         }
 
         return [
-            'offers' => $offers,
+            'inventory' => $inventory,
         ];
     }
 
     public static function fromArray(array $data): InventoryOfferList
     {
-        if (! isset($data['offers']) || ! \is_array($data['offers'])) {
-            throw new \InvalidArgumentException("Key 'offers' is missing in data array or is not an array");
+        if (! isset($data['inventory']) || ! \is_array($data['inventory'])) {
+            throw new \InvalidArgumentException("Key 'inventory' is missing in data array or is not an array");
         }
 
-        $offers = [];
+        $inventory = [];
 
-        foreach ($data['offers'] as $__value) {
-            if (! \is_array($data['offers'])) {
-                throw new \InvalidArgumentException("Key 'offers' in data array or is not an array of arrays");
+        foreach ($data['inventory'] as $__value) {
+            if (! \is_array($data['inventory'])) {
+                throw new \InvalidArgumentException("Key 'inventory' in data array or is not an array of arrays");
             }
 
-            $offers[] = InventoryOffer::fromArray($__value);
+            $inventory[] = InventoryOffer::fromArray($__value);
         }
 
-        return new self(...$offers);
+        return new self(...$inventory);
     }
 }
