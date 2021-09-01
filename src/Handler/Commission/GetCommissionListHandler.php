@@ -32,7 +32,7 @@ class GetCommissionListHandler implements GetCommissionListHandlerInterface
     {
         $response = $this->client->post('commission', [
             'json' => $getCommissionList->payload(),
-            'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
+            'headers' => ['Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER]
         ]);
 
         return CommissionList::fromArray($response->getBody()->json());

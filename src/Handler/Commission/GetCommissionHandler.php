@@ -35,7 +35,7 @@ class GetCommissionHandler implements GetCommissionHandlerInterface
                 'condition' => null === $getCommission->condition() ? null : $getCommission->condition()->value(),
                 'price' => null === $getCommission->price() ? null : $getCommission->price()->toScalar(),
             ],
-            'headers' => ['Accept' => 'application/vnd.retailer.v3+json']
+            'headers' => ['Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER]
         ]);
 
         return Commission::fromArray($response->getBody()->json());

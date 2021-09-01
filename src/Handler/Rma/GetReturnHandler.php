@@ -32,7 +32,7 @@ class GetReturnHandler implements GetReturnHandlerInterface
     {
         $response = $this->client->get("returns/{$getReturn->rmaId()->toScalar()}", [
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 
