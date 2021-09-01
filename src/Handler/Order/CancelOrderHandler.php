@@ -31,9 +31,8 @@ class CancelOrderHandler implements CancelOrderHandlerInterface
     public function __invoke(CancelOrder $cancelOrder): ProcessStatus
     {
         $payload = $cancelOrder->payload();
-        unset($payload['orderItemId']);
 
-        $response = $this->client->put("orders/{$cancelOrder->orderItemId()->toString()}/cancellation", [
+        $response = $this->client->put('orders/cancellation', [
             'json' => $payload,
             'headers' => [
                 'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER

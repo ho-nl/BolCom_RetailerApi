@@ -10,6 +10,7 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Order;
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
+use BolCom\RetailerApi\Model\Order\Command\ShipOrderItems;
 use BolCom\RetailerApi\Model\Order\OrderItemId;
 use BolCom\RetailerApi\Model\Transport\TransportInstruction;
 
@@ -26,22 +27,30 @@ class ShipOrderItemHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function testTransportInstruction()
     {
-        $this->messageBus->dispatch(ShipOrderItem::with(
-            OrderItemId::fromString('6107434013'),
-            'Shipment Reference',
-            TransportInstruction::fromArray([
-                'transporterCode' => 'TNT',
-                'trackAndTrace' => '123456789'
-            ])
+        $this->messageBus->dispatch(ShipOrderItems::with([
+                ShipOrderItem::fromArray([
+                    'orderItemId' => '6107434013'
+                    ])],
+                'Shipment Reference',
+                null,
+                TransportInstruction::fromArray([
+                    'transporterCode' => 'TNT',
+                    'trackAndTrace' => '123456789'
+                ])
         ));
     }
 
     public function testTransportInstructionWithoutTrackAndTrace()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->messageBus->dispatch(ShipOrderItem::with(
-            OrderItemId::fromString('6107434013'),
+        $this->messageBus->dispatch(ShipOrderItems::with(
+            [
+                ShipOrderItem::fromArray([
+                    'orderItemId' => '6107434013'
+                ])
+            ],
             'Shipment Reference',
+            null,
             TransportInstruction::fromArray([
                 'transporterCode' => 'TNT'
             ])

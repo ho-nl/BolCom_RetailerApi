@@ -39,7 +39,7 @@ use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice;
 use BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock;
 use BolCom\RetailerApi\Model\Offer\Query\GetOffer;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
-use BolCom\RetailerApi\Model\Order\Command\ShipOrderItem;
+use BolCom\RetailerApi\Model\Order\Command\ShipOrderItems;
 use BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders;
 use BolCom\RetailerApi\Model\Order\Query\GetOrder;
 use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity;
@@ -67,7 +67,7 @@ class MessageBus implements MessageBusInterface
             GetAllOpenOrders::class => GetAllOpenOrdersHandler::class,
             GetOrder::class => GetOrderHandler::class,
             CancelOrder::class => CancelOrderHandler::class,
-            ShipOrderItem::class => ShipOrderItemHandler::class,
+            ShipOrderItems::class => ShipOrderItemHandler::class,
             CreateOffer::class => CreateOfferHandler::class,
             UpdateOffer::class => UpdateOfferHandler::class,
             UpdateOfferPrice::class => UpdateOfferPriceHandler::class,

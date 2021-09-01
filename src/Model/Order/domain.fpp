@@ -3,40 +3,36 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data Order = Order {
         OrderId $orderId,
-        \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced,
-        OrderCustomerDetails $customerDetails,
+        \BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime,
+        AddressDetails $shipmentDetails,
+        AddressDetails $billingDetails,
         OrderItem[] $orderItems,
     } deriving (FromArray);
 
     data OrderListItem = OrderListItem {
         OrderId $orderId,
-        \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced
+        \BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime
     } deriving (FromArray);
 
     data OrderList = OrderList {
         OrderListItem[] $orders
     } deriving (FromArray);
 
-    data OrderCustomerDetails = OrderCustomerDetails {
-        AddressDetails $shipmentDetails,
-        AddressDetails $billingDetails,
-    } deriving (FromArray);
+    data Salutation = MALE | FEMALE | UNKNOWN deriving(Enum(useValue)) with (MALE:'MALE', FEMALE:'FEMALE', UNKNOWN:'UNKNOWN');
 
     data AddressDetails = AddressDetails {
-        string $salutationCode,
+        Salutation $salutation,
         ?string $firstName,
-        ?string $surName,
+        ?string $surname,
         string $streetName,
         string $houseNumber,
-        ?string $houseNumberExtended,
-        ?string $addressSupplement,
+        ?string $houseNumberExtension,
         ?string $extraAddressInformation,
         string $zipCode,
         string $city,
         string $countryCode,
         ?string $email,
         ?string $company,
-        ?string $vatNumber,
         ?string $deliveryPhoneNumber
     } deriving (FromArray);
 
@@ -44,21 +40,42 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data Quantity = Int deriving(FromScalar, ToScalar);
 
-    data OrderItem = OrderItem {
-        OrderItemId $orderItemId,
-        ?string $offerReference,
+    data DistributionParty = RETAILER | BOL deriving(Enum(useValue));
+
+    data OrderFulfilmemt = OrderFulfilmemt {
+        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method,
+        DistributionParty $distributionParty,
+        ?\BolCom\RetailerApi\Model\Date $latestDeliveryDate,
+        ?\BolCom\RetailerApi\Model\Date $exactDeliveryDate,
+        ?\BolCom\RetailerApi\Model\Date $expiryDate
+
+    } deriving (FromArray);
+
+    data OrderOffer = OrderOffer {
+        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
+        \BolCom\RetailerApi\Model\Offer\Reference $reference
+
+    } deriving (FromArray);
+
+    data OrderProduct = OrderProduct {
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         string $title,
+
+    } deriving (FromArray);
+
+    data Price = Float deriving(FromScalar, ToScalar) where
+        _: | !\BolCom\RetailerApi\Model\Assert\AssertCurrency::assert($value) => ''
+           | !\Assert\Assertion::between($value, 1, 9999, 'Price must be between 1 and 9999.') => '';
+
+    data OrderItem = OrderItem {
+        OrderItemId $orderItemId,
+        OrderFulfilmemt $fulfilment,
+        OrderOffer $offer,
+        OrderProduct $product,
         Quantity $quantity,
-        \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice,
-        \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
-        \BolCom\RetailerApi\Model\CurrencyAmount $transactionFee,
-        ?\BolCom\RetailerApi\Model\Date $latestDeliveryDate,
-        ?\BolCom\RetailerApi\Model\Date $expiryDate,
-        ?\BolCom\RetailerApi\Model\Date $exactDeliveryDate,
-        \BolCom\RetailerApi\Model\Offer\Condition $offerCondition,
-        bool $cancelRequest,
-        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
+        Price $unitPrice,
+        \BolCom\RetailerApi\Model\CurrencyAmount $commission,
+        bool $cancellationRequest,
         ?SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 
@@ -84,13 +101,22 @@ namespace BolCom\RetailerApi\Model\Order\Query {
 
 namespace BolCom\RetailerApi\Model\Order\Command {
     data CancelOrder = CancelOrder {
+        CancelOrderItem[] $orderItems
+    } deriving (Query);
+
+    data CancelOrderItem = CancelOrderItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        ?\BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
+        \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode
+    } deriving (FromArray, ToArray);
+
+    data ShipOrderItems = ShipOrderItems {
+        ShipOrderItem[] $orderItems,
+        ?string $shipmentReference,
+        ?string $shippingLabelId,
+        ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transport
     } deriving (Query);
 
     data ShipOrderItem = ShipOrderItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        ?string $shipmentReference,
-        ?\BolCom\RetailerApi\Model\Transport\TransportInstruction $transport
-    } deriving (Query);
+    } deriving (FromArray, ToArray);
 }

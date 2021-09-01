@@ -11,21 +11,24 @@ namespace BolCom\RetailerApi\Model\Order;
 final class Order
 {
     private $orderId;
-    private $dateTimeOrderPlaced;
-    private $customerDetails;
+    private $orderPlacedDateTime;
+    private $shipmentDetails;
+    private $billingDetails;
     private $orderItems;
 
     /**
      * @param \BolCom\RetailerApi\Model\Order\OrderId $orderId
-     * @param \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced
-     * @param \BolCom\RetailerApi\Model\Order\OrderCustomerDetails $customerDetails
+     * @param \BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime
+     * @param \BolCom\RetailerApi\Model\Order\AddressDetails $shipmentDetails
+     * @param \BolCom\RetailerApi\Model\Order\AddressDetails $billingDetails
      * @param \BolCom\RetailerApi\Model\Order\OrderItem[]|null $orderItems
      */
-    public function __construct(OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced, OrderCustomerDetails $customerDetails, array $orderItems)
+    public function __construct(OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime, AddressDetails $shipmentDetails, AddressDetails $billingDetails, array $orderItems)
     {
         $this->orderId = $orderId;
-        $this->dateTimeOrderPlaced = $dateTimeOrderPlaced;
-        $this->customerDetails = $customerDetails;
+        $this->orderPlacedDateTime = $orderPlacedDateTime;
+        $this->shipmentDetails = $shipmentDetails;
+        $this->billingDetails = $billingDetails;
             $this->orderItems = [];
             foreach ($orderItems as $__value) {
                 if (! $__value instanceof \BolCom\RetailerApi\Model\Order\OrderItem) {
@@ -40,14 +43,19 @@ final class Order
         return $this->orderId;
     }
 
-    public function dateTimeOrderPlaced(): \BolCom\RetailerApi\Model\DateTime
+    public function orderPlacedDateTime(): \BolCom\RetailerApi\Model\DateTime
     {
-        return $this->dateTimeOrderPlaced;
+        return $this->orderPlacedDateTime;
     }
 
-    public function customerDetails(): OrderCustomerDetails
+    public function shipmentDetails(): AddressDetails
     {
-        return $this->customerDetails;
+        return $this->shipmentDetails;
+    }
+
+    public function billingDetails(): AddressDetails
+    {
+        return $this->billingDetails;
     }
 
     /**
@@ -60,17 +68,22 @@ final class Order
 
     public function withOrderId(OrderId $orderId): Order
     {
-        return new self($orderId, $this->dateTimeOrderPlaced, $this->customerDetails, $this->orderItems);
+        return new self($orderId, $this->orderPlacedDateTime, $this->shipmentDetails, $this->billingDetails, $this->orderItems);
     }
 
-    public function withDateTimeOrderPlaced(\BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced): Order
+    public function withOrderPlacedDateTime(\BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime): Order
     {
-        return new self($this->orderId, $dateTimeOrderPlaced, $this->customerDetails, $this->orderItems);
+        return new self($this->orderId, $orderPlacedDateTime, $this->shipmentDetails, $this->billingDetails, $this->orderItems);
     }
 
-    public function withCustomerDetails(OrderCustomerDetails $customerDetails): Order
+    public function withShipmentDetails(AddressDetails $shipmentDetails): Order
     {
-        return new self($this->orderId, $this->dateTimeOrderPlaced, $customerDetails, $this->orderItems);
+        return new self($this->orderId, $this->orderPlacedDateTime, $shipmentDetails, $this->billingDetails, $this->orderItems);
+    }
+
+    public function withBillingDetails(AddressDetails $billingDetails): Order
+    {
+        return new self($this->orderId, $this->orderPlacedDateTime, $this->shipmentDetails, $billingDetails, $this->orderItems);
     }
 
     /**
@@ -79,7 +92,7 @@ final class Order
      */
     public function withOrderItems(array $orderItems): Order
     {
-        return new self($this->orderId, $this->dateTimeOrderPlaced, $this->customerDetails, $orderItems);
+        return new self($this->orderId, $this->orderPlacedDateTime, $this->shipmentDetails, $this->billingDetails, $orderItems);
     }
 
     public static function fromArray(array $data): Order
@@ -90,17 +103,23 @@ final class Order
 
         $orderId = OrderId::fromString($data['orderId']);
 
-        if (! isset($data['dateTimeOrderPlaced']) || ! \is_string($data['dateTimeOrderPlaced'])) {
-            throw new \InvalidArgumentException("Key 'dateTimeOrderPlaced' is missing in data array or is not a string");
+        if (! isset($data['orderPlacedDateTime']) || ! \is_string($data['orderPlacedDateTime'])) {
+            throw new \InvalidArgumentException("Key 'orderPlacedDateTime' is missing in data array or is not a string");
         }
 
-        $dateTimeOrderPlaced = \BolCom\RetailerApi\Model\DateTime::fromString($data['dateTimeOrderPlaced']);
+        $orderPlacedDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['orderPlacedDateTime']);
 
-        if (! isset($data['customerDetails']) || ! \is_array($data['customerDetails'])) {
-            throw new \InvalidArgumentException("Key 'customerDetails' is missing in data array or is not an array");
+        if (! isset($data['shipmentDetails']) || ! \is_array($data['shipmentDetails'])) {
+            throw new \InvalidArgumentException("Key 'shipmentDetails' is missing in data array or is not an array");
         }
 
-        $customerDetails = OrderCustomerDetails::fromArray($data['customerDetails']);
+        $shipmentDetails = AddressDetails::fromArray($data['shipmentDetails']);
+
+        if (! isset($data['billingDetails']) || ! \is_array($data['billingDetails'])) {
+            throw new \InvalidArgumentException("Key 'billingDetails' is missing in data array or is not an array");
+        }
+
+        $billingDetails = AddressDetails::fromArray($data['billingDetails']);
 
         if (! isset($data['orderItems']) || ! \is_array($data['orderItems'])) {
             throw new \InvalidArgumentException("Key 'orderItems' is missing in data array or is not an array");
@@ -118,8 +137,9 @@ final class Order
 
         return new self(
             $orderId,
-            $dateTimeOrderPlaced,
-            $customerDetails,
+            $orderPlacedDateTime,
+            $shipmentDetails,
+            $billingDetails,
             $orderItems
         );
     }

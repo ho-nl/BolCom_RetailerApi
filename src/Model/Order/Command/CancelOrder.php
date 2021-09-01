@@ -16,32 +16,46 @@ final class CancelOrder extends \Prooph\Common\Messaging\Query
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
+    /**
+     * @return \BolCom\RetailerApi\Model\Order\Command\CancelOrderItem[]
+     */
+    public function orderItems(): array
     {
-        return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
+        $__returnValue = [];
+
+        foreach ($this->payload['orderItems'] as $__value) {
+            $__returnValue[] = CancelOrderItem::fromArray($__value);
+        }
+
+        return $__returnValue;
     }
 
-    public function reasonCode()
+        /**
+     * @param \BolCom\RetailerApi\Model\Order\Command\CancelOrderItem[]|null $orderItems
+     */
+public static function with(CancelOrderItem ...$orderItems): CancelOrder
     {
-        return isset($this->payload['reasonCode']) ? \BolCom\RetailerApi\Model\Order\CancellationReason::fromValue($this->payload['reasonCode']) : null;
-    }
+        $__array_orderItems = [];
 
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\CancellationReason $reasonCode = null): CancelOrder
-    {
+        foreach ($orderItems as $__value) {
+            $__array_orderItems[] = $__value->toArray();
+        }
+
         return new self([
-            'orderItemId' => $orderItemId->toString(),
-            'reasonCode' => null === $reasonCode ? null : $reasonCode->value(),
+            'orderItems' => $__array_orderItems,
         ]);
     }
 
     protected function setPayload(array $payload)
     {
-        if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
-            throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
+        if (! isset($payload['orderItems']) || ! \is_array($payload['orderItems'])) {
+            throw new \InvalidArgumentException("Key 'orderItems' is missing in payload or is not an array");
         }
 
-        if (isset($payload['reasonCode']) && ! \is_string($payload['reasonCode'])) {
-            throw new \InvalidArgumentException("Value for 'reasonCode' is not a string in payload");
+        foreach ($payload['orderItems'] as $__value) {
+            if (! \is_array($__value)) {
+                throw new \InvalidArgumentException("Key 'orderItems' is not an array of arrays in payload");
+            }
         }
 
         $this->payload = $payload;
