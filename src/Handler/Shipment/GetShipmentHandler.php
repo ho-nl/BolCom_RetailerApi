@@ -42,7 +42,8 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
         // Convert this timestamp into ISO 8601 format.
         $response['shipmentDateTime'] = (new \DateTime($response['shipmentDateTime']))->format(\DateTime::ATOM);
         $response['shipmentItems'] = array_map(static function (array $item) {
-            $item['fulfilment']['latestDeliveryDate'] = (new \DateTime($item['fulfilment']['latestDeliveryDate']))->format('Y-m-d');
+            $item['fulfilment']['latestDeliveryDate'] =
+                (new \DateTime($item['fulfilment']['latestDeliveryDate']))->format('Y-m-d');
 
             return $item;
         }, $response['shipmentItems']);
