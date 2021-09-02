@@ -25,7 +25,7 @@ class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
                 CancelOrderItem::fromArray([
                 'orderItemId' => '6107434013',
                 'reasonCode' => CancellationReason::REQUESTED_BY_CUSTOMER
-            ]),
+            ])
         ));
     }
 }
