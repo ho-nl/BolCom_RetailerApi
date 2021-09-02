@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Test\Integration\Handler\Rma;
 use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Rma\Query\GetReturn;
-use BolCom\RetailerApi\Model\Rma\RmaId;
+use BolCom\RetailerApi\Model\Rma\ReturnId;
 
 class GetReturnHandlerTest extends \PHPUnit\Framework\TestCase
 {
@@ -19,6 +19,6 @@ class GetReturnHandlerTest extends \PHPUnit\Framework\TestCase
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetReturn::with(RmaId::fromScalar(86127199)));
+        $messageBus->dispatch(GetReturn::with(ReturnId::fromScalar(15892026)));
     }
 }

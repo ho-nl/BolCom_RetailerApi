@@ -26,7 +26,7 @@ final class CustomerDetails
     private $vatNumber;
     private $deliveryPhoneNumber;
 
-    public function __construct(string $salutationCode, string $firstName = null, string $surname = null, string $streetName = null, string $houseNumber = null, string $houseNumberExtended = null, string $addressSupplement = null, string $extraAddressInformation = null, string $zipCode, string $city = null, string $countryCode, string $email = null, string $company = null, string $vatNumber = null, string $deliveryPhoneNumber = null)
+    public function __construct(string $salutationCode = null, string $firstName = null, string $surname = null, string $streetName = null, string $houseNumber = null, string $houseNumberExtended = null, string $addressSupplement = null, string $extraAddressInformation = null, string $zipCode, string $city = null, string $countryCode, string $email = null, string $company = null, string $vatNumber = null, string $deliveryPhoneNumber = null)
     {
         $this->salutationCode = $salutationCode;
         $this->firstName = $firstName;
@@ -45,7 +45,7 @@ final class CustomerDetails
         $this->deliveryPhoneNumber = $deliveryPhoneNumber;
     }
 
-    public function salutationCode(): string
+    public function salutationCode()
     {
         return $this->salutationCode;
     }
@@ -120,7 +120,7 @@ final class CustomerDetails
         return $this->deliveryPhoneNumber;
     }
 
-    public function withSalutationCode(string $salutationCode): CustomerDetails
+    public function withSalutationCode(string $salutationCode = null): CustomerDetails
     {
         return new self($salutationCode, $this->firstName, $this->surname, $this->streetName, $this->houseNumber, $this->houseNumberExtended, $this->addressSupplement, $this->extraAddressInformation, $this->zipCode, $this->city, $this->countryCode, $this->email, $this->company, $this->vatNumber, $this->deliveryPhoneNumber);
     }
@@ -197,11 +197,15 @@ final class CustomerDetails
 
     public static function fromArray(array $data): CustomerDetails
     {
-        if (! isset($data['salutationCode']) || ! \is_string($data['salutationCode'])) {
-            throw new \InvalidArgumentException("Key 'salutationCode' is missing in data array or is not a string");
-        }
+        if (isset($data['salutationCode'])) {
+            if (! \is_string($data['salutationCode'])) {
+                throw new \InvalidArgumentException("Value for 'salutationCode' is not a string in data array");
+            }
 
-        $salutationCode = $data['salutationCode'];
+            $salutationCode = $data['salutationCode'];
+        } else {
+            $salutationCode = null;
+        }
 
         if (isset($data['firstName'])) {
             if (! \is_string($data['firstName'])) {

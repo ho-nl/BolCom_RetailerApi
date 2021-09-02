@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Rma;
 
-final class ReducedReturnItem
+final class ReturnResult
 {
     private $returnId;
     private $registrationDateTime;
@@ -58,31 +58,31 @@ final class ReducedReturnItem
         return $this->returnItems;
     }
 
-    public function withReturnId(ReturnId $returnId): ReducedReturnItem
+    public function withReturnId(ReturnId $returnId): ReturnResult
     {
         return new self($returnId, $this->registrationDateTime, $this->fulfilmentMethod, $this->returnItems);
     }
 
-    public function withRegistrationDateTime(\BolCom\RetailerApi\Model\DateTime $registrationDateTime = null): ReducedReturnItem
+    public function withRegistrationDateTime(\BolCom\RetailerApi\Model\DateTime $registrationDateTime = null): ReturnResult
     {
         return new self($this->returnId, $registrationDateTime, $this->fulfilmentMethod, $this->returnItems);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null): ReducedReturnItem
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null): ReturnResult
     {
         return new self($this->returnId, $this->registrationDateTime, $fulfilmentMethod, $this->returnItems);
     }
 
     /**
      * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returnItems
-     * @return \BolCom\RetailerApi\Model\Rma\ReducedReturnItem
+     * @return \BolCom\RetailerApi\Model\Rma\ReturnResult
      */
-    public function withReturnItems(array $returnItems): ReducedReturnItem
+    public function withReturnItems(array $returnItems): ReturnResult
     {
         return new self($this->returnId, $this->registrationDateTime, $this->fulfilmentMethod, $returnItems);
     }
 
-    public static function fromArray(array $data): ReducedReturnItem
+    public static function fromArray(array $data): ReturnResult
     {
         if (! isset($data['returnId']) || ! \is_int($data['returnId'])) {
             throw new \InvalidArgumentException("Key 'returnId' is missing in data array or is not a int");
