@@ -11,31 +11,25 @@ namespace BolCom\RetailerApi\Model\Shipment;
 final class ShipmentItem
 {
     private $orderItemId;
-    private $orderId;
+    private $order;
     private $offer;
-    private $orderDate;
-    private $latestDeliveryDate;
-    private $ean;
-    private $title;
+    private $product;
     private $quantity;
-    private $offerPrice;
-    private $offerCondition;
-    private $fulfilmentMethod;
+    private $unitPrice;
+    private $commission;
+    private $fulfilment;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, Offer $offer, \BolCom\RetailerApi\Model\DateTime $orderDate, \BolCom\RetailerApi\Model\Date $latestDeliveryDate, \BolCom\RetailerApi\Model\Offer\Ean $ean, \BolCom\RetailerApi\Model\Offer\Title $title, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $offerPrice, \BolCom\RetailerApi\Model\Offer\Condition $offerCondition, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ShipmentOrder $order = null, Offer $offer, Product $product, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, ShipmentFulfilmemt $fulfilment, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
-        $this->orderId = $orderId;
+        $this->order = $order;
         $this->offer = $offer;
-        $this->orderDate = $orderDate;
-        $this->latestDeliveryDate = $latestDeliveryDate;
-        $this->ean = $ean;
-        $this->title = $title;
+        $this->product = $product;
         $this->quantity = $quantity;
-        $this->offerPrice = $offerPrice;
-        $this->offerCondition = $offerCondition;
-        $this->fulfilmentMethod = $fulfilmentMethod;
+        $this->unitPrice = $unitPrice;
+        $this->commission = $commission;
+        $this->fulfilment = $fulfilment;
         $this->selectedDeliveryWindow = $selectedDeliveryWindow;
     }
 
@@ -44,9 +38,9 @@ final class ShipmentItem
         return $this->orderItemId;
     }
 
-    public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
+    public function order()
     {
-        return $this->orderId;
+        return $this->order;
     }
 
     public function offer(): Offer
@@ -54,24 +48,9 @@ final class ShipmentItem
         return $this->offer;
     }
 
-    public function orderDate(): \BolCom\RetailerApi\Model\DateTime
+    public function product(): Product
     {
-        return $this->orderDate;
-    }
-
-    public function latestDeliveryDate(): \BolCom\RetailerApi\Model\Date
-    {
-        return $this->latestDeliveryDate;
-    }
-
-    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
-    {
-        return $this->ean;
-    }
-
-    public function title(): \BolCom\RetailerApi\Model\Offer\Title
-    {
-        return $this->title;
+        return $this->product;
     }
 
     public function quantity(): \BolCom\RetailerApi\Model\Order\Quantity
@@ -79,19 +58,19 @@ final class ShipmentItem
         return $this->quantity;
     }
 
-    public function offerPrice(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function unitPrice(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
-        return $this->offerPrice;
+        return $this->unitPrice;
     }
 
-    public function offerCondition(): \BolCom\RetailerApi\Model\Offer\Condition
+    public function commission(): \BolCom\RetailerApi\Model\CurrencyAmount
     {
-        return $this->offerCondition;
+        return $this->commission;
     }
 
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
+    public function fulfilment(): ShipmentFulfilmemt
     {
-        return $this->fulfilmentMethod;
+        return $this->fulfilment;
     }
 
     public function selectedDeliveryWindow()
@@ -101,62 +80,47 @@ final class ShipmentItem
 
     public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): ShipmentItem
     {
-        return new self($orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ShipmentItem
+    public function withOrder(ShipmentOrder $order = null): ShipmentItem
     {
-        return new self($this->orderItemId, $orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
     public function withOffer(Offer $offer): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withOrderDate(\BolCom\RetailerApi\Model\DateTime $orderDate): ShipmentItem
+    public function withProduct(Product $product): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
-    }
-
-    public function withLatestDeliveryDate(\BolCom\RetailerApi\Model\Date $latestDeliveryDate): ShipmentItem
-    {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
-    }
-
-    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ShipmentItem
-    {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
-    }
-
-    public function withTitle(\BolCom\RetailerApi\Model\Offer\Title $title): ShipmentItem
-    {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $product, $this->quantity, $this->unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
     public function withQuantity(\BolCom\RetailerApi\Model\Order\Quantity $quantity): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $this->product, $quantity, $this->unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withOfferPrice(\BolCom\RetailerApi\Model\CurrencyAmount $offerPrice): ShipmentItem
+    public function withUnitPrice(\BolCom\RetailerApi\Model\CurrencyAmount $unitPrice): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $offerPrice, $this->offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withOfferCondition(\BolCom\RetailerApi\Model\Offer\Condition $offerCondition): ShipmentItem
+    public function withCommission(\BolCom\RetailerApi\Model\CurrencyAmount $commission): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $offerCondition, $this->fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): ShipmentItem
+    public function withFulfilment(ShipmentFulfilmemt $fulfilment): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $fulfilmentMethod, $this->selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $fulfilment, $this->selectedDeliveryWindow);
     }
 
     public function withSelectedDeliveryWindow(\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null): ShipmentItem
     {
-        return new self($this->orderItemId, $this->orderId, $this->offer, $this->orderDate, $this->latestDeliveryDate, $this->ean, $this->title, $this->quantity, $this->offerPrice, $this->offerCondition, $this->fulfilmentMethod, $selectedDeliveryWindow);
+        return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $this->fulfilment, $selectedDeliveryWindow);
     }
 
     public static function fromArray(array $data): ShipmentItem
@@ -167,11 +131,15 @@ final class ShipmentItem
 
         $orderItemId = \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($data['orderItemId']);
 
-        if (! isset($data['orderId']) || ! \is_string($data['orderId'])) {
-            throw new \InvalidArgumentException("Key 'orderId' is missing in data array or is not a string");
-        }
+        if (isset($data['order'])) {
+            if (! \is_array($data['order'])) {
+                throw new \InvalidArgumentException("Value for 'order' is not an array in data array");
+            }
 
-        $orderId = \BolCom\RetailerApi\Model\Order\OrderId::fromString($data['orderId']);
+            $order = ShipmentOrder::fromArray($data['order']);
+        } else {
+            $order = null;
+        }
 
         if (! isset($data['offer']) || ! \is_array($data['offer'])) {
             throw new \InvalidArgumentException("Key 'offer' is missing in data array or is not an array");
@@ -179,29 +147,11 @@ final class ShipmentItem
 
         $offer = Offer::fromArray($data['offer']);
 
-        if (! isset($data['orderDate']) || ! \is_string($data['orderDate'])) {
-            throw new \InvalidArgumentException("Key 'orderDate' is missing in data array or is not a string");
+        if (! isset($data['product']) || ! \is_array($data['product'])) {
+            throw new \InvalidArgumentException("Key 'product' is missing in data array or is not an array");
         }
 
-        $orderDate = \BolCom\RetailerApi\Model\DateTime::fromString($data['orderDate']);
-
-        if (! isset($data['latestDeliveryDate']) || ! \is_string($data['latestDeliveryDate'])) {
-            throw new \InvalidArgumentException("Key 'latestDeliveryDate' is missing in data array or is not a string");
-        }
-
-        $latestDeliveryDate = \BolCom\RetailerApi\Model\Date::fromString($data['latestDeliveryDate']);
-
-        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
-            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
-        }
-
-        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
-
-        if (! isset($data['title']) || ! \is_string($data['title'])) {
-            throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
-        }
-
-        $title = \BolCom\RetailerApi\Model\Offer\Title::fromString($data['title']);
+        $product = Product::fromArray($data['product']);
 
         if (! isset($data['quantity']) || ! \is_int($data['quantity'])) {
             throw new \InvalidArgumentException("Key 'quantity' is missing in data array or is not a int");
@@ -209,23 +159,23 @@ final class ShipmentItem
 
         $quantity = \BolCom\RetailerApi\Model\Order\Quantity::fromScalar($data['quantity']);
 
-        if (! isset($data['offerPrice']) || (! \is_float($data['offerPrice']) && ! \is_int($data['offerPrice']))) {
-            throw new \InvalidArgumentException("Key 'offerPrice' is missing in data array or is not a float");
+        if (! isset($data['unitPrice']) || (! \is_float($data['unitPrice']) && ! \is_int($data['unitPrice']))) {
+            throw new \InvalidArgumentException("Key 'unitPrice' is missing in data array or is not a float");
         }
 
-        $offerPrice = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['offerPrice']);
+        $unitPrice = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['unitPrice']);
 
-        if (! isset($data['offerCondition']) || ! \is_string($data['offerCondition'])) {
-            throw new \InvalidArgumentException("Key 'offerCondition' is missing in data array or is not a string");
+        if (! isset($data['commission']) || (! \is_float($data['commission']) && ! \is_int($data['commission']))) {
+            throw new \InvalidArgumentException("Key 'commission' is missing in data array or is not a float");
         }
 
-        $offerCondition = \BolCom\RetailerApi\Model\Offer\Condition::fromValue($data['offerCondition']);
+        $commission = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['commission']);
 
-        if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
-            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
+        if (! isset($data['fulfilment']) || ! \is_array($data['fulfilment'])) {
+            throw new \InvalidArgumentException("Key 'fulfilment' is missing in data array or is not an array");
         }
 
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
+        $fulfilment = ShipmentFulfilmemt::fromArray($data['fulfilment']);
 
         if (isset($data['selectedDeliveryWindow'])) {
             if (! \is_array($data['selectedDeliveryWindow'])) {
@@ -239,16 +189,13 @@ final class ShipmentItem
 
         return new self(
             $orderItemId,
-            $orderId,
+            $order,
             $offer,
-            $orderDate,
-            $latestDeliveryDate,
-            $ean,
-            $title,
+            $product,
             $quantity,
-            $offerPrice,
-            $offerCondition,
-            $fulfilmentMethod,
+            $unitPrice,
+            $commission,
+            $fulfilment,
             $selectedDeliveryWindow
         );
     }

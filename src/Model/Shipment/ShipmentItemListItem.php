@@ -11,12 +11,12 @@ namespace BolCom\RetailerApi\Model\Shipment;
 final class ShipmentItemListItem
 {
     private $orderItemId;
-    private $orderId;
+    private $ean;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Order\OrderId $orderId)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Offer\Ean $ean)
     {
         $this->orderItemId = $orderItemId;
-        $this->orderId = $orderId;
+        $this->ean = $ean;
     }
 
     public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
@@ -24,19 +24,19 @@ final class ShipmentItemListItem
         return $this->orderItemId;
     }
 
-    public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
+    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
     {
-        return $this->orderId;
+        return $this->ean;
     }
 
     public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): ShipmentItemListItem
     {
-        return new self($orderItemId, $this->orderId);
+        return new self($orderItemId, $this->ean);
     }
 
-    public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ShipmentItemListItem
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ShipmentItemListItem
     {
-        return new self($this->orderItemId, $orderId);
+        return new self($this->orderItemId, $ean);
     }
 
     public static function fromArray(array $data): ShipmentItemListItem
@@ -47,12 +47,12 @@ final class ShipmentItemListItem
 
         $orderItemId = \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($data['orderItemId']);
 
-        if (! isset($data['orderId']) || ! \is_string($data['orderId'])) {
-            throw new \InvalidArgumentException("Key 'orderId' is missing in data array or is not a string");
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
+            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
-        $orderId = \BolCom\RetailerApi\Model\Order\OrderId::fromString($data['orderId']);
+        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
-        return new self($orderItemId, $orderId);
+        return new self($orderItemId, $ean);
     }
 }
