@@ -33,6 +33,7 @@ namespace BolCom\RetailerApi\Model\Order {
         string $countryCode,
         ?string $email,
         ?string $company,
+        ?string $kvkNumber,
         ?string $deliveryPhoneNumber
     } deriving (FromArray);
 
