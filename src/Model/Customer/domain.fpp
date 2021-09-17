@@ -13,7 +13,7 @@ namespace BolCom\RetailerApi\Model\Customer {
         string $countryCode,
         ?string $email,
         ?string $company,
-        ?string $vatNumber,
+        ?string $kvkNumber,
         ?string $deliveryPhoneNumber
     } deriving (FromArray);
 }
