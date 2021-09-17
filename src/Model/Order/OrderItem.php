@@ -20,7 +20,7 @@ final class OrderItem
     private $cancellationRequest;
     private $selectedDeliveryWindow;
 
-    public function __construct(OrderItemId $orderItemId, OrderFulfilmemt $fulfilment, OrderOffer $offer, OrderProduct $product, Quantity $quantity, Price $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, bool $cancellationRequest, SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(OrderItemId $orderItemId, OrderFulfilmemt $fulfilment, OrderOffer $offer, OrderProduct $product, Quantity $quantity, Price $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, bool $cancellationRequest = null, SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->fulfilment = $fulfilment;
@@ -68,7 +68,7 @@ final class OrderItem
         return $this->commission;
     }
 
-    public function cancellationRequest(): bool
+    public function cancellationRequest()
     {
         return $this->cancellationRequest;
     }
@@ -113,7 +113,7 @@ final class OrderItem
         return new self($this->orderItemId, $this->fulfilment, $this->offer, $this->product, $this->quantity, $this->unitPrice, $commission, $this->cancellationRequest, $this->selectedDeliveryWindow);
     }
 
-    public function withCancellationRequest(bool $cancellationRequest): OrderItem
+    public function withCancellationRequest(bool $cancellationRequest = null): OrderItem
     {
         return new self($this->orderItemId, $this->fulfilment, $this->offer, $this->product, $this->quantity, $this->unitPrice, $this->commission, $cancellationRequest, $this->selectedDeliveryWindow);
     }
@@ -167,11 +167,15 @@ final class OrderItem
 
         $commission = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['commission']);
 
-        if (! isset($data['cancellationRequest']) || ! \is_bool($data['cancellationRequest'])) {
-            throw new \InvalidArgumentException("Key 'cancellationRequest' is missing in data array or is not a bool");
-        }
+        if (isset($data['cancellationRequest'])) {
+            if (! \is_bool($data['cancellationRequest'])) {
+                throw new \InvalidArgumentException("Value for 'cancellationRequest' is not a bool in data array");
+            }
 
-        $cancellationRequest = $data['cancellationRequest'];
+            $cancellationRequest = $data['cancellationRequest'];
+        } else {
+            $cancellationRequest = null;
+        }
 
         if (isset($data['selectedDeliveryWindow'])) {
             if (! \is_array($data['selectedDeliveryWindow'])) {

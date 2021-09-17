@@ -44,8 +44,8 @@ namespace BolCom\RetailerApi\Model\Order {
     data DistributionParty = RETAILER | BOL deriving(Enum(useValue));
 
     data OrderFulfilmemt = OrderFulfilmemt {
-        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method,
-        DistributionParty $distributionParty,
+        ?\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method,
+        ?DistributionParty $distributionParty,
         ?\BolCom\RetailerApi\Model\Date $latestDeliveryDate,
         ?\BolCom\RetailerApi\Model\Date $exactDeliveryDate,
         ?\BolCom\RetailerApi\Model\Date $expiryDate
@@ -54,7 +54,7 @@ namespace BolCom\RetailerApi\Model\Order {
 
     data OrderOffer = OrderOffer {
         \BolCom\RetailerApi\Model\Offer\OfferId $offerId,
-        \BolCom\RetailerApi\Model\Offer\Reference $reference
+        ?\BolCom\RetailerApi\Model\Offer\Reference $reference
 
     } deriving (FromArray);
 
@@ -76,7 +76,7 @@ namespace BolCom\RetailerApi\Model\Order {
         Quantity $quantity,
         Price $unitPrice,
         \BolCom\RetailerApi\Model\CurrencyAmount $commission,
-        bool $cancellationRequest,
+        ?bool $cancellationRequest,
         ?SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);
 

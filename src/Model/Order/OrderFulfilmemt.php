@@ -16,7 +16,7 @@ final class OrderFulfilmemt
     private $exactDeliveryDate;
     private $expiryDate;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method, DistributionParty $distributionParty, \BolCom\RetailerApi\Model\Date $latestDeliveryDate = null, \BolCom\RetailerApi\Model\Date $exactDeliveryDate = null, \BolCom\RetailerApi\Model\Date $expiryDate = null)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method = null, DistributionParty $distributionParty = null, \BolCom\RetailerApi\Model\Date $latestDeliveryDate = null, \BolCom\RetailerApi\Model\Date $exactDeliveryDate = null, \BolCom\RetailerApi\Model\Date $expiryDate = null)
     {
         $this->method = $method;
         $this->distributionParty = $distributionParty;
@@ -25,12 +25,12 @@ final class OrderFulfilmemt
         $this->expiryDate = $expiryDate;
     }
 
-    public function method(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
+    public function method()
     {
         return $this->method;
     }
 
-    public function distributionParty(): DistributionParty
+    public function distributionParty()
     {
         return $this->distributionParty;
     }
@@ -50,12 +50,12 @@ final class OrderFulfilmemt
         return $this->expiryDate;
     }
 
-    public function withMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method): OrderFulfilmemt
+    public function withMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $method = null): OrderFulfilmemt
     {
         return new self($method, $this->distributionParty, $this->latestDeliveryDate, $this->exactDeliveryDate, $this->expiryDate);
     }
 
-    public function withDistributionParty(DistributionParty $distributionParty): OrderFulfilmemt
+    public function withDistributionParty(DistributionParty $distributionParty = null): OrderFulfilmemt
     {
         return new self($this->method, $distributionParty, $this->latestDeliveryDate, $this->exactDeliveryDate, $this->expiryDate);
     }
@@ -77,17 +77,25 @@ final class OrderFulfilmemt
 
     public static function fromArray(array $data): OrderFulfilmemt
     {
-        if (! isset($data['method']) || ! \is_string($data['method'])) {
-            throw new \InvalidArgumentException("Key 'method' is missing in data array or is not a string");
+        if (isset($data['method'])) {
+            if (! \is_string($data['method'])) {
+                throw new \InvalidArgumentException("Value for 'method' is not a string in data array");
+            }
+
+            $method = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['method']);
+        } else {
+            $method = null;
         }
 
-        $method = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['method']);
+        if (isset($data['distributionParty'])) {
+            if (! \is_string($data['distributionParty'])) {
+                throw new \InvalidArgumentException("Value for 'distributionParty' is not a string in data array");
+            }
 
-        if (! isset($data['distributionParty']) || ! \is_string($data['distributionParty'])) {
-            throw new \InvalidArgumentException("Key 'distributionParty' is missing in data array or is not a string");
+            $distributionParty = DistributionParty::fromValue($data['distributionParty']);
+        } else {
+            $distributionParty = null;
         }
-
-        $distributionParty = DistributionParty::fromValue($data['distributionParty']);
 
         if (isset($data['latestDeliveryDate'])) {
             if (! \is_string($data['latestDeliveryDate'])) {
