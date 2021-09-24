@@ -49,7 +49,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
 
     data ShipmentItemListItem = ShipmentItemListItem {
         \BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId,
-        \BolCom\RetailerApi\Model\Offer\Ean $ean
+        ?\BolCom\RetailerApi\Model\Offer\Ean $ean
     } deriving (FromArray);
 
     data Offer = Offer {
@@ -65,7 +65,7 @@ namespace BolCom\RetailerApi\Model\Shipment {
         Product $product,
         \BolCom\RetailerApi\Model\Order\Quantity $quantity,
         \BolCom\RetailerApi\Model\CurrencyAmount $unitPrice,
-        \BolCom\RetailerApi\Model\CurrencyAmount $commission,
+        ?\BolCom\RetailerApi\Model\CurrencyAmount $commission,
         ShipmentFulfilmemt $fulfilment,
         ?\BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow
     } deriving (FromArray);

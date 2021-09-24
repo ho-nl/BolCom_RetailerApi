@@ -20,7 +20,7 @@ final class ShipmentItem
     private $fulfilment;
     private $selectedDeliveryWindow;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ShipmentOrder $order = null, Offer $offer, Product $product, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, ShipmentFulfilmemt $fulfilment, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, ShipmentOrder $order = null, Offer $offer, Product $product, \BolCom\RetailerApi\Model\Order\Quantity $quantity, \BolCom\RetailerApi\Model\CurrencyAmount $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission = null, ShipmentFulfilmemt $fulfilment, \BolCom\RetailerApi\Model\Order\SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->order = $order;
@@ -63,7 +63,7 @@ final class ShipmentItem
         return $this->unitPrice;
     }
 
-    public function commission(): \BolCom\RetailerApi\Model\CurrencyAmount
+    public function commission()
     {
         return $this->commission;
     }
@@ -108,7 +108,7 @@ final class ShipmentItem
         return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $unitPrice, $this->commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
 
-    public function withCommission(\BolCom\RetailerApi\Model\CurrencyAmount $commission): ShipmentItem
+    public function withCommission(\BolCom\RetailerApi\Model\CurrencyAmount $commission = null): ShipmentItem
     {
         return new self($this->orderItemId, $this->order, $this->offer, $this->product, $this->quantity, $this->unitPrice, $commission, $this->fulfilment, $this->selectedDeliveryWindow);
     }
@@ -165,11 +165,15 @@ final class ShipmentItem
 
         $unitPrice = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['unitPrice']);
 
-        if (! isset($data['commission']) || (! \is_float($data['commission']) && ! \is_int($data['commission']))) {
-            throw new \InvalidArgumentException("Key 'commission' is missing in data array or is not a float");
-        }
+        if (isset($data['commission'])) {
+            if (! \is_float($data['commission']) && ! \is_int($data['commission'])) {
+                throw new \InvalidArgumentException("Value for 'commission' is not a float in data array");
+            }
 
-        $commission = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['commission']);
+            $commission = \BolCom\RetailerApi\Model\CurrencyAmount::fromScalar($data['commission']);
+        } else {
+            $commission = null;
+        }
 
         if (! isset($data['fulfilment']) || ! \is_array($data['fulfilment'])) {
             throw new \InvalidArgumentException("Key 'fulfilment' is missing in data array or is not an array");

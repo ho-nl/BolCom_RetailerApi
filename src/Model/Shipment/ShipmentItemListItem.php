@@ -13,7 +13,7 @@ final class ShipmentItemListItem
     private $orderItemId;
     private $ean;
 
-    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Offer\Ean $ean)
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, \BolCom\RetailerApi\Model\Offer\Ean $ean = null)
     {
         $this->orderItemId = $orderItemId;
         $this->ean = $ean;
@@ -24,7 +24,7 @@ final class ShipmentItemListItem
         return $this->orderItemId;
     }
 
-    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
+    public function ean()
     {
         return $this->ean;
     }
@@ -34,7 +34,7 @@ final class ShipmentItemListItem
         return new self($orderItemId, $this->ean);
     }
 
-    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ShipmentItemListItem
+    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean = null): ShipmentItemListItem
     {
         return new self($this->orderItemId, $ean);
     }
@@ -47,11 +47,15 @@ final class ShipmentItemListItem
 
         $orderItemId = \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($data['orderItemId']);
 
-        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
-            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
-        }
+        if (isset($data['ean'])) {
+            if (! \is_string($data['ean'])) {
+                throw new \InvalidArgumentException("Value for 'ean' is not a string in data array");
+            }
 
-        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
+            $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
+        } else {
+            $ean = null;
+        }
 
         return new self($orderItemId, $ean);
     }
