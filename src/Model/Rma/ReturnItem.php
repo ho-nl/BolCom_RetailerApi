@@ -37,7 +37,7 @@ final class ReturnItem
      * @param string $transporterName
      * @param \BolCom\RetailerApi\Model\Rma\ReturnProcessingResult[] $processingResults
      */
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, int $expectedQuantity, string $returnReason, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, string $transporterName = null, array $processingResults = null)
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, int $expectedQuantity = null, string $returnReason, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, string $transporterName = null, array $processingResults = null)
     {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
@@ -81,7 +81,7 @@ final class ReturnItem
         return $this->title;
     }
 
-    public function expectedQuantity(): int
+    public function expectedQuantity()
     {
         return $this->expectedQuantity;
     }
@@ -144,7 +144,7 @@ final class ReturnItem
         return new self($this->rmaId, $this->orderId, $this->ean, $title, $this->expectedQuantity, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
-    public function withExpectedQuantity(int $expectedQuantity): ReturnItem
+    public function withExpectedQuantity(int $expectedQuantity = null): ReturnItem
     {
         return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $expectedQuantity, $this->returnReason, $this->returnReasonComments, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
@@ -218,11 +218,15 @@ final class ReturnItem
             $title = null;
         }
 
-        if (! isset($data['expectedQuantity']) || ! \is_int($data['expectedQuantity'])) {
-            throw new \InvalidArgumentException("Key 'expectedQuantity' is missing in data array or is not a int");
-        }
+        if (isset($data['expectedQuantity'])) {
+            if (! \is_int($data['expectedQuantity'])) {
+                throw new \InvalidArgumentException("Value for 'expectedQuantity' is not a int in data array");
+            }
 
-        $expectedQuantity = $data['expectedQuantity'];
+            $expectedQuantity = $data['expectedQuantity'];
+        } else {
+            $expectedQuantity = null;
+        }
 
         if (! isset($data['returnReason']) || ! \is_string($data['returnReason'])) {
             throw new \InvalidArgumentException("Key 'returnReason' is missing in data array or is not a string");

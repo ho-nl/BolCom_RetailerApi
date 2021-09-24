@@ -21,7 +21,7 @@ final class ReducedReturnItem
      * @param \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
      * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returnItems
      */
-    public function __construct(ReturnId $returnId, \BolCom\RetailerApi\Model\DateTime $registrationDateTime = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null, array $returnItems)
+    public function __construct(ReturnId $returnId = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null, array $returnItems)
     {
         $this->returnId = $returnId;
         $this->registrationDateTime = $registrationDateTime;
@@ -35,7 +35,7 @@ final class ReducedReturnItem
             }
     }
 
-    public function returnId(): ReturnId
+    public function returnId()
     {
         return $this->returnId;
     }
@@ -58,7 +58,7 @@ final class ReducedReturnItem
         return $this->returnItems;
     }
 
-    public function withReturnId(ReturnId $returnId): ReducedReturnItem
+    public function withReturnId(ReturnId $returnId = null): ReducedReturnItem
     {
         return new self($returnId, $this->registrationDateTime, $this->fulfilmentMethod, $this->returnItems);
     }
@@ -84,11 +84,15 @@ final class ReducedReturnItem
 
     public static function fromArray(array $data): ReducedReturnItem
     {
-        if (! isset($data['returnId']) || ! \is_int($data['returnId'])) {
-            throw new \InvalidArgumentException("Key 'returnId' is missing in data array or is not a int");
-        }
+        if (isset($data['returnId'])) {
+            if (! \is_int($data['returnId'])) {
+                throw new \InvalidArgumentException("Value for 'returnId' is not a int in data array");
+            }
 
-        $returnId = ReturnId::fromScalar($data['returnId']);
+            $returnId = ReturnId::fromScalar($data['returnId']);
+        } else {
+            $returnId = null;
+        }
 
         if (isset($data['registrationDateTime'])) {
             if (! \is_string($data['registrationDateTime'])) {

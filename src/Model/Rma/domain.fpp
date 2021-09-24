@@ -4,7 +4,7 @@ namespace BolCom\RetailerApi\Model\Rma {
     data RmaId = Int deriving(FromScalar, ToScalar);
 
     data ReducedReturnItem = ReducedReturnItem {
-        ReturnId $returnId,
+        ?ReturnId $returnId,
         ?\BolCom\RetailerApi\Model\DateTime $registrationDateTime,
         ?\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         ReturnItem[] $returnItems,
@@ -15,7 +15,7 @@ namespace BolCom\RetailerApi\Model\Rma {
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         ?string $title,
-        int $expectedQuantity,
+        ?int $expectedQuantity,
         string $returnReason,
         ?string $returnReasonComments,
         ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
