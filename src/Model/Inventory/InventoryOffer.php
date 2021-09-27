@@ -12,16 +12,16 @@ final class InventoryOffer
 {
     private $ean;
     private $bsku;
-    private $nckStock;
-    private $stock;
+    private $gradedStock;
+    private $regularStock;
     private $title;
 
-    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, string $bsku, int $nckStock, int $stock, \BolCom\RetailerApi\Model\Offer\Title $title)
+    public function __construct(\BolCom\RetailerApi\Model\Offer\Ean $ean, string $bsku, int $gradedStock, int $regularStock, \BolCom\RetailerApi\Model\Offer\Title $title)
     {
         $this->ean = $ean;
         $this->bsku = $bsku;
-        $this->nckStock = $nckStock;
-        $this->stock = $stock;
+        $this->gradedStock = $gradedStock;
+        $this->regularStock = $regularStock;
         $this->title = $title;
     }
 
@@ -35,14 +35,14 @@ final class InventoryOffer
         return $this->bsku;
     }
 
-    public function nckStock(): int
+    public function gradedStock(): int
     {
-        return $this->nckStock;
+        return $this->gradedStock;
     }
 
-    public function stock(): int
+    public function regularStock(): int
     {
-        return $this->stock;
+        return $this->regularStock;
     }
 
     public function title(): \BolCom\RetailerApi\Model\Offer\Title
@@ -52,27 +52,27 @@ final class InventoryOffer
 
     public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): InventoryOffer
     {
-        return new self($ean, $this->bsku, $this->nckStock, $this->stock, $this->title);
+        return new self($ean, $this->bsku, $this->gradedStock, $this->regularStock, $this->title);
     }
 
     public function withBsku(string $bsku): InventoryOffer
     {
-        return new self($this->ean, $bsku, $this->nckStock, $this->stock, $this->title);
+        return new self($this->ean, $bsku, $this->gradedStock, $this->regularStock, $this->title);
     }
 
-    public function withNckStock(int $nckStock): InventoryOffer
+    public function withGradedStock(int $gradedStock): InventoryOffer
     {
-        return new self($this->ean, $this->bsku, $nckStock, $this->stock, $this->title);
+        return new self($this->ean, $this->bsku, $gradedStock, $this->regularStock, $this->title);
     }
 
-    public function withStock(int $stock): InventoryOffer
+    public function withRegularStock(int $regularStock): InventoryOffer
     {
-        return new self($this->ean, $this->bsku, $this->nckStock, $stock, $this->title);
+        return new self($this->ean, $this->bsku, $this->gradedStock, $regularStock, $this->title);
     }
 
     public function withTitle(\BolCom\RetailerApi\Model\Offer\Title $title): InventoryOffer
     {
-        return new self($this->ean, $this->bsku, $this->nckStock, $this->stock, $title);
+        return new self($this->ean, $this->bsku, $this->gradedStock, $this->regularStock, $title);
     }
 
     public function toArray(): array
@@ -80,8 +80,8 @@ final class InventoryOffer
         return [
             'ean' => $this->ean->toString(),
             'bsku' => $this->bsku,
-            'nckStock' => $this->nckStock,
-            'stock' => $this->stock,
+            'gradedStock' => $this->gradedStock,
+            'regularStock' => $this->regularStock,
             'title' => $this->title->toString(),
         ];
     }
@@ -100,17 +100,17 @@ final class InventoryOffer
 
         $bsku = $data['bsku'];
 
-        if (! isset($data['nckStock']) || ! \is_int($data['nckStock'])) {
-            throw new \InvalidArgumentException("Key 'nckStock' is missing in data array or is not a int");
+        if (! isset($data['gradedStock']) || ! \is_int($data['gradedStock'])) {
+            throw new \InvalidArgumentException("Key 'gradedStock' is missing in data array or is not a int");
         }
 
-        $nckStock = $data['nckStock'];
+        $gradedStock = $data['gradedStock'];
 
-        if (! isset($data['stock']) || ! \is_int($data['stock'])) {
-            throw new \InvalidArgumentException("Key 'stock' is missing in data array or is not a int");
+        if (! isset($data['regularStock']) || ! \is_int($data['regularStock'])) {
+            throw new \InvalidArgumentException("Key 'regularStock' is missing in data array or is not a int");
         }
 
-        $stock = $data['stock'];
+        $regularStock = $data['regularStock'];
 
         if (! isset($data['title']) || ! \is_string($data['title'])) {
             throw new \InvalidArgumentException("Key 'title' is missing in data array or is not a string");
@@ -121,8 +121,8 @@ final class InventoryOffer
         return new self(
             $ean,
             $bsku,
-            $nckStock,
-            $stock,
+            $gradedStock,
+            $regularStock,
             $title
         );
     }

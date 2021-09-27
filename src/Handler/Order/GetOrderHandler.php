@@ -32,7 +32,7 @@ class GetOrderHandler implements GetOrderHandlerInterface
     {
         $response = $this->client->get("orders/{$getOrder->orderId()}", [
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 

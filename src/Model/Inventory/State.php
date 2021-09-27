@@ -11,12 +11,12 @@ namespace BolCom\RetailerApi\Model\Inventory;
 final class State
 {
     const OPTIONS = [
-        'SALEABLE' => 'saleable',
-        'UNSALEABLE' => 'unsaleable',
+        'REGULAR' => 'REGULAR',
+        'GRADED' => 'GRADED',
     ];
 
-    const SALEABLE = 'saleable';
-    const UNSALEABLE = 'unsaleable';
+    const REGULAR = 'REGULAR';
+    const GRADED = 'GRADED';
 
     private $name;
     private $value;
@@ -27,14 +27,14 @@ final class State
         $this->value = self::OPTIONS[$name];
     }
 
-    public static function SALEABLE(): self
+    public static function REGULAR(): self
     {
-        return new self('SALEABLE');
+        return new self('REGULAR');
     }
 
-    public static function UNSALEABLE(): self
+    public static function GRADED(): self
     {
-        return new self('UNSALEABLE');
+        return new self('GRADED');
     }
 
     public static function fromName(string $value): self

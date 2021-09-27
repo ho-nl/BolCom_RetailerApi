@@ -11,6 +11,7 @@ use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Infrastructure\ClientPool;
 use BolCom\RetailerApi\Model\Order\CancellationReason;
 use BolCom\RetailerApi\Model\Order\Command\CancelOrder;
+use BolCom\RetailerApi\Model\Order\Command\CancelOrderItem;
 use BolCom\RetailerApi\Model\Order\OrderItemId;
 
 class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
@@ -21,8 +22,10 @@ class CancelOrderHandlerTest extends \PHPUnit\Framework\TestCase
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
         $messageBus->dispatch(CancelOrder::with(
-            OrderItemId::fromString('6107434013'),
-            CancellationReason::REQUESTED_BY_CUSTOMER()
+                CancelOrderItem::fromArray([
+                'orderItemId' => '6107434013',
+                'reasonCode' => CancellationReason::REQUESTED_BY_CUSTOMER
+            ])
         ));
     }
 }

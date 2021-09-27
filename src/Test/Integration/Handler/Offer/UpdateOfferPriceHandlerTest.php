@@ -18,7 +18,7 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
     /** @var \BolCom\RetailerApi\Infrastructure\MessageBus $messageBus */
     private $messageBus;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $this->messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
@@ -30,8 +30,8 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             Pricing::fromArray([
                 'bundlePrices' => [
-                    ['quantity' => 1, 'price' => 12],
-                    ['quantity' => 10, 'price' => 1]
+                    ['quantity' => 1, 'unitPrice' => 12],
+                    ['quantity' => 10, 'unitPrice' => 1]
                 ]
             ])
         ));
@@ -44,7 +44,7 @@ class UpdateOfferPriceHandlerTest extends \PHPUnit\Framework\TestCase
             OfferId::fromString('6ff736b5-cdd0-4150-8c67-78269ee986f5'),
             Pricing::fromArray([
                 'bundlePrices' => [
-                    ['quantity' => 1, 'price' => 99999]
+                    ['quantity' => 1, 'unitPrice' => 99999]
                 ]
             ])
         ));

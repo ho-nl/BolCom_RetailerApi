@@ -16,22 +16,22 @@ final class GetReturn extends \Prooph\Common\Messaging\Query
 
     protected $messageName = self::MESSAGE_NAME;
 
-    public function rmaId(): \BolCom\RetailerApi\Model\Rma\RmaId
+    public function returnId(): \BolCom\RetailerApi\Model\Rma\ReturnId
     {
-        return \BolCom\RetailerApi\Model\Rma\RmaId::fromScalar($this->payload['rmaId']);
+        return \BolCom\RetailerApi\Model\Rma\ReturnId::fromScalar($this->payload['returnId']);
     }
 
-    public static function with(\BolCom\RetailerApi\Model\Rma\RmaId $rmaId): GetReturn
+    public static function with(\BolCom\RetailerApi\Model\Rma\ReturnId $returnId): GetReturn
     {
         return new self([
-            'rmaId' => $rmaId->toScalar(),
+            'returnId' => $returnId->toScalar(),
         ]);
     }
 
     protected function setPayload(array $payload)
     {
-        if (! isset($payload['rmaId']) || ! \is_int($payload['rmaId'])) {
-            throw new \InvalidArgumentException("Key 'rmaId' is missing in payload or is not a int");
+        if (! isset($payload['returnId']) || ! \is_int($payload['returnId'])) {
+            throw new \InvalidArgumentException("Key 'returnId' is missing in payload or is not a int");
         }
 
         $this->payload = $payload;

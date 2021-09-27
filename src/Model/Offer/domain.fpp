@@ -6,7 +6,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data QuantityInStock = Int deriving(FromScalar, ToScalar) where
         _: | !\Assert\Assertion::between($value, 0, 999) => 'Stock amount should be between 0 and 999.';
 
-    data ReferenceCode = String deriving(FromString, ToString) where
+    data Reference = String deriving(FromString, ToString) where
         _: | !\Assert\Assertion::betweenLength($value, 0, 20) => '';
 
     data Title = String deriving(FromString, ToString) where
@@ -26,7 +26,7 @@ namespace BolCom\RetailerApi\Model\Offer {
 
     data BundlePrice = BundlePrice {
         int $quantity,
-        Price $price
+        Price $unitPrice
     } deriving (FromArray, ToArray);
 
     data Pricing = Pricing {
@@ -41,7 +41,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data FulfilmentMethod = FBR | FBB deriving(Enum(useValue));
 
     data Fulfilment = Fulfilment {
-        FulfilmentMethod $type,
+        FulfilmentMethod $method,
         ?DeliveryCode $deliveryCode
     } deriving (FromArray, ToArray);
 
@@ -118,7 +118,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data RetailerOffer = RetailerOffer {
         OfferId $offerId,
         Ean $ean,
-        ReferenceCode $referenceCode,
+        Reference $reference,
         bool $onHoldByRetailer,
         ?Title $unknownProductTitle,
         Pricing $pricing,
@@ -132,7 +132,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     data RetailerOfferUpsert = RetailerOfferUpsert {
         Ean $ean,
         OfferCondition $condition,
-        ?ReferenceCode $referenceCode,
+        ?Reference $reference,
         bool $onHoldByRetailer,
         ?Title $unknownProductTitle,
         Pricing $pricing,
@@ -141,7 +141,7 @@ namespace BolCom\RetailerApi\Model\Offer {
     } deriving (FromArray, ToArray);
 
     data RetailerOfferUpdate = RetailerOfferUpdate {
-        ?ReferenceCode $referenceCode,
+        ?Reference $reference,
         bool $onHoldByRetailer,
         ?Title $unknownProductTitle,
         Fulfilment $fulfilment

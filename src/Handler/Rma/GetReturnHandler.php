@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Handler\Rma;
 use BolCom\RetailerApi\Client;
 use BolCom\RetailerApi\Model\Rma\Query\GetReturn;
 use BolCom\RetailerApi\Model\Rma\QueryHandler\GetReturnHandlerInterface;
-use BolCom\RetailerApi\Model\Rma\ReturnItem;
+use BolCom\RetailerApi\Model\Rma\ReturnResult;
 
 class GetReturnHandler implements GetReturnHandlerInterface
 {
@@ -28,14 +28,13 @@ class GetReturnHandler implements GetReturnHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function __invoke(GetReturn $getReturn): ReturnItem
+    public function __invoke(GetReturn $getReturn): ReturnResult
     {
-        $response = $this->client->get("returns/{$getReturn->rmaId()->toScalar()}", [
+        $response = $this->client->get("returns/{$getReturn->returnId()->toScalar()}", [
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
-
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
         // Convert this timestamp into ISO 8601 format.
         $response = $response->getBody()->json();
@@ -47,6 +46,6 @@ class GetReturnHandler implements GetReturnHandlerInterface
                 ->format(\DateTime::ATOM);
         }
 
-        return ReturnItem::fromArray($response);
+        return ReturnResult::fromArray($response);
     }
 }

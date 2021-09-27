@@ -10,22 +10,22 @@ namespace BolCom\RetailerApi\Model\Offer;
 
 final class RetailerOfferUpdate
 {
-    private $referenceCode;
+    private $reference;
     private $onHoldByRetailer;
     private $unknownProductTitle;
     private $fulfilment;
 
-    public function __construct(ReferenceCode $referenceCode = null, bool $onHoldByRetailer, Title $unknownProductTitle = null, Fulfilment $fulfilment)
+    public function __construct(Reference $reference = null, bool $onHoldByRetailer, Title $unknownProductTitle = null, Fulfilment $fulfilment)
     {
-        $this->referenceCode = $referenceCode;
+        $this->reference = $reference;
         $this->onHoldByRetailer = $onHoldByRetailer;
         $this->unknownProductTitle = $unknownProductTitle;
         $this->fulfilment = $fulfilment;
     }
 
-    public function referenceCode()
+    public function reference()
     {
-        return $this->referenceCode;
+        return $this->reference;
     }
 
     public function onHoldByRetailer(): bool
@@ -43,36 +43,36 @@ final class RetailerOfferUpdate
         return $this->fulfilment;
     }
 
-    public function withReferenceCode(ReferenceCode $referenceCode = null): RetailerOfferUpdate
+    public function withReference(Reference $reference = null): RetailerOfferUpdate
     {
-        return new self($referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $this->fulfilment);
+        return new self($reference, $this->onHoldByRetailer, $this->unknownProductTitle, $this->fulfilment);
     }
 
     public function withOnHoldByRetailer(bool $onHoldByRetailer): RetailerOfferUpdate
     {
-        return new self($this->referenceCode, $onHoldByRetailer, $this->unknownProductTitle, $this->fulfilment);
+        return new self($this->reference, $onHoldByRetailer, $this->unknownProductTitle, $this->fulfilment);
     }
 
     public function withUnknownProductTitle(Title $unknownProductTitle = null): RetailerOfferUpdate
     {
-        return new self($this->referenceCode, $this->onHoldByRetailer, $unknownProductTitle, $this->fulfilment);
+        return new self($this->reference, $this->onHoldByRetailer, $unknownProductTitle, $this->fulfilment);
     }
 
     public function withFulfilment(Fulfilment $fulfilment): RetailerOfferUpdate
     {
-        return new self($this->referenceCode, $this->onHoldByRetailer, $this->unknownProductTitle, $fulfilment);
+        return new self($this->reference, $this->onHoldByRetailer, $this->unknownProductTitle, $fulfilment);
     }
 
     public static function fromArray(array $data): RetailerOfferUpdate
     {
-        if (isset($data['referenceCode'])) {
-            if (! \is_string($data['referenceCode'])) {
-                throw new \InvalidArgumentException("Value for 'referenceCode' is not a string in data array");
+        if (isset($data['reference'])) {
+            if (! \is_string($data['reference'])) {
+                throw new \InvalidArgumentException("Value for 'reference' is not a string in data array");
             }
 
-            $referenceCode = ReferenceCode::fromString($data['referenceCode']);
+            $reference = Reference::fromString($data['reference']);
         } else {
-            $referenceCode = null;
+            $reference = null;
         }
 
         if (! isset($data['onHoldByRetailer']) || ! \is_bool($data['onHoldByRetailer'])) {
@@ -98,7 +98,7 @@ final class RetailerOfferUpdate
         $fulfilment = Fulfilment::fromArray($data['fulfilment']);
 
         return new self(
-            $referenceCode,
+            $reference,
             $onHoldByRetailer,
             $unknownProductTitle,
             $fulfilment
@@ -108,7 +108,7 @@ final class RetailerOfferUpdate
     public function toArray(): array
     {
         return [
-            'referenceCode' => null === $this->referenceCode ? null : $this->referenceCode->toString(),
+            'reference' => null === $this->reference ? null : $this->reference->toString(),
             'onHoldByRetailer' => $this->onHoldByRetailer,
             'unknownProductTitle' => null === $this->unknownProductTitle ? null : $this->unknownProductTitle->toString(),
             'fulfilment' => $this->fulfilment->toArray(),

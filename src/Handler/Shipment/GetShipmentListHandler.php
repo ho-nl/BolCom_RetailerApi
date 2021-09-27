@@ -45,7 +45,7 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
                 'order-id' => $getShipmentList->orderId() ? $getShipmentList->orderId()->toString() : null
             ],
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 
@@ -55,7 +55,7 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
             foreach ($response['shipments'] as &$shipment) {
                 // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
                 // Convert this timestamp into ISO 8601 format.
-                $shipment['shipmentDate'] = (new \DateTime($shipment['shipmentDate']))
+                $shipment['shipmentDateTime'] = (new \DateTime($shipment['shipmentDateTime']))
                     ->format(\DateTime::ATOM);
             }
 

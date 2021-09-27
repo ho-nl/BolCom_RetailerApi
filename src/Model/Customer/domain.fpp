@@ -1,6 +1,6 @@
 namespace BolCom\RetailerApi\Model\Customer {
     data CustomerDetails = CustomerDetails {
-        string $salutationCode,
+        ?string $salutationCode,
         ?string $firstName,
         ?string $surname,
         ?string $streetName,
@@ -13,7 +13,7 @@ namespace BolCom\RetailerApi\Model\Customer {
         string $countryCode,
         ?string $email,
         ?string $company,
-        ?string $vatNumber,
+        ?string $kvkNumber,
         ?string $deliveryPhoneNumber
     } deriving (FromArray);
 }

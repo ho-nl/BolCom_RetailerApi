@@ -1,38 +1,42 @@
 //Note: actual entity name should be Return instead of Rma, but because Return is a protected keyword fpp chokes.
 namespace BolCom\RetailerApi\Model\Rma {
+    data ReturnId = Int deriving(FromScalar, ToScalar);
     data RmaId = Int deriving(FromScalar, ToScalar);
 
     data ReducedReturnItem = ReducedReturnItem {
-        RmaId $rmaId,
-        \BolCom\RetailerApi\Model\Order\OrderId $orderId,
-        \BolCom\RetailerApi\Model\Offer\Ean $ean,
-        int $quantity,
-        \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
-        ?string $returnReason,
-        ?string $returnReasonComments,
-        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
-        bool $handled,
-        ?HandlingResult $handlingResult,
-        ?ProcessingResult $processingResult,
-        ?\BolCom\RetailerApi\Model\DateTime $processingDateTime
+        ?ReturnId $returnId,
+        ?\BolCom\RetailerApi\Model\DateTime $registrationDateTime,
+        ?\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
+        ReturnItem[] $returnItems,
     } deriving (FromArray);
 
     data ReturnItem = ReturnItem {
         RmaId $rmaId,
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
-        string $title,
-        int $quantity,
-        \BolCom\RetailerApi\Model\DateTime $registrationDateTime,
+        ?string $title,
+        ?int $expectedQuantity,
         string $returnReason,
         ?string $returnReasonComments,
         ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
-        \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
         bool $handled,
         ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace,
+        ?string $transporterName,
+        ?ReturnProcessingResult[] $processingResults
+    } deriving (FromArray);
+
+    data ReturnProcessingResult = ReturnProcessingResult {
+        ?int $quantity,
+        ?ProcessingResult $processingResults,
         ?HandlingResult $handlingResult,
-        ?ProcessingResult $processingResult,
-        ?\BolCom\RetailerApi\Model\DateTime $processingDateTime
+        ?\BolCom\RetailerApi\Model\DateTime $processingDateTime,
+    } deriving (FromArray);
+
+    data ReturnResult = ReturnResult {
+        ReturnId $returnId,
+        ?\BolCom\RetailerApi\Model\DateTime $registrationDateTime,
+        ?\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod,
+        ReturnItem[] $returnItems
     } deriving (FromArray);
 
     data ReturnItemList = ReturnItemList {
@@ -58,7 +62,7 @@ namespace BolCom\RetailerApi\Model\Rma\Query {
     } deriving (Query);
 
     data GetReturn = GetReturn {
-        \BolCom\RetailerApi\Model\Rma\RmaId $rmaId
+        \BolCom\RetailerApi\Model\Rma\ReturnId $returnId
     } deriving (Query);
 }
 

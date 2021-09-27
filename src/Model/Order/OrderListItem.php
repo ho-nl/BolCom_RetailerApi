@@ -11,12 +11,12 @@ namespace BolCom\RetailerApi\Model\Order;
 final class OrderListItem
 {
     private $orderId;
-    private $dateTimeOrderPlaced;
+    private $orderPlacedDateTime;
 
-    public function __construct(OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced)
+    public function __construct(OrderId $orderId, \BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime)
     {
         $this->orderId = $orderId;
-        $this->dateTimeOrderPlaced = $dateTimeOrderPlaced;
+        $this->orderPlacedDateTime = $orderPlacedDateTime;
     }
 
     public function orderId(): OrderId
@@ -24,19 +24,19 @@ final class OrderListItem
         return $this->orderId;
     }
 
-    public function dateTimeOrderPlaced(): \BolCom\RetailerApi\Model\DateTime
+    public function orderPlacedDateTime(): \BolCom\RetailerApi\Model\DateTime
     {
-        return $this->dateTimeOrderPlaced;
+        return $this->orderPlacedDateTime;
     }
 
     public function withOrderId(OrderId $orderId): OrderListItem
     {
-        return new self($orderId, $this->dateTimeOrderPlaced);
+        return new self($orderId, $this->orderPlacedDateTime);
     }
 
-    public function withDateTimeOrderPlaced(\BolCom\RetailerApi\Model\DateTime $dateTimeOrderPlaced): OrderListItem
+    public function withOrderPlacedDateTime(\BolCom\RetailerApi\Model\DateTime $orderPlacedDateTime): OrderListItem
     {
-        return new self($this->orderId, $dateTimeOrderPlaced);
+        return new self($this->orderId, $orderPlacedDateTime);
     }
 
     public static function fromArray(array $data): OrderListItem
@@ -47,12 +47,12 @@ final class OrderListItem
 
         $orderId = OrderId::fromString($data['orderId']);
 
-        if (! isset($data['dateTimeOrderPlaced']) || ! \is_string($data['dateTimeOrderPlaced'])) {
-            throw new \InvalidArgumentException("Key 'dateTimeOrderPlaced' is missing in data array or is not a string");
+        if (! isset($data['orderPlacedDateTime']) || ! \is_string($data['orderPlacedDateTime'])) {
+            throw new \InvalidArgumentException("Key 'orderPlacedDateTime' is missing in data array or is not a string");
         }
 
-        $dateTimeOrderPlaced = \BolCom\RetailerApi\Model\DateTime::fromString($data['dateTimeOrderPlaced']);
+        $orderPlacedDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['orderPlacedDateTime']);
 
-        return new self($orderId, $dateTimeOrderPlaced);
+        return new self($orderId, $orderPlacedDateTime);
     }
 }

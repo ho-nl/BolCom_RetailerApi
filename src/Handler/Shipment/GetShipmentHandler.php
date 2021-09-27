@@ -32,7 +32,7 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
     {
         $response = $this->client->get("shipments/{$getShipment->shipmentId()->toScalar()}", [
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 
@@ -40,9 +40,10 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
 
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
         // Convert this timestamp into ISO 8601 format.
-        $response['shipmentDate'] = (new \DateTime($response['shipmentDate']))->format(\DateTime::ATOM);
+        $response['shipmentDateTime'] = (new \DateTime($response['shipmentDateTime']))->format(\DateTime::ATOM);
         $response['shipmentItems'] = array_map(static function (array $item) {
-            $item['latestDeliveryDate'] = (new \DateTime($item['latestDeliveryDate']))->format('Y-m-d');
+            $item['fulfilment']['latestDeliveryDate'] =
+                (new \DateTime($item['fulfilment']['latestDeliveryDate']))->format('Y-m-d');
 
             return $item;
         }, $response['shipmentItems']);

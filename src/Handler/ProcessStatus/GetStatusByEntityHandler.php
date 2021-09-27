@@ -37,7 +37,7 @@ class GetStatusByEntityHandler implements GetStatusByEntityHandlerInterface
                 'page' => $getStatusByEntity->page(),
             ],
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 

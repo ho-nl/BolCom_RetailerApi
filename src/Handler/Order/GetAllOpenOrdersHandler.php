@@ -36,7 +36,7 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
                 'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value()
             ],
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 

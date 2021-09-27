@@ -8,52 +8,40 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Order\Command;
 
-final class ShipOrderItem extends \Prooph\Common\Messaging\Query
+final class ShipOrderItem
 {
-    use \Prooph\Common\Messaging\PayloadTrait;
+    private $orderItemId;
 
-    const MESSAGE_NAME = 'BolCom\RetailerApi\Model\Order\Command\ShipOrderItem';
-
-    protected $messageName = self::MESSAGE_NAME;
+    public function __construct(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId)
+    {
+        $this->orderItemId = $orderItemId;
+    }
 
     public function orderItemId(): \BolCom\RetailerApi\Model\Order\OrderItemId
     {
-        return \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($this->payload['orderItemId']);
+        return $this->orderItemId;
     }
 
-    public function shipmentReference()
+    public function withOrderItemId(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId): ShipOrderItem
     {
-        return $this->payload['shipmentReference'] ?? null;
+        return new self($orderItemId);
     }
 
-    public function transport()
+    public static function fromArray(array $data): ShipOrderItem
     {
-        return isset($this->payload['transport']) ? \BolCom\RetailerApi\Model\Transport\TransportInstruction::fromArray($this->payload['transport']) : null;
-    }
-
-    public static function with(\BolCom\RetailerApi\Model\Order\OrderItemId $orderItemId, string $shipmentReference = null, \BolCom\RetailerApi\Model\Transport\TransportInstruction $transport = null): ShipOrderItem
-    {
-        return new self([
-            'orderItemId' => $orderItemId->toString(),
-            'shipmentReference' => $shipmentReference,
-            'transport' => null === $transport ? null : $transport->toArray(),
-        ]);
-    }
-
-    protected function setPayload(array $payload)
-    {
-        if (! isset($payload['orderItemId']) || ! \is_string($payload['orderItemId'])) {
-            throw new \InvalidArgumentException("Key 'orderItemId' is missing in payload or is not a string");
+        if (! isset($data['orderItemId']) || ! \is_string($data['orderItemId'])) {
+            throw new \InvalidArgumentException("Key 'orderItemId' is missing in data array or is not a string");
         }
 
-        if (isset($payload['shipmentReference']) && ! \is_string($payload['shipmentReference'])) {
-            throw new \InvalidArgumentException("Value for 'shipmentReference' is not a string in payload");
-        }
+        $orderItemId = \BolCom\RetailerApi\Model\Order\OrderItemId::fromString($data['orderItemId']);
 
-        if (isset($payload['transport']) && ! \is_array($payload['transport'])) {
-            throw new \InvalidArgumentException("Value for 'transport' is not an array in payload");
-        }
+        return new self($orderItemId);
+    }
 
-        $this->payload = $payload;
+    public function toArray(): array
+    {
+        return [
+            'orderItemId' => $this->orderItemId->toString(),
+        ];
     }
 }

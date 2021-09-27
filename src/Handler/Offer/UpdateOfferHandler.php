@@ -35,7 +35,7 @@ class UpdateOfferHandler implements UpdateOfferHandlerInterface
     public function __invoke(UpdateOffer $updateOffer): ProcessStatus
     {
         if ($updateOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
-            && $updateOffer->retailerOffer()->fulfilment()->type()->equals(FulfilmentMethod::FBB())
+            && $updateOffer->retailerOffer()->fulfilment()->method()->equals(FulfilmentMethod::FBB())
         ) {
             throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
         }
@@ -43,7 +43,7 @@ class UpdateOfferHandler implements UpdateOfferHandlerInterface
         $response = $this->client->put("offers/{$updateOffer->offerId()->toString()}", [
             'json' => $updateOffer->retailerOffer()->toArray(),
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 

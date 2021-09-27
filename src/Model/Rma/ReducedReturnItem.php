@@ -10,262 +10,129 @@ namespace BolCom\RetailerApi\Model\Rma;
 
 final class ReducedReturnItem
 {
-    private $rmaId;
-    private $orderId;
-    private $ean;
-    private $quantity;
+    private $returnId;
     private $registrationDateTime;
-    private $returnReason;
-    private $returnReasonComments;
     private $fulfilmentMethod;
-    private $handled;
-    private $handlingResult;
-    private $processingResult;
-    private $processingDateTime;
+    private $returnItems;
 
-    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, int $quantity, \BolCom\RetailerApi\Model\DateTime $registrationDateTime, string $returnReason = null, string $returnReasonComments = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod, bool $handled, HandlingResult $handlingResult = null, ProcessingResult $processingResult = null, \BolCom\RetailerApi\Model\DateTime $processingDateTime = null)
+    /**
+     * @param \BolCom\RetailerApi\Model\Rma\ReturnId $returnId
+     * @param \BolCom\RetailerApi\Model\DateTime $registrationDateTime
+     * @param \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod
+     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returnItems
+     */
+    public function __construct(ReturnId $returnId = null, \BolCom\RetailerApi\Model\DateTime $registrationDateTime = null, \BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null, array $returnItems)
     {
-        $this->rmaId = $rmaId;
-        $this->orderId = $orderId;
-        $this->ean = $ean;
-        $this->quantity = $quantity;
+        $this->returnId = $returnId;
         $this->registrationDateTime = $registrationDateTime;
-        $this->returnReason = $returnReason;
-        $this->returnReasonComments = $returnReasonComments;
         $this->fulfilmentMethod = $fulfilmentMethod;
-        $this->handled = $handled;
-        $this->handlingResult = $handlingResult;
-        $this->processingResult = $processingResult;
-        $this->processingDateTime = $processingDateTime;
+            $this->returnItems = [];
+            foreach ($returnItems as $__value) {
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Rma\ReturnItem) {
+                    throw new \InvalidArgumentException('returnItems expected an array of BolCom\RetailerApi\Model\Rma\ReturnItem');
+                }
+                $this->returnItems[] = $__value;
+            }
     }
 
-    public function rmaId(): RmaId
+    public function returnId()
     {
-        return $this->rmaId;
+        return $this->returnId;
     }
 
-    public function orderId(): \BolCom\RetailerApi\Model\Order\OrderId
-    {
-        return $this->orderId;
-    }
-
-    public function ean(): \BolCom\RetailerApi\Model\Offer\Ean
-    {
-        return $this->ean;
-    }
-
-    public function quantity(): int
-    {
-        return $this->quantity;
-    }
-
-    public function registrationDateTime(): \BolCom\RetailerApi\Model\DateTime
+    public function registrationDateTime()
     {
         return $this->registrationDateTime;
     }
 
-    public function returnReason()
-    {
-        return $this->returnReason;
-    }
-
-    public function returnReasonComments()
-    {
-        return $this->returnReasonComments;
-    }
-
-    public function fulfilmentMethod(): \BolCom\RetailerApi\Model\Offer\FulfilmentMethod
+    public function fulfilmentMethod()
     {
         return $this->fulfilmentMethod;
     }
 
-    public function handled(): bool
+    /**
+     * @return \BolCom\RetailerApi\Model\Rma\ReturnItem[]
+     */
+    public function returnItems(): array
     {
-        return $this->handled;
+        return $this->returnItems;
     }
 
-    public function handlingResult()
+    public function withReturnId(ReturnId $returnId = null): ReducedReturnItem
     {
-        return $this->handlingResult;
+        return new self($returnId, $this->registrationDateTime, $this->fulfilmentMethod, $this->returnItems);
     }
 
-    public function processingResult()
+    public function withRegistrationDateTime(\BolCom\RetailerApi\Model\DateTime $registrationDateTime = null): ReducedReturnItem
     {
-        return $this->processingResult;
+        return new self($this->returnId, $registrationDateTime, $this->fulfilmentMethod, $this->returnItems);
     }
 
-    public function processingDateTime()
+    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod = null): ReducedReturnItem
     {
-        return $this->processingDateTime;
+        return new self($this->returnId, $this->registrationDateTime, $fulfilmentMethod, $this->returnItems);
     }
 
-    public function withRmaId(RmaId $rmaId): ReducedReturnItem
+    /**
+     * @param \BolCom\RetailerApi\Model\Rma\ReturnItem[]|null $returnItems
+     * @return \BolCom\RetailerApi\Model\Rma\ReducedReturnItem
+     */
+    public function withReturnItems(array $returnItems): ReducedReturnItem
     {
-        return new self($rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ReducedReturnItem
-    {
-        return new self($this->rmaId, $orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withQuantity(int $quantity): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withRegistrationDateTime(\BolCom\RetailerApi\Model\DateTime $registrationDateTime): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withReturnReason(string $returnReason = null): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withReturnReasonComments(string $returnReasonComments = null): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withFulfilmentMethod(\BolCom\RetailerApi\Model\Offer\FulfilmentMethod $fulfilmentMethod): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withHandled(bool $handled): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $handled, $this->handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withHandlingResult(HandlingResult $handlingResult = null): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $handlingResult, $this->processingResult, $this->processingDateTime);
-    }
-
-    public function withProcessingResult(ProcessingResult $processingResult = null): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $processingResult, $this->processingDateTime);
-    }
-
-    public function withProcessingDateTime(\BolCom\RetailerApi\Model\DateTime $processingDateTime = null): ReducedReturnItem
-    {
-        return new self($this->rmaId, $this->orderId, $this->ean, $this->quantity, $this->registrationDateTime, $this->returnReason, $this->returnReasonComments, $this->fulfilmentMethod, $this->handled, $this->handlingResult, $this->processingResult, $processingDateTime);
+        return new self($this->returnId, $this->registrationDateTime, $this->fulfilmentMethod, $returnItems);
     }
 
     public static function fromArray(array $data): ReducedReturnItem
     {
-        if (! isset($data['rmaId']) || ! \is_int($data['rmaId'])) {
-            throw new \InvalidArgumentException("Key 'rmaId' is missing in data array or is not a int");
-        }
-
-        $rmaId = RmaId::fromScalar($data['rmaId']);
-
-        if (! isset($data['orderId']) || ! \is_string($data['orderId'])) {
-            throw new \InvalidArgumentException("Key 'orderId' is missing in data array or is not a string");
-        }
-
-        $orderId = \BolCom\RetailerApi\Model\Order\OrderId::fromString($data['orderId']);
-
-        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
-            throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
-        }
-
-        $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
-
-        if (! isset($data['quantity']) || ! \is_int($data['quantity'])) {
-            throw new \InvalidArgumentException("Key 'quantity' is missing in data array or is not a int");
-        }
-
-        $quantity = $data['quantity'];
-
-        if (! isset($data['registrationDateTime']) || ! \is_string($data['registrationDateTime'])) {
-            throw new \InvalidArgumentException("Key 'registrationDateTime' is missing in data array or is not a string");
-        }
-
-        $registrationDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['registrationDateTime']);
-
-        if (isset($data['returnReason'])) {
-            if (! \is_string($data['returnReason'])) {
-                throw new \InvalidArgumentException("Value for 'returnReason' is not a string in data array");
+        if (isset($data['returnId'])) {
+            if (! \is_int($data['returnId'])) {
+                throw new \InvalidArgumentException("Value for 'returnId' is not a int in data array");
             }
 
-            $returnReason = $data['returnReason'];
+            $returnId = ReturnId::fromScalar($data['returnId']);
         } else {
-            $returnReason = null;
+            $returnId = null;
         }
 
-        if (isset($data['returnReasonComments'])) {
-            if (! \is_string($data['returnReasonComments'])) {
-                throw new \InvalidArgumentException("Value for 'returnReasonComments' is not a string in data array");
+        if (isset($data['registrationDateTime'])) {
+            if (! \is_string($data['registrationDateTime'])) {
+                throw new \InvalidArgumentException("Value for 'registrationDateTime' is not a string in data array");
             }
 
-            $returnReasonComments = $data['returnReasonComments'];
+            $registrationDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['registrationDateTime']);
         } else {
-            $returnReasonComments = null;
+            $registrationDateTime = null;
         }
 
-        if (! isset($data['fulfilmentMethod']) || ! \is_string($data['fulfilmentMethod'])) {
-            throw new \InvalidArgumentException("Key 'fulfilmentMethod' is missing in data array or is not a string");
-        }
-
-        $fulfilmentMethod = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
-
-        if (! isset($data['handled']) || ! \is_bool($data['handled'])) {
-            throw new \InvalidArgumentException("Key 'handled' is missing in data array or is not a bool");
-        }
-
-        $handled = $data['handled'];
-
-        if (isset($data['handlingResult'])) {
-            if (! \is_string($data['handlingResult'])) {
-                throw new \InvalidArgumentException("Value for 'handlingResult' is not a string in data array");
+        if (isset($data['fulfilmentMethod'])) {
+            if (! \is_string($data['fulfilmentMethod'])) {
+                throw new \InvalidArgumentException("Value for 'fulfilmentMethod' is not a string in data array");
             }
 
-            $handlingResult = HandlingResult::fromValue($data['handlingResult']);
+            $fulfilmentMethod = \BolCom\RetailerApi\Model\Offer\FulfilmentMethod::fromValue($data['fulfilmentMethod']);
         } else {
-            $handlingResult = null;
+            $fulfilmentMethod = null;
         }
 
-        if (isset($data['processingResult'])) {
-            if (! \is_string($data['processingResult'])) {
-                throw new \InvalidArgumentException("Value for 'processingResult' is not a string in data array");
-            }
-
-            $processingResult = ProcessingResult::fromValue($data['processingResult']);
-        } else {
-            $processingResult = null;
+        if (! isset($data['returnItems']) || ! \is_array($data['returnItems'])) {
+            throw new \InvalidArgumentException("Key 'returnItems' is missing in data array or is not an array");
         }
 
-        if (isset($data['processingDateTime'])) {
-            if (! \is_string($data['processingDateTime'])) {
-                throw new \InvalidArgumentException("Value for 'processingDateTime' is not a string in data array");
+        $returnItems = [];
+
+        foreach ($data['returnItems'] as $__value) {
+            if (! \is_array($data['returnItems'])) {
+                throw new \InvalidArgumentException("Key 'returnItems' in data array or is not an array of arrays");
             }
 
-            $processingDateTime = \BolCom\RetailerApi\Model\DateTime::fromString($data['processingDateTime']);
-        } else {
-            $processingDateTime = null;
+            $returnItems[] = ReturnItem::fromArray($__value);
         }
 
         return new self(
-            $rmaId,
-            $orderId,
-            $ean,
-            $quantity,
+            $returnId,
             $registrationDateTime,
-            $returnReason,
-            $returnReasonComments,
             $fulfilmentMethod,
-            $handled,
-            $handlingResult,
-            $processingResult,
-            $processingDateTime
+            $returnItems
         );
     }
 }

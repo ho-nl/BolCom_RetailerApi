@@ -11,12 +11,12 @@ namespace BolCom\RetailerApi\Model\Offer;
 final class BundlePrice
 {
     private $quantity;
-    private $price;
+    private $unitPrice;
 
-    public function __construct(int $quantity, Price $price)
+    public function __construct(int $quantity, Price $unitPrice)
     {
         $this->quantity = $quantity;
-        $this->price = $price;
+        $this->unitPrice = $unitPrice;
     }
 
     public function quantity(): int
@@ -24,19 +24,19 @@ final class BundlePrice
         return $this->quantity;
     }
 
-    public function price(): Price
+    public function unitPrice(): Price
     {
-        return $this->price;
+        return $this->unitPrice;
     }
 
     public function withQuantity(int $quantity): BundlePrice
     {
-        return new self($quantity, $this->price);
+        return new self($quantity, $this->unitPrice);
     }
 
-    public function withPrice(Price $price): BundlePrice
+    public function withUnitPrice(Price $unitPrice): BundlePrice
     {
-        return new self($this->quantity, $price);
+        return new self($this->quantity, $unitPrice);
     }
 
     public static function fromArray(array $data): BundlePrice
@@ -47,20 +47,20 @@ final class BundlePrice
 
         $quantity = $data['quantity'];
 
-        if (! isset($data['price']) || (! \is_float($data['price']) && ! \is_int($data['price']))) {
-            throw new \InvalidArgumentException("Key 'price' is missing in data array or is not a float");
+        if (! isset($data['unitPrice']) || (! \is_float($data['unitPrice']) && ! \is_int($data['unitPrice']))) {
+            throw new \InvalidArgumentException("Key 'unitPrice' is missing in data array or is not a float");
         }
 
-        $price = Price::fromScalar($data['price']);
+        $unitPrice = Price::fromScalar($data['unitPrice']);
 
-        return new self($quantity, $price);
+        return new self($quantity, $unitPrice);
     }
 
     public function toArray(): array
     {
         return [
             'quantity' => $this->quantity,
-            'price' => $this->price->toScalar(),
+            'unitPrice' => $this->unitPrice->toScalar(),
         ];
     }
 }

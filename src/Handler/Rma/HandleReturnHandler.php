@@ -36,7 +36,7 @@ class HandleReturnHandler implements HandleReturnHandlerInterface
         $response = $this->client->put("returns/{$handleReturn->rmaId()->toScalar()}", [
             'json' => $payload,
             'headers' => [
-                'Accept' => 'application/vnd.retailer.v3+json'
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
             ]
         ]);
 
