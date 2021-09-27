@@ -8,7 +8,7 @@
 Bol.com API documentation can be found [here](https://api.bol.com/retailer/public/redoc/v3).
 
 ## Features
-- Uses bol.com API v3.
+- Uses bol.com API v4.
 - Strict type checking.
 - Support multiple bol.com accounts.
 
