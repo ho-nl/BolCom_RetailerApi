@@ -184,6 +184,20 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ));
 ```
 
+#### ExportFileRequestHandler
+```PHP
+/** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
+$processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Query\ExportFileRequest::with('CSV'));
+```
+
+#### GetExportFileHandler (use after GetStatusByProcessIds for entityId value)
+```PHP
+/** @var \Psr\Http\Message\StreamInterface $stream */
+$stream = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Query\ExportFile::with(
+    '1353a98b-be21-413b-bf13-4aa0927026c6'
+));
+```
+
 ### Inventory
 #### GetInventoryHandler
 ```PHP
