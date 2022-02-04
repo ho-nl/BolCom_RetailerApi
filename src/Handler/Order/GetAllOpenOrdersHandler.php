@@ -33,15 +33,15 @@ class GetAllOpenOrdersHandler implements GetAllOpenOrdersHandlerInterface
         $response = $this->client->get('orders', [
             'query' => [
                 'page' => $getAllOpenOrders->page(),
-                'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value()
+                'fulfilment-method' => $getAllOpenOrders->fulfilmentMethod()->value(),
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         $response = $response->getBody()->json();
 
-        return ! empty($response) ? OrderList::fromArray($response) : null;
+        return !empty($response) ? OrderList::fromArray($response) : null;
     }
 }

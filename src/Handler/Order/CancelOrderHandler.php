@@ -35,8 +35,8 @@ class CancelOrderHandler implements CancelOrderHandlerInterface
         $response = $this->client->put('orders/cancellation', [
             'json' => $payload,
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
