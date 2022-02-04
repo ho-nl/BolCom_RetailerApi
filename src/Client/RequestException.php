@@ -29,14 +29,21 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
             return parent::create($request, $response);
         }
 
+        if (!isset($errorResponse['detail'])) {
+            return parent::create($request, $response);
+        }
+
         $additional = '';
         if (isset($errorResponse['violations'])) {
-            $additional .= implode(', ', array_map(static function ($violation) {
-                if (isset($violation['name'])) {
-                    return "`{$violation['name']}`: {$violation['reason']}";
-                }
-                return $violation['reason'];
-            }, $errorResponse['violations']));
+            $additional .= implode(
+                ', ',
+                array_map(static function ($violation) {
+                    if (isset($violation['name'])) {
+                        return "`{$violation['name']}`: {$violation['reason']}";
+                    }
+                    return $violation['reason'];
+                }, $errorResponse['violations'])
+            );
         }
 
         $newResponse = $response->withStatus(
