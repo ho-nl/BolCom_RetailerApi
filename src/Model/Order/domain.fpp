@@ -74,6 +74,8 @@ namespace BolCom\RetailerApi\Model\Order {
         OrderOffer $offer,
         OrderProduct $product,
         Quantity $quantity,
+        Quantity $quantityShipped,
+        Quantity $quantityCancelled,
         Price $unitPrice,
         \BolCom\RetailerApi\Model\CurrencyAmount $commission,
         ?bool $cancellationRequest,

@@ -16,7 +16,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus {
     data EventStatus = PENDING | SUCCESS | FAILURE | TIMEOUT deriving(Enum(useValue));
 
     data ProcessStatus = ProcessStatus {
-        int $id,
+        string $processStatusId,
         ?EntityId $entityId,
         EventType $eventType,
         string $description,
@@ -38,6 +38,6 @@ namespace BolCom\RetailerApi\Model\ProcessStatus\Query {
     } deriving (Query);
 
     data GetStatusByProcessIds = GetStatusByProcessIds {
-        int[] $ids
+        string[] $ids
     } deriving (Query);
 }

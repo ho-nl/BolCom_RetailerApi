@@ -17,7 +17,7 @@ final class GetStatusByProcessIds extends \Prooph\Common\Messaging\Query
     protected $messageName = self::MESSAGE_NAME;
 
     /**
-     * @return int[]
+     * @return string[]
      */
     public function ids(): array
     {
@@ -25,9 +25,9 @@ final class GetStatusByProcessIds extends \Prooph\Common\Messaging\Query
     }
 
         /**
-     * @param int[]|null $ids
+     * @param string[]|null $ids
      */
-public static function with(int ...$ids): GetStatusByProcessIds
+public static function with(string ...$ids): GetStatusByProcessIds
     {
         return new self([
             'ids' => $ids,
@@ -41,8 +41,8 @@ public static function with(int ...$ids): GetStatusByProcessIds
         }
 
         foreach ($payload['ids'] as $__value) {
-            if (! \is_int($__value)) {
-               throw new \InvalidArgumentException("'ids' is not an array of int");
+            if (! \is_string($__value)) {
+               throw new \InvalidArgumentException("'ids' is not an array of string");
             }
         }
 
