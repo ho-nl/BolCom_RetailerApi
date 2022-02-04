@@ -45,7 +45,7 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
                 'order-id' => $getShipmentList->orderId() ? $getShipmentList->orderId()->toString() : null
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

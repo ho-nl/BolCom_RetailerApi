@@ -32,7 +32,7 @@ class DeleteOfferHandler implements DeleteOfferHandlerInterface
     {
         $response = $this->client->delete("offers/{$deleteOffer->offerId()->toString()}", [
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

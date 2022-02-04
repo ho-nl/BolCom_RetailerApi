@@ -39,7 +39,7 @@ class GetInventoryHandler implements GetInventoryHandlerInterface
                 'query' => $getInventory->query()
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

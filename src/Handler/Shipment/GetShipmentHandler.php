@@ -32,7 +32,7 @@ class GetShipmentHandler implements GetShipmentHandlerInterface
     {
         $response = $this->client->get("shipments/{$getShipment->shipmentId()->toScalar()}", [
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

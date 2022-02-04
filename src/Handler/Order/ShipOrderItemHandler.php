@@ -41,7 +41,7 @@ class ShipOrderItemHandler implements ShipOrderItemHandlerInterface
         $response = $this->client->put("orders/shipment", [
             'json' => $payload,
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

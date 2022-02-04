@@ -32,7 +32,7 @@ class GetReturnHandler implements GetReturnHandlerInterface
     {
         $response = $this->client->get("returns/{$getReturn->returnId()->toScalar()}", [
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00

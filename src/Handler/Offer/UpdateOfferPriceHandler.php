@@ -36,7 +36,7 @@ class UpdateOfferPriceHandler implements UpdateOfferPriceHandlerInterface
         $response = $this->client->put("offers/{$updateOfferPrice->offerId()->toString()}/price", [
             'json' => $payload,
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 

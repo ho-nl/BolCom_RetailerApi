@@ -50,7 +50,7 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
         $response = $this->client->post('offers', [
             'json' => $createOffer->retailerOffer()->toArray(),
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
             ]
         ]);
 
