@@ -25,6 +25,6 @@ class GetShipmentHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function test__invoke()
     {
-        $this->messageBus->dispatch(GetShipment::with(ShipmentId::fromScalar(914587795)));
+        $this->messageBus->dispatch(GetShipment::with(ShipmentId::fromScalar('914587795')));
     }
 }
