@@ -42,21 +42,20 @@ class GetShipmentListHandler implements GetShipmentListHandlerInterface
                 'fulfilment-method' => $getShipmentList->fulfilmentMethod()
                     ? $getShipmentList->fulfilmentMethod()->value()
                     : null,
-                'order-id' => $getShipmentList->orderId() ? $getShipmentList->orderId()->toString() : null
+                'order-id' => $getShipmentList->orderId() ? $getShipmentList->orderId()->toString() : null,
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         $response = $response->getBody()->json();
 
-        if (! empty($response)) {
+        if (!empty($response)) {
             foreach ($response['shipments'] as &$shipment) {
                 // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
                 // Convert this timestamp into ISO 8601 format.
-                $shipment['shipmentDateTime'] = (new \DateTime($shipment['shipmentDateTime']))
-                    ->format(\DateTime::ATOM);
+                $shipment['shipmentDateTime'] = (new \DateTime($shipment['shipmentDateTime']))->format(\DateTime::ATOM);
             }
 
             return ShipmentList::fromArray($response);
