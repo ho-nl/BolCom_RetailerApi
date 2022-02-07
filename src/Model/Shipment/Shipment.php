@@ -137,8 +137,8 @@ final class Shipment
 
     public static function fromArray(array $data): Shipment
     {
-        if (! isset($data['shipmentId']) || ! \is_int($data['shipmentId'])) {
-            throw new \InvalidArgumentException("Key 'shipmentId' is missing in data array or is not a int");
+        if (! isset($data['shipmentId']) || ! \is_string($data['shipmentId'])) {
+            throw new \InvalidArgumentException("Key 'shipmentId' is missing in data array or is not a string");
         }
 
         $shipmentId = ShipmentId::fromScalar($data['shipmentId']);

@@ -53,8 +53,8 @@ final class Transport
 
     public static function fromArray(array $data): Transport
     {
-        if (! isset($data['transportId']) || ! \is_int($data['transportId'])) {
-            throw new \InvalidArgumentException("Key 'transportId' is missing in data array or is not a int");
+        if (! isset($data['transportId']) || ! \is_string($data['transportId'])) {
+            throw new \InvalidArgumentException("Key 'transportId' is missing in data array or is not a string");
         }
 
         $transportId = TransportId::fromScalar($data['transportId']);

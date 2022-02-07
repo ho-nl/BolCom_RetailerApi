@@ -12,22 +12,22 @@ final class ShipmentId
 {
     private $value;
 
-    public function __construct(int $value)
+    public function __construct(string $value)
     {
         $this->value = $value;
     }
 
-    public function value(): int
+    public function value(): string
     {
         return $this->value;
     }
 
-    public static function fromScalar(int $shipmentId): ShipmentId
+    public static function fromScalar(string $shipmentId): ShipmentId
     {
         return new self($shipmentId);
     }
 
-    public function toScalar(): int
+    public function toScalar(): string
     {
         return $this->value;
     }
