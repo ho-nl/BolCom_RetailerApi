@@ -22,7 +22,7 @@ final class OrderItem
     private $cancellationRequest;
     private $selectedDeliveryWindow;
 
-    public function __construct(OrderItemId $orderItemId, OrderFulfilmemt $fulfilment, OrderOffer $offer, OrderProduct $product, Quantity $quantity, Quantity $quantityShipped, Quantity $quantityCancelled, Price $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, bool $cancellationRequest = null, SelectedDeliveryWindow $selectedDeliveryWindow = null)
+    public function __construct(OrderItemId $orderItemId, OrderFulfilmemt $fulfilment, OrderOffer $offer, OrderProduct $product, Quantity $quantity, Quantity $quantityShipped = null, Quantity $quantityCancelled = null, Price $unitPrice, \BolCom\RetailerApi\Model\CurrencyAmount $commission, bool $cancellationRequest = null, SelectedDeliveryWindow $selectedDeliveryWindow = null)
     {
         $this->orderItemId = $orderItemId;
         $this->fulfilment = $fulfilment;
@@ -62,12 +62,12 @@ final class OrderItem
         return $this->quantity;
     }
 
-    public function quantityShipped(): Quantity
+    public function quantityShipped()
     {
         return $this->quantityShipped;
     }
 
-    public function quantityCancelled(): Quantity
+    public function quantityCancelled()
     {
         return $this->quantityCancelled;
     }
@@ -117,12 +117,12 @@ final class OrderItem
         return new self($this->orderItemId, $this->fulfilment, $this->offer, $this->product, $quantity, $this->quantityShipped, $this->quantityCancelled, $this->unitPrice, $this->commission, $this->cancellationRequest, $this->selectedDeliveryWindow);
     }
 
-    public function withQuantityShipped(Quantity $quantityShipped): OrderItem
+    public function withQuantityShipped(Quantity $quantityShipped = null): OrderItem
     {
         return new self($this->orderItemId, $this->fulfilment, $this->offer, $this->product, $this->quantity, $quantityShipped, $this->quantityCancelled, $this->unitPrice, $this->commission, $this->cancellationRequest, $this->selectedDeliveryWindow);
     }
 
-    public function withQuantityCancelled(Quantity $quantityCancelled): OrderItem
+    public function withQuantityCancelled(Quantity $quantityCancelled = null): OrderItem
     {
         return new self($this->orderItemId, $this->fulfilment, $this->offer, $this->product, $this->quantity, $this->quantityShipped, $quantityCancelled, $this->unitPrice, $this->commission, $this->cancellationRequest, $this->selectedDeliveryWindow);
     }
@@ -179,17 +179,25 @@ final class OrderItem
 
         $quantity = Quantity::fromScalar($data['quantity']);
 
-        if (! isset($data['quantityShipped']) || ! \is_int($data['quantityShipped'])) {
-            throw new \InvalidArgumentException("Key 'quantityShipped' is missing in data array or is not a int");
+        if (isset($data['quantityShipped'])) {
+            if (! \is_int($data['quantityShipped'])) {
+                throw new \InvalidArgumentException("Value for 'quantityShipped' is not a int in data array");
+            }
+
+            $quantityShipped = Quantity::fromScalar($data['quantityShipped']);
+        } else {
+            $quantityShipped = null;
         }
 
-        $quantityShipped = Quantity::fromScalar($data['quantityShipped']);
+        if (isset($data['quantityCancelled'])) {
+            if (! \is_int($data['quantityCancelled'])) {
+                throw new \InvalidArgumentException("Value for 'quantityCancelled' is not a int in data array");
+            }
 
-        if (! isset($data['quantityCancelled']) || ! \is_int($data['quantityCancelled'])) {
-            throw new \InvalidArgumentException("Key 'quantityCancelled' is missing in data array or is not a int");
+            $quantityCancelled = Quantity::fromScalar($data['quantityCancelled']);
+        } else {
+            $quantityCancelled = null;
         }
-
-        $quantityCancelled = Quantity::fromScalar($data['quantityCancelled']);
 
         if (! isset($data['unitPrice']) || (! \is_float($data['unitPrice']) && ! \is_int($data['unitPrice']))) {
             throw new \InvalidArgumentException("Key 'unitPrice' is missing in data array or is not a float");
