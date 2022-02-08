@@ -8,17 +8,14 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Model\Rma;
 
-final class returnReason extends ReturnReason
+final class ReturnReason
 {
     private $mainReason;
     private $detailedReason;
     private $customerComments;
 
-    public function __construct(
-        string $mainReason = null,
-        string $detailedReason = null,
-        string $customerComments = null
-    ) {
+    public function __construct(string $mainReason = null, string $detailedReason = null, string $customerComments = null)
+    {
         $this->mainReason = $mainReason;
         $this->detailedReason = $detailedReason;
         $this->customerComments = $customerComments;
@@ -54,10 +51,10 @@ final class returnReason extends ReturnReason
         return new self($this->mainReason, $this->detailedReason, $customerComments);
     }
 
-    public static function fromArray(array $data): returnReason
+    public static function fromArray(array $data): ReturnReason
     {
         if (isset($data['mainReason'])) {
-            if (!\is_string($data['mainReason'])) {
+            if (! \is_string($data['mainReason'])) {
                 throw new \InvalidArgumentException("Value for 'mainReason' is not a string in data array");
             }
 
@@ -67,7 +64,7 @@ final class returnReason extends ReturnReason
         }
 
         if (isset($data['detailedReason'])) {
-            if (!\is_string($data['detailedReason'])) {
+            if (! \is_string($data['detailedReason'])) {
                 throw new \InvalidArgumentException("Value for 'detailedReason' is not a string in data array");
             }
 
@@ -77,7 +74,7 @@ final class returnReason extends ReturnReason
         }
 
         if (isset($data['customerComments'])) {
-            if (!\is_string($data['customerComments'])) {
+            if (! \is_string($data['customerComments'])) {
                 throw new \InvalidArgumentException("Value for 'customerComments' is not a string in data array");
             }
 
@@ -86,6 +83,10 @@ final class returnReason extends ReturnReason
             $customerComments = null;
         }
 
-        return new self($mainReason, $detailedReason, $customerComments);
+        return new self(
+            $mainReason,
+            $detailedReason,
+            $customerComments
+        );
     }
 }

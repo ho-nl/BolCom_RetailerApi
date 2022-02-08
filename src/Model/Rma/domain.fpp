@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Model\Rma {
         ReturnItem[] $returnItems,
     } deriving (FromArray);
 
-    data ReturnReason = returnReason {
+    data ReturnReason = ReturnReason {
         ?string $mainReason,
         ?string $detailedReason,
         ?string $customerComments

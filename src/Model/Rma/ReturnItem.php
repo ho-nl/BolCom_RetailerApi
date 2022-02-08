@@ -35,19 +35,8 @@ final class ReturnItem
      * @param string $transporterName
      * @param \BolCom\RetailerApi\Model\Rma\ReturnProcessingResult[] $processingResults
      */
-    public function __construct(
-        RmaId $rmaId,
-        \BolCom\RetailerApi\Model\Order\OrderId $orderId,
-        \BolCom\RetailerApi\Model\Offer\Ean $ean,
-        string $title = null,
-        int $expectedQuantity = null,
-        ReturnReason $returnReason = null,
-        \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null,
-        bool $handled,
-        \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null,
-        string $transporterName = null,
-        array $processingResults = null
-    ) {
+    public function __construct(RmaId $rmaId, \BolCom\RetailerApi\Model\Order\OrderId $orderId, \BolCom\RetailerApi\Model\Offer\Ean $ean, string $title = null, int $expectedQuantity = null, ReturnReason $returnReason = null, \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null, bool $handled, \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null, string $transporterName = null, array $processingResults = null)
+    {
         $this->rmaId = $rmaId;
         $this->orderId = $orderId;
         $this->ean = $ean;
@@ -61,10 +50,8 @@ final class ReturnItem
         if ($processingResults !== null) {
             $this->processingResults = [];
             foreach ($processingResults as $__value) {
-                if (!$__value instanceof \BolCom\RetailerApi\Model\Rma\ReturnProcessingResult) {
-                    throw new \InvalidArgumentException(
-                        'processingResults expected an array of BolCom\RetailerApi\Model\Rma\ReturnProcessingResult'
-                    );
+                if (! $__value instanceof \BolCom\RetailerApi\Model\Rma\ReturnProcessingResult) {
+                    throw new \InvalidArgumentException('processingResults expected an array of BolCom\RetailerApi\Model\Rma\ReturnProcessingResult');
                 }
                 $this->processingResults[] = $__value;
             }
@@ -131,174 +118,52 @@ final class ReturnItem
 
     public function withRmaId(RmaId $rmaId): ReturnItem
     {
-        return new self(
-            $rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withOrderId(\BolCom\RetailerApi\Model\Order\OrderId $orderId): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withEan(\BolCom\RetailerApi\Model\Offer\Ean $ean): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withTitle(string $title = null): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withExpectedQuantity(int $expectedQuantity = null): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withReturnReason(ReturnReason $returnReason = null): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
-    public function withCustomerDetails(
-        \BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null
-    ): ReturnItem {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+    public function withCustomerDetails(\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails = null): ReturnItem
+    {
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withHandled(bool $handled): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $handled, $this->trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
-    public function withTrackAndTrace(
-        \BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null
-    ): ReturnItem {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $trackAndTrace,
-            $this->transporterName,
-            $this->processingResults
-        );
+    public function withTrackAndTrace(\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace = null): ReturnItem
+    {
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $trackAndTrace, $this->transporterName, $this->processingResults);
     }
 
     public function withTransporterName(string $transporterName = null): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $transporterName,
-            $this->processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $transporterName, $this->processingResults);
     }
 
     /**
@@ -307,43 +172,31 @@ final class ReturnItem
      */
     public function withProcessingResults(array $processingResults = null): ReturnItem
     {
-        return new self(
-            $this->rmaId,
-            $this->orderId,
-            $this->ean,
-            $this->title,
-            $this->expectedQuantity,
-            $this->returnReason,
-            $this->customerDetails,
-            $this->handled,
-            $this->trackAndTrace,
-            $this->transporterName,
-            $processingResults
-        );
+        return new self($this->rmaId, $this->orderId, $this->ean, $this->title, $this->expectedQuantity, $this->returnReason, $this->customerDetails, $this->handled, $this->trackAndTrace, $this->transporterName, $processingResults);
     }
 
     public static function fromArray(array $data): ReturnItem
     {
-        if (!isset($data['rmaId']) || !\is_string($data['rmaId'])) {
+        if (! isset($data['rmaId']) || ! \is_string($data['rmaId'])) {
             throw new \InvalidArgumentException("Key 'rmaId' is missing in data array or is not a string");
         }
 
         $rmaId = RmaId::fromScalar($data['rmaId']);
 
-        if (!isset($data['orderId']) || !\is_string($data['orderId'])) {
+        if (! isset($data['orderId']) || ! \is_string($data['orderId'])) {
             throw new \InvalidArgumentException("Key 'orderId' is missing in data array or is not a string");
         }
 
         $orderId = \BolCom\RetailerApi\Model\Order\OrderId::fromString($data['orderId']);
 
-        if (!isset($data['ean']) || !\is_string($data['ean'])) {
+        if (! isset($data['ean']) || ! \is_string($data['ean'])) {
             throw new \InvalidArgumentException("Key 'ean' is missing in data array or is not a string");
         }
 
         $ean = \BolCom\RetailerApi\Model\Offer\Ean::fromString($data['ean']);
 
         if (isset($data['title'])) {
-            if (!\is_string($data['title'])) {
+            if (! \is_string($data['title'])) {
                 throw new \InvalidArgumentException("Value for 'title' is not a string in data array");
             }
 
@@ -353,7 +206,7 @@ final class ReturnItem
         }
 
         if (isset($data['expectedQuantity'])) {
-            if (!\is_int($data['expectedQuantity'])) {
+            if (! \is_int($data['expectedQuantity'])) {
                 throw new \InvalidArgumentException("Value for 'expectedQuantity' is not a int in data array");
             }
 
@@ -363,7 +216,7 @@ final class ReturnItem
         }
 
         if (isset($data['returnReason'])) {
-            if (!\is_array($data['returnReason'])) {
+            if (! \is_array($data['returnReason'])) {
                 throw new \InvalidArgumentException("Value for 'returnReason' is not an array in data array");
             }
 
@@ -373,7 +226,7 @@ final class ReturnItem
         }
 
         if (isset($data['customerDetails'])) {
-            if (!\is_array($data['customerDetails'])) {
+            if (! \is_array($data['customerDetails'])) {
                 throw new \InvalidArgumentException("Value for 'customerDetails' is not an array in data array");
             }
 
@@ -382,14 +235,14 @@ final class ReturnItem
             $customerDetails = null;
         }
 
-        if (!isset($data['handled']) || !\is_bool($data['handled'])) {
+        if (! isset($data['handled']) || ! \is_bool($data['handled'])) {
             throw new \InvalidArgumentException("Key 'handled' is missing in data array or is not a bool");
         }
 
         $handled = $data['handled'];
 
         if (isset($data['trackAndTrace'])) {
-            if (!\is_string($data['trackAndTrace'])) {
+            if (! \is_string($data['trackAndTrace'])) {
                 throw new \InvalidArgumentException("Value for 'trackAndTrace' is not a string in data array");
             }
 
@@ -399,7 +252,7 @@ final class ReturnItem
         }
 
         if (isset($data['transporterName'])) {
-            if (!\is_string($data['transporterName'])) {
+            if (! \is_string($data['transporterName'])) {
                 throw new \InvalidArgumentException("Value for 'transporterName' is not a string in data array");
             }
 
@@ -409,17 +262,15 @@ final class ReturnItem
         }
 
         if (isset($data['processingResults'])) {
-            if (!\is_array($data['processingResults'])) {
+            if (! \is_array($data['processingResults'])) {
                 throw new \InvalidArgumentException("Value for 'processingResults' is not an array in data array");
             }
 
             $processingResults = [];
 
             foreach ($data['processingResults'] as $__value) {
-                if (!\is_array($data['processingResults'])) {
-                    throw new \InvalidArgumentException(
-                        "Key 'processingResults' in data array or is not an array of arrays"
-                    );
+                if (! \is_array($data['processingResults'])) {
+                    throw new \InvalidArgumentException("Key 'processingResults' in data array or is not an array of arrays");
                 }
 
                 $processingResults[] = ReturnProcessingResult::fromArray($__value);
