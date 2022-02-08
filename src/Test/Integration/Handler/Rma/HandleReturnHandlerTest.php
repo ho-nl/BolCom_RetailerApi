@@ -21,10 +21,12 @@ class HandleReturnHandlerTest extends \PHPUnit\Framework\TestCase
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(HandleReturn::with(
-            RmaId::fromScalar(31234567),
-            HandlingResult::RETURN_RECEIVED(),
-            QuantityReturned::fromScalar(1)
-        ));
+        $messageBus->dispatch(
+            HandleReturn::with(
+                RmaId::fromScalar('31234567'),
+                HandlingResult::RETURN_RECEIVED(),
+                QuantityReturned::fromScalar(1)
+            )
+        );
     }
 }
