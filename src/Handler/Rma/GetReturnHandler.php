@@ -32,18 +32,16 @@ class GetReturnHandler implements GetReturnHandlerInterface
     {
         $response = $this->client->get("returns/{$getReturn->returnId()->toScalar()}", [
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00
         // Convert this timestamp into ISO 8601 format.
         $response = $response->getBody()->json();
-        $response['registrationDateTime'] = (new \DateTime($response['registrationDateTime']))
-            ->format(\DateTime::ATOM);
+        $response['registrationDateTime'] = (new \DateTime($response['registrationDateTime']))->format(\DateTime::ATOM);
 
         if (isset($response['processingDateTime'])) {
-            $response['processingDateTime'] = (new \DateTime($response['processingDateTime']))
-                ->format(\DateTime::ATOM);
+            $response['processingDateTime'] = (new \DateTime($response['processingDateTime']))->format(\DateTime::ATOM);
         }
 
         return ReturnResult::fromArray($response);
