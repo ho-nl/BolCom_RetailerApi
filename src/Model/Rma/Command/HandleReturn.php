@@ -42,8 +42,8 @@ final class HandleReturn extends \Prooph\Common\Messaging\Command
 
     protected function setPayload(array $payload)
     {
-        if (! isset($payload['rmaId']) || ! \is_int($payload['rmaId'])) {
-            throw new \InvalidArgumentException("Key 'rmaId' is missing in payload or is not a int");
+        if (! isset($payload['rmaId']) || ! \is_string($payload['rmaId'])) {
+            throw new \InvalidArgumentException("Key 'rmaId' is missing in payload or is not a string");
         }
 
         if (! isset($payload['handlingResult']) || ! \is_string($payload['handlingResult'])) {

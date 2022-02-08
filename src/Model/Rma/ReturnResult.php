@@ -84,8 +84,8 @@ final class ReturnResult
 
     public static function fromArray(array $data): ReturnResult
     {
-        if (! isset($data['returnId']) || ! \is_int($data['returnId'])) {
-            throw new \InvalidArgumentException("Key 'returnId' is missing in data array or is not a int");
+        if (! isset($data['returnId']) || ! \is_string($data['returnId'])) {
+            throw new \InvalidArgumentException("Key 'returnId' is missing in data array or is not a string");
         }
 
         $returnId = ReturnId::fromScalar($data['returnId']);

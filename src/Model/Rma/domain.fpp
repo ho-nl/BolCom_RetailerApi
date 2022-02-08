@@ -1,7 +1,7 @@
 //Note: actual entity name should be Return instead of Rma, but because Return is a protected keyword fpp chokes.
 namespace BolCom\RetailerApi\Model\Rma {
-    data ReturnId = Int deriving(FromScalar, ToScalar);
-    data RmaId = Int deriving(FromScalar, ToScalar);
+    data ReturnId = String deriving(FromScalar, ToScalar);
+    data RmaId = String deriving(FromScalar, ToScalar);
 
     data ReducedReturnItem = ReducedReturnItem {
         ?ReturnId $returnId,
@@ -10,14 +10,19 @@ namespace BolCom\RetailerApi\Model\Rma {
         ReturnItem[] $returnItems,
     } deriving (FromArray);
 
+    data ReturnReason = returnReason {
+        ?string $mainReason,
+        ?string $detailedReason,
+        ?string $customerComments
+    } deriving (FromArray);
+
     data ReturnItem = ReturnItem {
         RmaId $rmaId,
         \BolCom\RetailerApi\Model\Order\OrderId $orderId,
         \BolCom\RetailerApi\Model\Offer\Ean $ean,
         ?string $title,
         ?int $expectedQuantity,
-        string $returnReason,
-        ?string $returnReasonComments,
+        ?ReturnReason $returnReason,
         ?\BolCom\RetailerApi\Model\Customer\CustomerDetails $customerDetails,
         bool $handled,
         ?\BolCom\RetailerApi\Model\Transport\TrackAndTrace $trackAndTrace,

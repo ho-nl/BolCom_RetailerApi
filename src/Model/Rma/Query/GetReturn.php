@@ -30,8 +30,8 @@ final class GetReturn extends \Prooph\Common\Messaging\Query
 
     protected function setPayload(array $payload)
     {
-        if (! isset($payload['returnId']) || ! \is_int($payload['returnId'])) {
-            throw new \InvalidArgumentException("Key 'returnId' is missing in payload or is not a int");
+        if (! isset($payload['returnId']) || ! \is_string($payload['returnId'])) {
+            throw new \InvalidArgumentException("Key 'returnId' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;
