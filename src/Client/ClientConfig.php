@@ -11,7 +11,6 @@ class ClientConfig implements ClientConfigInterface
 {
     const API_URL = 'https://api.bol.com/retailer/';
     const TEST_API_URL = 'https://api.bol.com/retailer-demo/';
-    const ACCEPT_HEADER_V4 = 'application/vnd.retailer.v4+json';
     const ACCEPT_HEADER = 'application/vnd.retailer.v6+json';
 
     /** @var string $clientId */
