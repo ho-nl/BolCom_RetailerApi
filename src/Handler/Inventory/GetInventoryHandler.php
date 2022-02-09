@@ -36,15 +36,15 @@ class GetInventoryHandler implements GetInventoryHandlerInterface
                 'quantity' => null === $getInventory->quantity() ? null : implode(',', $getInventory->quantity()),
                 'stock' => null === $getInventory->stock() ? null : $getInventory->stock()->value(),
                 'state' => null === $getInventory->state() ? null : $getInventory->state()->value(),
-                'query' => $getInventory->query()
+                'query' => $getInventory->query(),
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER_V4
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         $response = $response->getBody()->json();
 
-        return ! empty($response) ? InventoryOfferList::fromArray($response) : null;
+        return !empty($response) ? InventoryOfferList::fromArray($response) : null;
     }
 }
