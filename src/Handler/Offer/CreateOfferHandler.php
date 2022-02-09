@@ -32,8 +32,7 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
      */
     public function __invoke(CreateOffer $createOffer): ProcessStatus
     {
-        if (
-            $createOffer
+        if ($createOffer
                 ->retailerOffer()
                 ->condition()
                 ->comment() !== null &&
@@ -53,8 +52,7 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
             );
         }
 
-        if (
-            $createOffer
+        if ($createOffer
                 ->retailerOffer()
                 ->fulfilment()
                 ->deliveryCode() !== null &&

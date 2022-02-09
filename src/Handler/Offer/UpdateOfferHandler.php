@@ -34,8 +34,7 @@ class UpdateOfferHandler implements UpdateOfferHandlerInterface
      */
     public function __invoke(UpdateOffer $updateOffer): ProcessStatus
     {
-        if (
-            $updateOffer
+        if ($updateOffer
                 ->retailerOffer()
                 ->fulfilment()
                 ->deliveryCode() !== null &&
