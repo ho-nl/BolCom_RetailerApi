@@ -85,8 +85,8 @@ final class ReducedReturnItem
     public static function fromArray(array $data): ReducedReturnItem
     {
         if (isset($data['returnId'])) {
-            if (! \is_int($data['returnId'])) {
-                throw new \InvalidArgumentException("Value for 'returnId' is not a int in data array");
+            if (! \is_string($data['returnId'])) {
+                throw new \InvalidArgumentException("Value for 'returnId' is not a string in data array");
             }
 
             $returnId = ReturnId::fromScalar($data['returnId']);

@@ -24,6 +24,6 @@ class GetStatusByProcessIdsHandlerTest extends \PHPUnit\Framework\TestCase
 
     public function test__invoke()
     {
-        $this->messageBus->dispatch(GetStatusByProcessIds::with(...[1, 2, 3, 4]));
+        $this->messageBus->dispatch(GetStatusByProcessIds::with(...['1', '2', '3', '4']));
     }
 }

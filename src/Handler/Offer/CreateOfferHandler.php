@@ -32,17 +32,35 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
      */
     public function __invoke(CreateOffer $createOffer): ProcessStatus
     {
-        if ($createOffer->retailerOffer()->condition()->comment() !== null
-            && $createOffer->retailerOffer()->condition()->comment()->toString() !== null
-            && $createOffer->retailerOffer()->condition()->name()->equals(Condition::IS_NEW())
+        if ($createOffer
+                ->retailerOffer()
+                ->condition()
+                ->comment() !== null &&
+            $createOffer
+                ->retailerOffer()
+                ->condition()
+                ->comment()
+                ->toString() !== null &&
+            $createOffer
+                ->retailerOffer()
+                ->condition()
+                ->name()
+                ->equals(Condition::IS_NEW())
         ) {
             throw new \RuntimeException(
                 'conditionComment is only allowed in combination with conditionName(s): AS_NEW, GOOD, REASONABLE, MODERATE.' // @codingStandardsIgnoreLine
             );
         }
 
-        if ($createOffer->retailerOffer()->fulfilment()->deliveryCode() !== null
-            && $createOffer->retailerOffer()->fulfilment()->method()->equals(FulfilmentMethod::FBB())
+        if ($createOffer
+                ->retailerOffer()
+                ->fulfilment()
+                ->deliveryCode() !== null &&
+            $createOffer
+                ->retailerOffer()
+                ->fulfilment()
+                ->method()
+                ->equals(FulfilmentMethod::FBB())
         ) {
             throw new \RuntimeException('DeliveryCode is not allowed for fulfilment type FBB.');
         }
@@ -50,8 +68,8 @@ class CreateOfferHandler implements CreateOfferHandlerInterface
         $response = $this->client->post('offers', [
             'json' => $createOffer->retailerOffer()->toArray(),
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         // Current return includes milliseconds: 2018-12-20T11:34:50.237+01:00

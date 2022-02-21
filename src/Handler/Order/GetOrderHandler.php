@@ -32,8 +32,8 @@ class GetOrderHandler implements GetOrderHandlerInterface
     {
         $response = $this->client->get("orders/{$getOrder->orderId()}", [
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         return Order::fromArray($response->getBody()->json());

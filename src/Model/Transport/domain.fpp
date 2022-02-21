@@ -1,5 +1,5 @@
 namespace BolCom\RetailerApi\Model\Transport {
-    data TransportId = Int deriving(FromScalar, ToScalar);
+    data TransportId = String deriving(FromScalar, ToScalar);
 
     data TransporterName = String deriving(FromScalar, ToScalar);
 

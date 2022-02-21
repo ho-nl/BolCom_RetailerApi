@@ -5,17 +5,22 @@
 </div>
 
 # BolCom_Api
-Bol.com API documentation can be found [here](https://api.bol.com/retailer/public/redoc/v3).
+
+Bol.com API documentation can be found
+[here](https://api.bol.com/retailer/public/redoc/v6).
 
 ## Features
-- Uses bol.com API v4.
+
+- Uses bol.com API v6.
 - Strict type checking.
 - Support multiple bol.com accounts.
 
 ## Usage
+
 ### How to use the `ClientPool`
-A client pool is used to support multiple bol.com accounts.
-We can configure the pool with a default client if only one seller account will be active.
+
+A client pool is used to support multiple bol.com accounts. We can configure the
+pool with a default client if only one seller account will be active.
 
 ```PHP
 <?php declare(strict_types=1);
@@ -33,7 +38,9 @@ $order = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetOrder::w
 ```
 
 ### Multiple account support
-To support multiple accounts you can create your own `ClientPool` and add multiple clients to the pool.
+
+To support multiple accounts you can create your own `ClientPool` and add
+multiple clients to the pool.
 
 ```PHP
 <?php declare(strict_types=1);
@@ -60,7 +67,9 @@ foreach ($clientPool->names() as $name) {
 ```
 
 ## Running integration tests
-Place this code in your `phpunit.xml` and update the values with your own test credentials.
+
+Place this code in your `phpunit.xml` and update the values with your own test
+credentials.
 
 ```XML
 <php>
@@ -70,8 +79,11 @@ Place this code in your `phpunit.xml` and update the values with your own test c
 ```
 
 ## Supported handlers
+
 ### Commission
+
 #### GetCommissionHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Commission\Commission $commission */
 $commission = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Query\GetCommission::with(
@@ -82,6 +94,7 @@ $commission = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Query\G
 ```
 
 #### GetCommissionListHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Commission\Query\GetCommissionList $commissionList */
 $commissionList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Query\GetCommissionList::with(
@@ -94,7 +107,9 @@ $commissionList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Commission\Que
 ```
 
 ### Offer
+
 #### CreateOfferHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\CreateOffer::with(
@@ -126,6 +141,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\C
 ```
 
 #### DeleteOfferHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\DeleteOffer::with(
@@ -134,6 +150,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\D
 ```
 
 #### GetOfferHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Offer\RetailerOffer $offer */
 $offer = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Query\GetOffer::with(
@@ -142,6 +159,7 @@ $offer = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Query\GetOffer::w
 ```
 
 #### UpdateOfferHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOffer::with(
@@ -159,6 +177,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ```
 
 #### UpdateOfferPriceHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOfferPrice::with(
@@ -173,6 +192,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ```
 
 #### UpdateOfferStockHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\UpdateOfferStock::with(
@@ -185,7 +205,9 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Offer\Command\U
 ```
 
 ### Inventory
+
 #### GetInventoryHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Inventory\InventoryOfferList $inventoryOfferList */
 $inventoryOfferList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Inventory\Query\GetInventory::with(
@@ -198,7 +220,9 @@ $inventoryOfferList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Inventory\
 ```
 
 ### Order
+
 #### CancelOrderHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\CancelOrder::with(
@@ -209,6 +233,7 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\C
 ```
 
 #### GetAllOpenOrdersHandler
+
 ```PHP
 /** @var null|\BolCom\RetailerApi\Model\Order\OrderList $orderList */
 $orderList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetAllOpenOrders::with(
@@ -218,6 +243,7 @@ $orderList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetAllO
 ```
 
 #### GetOrderHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Order\Order $order */
 $order = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetOrder::with(
@@ -226,6 +252,7 @@ $order = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Query\GetOrder::w
 ```
 
 #### ShipOrderItemHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\ShipOrderItem::with(
@@ -239,7 +266,9 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Order\Command\S
 ```
 
 ### ProcessStatus
+
 #### GetStatusByEntityHandler
+
 ```PHP
 /** @var null|\BolCom\RetailerApi\Model\ProcessStatus\ProcessStatuses $processStatuses */
 $processStatuses = $messageBus->dispatch(\BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByEntity::with(
@@ -250,6 +279,7 @@ $processStatuses = $messageBus->dispatch(\BolCom\RetailerApi\Model\ProcessStatus
 ```
 
 #### GetStatusByProcessIdsHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatuses $processStatuses */
 $processStatuses = $messageBus->dispatch(\BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessIds::with(
@@ -258,7 +288,9 @@ $processStatuses = $messageBus->dispatch(\BolCom\RetailerApi\Model\ProcessStatus
 ```
 
 ### Rma
+
 #### GetAllReturnsHandler
+
 ```PHP
 /** @var null|\BolCom\RetailerApi\Model\Rma\ReturnItemList $returnItemList */
 $returnItemList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetAllReturns::with(
@@ -269,6 +301,7 @@ $returnItemList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetA
 ```
 
 #### GetReturnHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Rma\ReturnItem $returnItem */
 $returnItem = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetReturn::with(
@@ -277,6 +310,7 @@ $returnItem = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Query\GetRetur
 ```
 
 #### HandleReturnHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\ProcessStatus\ProcessStatus $processStatus */
 $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Command\HandleReturn::with(
@@ -287,7 +321,9 @@ $processStatus = $messageBus->dispatch(\BolCom\RetailerApi\Model\Rma\Command\Han
 ```
 
 ### Shipment
+
 #### GetShipmentHandler
+
 ```PHP
 /** @var \BolCom\RetailerApi\Model\Shipment\Shipment $shipment */
 $shipment = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\GetShipment::with(
@@ -296,6 +332,7 @@ $shipment = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\GetSh
 ```
 
 #### GetShipmentListHandler
+
 ```PHP
 /** @var null|\BolCom\RetailerApi\Model\Shipment\ShipmentList $shipmentList */
 $shipmentList = $messageBus->dispatch(\BolCom\RetailerApi\Model\Shipment\Query\GetShipmentList::with(

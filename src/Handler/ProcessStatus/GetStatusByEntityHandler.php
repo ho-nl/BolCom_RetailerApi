@@ -37,12 +37,12 @@ class GetStatusByEntityHandler implements GetStatusByEntityHandlerInterface
                 'page' => $getStatusByEntity->page(),
             ],
             'headers' => [
-                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
-            ]
+                'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+            ],
         ]);
 
         $response = $response->getBody()->json();
 
-        return ! empty($response) ? ProcessStatuses::fromArray($response) : null;
+        return !empty($response) ? ProcessStatuses::fromArray($response) : null;
     }
 }

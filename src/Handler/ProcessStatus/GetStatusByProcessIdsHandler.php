@@ -35,8 +35,8 @@ class GetStatusByProcessIdsHandler implements GetStatusByProcessIdsHandlerInterf
         foreach ($getStatusByProcessIds->ids() as $id) {
             $promises[] = $this->client->getAsync("process-status/{$id}", [
                 'headers' => [
-                    'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER
-                ]
+                    'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+                ],
             ]);
         }
 

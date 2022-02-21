@@ -10,7 +10,7 @@ namespace BolCom\RetailerApi\Model\ProcessStatus;
 
 final class ProcessStatus
 {
-    private $id;
+    private $processStatusId;
     private $entityId;
     private $eventType;
     private $description;
@@ -18,9 +18,9 @@ final class ProcessStatus
     private $errorMessage;
     private $createTimestamp;
 
-    public function __construct(int $id, EntityId $entityId = null, EventType $eventType, string $description, EventStatus $status, string $errorMessage = null, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
+    public function __construct(string $processStatusId, EntityId $entityId = null, EventType $eventType, string $description, EventStatus $status, string $errorMessage = null, \BolCom\RetailerApi\Model\DateTime $createTimestamp)
     {
-        $this->id = $id;
+        $this->processStatusId = $processStatusId;
         $this->entityId = $entityId;
         $this->eventType = $eventType;
         $this->description = $description;
@@ -29,9 +29,9 @@ final class ProcessStatus
         $this->createTimestamp = $createTimestamp;
     }
 
-    public function id(): int
+    public function processStatusId(): string
     {
-        return $this->id;
+        return $this->processStatusId;
     }
 
     public function entityId()
@@ -64,48 +64,48 @@ final class ProcessStatus
         return $this->createTimestamp;
     }
 
-    public function withId(int $id): ProcessStatus
+    public function withProcessStatusId(string $processStatusId): ProcessStatus
     {
-        return new self($id, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($processStatusId, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withEntityId(EntityId $entityId = null): ProcessStatus
     {
-        return new self($this->id, $entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->processStatusId, $entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withEventType(EventType $eventType): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->processStatusId, $this->entityId, $eventType, $this->description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withDescription(string $description): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->eventType, $description, $this->status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->processStatusId, $this->entityId, $this->eventType, $description, $this->status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withStatus(EventStatus $status): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->eventType, $this->description, $status, $this->errorMessage, $this->createTimestamp);
+        return new self($this->processStatusId, $this->entityId, $this->eventType, $this->description, $status, $this->errorMessage, $this->createTimestamp);
     }
 
     public function withErrorMessage(string $errorMessage = null): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->eventType, $this->description, $this->status, $errorMessage, $this->createTimestamp);
+        return new self($this->processStatusId, $this->entityId, $this->eventType, $this->description, $this->status, $errorMessage, $this->createTimestamp);
     }
 
     public function withCreateTimestamp(\BolCom\RetailerApi\Model\DateTime $createTimestamp): ProcessStatus
     {
-        return new self($this->id, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $createTimestamp);
+        return new self($this->processStatusId, $this->entityId, $this->eventType, $this->description, $this->status, $this->errorMessage, $createTimestamp);
     }
 
     public static function fromArray(array $data): ProcessStatus
     {
-        if (! isset($data['id']) || ! \is_int($data['id'])) {
-            throw new \InvalidArgumentException("Key 'id' is missing in data array or is not a int");
+        if (! isset($data['processStatusId']) || ! \is_string($data['processStatusId'])) {
+            throw new \InvalidArgumentException("Key 'processStatusId' is missing in data array or is not a string");
         }
 
-        $id = $data['id'];
+        $processStatusId = $data['processStatusId'];
 
         if (isset($data['entityId'])) {
             if (! \is_string($data['entityId'])) {
@@ -152,7 +152,7 @@ final class ProcessStatus
         $createTimestamp = \BolCom\RetailerApi\Model\DateTime::fromString($data['createTimestamp']);
 
         return new self(
-            $id,
+            $processStatusId,
             $entityId,
             $eventType,
             $description,

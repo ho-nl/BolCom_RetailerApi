@@ -1,5 +1,5 @@
 namespace BolCom\RetailerApi\Model\Shipment {
-    data ShipmentId = Int deriving(FromScalar, ToScalar);
+    data ShipmentId = String deriving(FromScalar, ToScalar);
 
     data Shipment = Shipment {
         ShipmentId $shipmentId,

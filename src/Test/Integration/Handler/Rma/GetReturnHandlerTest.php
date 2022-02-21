@@ -19,6 +19,6 @@ class GetReturnHandlerTest extends \PHPUnit\Framework\TestCase
         $clientPool = ClientPool::configure(new ClientConfig(BOL_CLIENT_ID, BOL_CLIENT_SECRET, true));
         $messageBus = new \BolCom\RetailerApi\Infrastructure\MessageBus($clientPool);
 
-        $messageBus->dispatch(GetReturn::with(ReturnId::fromScalar(15892026)));
+        $messageBus->dispatch(GetReturn::with(ReturnId::fromScalar('15892026')));
     }
 }

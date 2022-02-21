@@ -1,12 +1,11 @@
 namespace BolCom\RetailerApi\Model\Customer {
     data CustomerDetails = CustomerDetails {
-        ?string $salutationCode,
+        ?string $salutation,
         ?string $firstName,
         ?string $surname,
         ?string $streetName,
         ?string $houseNumber,
-        ?string $houseNumberExtended,
-        ?string $addressSupplement,
+        ?string $houseNumberExtention,
         ?string $extraAddressInformation,
         string $zipCode,
         ?string $city,
