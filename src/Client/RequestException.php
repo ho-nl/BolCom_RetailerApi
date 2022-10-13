@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace BolCom\RetailerApi\Client;
 
+use GuzzleHttp\BodySummarizerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -15,15 +16,15 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
     public static function create(
         RequestInterface $request,
         ResponseInterface $response = null,
-        \Exception $previous = null,
-        array $ctx = []
-    ) {
+        \Throwable $previous = null,
+        array $ctx = [],
+        BodySummarizerInterface $bodySummarizer = null
+    ): \GuzzleHttp\Exception\RequestException  {
         if ($response === null || !($response->getBody() instanceof JsonResponse)) {
             return parent::create($request, $response);
         }
 
         try {
-            /** @noinspection PhpUndefinedMethodInspection */
             $errorResponse = $response->getBody()->json();
         } catch (\InvalidArgumentException $exception) {
             return parent::create($request, $response);

@@ -12,7 +12,7 @@
     "description": "Package to talk to the bol.com v6 API.",
     "license": "Apache-2.0",
     "require": {
-        "guzzlehttp/guzzle": "~6.0",
+        "guzzlehttp/guzzle": "^7.2.0",
         "kamermans/guzzle-oauth2-subscriber": "^1.0",
         "caseyamcl/guzzle_retry_middleware": "^2.2",
         "php": "^7.3",
