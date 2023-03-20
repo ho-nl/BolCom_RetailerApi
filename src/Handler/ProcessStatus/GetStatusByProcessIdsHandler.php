@@ -8,6 +8,7 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi\Handler\ProcessStatus;
 
 use BolCom\RetailerApi\Client;
+use BolCom\RetailerApi\Client\ClientConfig;
 use BolCom\RetailerApi\Model\ProcessStatus\ProcessStatuses;
 use BolCom\RetailerApi\Model\ProcessStatus\Query\GetStatusByProcessIds;
 use BolCom\RetailerApi\Model\ProcessStatus\QueryHandler\GetStatusByProcessIdsHandlerInterface;
@@ -31,11 +32,14 @@ class GetStatusByProcessIdsHandler implements GetStatusByProcessIdsHandlerInterf
      */
     public function __invoke(GetStatusByProcessIds $getStatusByProcessIds): ProcessStatuses
     {
+
         $promises = [];
+        $sharedBaseUri = $this->client->getConfig('base_uri')->__toString() === ClientConfig::TEST_API_URL ? ClientConfig::SHARED_TEST_API_URL : ClientConfig::SHARED_API_URL;
         foreach ($getStatusByProcessIds->ids() as $id) {
             $promises[] = $this->client->getAsync("process-status/{$id}", [
+                'base_uri' => $sharedBaseUri,
                 'headers' => [
-                    'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
+                    'Accept' => ClientConfig::ACCEPT_HEADER,
                 ],
             ]);
         }
