@@ -13,7 +13,7 @@ class ClientConfig implements ClientConfigInterface
     CONST SHARED_API_URL = 'https://api.bol.com/shared/';
     const TEST_API_URL = 'https://api.bol.com/retailer-demo/';
     CONST SHARED_TEST_API_URL = 'https://api.bol.com/shared-demo/';
-    const ACCEPT_HEADER = 'application/vnd.retailer.v7+json';
+    const ACCEPT_HEADER = 'application/vnd.retailer.v8+json';
 
     /** @var string $clientId */
     private $clientId;

@@ -1,7 +1,7 @@
 {
     "name": "bol-com/retailer-api",
     "type": "library",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "authors": [
         {
             "name": "Reach Digital",
@@ -9,7 +9,7 @@
             "homepage": "https://www.reachdigital.nl/"
         }
     ],
-    "description": "Package to talk to the bol.com v7 API.",
+    "description": "Package to talk to the bol.com v8 API.",
     "license": "Apache-2.0",
     "require": {
         "guzzlehttp/guzzle": "^7.2.0",
