@@ -6,12 +6,14 @@
 
 # BolCom_Api
 
-Bol.com API documentation can be found
-[here](https://api.bol.com/retailer/public/redoc/v6).
+Bol.com retailer API documentation can be found
+[here](https://api.bol.com/retailer/public/redoc/v7/retailer.html)
+and the shared api [here](https://api.bol.com/retailer/public/redoc/v7/shared.html).
+
 
 ## Features
 
-- Uses bol.com API v6.
+- Uses bol.com API v7.
 - Strict type checking.
 - Support multiple bol.com accounts.
 

@@ -10,8 +10,10 @@ namespace BolCom\RetailerApi\Client;
 class ClientConfig implements ClientConfigInterface
 {
     const API_URL = 'https://api.bol.com/retailer/';
+    CONST SHARED_API_URL = 'https://api.bol.com/shared/';
     const TEST_API_URL = 'https://api.bol.com/retailer-demo/';
-    const ACCEPT_HEADER = 'application/vnd.retailer.v6+json';
+    CONST SHARED_TEST_API_URL = 'https://api.bol.com/shared-demo/';
+    const ACCEPT_HEADER = 'application/vnd.retailer.v7+json';
 
     /** @var string $clientId */
     private $clientId;
