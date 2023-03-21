@@ -35,7 +35,7 @@ class GetStatusByProcessIdsHandler implements GetStatusByProcessIdsHandlerInterf
         $promises = [];
         $sharedBaseUri = $this->client->getConfig('base_uri')->__toString() === ClientConfig::TEST_API_URL ? ClientConfig::SHARED_TEST_API_URL : ClientConfig::SHARED_API_URL;
         foreach ($getStatusByProcessIds->ids() as $id) {
-            $promises[] = $this->client->get("process-status/{$id}", [
+            $promises[] = $this->client->getAsync("process-status/{$id}", [
                 'base_uri' => $sharedBaseUri,
                 'headers' => [
                     'Accept' => \BolCom\RetailerApi\Client\ClientConfig::ACCEPT_HEADER,
