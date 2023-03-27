@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace BolCom\RetailerApi;
 
 use BolCom\RetailerApi\Client\ClientConfigInterface;
-use BolCom\RetailerApi\Client\JsonResponseMiddleware;
 use BolCom\RetailerApi\Client\AcceptHeaderMiddleware;
 use BolCom\RetailerApi\Client\Oauth2Middleware;
 use BolCom\RetailerApi\Client\RequestExceptionMiddleware;
+use BolCom\RetailerApi\Client\ResponseSelectorMiddleware;
 use BolCom\RetailerApi\Model\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -58,7 +58,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
         $stack->push(GuzzleRetryMiddleware::factory());
 
         $logger && $stack->push(Middleware::log($logger, new \GuzzleHttp\MessageFormatter()));
-        $stack->push(new JsonResponseMiddleware());
+        $stack->push(new ResponseSelectorMiddleware());
 
         return $stack;
     }
